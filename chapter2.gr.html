@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ενότητα 2 | Αναγνώριση Κινδύνων</title>
+
+  <style>
+    :root {
+      --primary: #123c69;
+      --primary-dark: #0b2545;
+      --secondary: #f4b400;
+      --danger: #d62828;
+      --success: #2a9d8f;
+      --background: #f5f7fa;
+      --surface: #ffffff;
+      --text: #1f2933;
+      --muted: #5f6c7b;
+      --border: #d9e2ec;
+      --focus: #2563eb;
+      --shadow: 0 10px 30px rgba(15, 35, 55, 0.08);
+      --radius: 18px;
+      --content-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    input:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, 0.4);
+      outline-offset: 3px;
+    }
+
+    header {
+      position: relative;
+      overflow: hidden;
+      padding: 58px 20px;
+      color: #ffffff;
+      text-align: center;
+      background:
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(255, 255, 255, 0.15),
+          transparent 32%
+        ),
+        linear-gradient(135deg, var(--primary), var(--primary-dark));
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      right: -110px;
+      bottom: -170px;
+      width: 360px;
+      height: 360px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 45px rgba(255, 255, 255, 0.03),
+        0 0 0 90px rgba(255, 255, 255, 0.025);
+      pointer-events: none;
+    }
+
+    header h1,
+    header p {
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.35rem);
+      line-height: 1.15;
+    }
+
+    header p {
+      max-width: 850px;
+      margin: 0 auto;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      opacity: 0.95;
+    }
+
+    main {
+      width: min(100% - 32px, var(--content-width));
+      margin: 28px auto;
+    }
+
+    section {
+      margin-bottom: 24px;
+      padding: clamp(20px, 4vw, 30px);
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid rgba(217, 226, 236, 0.8);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      color: var(--primary);
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin-top: 0;
+      color: var(--primary-dark);
+    }
+
+    p {
+      margin-top: 0;
+    }
+
+    .section-intro {
+      max-width: 800px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 20px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .card .icon {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .method-step {
+      position: relative;
+      min-height: 190px;
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .method-step:hover {
+      transform: translateY(-4px);
+      border-color: rgba(18, 60, 105, 0.35);
+      box-shadow: 0 14px 30px rgba(15, 35, 55, 0.09);
+    }
+
+    .method-step strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .highlight,
+    .danger,
+    .success {
+      padding: 18px;
+      border-radius: 12px;
+    }
+
+    .highlight {
+      border-left: 6px solid var(--secondary);
+      background: #fff8e1;
+    }
+
+    .danger {
+      border-left: 6px solid var(--danger);
+      background: #fff1f1;
+    }
+
+    .success {
+      border-left: 6px solid var(--success);
+      background: #eafaf7;
+    }
+
+    /* =========================================================
+       FIND THE HAZARD
+       ========================================================= */
+
+    .hazard-game {
+      margin-top: 22px;
+    }
+
+    .game-instructions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding: 12px 15px;
+      color: #334155;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .game-instructions span {
+      flex: 0 0 auto;
+      font-size: 1.35rem;
+    }
+
+    .factory-scene {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
+      isolation: isolate;
+      background: #111827;
+      border: 1px solid #cbd5e1;
+      border-radius: 18px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18);
+    }
+
+    .factory-scene img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .factory-scene::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(2, 6, 23, 0.02),
+          rgba(2, 6, 23, 0.12)
+        );
+    }
+
+    .hotspot {
+      position: absolute;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      width: clamp(36px, 4.8vw, 54px);
+      height: clamp(36px, 4.8vw, 54px);
+      padding: 0;
+      color: #ffffff;
+      font-size: clamp(17px, 2.2vw, 23px);
+      font-weight: 800;
+      line-height: 1;
+      cursor: pointer;
+      background: rgba(214, 40, 40, 0.94);
+      border: 3px solid #ffffff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow:
+        0 0 0 0 rgba(214, 40, 40, 0.55),
+        0 8px 20px rgba(0, 0, 0, 0.4);
+      animation: hotspotPulse 2s infinite;
+      transition:
+        transform 180ms ease,
+        background-color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .hotspot::before {
+      content: "";
+      position: absolute;
+      inset: -9px;
+      pointer-events: none;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      border-radius: inherit;
+    }
+
+    .hotspot:hover,
+    .hotspot:focus-visible {
+      transform: translate(-50%, -50%) scale(1.12);
+      box-shadow:
+        0 0 0 8px rgba(214, 40, 40, 0.18),
+        0 10px 24px rgba(0, 0, 0, 0.42);
+    }
+
+    .hotspot.found {
+      cursor: default;
+      background: var(--success);
+      animation: none;
+      box-shadow:
+        0 0 0 7px rgba(42, 157, 143, 0.2),
+        0 8px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    /*
+      Responsive hotspot positions.
+      Values are percentages of the image dimensions.
+    */
+
+    /* Εργαζόμενος κοντά σε κινούμενα μέρη μηχανής */
+    .hs-machine {
+      left: 22%;
+      top: 42%;
+    }
+
+    /* Παλέτα που εμποδίζει την έξοδο κινδύνου */
+    .hs-exit {
+      left: 52%;
+      top: 38%;
+    }
+
+    /* Καλώδιο μέσα στον διάδρομο */
+    .hs-cable {
+      left: 54%;
+      top: 66%;
+    }
+
+    /* Υγρό στο δάπεδο */
+    .hs-spill {
+      left: 39%;
+      top: 84%;
+    }
+
+    /* Λανθασμένη χειρωνακτική ανύψωση */
+    .hs-lifting {
+      left: 80%;
+      top: 64%;
+    }
+
+    /* Εργαζόμενος πολύ κοντά στο περονοφόρο */
+    .hs-forklift {
+      left: 68%;
+      top: 42%;
+    }
+
+    .hazard-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .hazard-counter {
+      margin: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .hazard-progress {
+      flex: 1 1 240px;
+      height: 12px;
+      overflow: hidden;
+      background: #e8eef5;
+      border-radius: 999px;
+    }
+
+    .hazard-progress-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--success), #52b788);
+      border-radius: inherit;
+      transition: width 350ms ease;
+    }
+
+    .button {
+      min-height: 44px;
+      padding: 10px 17px;
+      color: #ffffff;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--primary);
+      border: 0;
+      border-radius: 11px;
+      transition:
+        transform 160ms ease,
+        background-color 160ms ease,
+        box-shadow 160ms ease;
+    }
+
+    .button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(18, 60, 105, 0.2);
+    }
+
+    .button.secondary {
+      color: var(--primary);
+      background: #eef5fb;
+      border: 1px solid #c9dced;
+    }
+
+    .button.secondary:hover {
+      background: #e2edf7;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-radius: 12px;
+    }
+
+    .feedback strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    /* =========================================================
+       SCENARIO AND QUIZ
+       ========================================================= */
+
+    .scenario-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .scenario-actions .button {
+      width: 100%;
+      text-align: left;
+    }
+
+    .quiz-question {
+      margin-bottom: 18px;
+      padding: 18px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .quiz-question p {
+      margin-bottom: 12px;
+    }
+
+    .quiz-question label {
+      display: block;
+      margin: 8px 0;
+      padding: 11px 13px;
+      cursor: pointer;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition:
+        border-color 160ms ease,
+        background-color 160ms ease;
+    }
+
+    .quiz-question label:hover {
+      border-color: rgba(18, 60, 105, 0.45);
+      background: #f7fbff;
+    }
+
+    .quiz-question input {
+      margin-right: 8px;
+    }
+
+    .progress-box {
+      height: 18px;
+      overflow: hidden;
+      margin-top: 16px;
+      background: #e7edf3;
+      border-radius: 999px;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: var(--success);
+      transition: width 400ms ease;
+    }
+
+    .takeaway {
+      margin-bottom: 10px;
+      padding-left: 16px;
+      color: var(--primary);
+      font-size: 1.08rem;
+      font-weight: 700;
+      border-left: 4px solid var(--secondary);
+    }
+
+    footer {
+      padding: 30px 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @keyframes hotspotPulse {
+      0% {
+        box-shadow:
+          0 0 0 0 rgba(214, 40, 40, 0.55),
+          0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      70% {
+        box-shadow:
+          0 0 0 14px rgba(214, 40, 40, 0),
+          0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      100% {
+        box-shadow:
+          0 0 0 0 rgba(214, 40, 40, 0),
+          0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    @media (max-width: 700px) {
+      main {
+        width: min(100% - 20px, var(--content-width));
+        margin-top: 16px;
+      }
+
+      header {
+        padding: 42px 16px;
+      }
+
+      section {
+        padding: 20px 16px;
+        border-radius: 15px;
+      }
+
+      .factory-scene {
+        border-radius: 14px;
+      }
+
+      .hotspot {
+        border-width: 2px;
+      }
+
+      .hotspot::before {
+        inset: -6px;
+      }
+
+      .hazard-toolbar {
+        align-items: stretch;
+      }
+
+      .hazard-progress {
+        flex-basis: 100%;
+        order: 3;
+      }
+
+      .hazard-toolbar .button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+    <h1>Ενότητα 2: Αναγνώριση Κινδύνων</h1>
+
+```
+<p>
+  Κάθε ατύχημα ξεκινά από έναν κίνδυνο. Όσο πιο γρήγορα
+  τον αναγνωρίσουμε, τόσο πιο εύκολα μπορούμε να τον ελέγξουμε.
+</p>
+```
+
+  </header>
+
+  <main>
+
+```
+<section aria-labelledby="learning-title">
+  <h2 id="learning-title">Στόχοι μάθησης</h2>
+
+  <p class="section-intro">
+    Με την ολοκλήρωση αυτής της ενότητας, ο εργαζόμενος θα μπορεί να:
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <span class="icon" aria-hidden="true">👀</span>
+      Αναγνωρίζει κινδύνους στον χώρο εργασίας.
+    </div>
+
+    <div class="card">
+      <span class="icon" aria-hidden="true">⚠️</span>
+      Διακρίνει το Hazard από το Risk.
+    </div>
+
+    <div class="card">
+      <span class="icon" aria-hidden="true">🧠</span>
+      Εφαρμόζει τη μέθοδο Look – Think – Act.
+    </div>
+
+    <div class="card">
+      <span class="icon" aria-hidden="true">🗣️</span>
+      Αναφέρει επικίνδυνες συνθήκες πριν συμβεί ατύχημα.
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="definitions-title">
+  <h2 id="definitions-title">Hazard και Risk</h2>
+
+  <div class="grid">
+    <article class="card">
+      <span class="icon" aria-hidden="true">⚡</span>
+      <h3>Hazard – Κίνδυνος</h3>
+      <p>
+        Οτιδήποτε μπορεί να προκαλέσει τραυματισμό, ασθένεια,
+        ζημιά ή άλλη ανεπιθύμητη συνέπεια.
+      </p>
+    </article>
+
+    <article class="card">
+      <span class="icon" aria-hidden="true">📊</span>
+      <h3>Risk – Επικινδυνότητα</h3>
+      <p>
+        Ο συνδυασμός της πιθανότητας να συμβεί κάτι επικίνδυνο
+        και της σοβαρότητας των πιθανών συνεπειών.
+      </p>
+    </article>
+  </div>
+
+  <div class="highlight">
+    <strong>Παράδειγμα:</strong>
+    Το υγρό στο δάπεδο είναι ο κίνδυνος. Η πιθανότητα κάποιος
+    να γλιστρήσει και να τραυματιστεί αποτελεί την επικινδυνότητα.
+  </div>
+</section>
+
+<section aria-labelledby="method-title">
+  <h2 id="method-title">Μέθοδος Look – Think – Act</h2>
+
+  <div class="grid">
+    <article class="card method-step">
+      <span class="icon" aria-hidden="true">👀</span>
+      <strong>LOOK</strong>
+      Κοίτα τον χώρο, τον εξοπλισμό, τα εργαλεία και τους
+      ανθρώπους γύρω σου.
+    </article>
+
+    <article class="card method-step">
+      <span class="icon" aria-hidden="true">🧠</span>
+      <strong>THINK</strong>
+      Σκέψου τι μπορεί να πάει στραβά και ποιος μπορεί
+      να τραυματιστεί.
+    </article>
+
+    <article class="card method-step">
+      <span class="icon" aria-hidden="true">✅</span>
+      <strong>ACT</strong>
+      Πάρε μέτρα, ανέφερε τον κίνδυνο ή σταμάτησε την εργασία
+      όταν δεν μπορεί να πραγματοποιηθεί με ασφάλεια.
+    </article>
+  </div>
+</section>
+
+<section id="find-the-hazard" aria-labelledby="hazard-game-title">
+  <h2 id="hazard-game-title">Find the Hazard</h2>
+
+  <p class="section-intro">
+    Εντόπισε τους έξι κινδύνους στη βιομηχανική σκηνή.
+    Πάτησε πάνω στους κόκκινους δείκτες για να μάθεις
+    γιατί κάθε σημείο είναι επικίνδυνο.
+  </p>
+
+  <div class="hazard-game">
+
+    <div class="game-instructions">
+      <span aria-hidden="true">🎯</span>
+      <div>
+        Οι δείκτες μετατρέπονται σε πράσινο σημάδι όταν
+        αναγνωριστεί ο αντίστοιχος κίνδυνος.
+      </div>
+    </div>
+
+    <div
+      class="factory-scene"
+      role="group"
+      aria-label="Διαδραστική εικόνα βιομηχανικού χώρου με έξι σημεία κινδύνου"
+    >
+      <img
+        src="a_wide_high_resolution_photo_of_an_industrial_war.png"
+        alt="Βιομηχανικός χώρος με μηχανήματα, περονοφόρο, εργαζομένους, καλώδια, διαρροή και εμπόδια"
+        width="1536"
+        height="1024"
+        loading="eager"
+        decoding="async"
+      >
+
+      <button
+        type="button"
+        class="hotspot hs-machine"
+        aria-label="Έλεγχος κινδύνου κοντά στο μηχάνημα"
+        aria-pressed="false"
+        data-title="Κινούμενα μέρη μηχανήματος"
+        data-message="Ο εργαζόμενος βρίσκεται πολύ κοντά σε κινούμενα μέρη μηχανήματος. Η ανεπαρκής προστασία μπορεί να προκαλέσει παγίδευση, σύνθλιψη ή σοβαρό τραυματισμό."
+      >
+        !
+      </button>
+
+      <button
+        type="button"
+        class="hotspot hs-exit"
+        aria-label="Έλεγχος κινδύνου στην έξοδο κινδύνου"
+        aria-pressed="false"
+        data-title="Μπλοκαρισμένη έξοδος κινδύνου"
+        data-message="Η παλέτα και τα κιβώτια εμποδίζουν την έξοδο κινδύνου. Οι οδεύσεις διαφυγής πρέπει να παραμένουν πάντοτε ελεύθερες και άμεσα προσβάσιμες."
+      >
+        !
+      </button>
+
+      <button
+        type="button"
+        class="hotspot hs-cable"
+        aria-label="Έλεγχος κινδύνου στο καλώδιο του διαδρόμου"
+        aria-pressed="false"
+        data-title="Καλώδιο στον διάδρομο"
+        data-message="Το ηλεκτρικό καλώδιο περνά μέσα από τον διάδρομο κυκλοφορίας. Υπάρχει κίνδυνος παραπατήματος, πτώσης και φθοράς της ηλεκτρικής μόνωσης."
+      >
+        !
+      </button>
+
+      <button
+        type="button"
+        class="hotspot hs-spill"
+        aria-label="Έλεγχος κινδύνου στη διαρροή"
+        aria-pressed="false"
+        data-title="Υγρό στο δάπεδο"
+        data-message="Υγρό έχει χυθεί στο δάπεδο. Η περιοχή πρέπει να απομονωθεί και να καθαριστεί άμεσα, καθώς υπάρχει κίνδυνος ολίσθησης και πτώσης."
+      >
+        !
+      </button>
+
+      <button
+        type="button"
+        class="hotspot hs-lifting"
+        aria-label="Έλεγχος κινδύνου κατά την ανύψωση φορτίου"
+        aria-pressed="false"
+        data-title="Λανθασμένη ανύψωση φορτίου"
+        data-message="Ο εργαζόμενος σηκώνει βαρύ εξάρτημα με λυγισμένη μέση και χωρίς κατάλληλο μηχανικό βοήθημα. Υπάρχει σημαντικός μυοσκελετικός κίνδυνος."
+      >
+        !
+      </button>
+
+      <button
+        type="button"
+        class="hotspot hs-forklift"
+        aria-label="Έλεγχος κινδύνου κοντά στο περονοφόρο"
+        aria-pressed="false"
+        data-title="Πεζός κοντά σε περονοφόρο"
+        data-message="Υπάρχει εργαζόμενος πολύ κοντά στο περονοφόρο χωρίς σαφή διαχωρισμό της κίνησης πεζών και οχημάτων. Υπάρχει κίνδυνος σύγκρουσης ή παράσυρσης."
+      >
+        !
+      </button>
+    </div>
+
+    <div class="hazard-toolbar">
+      <p class="hazard-counter" aria-live="polite">
+        Εντοπίστηκαν:
+        <span id="hazardScore">0</span>/<span id="hazardTotal">6</span>
+      </p>
+
+      <div
+        class="hazard-progress"
+        role="progressbar"
+        aria-label="Πρόοδος εντοπισμού κινδύνων"
+        aria-valuemin="0"
+        aria-valuemax="6"
+        aria-valuenow="0"
+      >
+        <div
+          id="hazardProgressBar"
+          class="hazard-progress-bar"
+        ></div>
+      </div>
+
+      <button
+        type="button"
+        id="resetHazards"
+        class="button secondary"
+      >
+        Επανεκκίνηση
+      </button>
+    </div>
+
+    <div
+      id="hazardFeedback"
+      class="feedback"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+  </div>
+</section>
+
+<section aria-labelledby="scenario-title">
+  <h2 id="scenario-title">Σενάριο εργασίας</h2>
+
+  <p>
+    Βλέπεις ένα καλώδιο να περνά μέσα από τον βασικό διάδρομο
+    κίνησης. Τι πρέπει να κάνεις;
+  </p>
+
+  <div class="scenario-actions">
+    <button
+      type="button"
+      class="button"
+      data-scenario="correct"
+    >
+      Το αναφέρω και φροντίζω να απομακρυνθεί ή να ασφαλιστεί.
+    </button>
+
+    <button
+      type="button"
+      class="button"
+      data-scenario="partial"
+    >
+      Περνάω προσεκτικά από δίπλα.
+    </button>
+
+    <button
+      type="button"
+      class="button"
+      data-scenario="wrong"
+    >
+      Το αγνοώ επειδή δεν έχει συμβεί ακόμη ατύχημα.
+    </button>
+  </div>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    role="status"
+    aria-live="polite"
+  ></div>
+</section>
+
+<section aria-labelledby="quiz-title">
+  <h2 id="quiz-title">Σύντομο Quiz</h2>
+
+  <form id="safetyQuiz">
+    <div class="quiz-question">
+      <p>
+        <strong>1. Τι είναι Hazard;</strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        Οτιδήποτε μπορεί να προκαλέσει βλάβη.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Μόνο ένα ατύχημα που έχει ήδη συμβεί.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Μία διαδικασία παραγωγής χωρίς εργαζομένους.
+      </label>
+    </div>
+
+    <div class="quiz-question">
+      <p>
+        <strong>2. Τι είναι Risk;</strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Η ύπαρξη ενός μηχανήματος.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Ο συνδυασμός πιθανότητας και σοβαρότητας.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Η ταχύτητα ολοκλήρωσης μιας εργασίας.
+      </label>
+    </div>
+
+    <div class="quiz-question">
+      <p>
+        <strong>3. Τι κάνουμε όταν εντοπίζουμε σοβαρό κίνδυνο;</strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Συνεχίζουμε μέχρι να ολοκληρωθεί η εργασία.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        Λαμβάνουμε μέτρα, τον αναφέρουμε ή σταματάμε την εργασία.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Περιμένουμε να τον παρατηρήσει κάποιος άλλος.
+      </label>
+    </div>
+
+    <div class="quiz-question">
+      <p>
+        <strong>4. Τι σημαίνει Look – Think – Act;</strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        Παρατηρώ, σκέφτομαι και ενεργώ με ασφάλεια.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Κάνω την εργασία όσο πιο γρήγορα γίνεται.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Σταματώ κάθε εργασία χωρίς να εξετάσω τις συνθήκες.
+      </label>
+    </div>
+
+    <button type="submit" class="button">
+      Υποβολή Quiz
+    </button>
+  </form>
+
+  <div
+    class="progress-box"
+    role="progressbar"
+    aria-label="Αποτέλεσμα quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0"
+  >
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    role="status"
+    aria-live="polite"
+  ></div>
+</section>
+
+<section aria-labelledby="takeaways-title">
+  <h2 id="takeaways-title">Βασικά σημεία</h2>
+
+  <p class="takeaway">
+    Κάθε ατύχημα ξεκινά από έναν κίνδυνο.
+  </p>
+
+  <p class="takeaway">
+    Η έγκαιρη αναγνώριση κινδύνων προλαμβάνει τραυματισμούς.
+  </p>
+
+  <p class="takeaway">
+    Hazard είναι η πηγή βλάβης. Risk είναι το επίπεδο επικινδυνότητας.
+  </p>
+
+  <p class="takeaway">
+    Εφάρμοσε Look – Think – Act πριν από κάθε εργασία.
+  </p>
+
+  <p class="takeaway">
+    Αν δεις κάτι επικίνδυνο, μίλησε και ανέφερέ το.
+  </p>
+</section>
+```
+
+  </main>
+
+  <footer>
+    Εκπαίδευση Βιομηχανικής Ασφάλειας | Ενότητα 2
+  </footer>
+
+  <script>
+    "use strict";
+
+    /* =========================================================
+       FIND THE HAZARD
+       ========================================================= */
+
+    const hazardButtons = Array.from(
+      document.querySelectorAll(".hotspot")
+    );
+
+    const hazardFeedback =
+      document.getElementById("hazardFeedback");
+
+    const hazardScore =
+      document.getElementById("hazardScore");
+
+    const hazardTotal =
+      document.getElementById("hazardTotal");
+
+    const hazardProgressBar =
+      document.getElementById("hazardProgressBar");
+
+    const hazardProgress =
+      document.querySelector(".hazard-progress");
+
+    const resetHazardsButton =
+      document.getElementById("resetHazards");
+
+    let hazardsFound = 0;
+    const totalHazards = hazardButtons.length;
+
+    hazardTotal.textContent = String(totalHazards);
+    hazardProgress.setAttribute(
+      "aria-valuemax",
+      String(totalHazards)
+    );
+
+    function updateHazardProgress() {
+      const percentage =
+        totalHazards > 0
+          ? (hazardsFound / totalHazards) * 100
+          : 0;
+
+      hazardScore.textContent = String(hazardsFound);
+      hazardProgressBar.style.width = percentage + "%";
+
+      hazardProgress.setAttribute(
+        "aria-valuenow",
+        String(hazardsFound)
+      );
+    }
+
+    function showHazard(button) {
+      const title =
+        button.dataset.title || "Κίνδυνος";
+
+      const message =
+        button.dataset.message || "";
+
+      const alreadyFound =
+        button.classList.contains("found");
+
+      if (!alreadyFound) {
+        button.classList.add("found");
+        button.textContent = "✓";
+        button.setAttribute("aria-pressed", "true");
+
+        hazardsFound += 1;
+        updateHazardProgress();
+      }
+
+      hazardFeedback.style.display = "block";
+      hazardFeedback.className = "feedback success";
+
+      if (hazardsFound === totalHazards) {
+        hazardFeedback.innerHTML =
+          "<strong>Μπράβο! Εντόπισες όλους τους κινδύνους.</strong>" +
+          "Ο τελευταίος κίνδυνος ήταν: " +
+          escapeHTML(title) +
+          ". " +
+          escapeHTML(message);
+      } else {
+        hazardFeedback.innerHTML =
+          "<strong>" +
+          escapeHTML(title) +
+          "</strong>" +
+          escapeHTML(message);
+      }
+    }
+
+    function resetHazards() {
+      hazardsFound = 0;
+
+      hazardButtons.forEach(function (button) {
+        button.classList.remove("found");
+        button.textContent = "!";
+        button.setAttribute("aria-pressed", "false");
+      });
+
+      hazardFeedback.style.display = "none";
+      hazardFeedback.textContent = "";
+
+      updateHazardProgress();
+
+      const firstHotspot = hazardButtons[0];
+
+      if (firstHotspot) {
+        firstHotspot.focus();
+      }
+    }
+
+    hazardButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        showHazard(button);
+      });
+    });
+
+    resetHazardsButton.addEventListener(
+      "click",
+      resetHazards
+    );
+
+    /* =========================================================
+       SCENARIO
+       ========================================================= */
+
+    const scenarioFeedback =
+      document.getElementById("scenarioFeedback");
+
+    const scenarioButtons =
+      document.querySelectorAll("[data-scenario]");
+
+    scenarioButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        showScenarioFeedback(button.dataset.scenario);
+      });
+    });
+
+    function showScenarioFeedback(type) {
+      scenarioFeedback.style.display = "block";
+
+      if (type === "correct") {
+        scenarioFeedback.className =
+          "feedback success";
+
+        scenarioFeedback.textContent =
+          "Σωστά. Ο κίνδυνος πρέπει να αναφερθεί και να ελεγχθεί πριν προκαλέσει ατύχημα.";
+      } else if (type === "partial") {
+        scenarioFeedback.className =
+          "feedback highlight";
+
+        scenarioFeedback.textContent =
+          "Μερικώς σωστό. Το να περάσεις προσεκτικά προστατεύει προσωρινά μόνο εσένα. Ο κίνδυνος παραμένει για τους υπόλοιπους εργαζομένους.";
+      } else {
+        scenarioFeedback.className =
+          "feedback danger";
+
+        scenarioFeedback.textContent =
+          "Λάθος. Η αγνόηση ενός κινδύνου επιτρέπει στο πρόβλημα να εξελιχθεί σε ατύχημα.";
+      }
+    }
+
+    /* =========================================================
+       QUIZ
+       ========================================================= */
+
+    const safetyQuiz =
+      document.getElementById("safetyQuiz");
+
+    const quizResult =
+      document.getElementById("quizResult");
+
+    const quizProgressBar =
+      document.getElementById("progressBar");
+
+    const quizProgress =
+      document.querySelector(".progress-box");
+
+    safetyQuiz.addEventListener(
+      "submit",
+      function (event) {
+        event.preventDefault();
+        checkQuiz();
+      }
+    );
+
+    function checkQuiz() {
+      const questionNames = [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ];
+
+      let score = 0;
+      let answered = 0;
+
+      questionNames.forEach(function (name) {
+        const selected =
+          safetyQuiz.querySelector(
+            'input[name="' + name + '"]:checked'
+          );
+
+        if (selected) {
+          answered += 1;
+          score += Number(selected.value);
+        }
+      });
+
+      quizResult.style.display = "block";
+
+      if (answered < questionNames.length) {
+        quizResult.className =
+          "feedback highlight";
+
+        quizResult.textContent =
+          "Απάντησε σε όλες τις ερωτήσεις πριν υποβάλεις το quiz.";
+
+        return;
+      }
+
+      const percentage =
+        Math.round(
+          (score / questionNames.length) * 100
+        );
+
+      quizProgressBar.style.width =
+        percentage + "%";
+
+      quizProgress.setAttribute(
+        "aria-valuenow",
+        String(percentage)
+      );
+
+      if (percentage === 100) {
+        quizResult.className =
+          "feedback success";
+
+        quizResult.textContent =
+          "Άριστα! Απάντησες σωστά και στις τέσσερις ερωτήσεις.";
+      } else if (percentage >= 75) {
+        quizResult.className =
+          "feedback success";
+
+        quizResult.textContent =
+          "Πολύ καλά! Το αποτέλεσμά σου είναι " +
+          percentage +
+          "%.";
+      } else {
+        quizResult.className =
+          "feedback danger";
+
+        quizResult.textContent =
+          "Το αποτέλεσμά σου είναι " +
+          percentage +
+          "%. Επανέλαβε τα βασικά σημεία και δοκίμασε ξανά.";
+      }
+    }
+
+    /* Prevent dataset text from being inserted as HTML. */
+    function escapeHTML(value) {
+      const element =
+        document.createElement("div");
+
+      element.textContent =
+        String(value);
+
+      return element.innerHTML;
+    }
+
+    updateHazardProgress();
+  </script>
+
+</body>
+</html>
