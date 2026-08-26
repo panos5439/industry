@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ενότητα 1 | Εισαγωγή στην Ασφάλεια</title>
+
   <style>
     :root {
       --primary: #123c69;
@@ -111,6 +112,10 @@
       border-radius: 12px;
     }
 
+    /* =====================================================
+       ΓΕΝΙΚΑ BUTTONS
+       ===================================================== */
+
     button {
       background: var(--primary);
       color: white;
@@ -120,6 +125,11 @@
       cursor: pointer;
       font-size: 1rem;
       margin-top: 10px;
+      transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
     }
 
     button:hover,
@@ -129,6 +139,11 @@
       outline-offset: 2px;
     }
 
+    /* =====================================================
+       ΠΡΑΚΤΙΚΟ ΣΕΝΑΡΙΟ
+       ΔΙΟΡΘΩΜΕΝΟ HOVER / FOCUS
+       ===================================================== */
+
     .scenario-option {
       display: block;
       width: 100%;
@@ -137,6 +152,42 @@
       color: var(--text);
       border: 1px solid var(--border);
       margin: 10px 0;
+      padding: 15px 17px;
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    /*
+      Στο hover το background παραμένει ανοιχτό
+      και το κείμενο σκούρο για μέγιστη αναγνωσιμότητα.
+    */
+    .scenario-option:hover,
+    .scenario-option:focus {
+      background: #dcecff;
+      color: #1f2933;
+      border-color: var(--primary);
+      outline: 3px solid rgba(244,180,0,0.60);
+      outline-offset: 2px;
+    }
+
+    /*
+      Η επιλογή που πάτησε ο εκπαιδευόμενος
+      παραμένει εμφανώς επιλεγμένη.
+    */
+    .scenario-option.selected {
+      background: #d9e9f8;
+      color: #0b2545;
+      border: 2px solid var(--primary);
+      font-weight: bold;
+    }
+
+    .scenario-option.selected:hover,
+    .scenario-option.selected:focus {
+      background: #cfe2f5;
+      color: #0b2545;
+      border-color: var(--primary);
+      outline: 3px solid var(--secondary);
+      outline-offset: 2px;
     }
 
     .feedback {
@@ -195,215 +246,509 @@
       section {
         padding: 20px;
       }
+
+      .scenario-option {
+        padding: 14px;
+      }
     }
   </style>
 </head>
+
 <body>
 
 <header>
   <h1>Ενότητα 1: Εισαγωγή στην Ασφάλεια</h1>
-  <p>Η ασφάλεια στη βιομηχανία δεν είναι απλώς κανόνας. Είναι καθημερινή επιλογή, προσωπική ευθύνη και βασικό στοιχείο επαγγελματισμού.</p>
+
+  <p>
+    Η ασφάλεια στη βιομηχανία δεν είναι απλώς κανόνας.
+    Είναι καθημερινή επιλογή, προσωπική ευθύνη και βασικό
+    στοιχείο επαγγελματισμού.
+  </p>
 </header>
 
 <main>
 
+  <!-- ΣΤΟΧΟΙ ΜΑΘΗΣΗΣ -->
   <section>
     <h2>Στόχοι μάθησης</h2>
-    <p>Με την ολοκλήρωση αυτής της ενότητας, ο εργαζόμενος θα μπορεί να:</p>
+
+    <p>
+      Με την ολοκλήρωση αυτής της ενότητας, ο εργαζόμενος θα μπορεί να:
+    </p>
+
     <div class="grid">
-      <div class="card"><span class="icon">🎯</span>Εξηγεί γιατί η ασφάλεια αφορά κάθε εργαζόμενο.</div>
-      <div class="card"><span class="icon">⚠️</span>Αναγνωρίζει βασικές επικίνδυνες συμπεριφορές.</div>
-      <div class="card"><span class="icon">👷</span>Κατανοεί τη σημασία της προσωπικής ευθύνης.</div>
-      <div class="card"><span class="icon">🗣️</span>Αναφέρει κινδύνους, συμβάντα και near misses.</div>
+
+      <div class="card">
+        <span class="icon">🎯</span>
+        Εξηγεί γιατί η ασφάλεια αφορά κάθε εργαζόμενο.
+      </div>
+
+      <div class="card">
+        <span class="icon">⚠️</span>
+        Αναγνωρίζει βασικές επικίνδυνες συμπεριφορές.
+      </div>
+
+      <div class="card">
+        <span class="icon">👷</span>
+        Κατανοεί τη σημασία της προσωπικής ευθύνης.
+      </div>
+
+      <div class="card">
+        <span class="icon">🗣️</span>
+        Αναφέρει κινδύνους, συμβάντα και near misses.
+      </div>
+
     </div>
   </section>
 
+  <!-- ΓΙΑΤΙ ΕΙΝΑΙ ΣΗΜΑΝΤΙΚΗ Η ΑΣΦΑΛΕΙΑ -->
   <section>
     <h2>Γιατί είναι σημαντική η ασφάλεια;</h2>
+
     <p>
-      Σε ένα βιομηχανικό περιβάλλον, οι εργασίες μπορεί να περιλαμβάνουν μηχανές, ηλεκτρική ενέργεια,
-      χημικά, ανυψώσεις, οχήματα, θερμές εργασίες και χειρωνακτικές δραστηριότητες.
-      Ένα απλό λάθος μπορεί να οδηγήσει σε τραυματισμό, ζημιά στον εξοπλισμό, διακοπή παραγωγής ή σοβαρό ατύχημα.
+      Σε ένα βιομηχανικό περιβάλλον, οι εργασίες μπορεί να περιλαμβάνουν
+      μηχανές, ηλεκτρική ενέργεια, χημικά, ανυψώσεις, οχήματα,
+      θερμές εργασίες και χειρωνακτικές δραστηριότητες.
+      Ένα απλό λάθος μπορεί να οδηγήσει σε τραυματισμό,
+      ζημιά στον εξοπλισμό, διακοπή παραγωγής ή σοβαρό ατύχημα.
     </p>
 
     <div class="highlight">
-      <strong>Βασικό μήνυμα:</strong> Η ασφάλεια δεν ξεκινά από τον κανόνα. Ξεκινά από την απόφαση να σταματήσω, να σκεφτώ και να ενεργήσω σωστά.
+      <strong>Βασικό μήνυμα:</strong>
+      Η ασφάλεια δεν ξεκινά από τον κανόνα.
+      Ξεκινά από την απόφαση να σταματήσω, να σκεφτώ
+      και να ενεργήσω σωστά.
     </div>
   </section>
 
+  <!-- ΚΟΥΛΤΟΥΡΑ ΑΣΦΑΛΕΙΑΣ -->
   <section>
     <h2>Τι σημαίνει κουλτούρα ασφάλειας;</h2>
+
     <p>
-      Κουλτούρα ασφάλειας σημαίνει ότι όλοι, από τη διοίκηση μέχρι τον νεότερο εργαζόμενο,
-      συμπεριφέρονται με τρόπο που προστατεύει τη ζωή, την υγεία και την εργασία όλων.
+      Κουλτούρα ασφάλειας σημαίνει ότι όλοι, από τη διοίκηση
+      μέχρι τον νεότερο εργαζόμενο, συμπεριφέρονται με τρόπο
+      που προστατεύει τη ζωή, την υγεία και την εργασία όλων.
     </p>
 
     <div class="grid">
+
       <div class="card">
         <span class="icon">✅</span>
+
         <h3>Σωστή συμπεριφορά</h3>
-        <p>Ακολουθώ τις οδηγίες, χρησιμοποιώ τα ΜΑΠ, αναφέρω κινδύνους και σταματώ εργασία όταν κάτι δεν είναι ασφαλές.</p>
+
+        <p>
+          Ακολουθώ τις οδηγίες, χρησιμοποιώ τα ΜΑΠ,
+          αναφέρω κινδύνους και σταματώ εργασία όταν
+          κάτι δεν είναι ασφαλές.
+        </p>
       </div>
+
       <div class="card">
         <span class="icon">❌</span>
+
         <h3>Λανθασμένη συμπεριφορά</h3>
-        <p>Παρακάμπτω προστατευτικά, βιάζομαι, αγνοώ κινδύνους ή συνεχίζω εργασία ενώ γνωρίζω ότι υπάρχει πρόβλημα.</p>
+
+        <p>
+          Παρακάμπτω προστατευτικά, βιάζομαι,
+          αγνοώ κινδύνους ή συνεχίζω εργασία ενώ
+          γνωρίζω ότι υπάρχει πρόβλημα.
+        </p>
       </div>
+
     </div>
   </section>
 
+  <!-- STOP -->
   <section>
     <h2>Η αρχή STOP</h2>
-    <p>Πριν ξεκινήσεις μια εργασία, χρησιμοποίησε την απλή αρχή STOP:</p>
+
+    <p>
+      Πριν ξεκινήσεις μια εργασία, χρησιμοποίησε την απλή αρχή STOP:
+    </p>
 
     <div class="grid">
-      <div class="card"><strong>S — Stop</strong><br>Σταμάτα πριν ενεργήσεις.</div>
-      <div class="card"><strong>T — Think</strong><br>Σκέψου τι μπορεί να πάει στραβά.</div>
-      <div class="card"><strong>O — Observe</strong><br>Παρατήρησε τον χώρο, τον εξοπλισμό και τους ανθρώπους γύρω σου.</div>
-      <div class="card"><strong>P — Proceed</strong><br>Προχώρησε μόνο όταν η εργασία είναι ασφαλής.</div>
+
+      <div class="card">
+        <strong>S — Stop</strong>
+        <br>
+        Σταμάτα πριν ενεργήσεις.
+      </div>
+
+      <div class="card">
+        <strong>T — Think</strong>
+        <br>
+        Σκέψου τι μπορεί να πάει στραβά.
+      </div>
+
+      <div class="card">
+        <strong>O — Observe</strong>
+        <br>
+        Παρατήρησε τον χώρο, τον εξοπλισμό και τους ανθρώπους γύρω σου.
+      </div>
+
+      <div class="card">
+        <strong>P — Proceed</strong>
+        <br>
+        Προχώρησε μόνο όταν η εργασία είναι ασφαλής.
+      </div>
+
     </div>
   </section>
 
+  <!-- ΠΡΑΚΤΙΚΟ ΣΕΝΑΡΙΟ -->
   <section>
     <h2>Πρακτικό σενάριο</h2>
+
     <p>
-      Βλέπεις έναν συνάδελφο να αφαιρεί προσωρινά ένα προστατευτικό μηχανής για να ολοκληρώσει πιο γρήγορα μια εργασία.
-      Τι κάνεις;
+      Βλέπεις έναν συνάδελφο να αφαιρεί προσωρινά ένα
+      προστατευτικό μηχανής για να ολοκληρώσει πιο γρήγορα
+      μια εργασία.
     </p>
 
-    <button class="scenario-option" onclick="showScenarioFeedback('wrong')">
+    <p>
+      <strong>Τι κάνεις;</strong>
+    </p>
+
+    <button
+      type="button"
+      class="scenario-option"
+      onclick="showScenarioFeedback(this, 'wrong')">
       Συνεχίζω τη δουλειά μου, γιατί δεν είναι δική μου ευθύνη.
     </button>
 
-    <button class="scenario-option" onclick="showScenarioFeedback('wrong')">
+    <button
+      type="button"
+      class="scenario-option"
+      onclick="showScenarioFeedback(this, 'wrong')">
       Τον βοηθάω για να τελειώσει πιο γρήγορα.
     </button>
 
-    <button class="scenario-option" onclick="showScenarioFeedback('correct')">
-      Σταματώ την εργασία, τον ενημερώνω για τον κίνδυνο και ειδοποιώ τον υπεύθυνο.
+    <button
+      type="button"
+      class="scenario-option"
+      onclick="showScenarioFeedback(this, 'correct')">
+      Σταματώ την εργασία, τον ενημερώνω για τον κίνδυνο
+      και ειδοποιώ τον υπεύθυνο.
     </button>
 
-    <div id="scenarioFeedback" class="feedback"></div>
+    <div
+      id="scenarioFeedback"
+      class="feedback"
+      aria-live="polite">
+    </div>
   </section>
 
+  <!-- ΑΝΑΦΟΡΑ -->
   <section>
     <h2>Τι πρέπει να αναφέρουμε;</h2>
 
     <div class="grid">
+
       <div class="card">
         <span class="icon">⚠️</span>
+
         <h3>Επικίνδυνες συνθήκες</h3>
-        <p>Π.χ. διαρροές, χαλασμένα προστατευτικά, εμπόδια σε διαδρόμους, φθαρμένα καλώδια.</p>
+
+        <p>
+          Π.χ. διαρροές, χαλασμένα προστατευτικά,
+          εμπόδια σε διαδρόμους, φθαρμένα καλώδια.
+        </p>
       </div>
+
       <div class="card">
         <span class="icon">🚧</span>
+
         <h3>Επικίνδυνες συμπεριφορές</h3>
-        <p>Π.χ. μη χρήση ΜΑΠ, παράκαμψη διαδικασιών, εργασία χωρίς άδεια.</p>
+
+        <p>
+          Π.χ. μη χρήση ΜΑΠ, παράκαμψη διαδικασιών,
+          εργασία χωρίς άδεια.
+        </p>
       </div>
+
       <div class="card">
         <span class="icon">🟡</span>
+
         <h3>Near Miss</h3>
-        <p>Ένα συμβάν που δεν προκάλεσε τραυματισμό, αλλά θα μπορούσε να είχε προκαλέσει.</p>
+
+        <p>
+          Ένα συμβάν που δεν προκάλεσε τραυματισμό,
+          αλλά θα μπορούσε να είχε προκαλέσει.
+        </p>
       </div>
+
     </div>
 
     <div class="success">
-      <strong>Θυμήσου:</strong> Η αναφορά ενός κινδύνου δεν είναι κατηγορία. Είναι πράξη πρόληψης.
+      <strong>Θυμήσου:</strong>
+      Η αναφορά ενός κινδύνου δεν είναι κατηγορία.
+      Είναι πράξη πρόληψης.
     </div>
   </section>
 
+  <!-- MINI QUIZ -->
   <section>
     <h2>Mini Quiz</h2>
 
     <form id="quizForm">
+
       <div class="quiz-question">
-        <p><strong>1. Πότε πρέπει να σκεφτόμαστε την ασφάλεια;</strong></p>
-        <label><input type="radio" name="q1" value="0"> Μόνο όταν υπάρχει επιθεώρηση.</label>
-        <label><input type="radio" name="q1" value="1"> Πριν, κατά τη διάρκεια και μετά από κάθε εργασία.</label>
-        <label><input type="radio" name="q1" value="0"> Μόνο όταν η εργασία φαίνεται επικίνδυνη.</label>
+
+        <p>
+          <strong>1. Πότε πρέπει να σκεφτόμαστε την ασφάλεια;</strong>
+        </p>
+
+        <label>
+          <input type="radio" name="q1" value="0">
+          Μόνο όταν υπάρχει επιθεώρηση.
+        </label>
+
+        <label>
+          <input type="radio" name="q1" value="1">
+          Πριν, κατά τη διάρκεια και μετά από κάθε εργασία.
+        </label>
+
+        <label>
+          <input type="radio" name="q1" value="0">
+          Μόνο όταν η εργασία φαίνεται επικίνδυνη.
+        </label>
+
       </div>
 
       <div class="quiz-question">
-        <p><strong>2. Τι σημαίνει Near Miss;</strong></p>
-        <label><input type="radio" name="q2" value="1"> Συμβάν που δεν προκάλεσε τραυματισμό αλλά θα μπορούσε.</label>
-        <label><input type="radio" name="q2" value="0"> Μικρός τραυματισμός.</label>
-        <label><input type="radio" name="q2" value="0"> Καθυστέρηση στην παραγωγή.</label>
+
+        <p>
+          <strong>2. Τι σημαίνει Near Miss;</strong>
+        </p>
+
+        <label>
+          <input type="radio" name="q2" value="1">
+          Συμβάν που δεν προκάλεσε τραυματισμό αλλά θα μπορούσε.
+        </label>
+
+        <label>
+          <input type="radio" name="q2" value="0">
+          Μικρός τραυματισμός.
+        </label>
+
+        <label>
+          <input type="radio" name="q2" value="0">
+          Καθυστέρηση στην παραγωγή.
+        </label>
+
       </div>
 
       <div class="quiz-question">
-        <p><strong>3. Ποια είναι σωστή συμπεριφορά;</strong></p>
-        <label><input type="radio" name="q3" value="0"> Παρακάμπτω διαδικασίες όταν βιάζομαι.</label>
-        <label><input type="radio" name="q3" value="0"> Αγνοώ μικρούς κινδύνους.</label>
-        <label><input type="radio" name="q3" value="1"> Αναφέρω επικίνδυνες συνθήκες και σταματώ μη ασφαλή εργασία.</label>
+
+        <p>
+          <strong>3. Ποια είναι σωστή συμπεριφορά;</strong>
+        </p>
+
+        <label>
+          <input type="radio" name="q3" value="0">
+          Παρακάμπτω διαδικασίες όταν βιάζομαι.
+        </label>
+
+        <label>
+          <input type="radio" name="q3" value="0">
+          Αγνοώ μικρούς κινδύνους.
+        </label>
+
+        <label>
+          <input type="radio" name="q3" value="1">
+          Αναφέρω επικίνδυνες συνθήκες και σταματώ μη ασφαλή εργασία.
+        </label>
+
       </div>
 
-      <button type="button" onclick="checkQuiz()">Υποβολή Quiz</button>
+      <button
+        type="button"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
     </form>
 
-    <div class="progress-box" aria-label="Πρόοδος αποτελέσματος quiz">
-      <div id="progressBar" class="progress-bar"></div>
+    <div
+      class="progress-box"
+      role="progressbar"
+      aria-label="Πρόοδος αποτελέσματος quiz"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0">
+
+      <div
+        id="progressBar"
+        class="progress-bar">
+      </div>
+
     </div>
 
-    <div id="quizResult" class="feedback"></div>
+    <div
+      id="quizResult"
+      class="feedback"
+      aria-live="polite">
+    </div>
+
   </section>
 
+  <!-- ΒΑΣΙΚΑ ΣΗΜΕΙΑ -->
   <section>
     <h2>Βασικά σημεία</h2>
-    <p class="takeaway">Η ασφάλεια είναι ευθύνη όλων.</p>
-    <p class="takeaway">Σταματώ, σκέφτομαι, παρατηρώ και ενεργώ σωστά.</p>
-    <p class="takeaway">Δεν αγνοώ κινδύνους. Τους αναφέρω.</p>
-    <p class="takeaway">Κανένας στόχος παραγωγής δεν αξίζει περισσότερο από την ανθρώπινη ζωή.</p>
+
+    <p class="takeaway">
+      Η ασφάλεια είναι ευθύνη όλων.
+    </p>
+
+    <p class="takeaway">
+      Σταματώ, σκέφτομαι, παρατηρώ και ενεργώ σωστά.
+    </p>
+
+    <p class="takeaway">
+      Δεν αγνοώ κινδύνους. Τους αναφέρω.
+    </p>
+
+    <p class="takeaway">
+      Κανένας στόχος παραγωγής δεν αξίζει περισσότερο
+      από την ανθρώπινη ζωή.
+    </p>
   </section>
 
 </main>
 
 <footer>
-  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 1
+  Εκπαίδευση Υγείας &amp; Ασφάλειας στη Βιομηχανία | Ενότητα 1
 </footer>
 
 <script>
-  function showScenarioFeedback(type) {
+  /* =====================================================
+     ΠΡΑΚΤΙΚΟ ΣΕΝΑΡΙΟ
+     ===================================================== */
+
+  function showScenarioFeedback(button, type) {
+
     const feedback = document.getElementById("scenarioFeedback");
+
+    /*
+      Αφαιρούμε την προηγούμενη επιλογή.
+    */
+    document
+      .querySelectorAll(".scenario-option")
+      .forEach(function(option) {
+        option.classList.remove("selected");
+      });
+
+    /*
+      Επισημαίνουμε την τρέχουσα επιλογή.
+    */
+    button.classList.add("selected");
+
     feedback.style.display = "block";
 
     if (type === "correct") {
+
       feedback.className = "feedback success";
-      feedback.innerHTML = "Σωστά. Η εργασία πρέπει να σταματήσει όταν υπάρχει άμεσος κίνδυνος. Η παρέμβαση προστατεύει και τον συνάδελφο και την ομάδα.";
+
+      feedback.innerHTML =
+        "Σωστά. Η εργασία πρέπει να σταματήσει όταν υπάρχει άμεσος κίνδυνος. " +
+        "Η παρέμβαση προστατεύει και τον συνάδελφο και την ομάδα.";
+
     } else {
+
       feedback.className = "feedback danger";
-      feedback.innerHTML = "Όχι σωστά. Η παράκαμψη προστατευτικού μπορεί να οδηγήσει σε σοβαρό τραυματισμό. Η ασφάλεια είναι κοινή ευθύνη.";
+
+      feedback.innerHTML =
+        "Όχι σωστά. Η παράκαμψη προστατευτικού μπορεί να οδηγήσει σε σοβαρό τραυματισμό. " +
+        "Η ασφάλεια είναι κοινή ευθύνη.";
     }
   }
 
+
+  /* =====================================================
+     MINI QUIZ
+     ===================================================== */
+
   function checkQuiz() {
+
     const form = document.getElementById("quizForm");
     const result = document.getElementById("quizResult");
     const progressBar = document.getElementById("progressBar");
+    const progressBox = document.querySelector(".progress-box");
 
     let score = 0;
+    let answered = 0;
+
     const total = 3;
 
     for (let i = 1; i <= total; i++) {
-      const answer = form.querySelector(`input[name="q${i}"]:checked`);
-      if (answer && answer.value === "1") {
-        score++;
+
+      const answer = form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+      if (answer) {
+
+        answered++;
+
+        if (answer.value === "1") {
+          score++;
+        }
       }
     }
 
-    const percentage = Math.round((score / total) * 100);
+    /*
+      Δεν επιτρέπουμε υποβολή χωρίς να έχουν
+      απαντηθεί όλες οι ερωτήσεις.
+    */
+    if (answered < total) {
+
+      result.style.display = "block";
+      result.className = "feedback highlight";
+
+      result.innerHTML =
+        "Παρακαλώ απάντησε σε όλες τις ερωτήσεις πριν από την υποβολή.";
+
+      return;
+    }
+
+    const percentage = Math.round(
+      (score / total) * 100
+    );
+
     progressBar.style.width = percentage + "%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      percentage
+    );
 
     result.style.display = "block";
 
     if (score === total) {
+
       result.className = "feedback success";
-      result.innerHTML = `Άριστα! Πέτυχες ${score}/${total}. Έχεις κατανοήσει τα βασικά μηνύματα της ενότητας.`;
+
+      result.innerHTML =
+        `Άριστα! Πέτυχες ${score}/${total}. ` +
+        "Έχεις κατανοήσει τα βασικά μηνύματα της ενότητας.";
+
     } else if (score === 2) {
+
       result.className = "feedback highlight";
-      result.innerHTML = `Καλή προσπάθεια. Πέτυχες ${score}/${total}. Ξαναδές τα σημεία για αναφορά κινδύνων και κουλτούρα ασφάλειας.`;
+
+      result.innerHTML =
+        `Καλή προσπάθεια. Πέτυχες ${score}/${total}. ` +
+        "Ξαναδές τα σημεία για αναφορά κινδύνων και κουλτούρα ασφάλειας.";
+
     } else {
+
       result.className = "feedback danger";
-      result.innerHTML = `Πέτυχες ${score}/${total}. Προτείνεται να επαναλάβεις την ενότητα πριν προχωρήσεις.`;
+
+      result.innerHTML =
+        `Πέτυχες ${score}/${total}. ` +
+        "Προτείνεται να επαναλάβεις την ενότητα πριν προχωρήσεις.";
     }
   }
 </script>
