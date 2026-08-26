@@ -1,415 +1,3 @@
-<!DOCTYPE html>
-<html lang="el">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ενότητα 4 | Μέσα Ατομικής Προστασίας</title>
-
-<style>
-:root{
-  --primary:#123c69;
-  --secondary:#f4b400;
-  --accent:#d62828;
-  --success:#2a9d8f;
-  --bg:#f5f7fa;
-  --card:#ffffff;
-  --text:#1f2933;
-  --border:#d9e2ec;
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.6;
-}
-
-header{
-  background:linear-gradient(135deg,var(--primary),#0b2545);
-  color:white;
-  padding:52px 20px;
-  text-align:center;
-}
-
-header h1{
-  margin:0 0 12px;
-  font-size:clamp(1.8rem,4vw,3rem);
-}
-
-header p{
-  max-width:850px;
-  margin:auto;
-  font-size:1.1rem;
-}
-
-main{
-  max-width:1100px;
-  margin:auto;
-  padding:24px;
-}
-
-section{
-  background:var(--card);
-  margin-bottom:24px;
-  padding:28px;
-  border-radius:18px;
-  box-shadow:0 8px 24px rgba(0,0,0,.06);
-}
-
-h2{color:var(--primary);margin-top:0}
-h3{color:#0b2545}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:18px;
-}
-
-.card{
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:20px;
-  background:white;
-}
-
-.icon{
-  font-size:2rem;
-  display:block;
-  margin-bottom:10px;
-}
-
-.highlight{
-  border-left:6px solid var(--secondary);
-  background:#fff8e1;
-  padding:18px;
-  border-radius:12px;
-  margin-top:16px;
-}
-
-.success{
-  border-left:6px solid var(--success);
-  background:#eafaf7;
-  padding:18px;
-  border-radius:12px;
-}
-
-.danger{
-  border-left:6px solid var(--accent);
-  background:#fff1f1;
-  padding:18px;
-  border-radius:12px;
-}
-
-button, select{
-  font-size:1rem;
-}
-
-button{
-  cursor:pointer;
-}
-
-.submit-btn{
-  background:var(--primary);
-  color:white;
-  border:none;
-  padding:12px 18px;
-  border-radius:10px;
-  margin-top:12px;
-}
-
-.submit-btn:hover,
-.submit-btn:focus{
-  background:#0b2545;
-  outline:3px solid var(--secondary);
-  outline-offset:2px;
-}
-
-.ppe-selector{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:18px;
-  align-items:end;
-}
-
-.ppe-selector label{
-  display:block;
-  font-weight:bold;
-  margin-bottom:8px;
-}
-
-.ppe-selector select{
-  width:100%;
-  padding:12px;
-  border:1px solid var(--border);
-  border-radius:10px;
-}
-
-.ppe-result{
-  display:none;
-  margin-top:18px;
-  padding:18px;
-  border-radius:14px;
-  border-left:8px solid var(--success);
-  background:#eafaf7;
-  font-weight:bold;
-}
-
-.ppe-list{
-  margin-top:10px;
-  font-weight:normal;
-}
-
-.ppe-list li{
-  margin-bottom:6px;
-}
-
-.scenario-option{
-  display:block;
-  width:100%;
-  text-align:left;
-  background:#eef4fb;
-  color:var(--text);
-  border:1px solid var(--border);
-  padding:14px 16px;
-  border-radius:12px;
-  margin:10px 0;
-}
-
-.scenario-option.selected{
-  background:#0b2545;
-  color:white;
-}
-
-.feedback{
-  display:none;
-  margin-top:14px;
-  padding:14px;
-  border-radius:10px;
-  font-weight:bold;
-}
-
-.quiz-question{
-  margin-bottom:22px;
-  padding-bottom:18px;
-  border-bottom:1px solid var(--border);
-}
-
-.quiz-question label{
-  display:block;
-  margin:8px 0;
-  cursor:pointer;
-}
-
-.progress-box{
-  background:#e8eef5;
-  border-radius:999px;
-  height:18px;
-  overflow:hidden;
-  margin-top:12px;
-}
-
-.progress-bar{
-  height:100%;
-  width:0%;
-  background:var(--success);
-  transition:width .4s ease;
-}
-
-.takeaway{
-  font-size:1.15rem;
-  font-weight:bold;
-  color:var(--primary);
-}
-
-footer{
-  text-align:center;
-  color:#5f6c7b;
-  padding:30px 20px;
-  font-size:.9rem;
-}
-
-@media(max-width:700px){
-  main{padding:14px}
-  section{padding:20px}
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <h1>Ενότητα 4: Μέσα Ατομικής Προστασίας</h1>
-  <p>Τα ΜΑΠ είναι σημαντικά, αλλά δεν κάνουν την εργασία αυτόματα ασφαλή. Προστατεύουν τον εργαζόμενο όταν οι κίνδυνοι δεν μπορούν να εξαλειφθούν πλήρως.</p>
-</header>
-
-<main>
-
-<section>
-  <h2>Στόχοι μάθησης</h2>
-  <div class="grid">
-    <div class="card"><span class="icon">🦺</span>Κατανοεί τον ρόλο των ΜΑΠ στην προστασία του εργαζομένου.</div>
-    <div class="card"><span class="icon">🛡️</span>Αναγνωρίζει βασικές κατηγορίες ΜΑΠ.</div>
-    <div class="card"><span class="icon">🔍</span>Ελέγχει τα ΜΑΠ πριν από τη χρήση.</div>
-    <div class="card"><span class="icon">✅</span>Επιλέγει κατάλληλα ΜΑΠ ανάλογα με την εργασία.</div>
-  </div>
-</section>
-
-<section>
-  <h2>Τι είναι τα ΜΑΠ;</h2>
-  <p>
-    Μέσα Ατομικής Προστασίας είναι ο εξοπλισμός που φορά ή χρησιμοποιεί ο εργαζόμενος
-    για να μειώσει την έκθεσή του σε κινδύνους που δεν μπορούν να εξαλειφθούν πλήρως.
-  </p>
-
-  <div class="highlight">
-    <strong>Σημαντικό:</strong> Τα ΜΑΠ δεν αφαιρούν τον κίνδυνο. Μειώνουν την πιθανότητα ή τη σοβαρότητα τραυματισμού όταν χρησιμοποιούνται σωστά.
-  </div>
-</section>
-
-<section>
-  <h2>Γιατί τα ΜΑΠ είναι το τελευταίο επίπεδο προστασίας;</h2>
-  <p>
-    Σύμφωνα με την ιεράρχηση μέτρων ελέγχου, πρώτα πρέπει να προσπαθούμε να εξαλείψουμε
-    ή να μειώσουμε τον κίνδυνο στην πηγή. Τα ΜΑΠ χρησιμοποιούνται όταν εξακολουθεί να υπάρχει έκθεση.
-  </p>
-
-  <div class="danger">
-    <strong>Παράδειγμα:</strong> Αν υπάρχει κίνδυνος εκτόξευσης σωματιδίων, τα γυαλιά προστασίας είναι απαραίτητα.
-    Όμως πρέπει πρώτα να εξετάζονται τεχνικά μέτρα, όπως κάλυμμα, προστατευτικό ή απομόνωση της πηγής.
-  </div>
-</section>
-
-<section>
-  <h2>Βασικές κατηγορίες ΜΑΠ</h2>
-
-  <div class="grid">
-    <div class="card"><span class="icon">⛑️</span><h3>Προστασία κεφαλής</h3><p>Κράνος ασφαλείας για πτώση αντικειμένων ή πρόσκρουση.</p></div>
-    <div class="card"><span class="icon">🥽</span><h3>Προστασία ματιών</h3><p>Γυαλιά ή προσωπίδα για σωματίδια, χημικά ή πιτσιλίσματα.</p></div>
-    <div class="card"><span class="icon">🎧</span><h3>Προστασία ακοής</h3><p>Ωτοασπίδες ή ακουστικά σε χώρους με υψηλό θόρυβο.</p></div>
-    <div class="card"><span class="icon">😷</span><h3>Αναπνευστική προστασία</h3><p>Μάσκες ή αναπνευστήρες για σκόνη, ατμούς ή αέρια.</p></div>
-    <div class="card"><span class="icon">🧤</span><h3>Προστασία χεριών</h3><p>Γάντια ανάλογα με τον κίνδυνο: κοπή, θερμότητα, χημικά, τριβή.</p></div>
-    <div class="card"><span class="icon">🥾</span><h3>Προστασία ποδιών</h3><p>Υποδήματα ασφαλείας για πρόσκρουση, ολίσθηση ή διάτρηση.</p></div>
-    <div class="card"><span class="icon">🦺</span><h3>Προστασία σώματος</h3><p>Γιλέκα υψηλής ορατότητας, φόρμες, ποδιές ή ειδική ενδυμασία.</p></div>
-    <div class="card"><span class="icon">🧗</span><h3>Προστασία από πτώση</h3><p>Ζώνες, ιμάντες και συστήματα συγκράτησης για εργασία σε ύψος.</p></div>
-  </div>
-</section>
-
-<section>
-  <h2>Έλεγχος πριν από τη χρήση</h2>
-
-  <div class="grid">
-    <div class="card"><span class="icon">🔍</span><h3>Είναι σε καλή κατάσταση;</h3><p>Έλεγξε για φθορές, ρωγμές, σκισίματα, σπασμένα μέρη ή λήξη.</p></div>
-    <div class="card"><span class="icon">📏</span><h3>Ταιριάζει σωστά;</h3><p>Το ΜΑΠ πρέπει να εφαρμόζει σωστά και να μην εμποδίζει την εργασία.</p></div>
-    <div class="card"><span class="icon">🏷️</span><h3>Είναι κατάλληλο για τον κίνδυνο;</h3><p>Δεν είναι όλα τα γάντια, φίλτρα ή γυαλιά κατάλληλα για κάθε χρήση.</p></div>
-    <div class="card"><span class="icon">🧼</span><h3>Είναι καθαρό και συντηρημένο;</h3><p>Τα λερωμένα ή κακοσυντηρημένα ΜΑΠ μπορεί να χάσουν την αποτελεσματικότητά τους.</p></div>
-  </div>
-</section>
-
-<section>
-  <h2>Διαδραστική επιλογή ΜΑΠ</h2>
-  <p>Επίλεξε μια εργασία για να δεις ενδεικτικά ποια ΜΑΠ μπορεί να απαιτούνται.</p>
-
-  <div class="ppe-selector">
-    <div>
-      <label for="taskSelect">Εργασία</label>
-      <select id="taskSelect">
-        <option value="">Επίλεξε εργασία</option>
-        <option value="grinding">Τρόχισμα μετάλλου</option>
-        <option value="chemical">Χειρισμός χημικού καθαριστικού</option>
-        <option value="forklift">Εργασία κοντά σε περονοφόρα</option>
-        <option value="height">Εργασία σε ύψος</option>
-      </select>
-    </div>
-
-    <button class="submit-btn" onclick="showPPE()">Εμφάνιση ΜΑΠ</button>
-  </div>
-
-  <div id="ppeResult" class="ppe-result"></div>
-</section>
-
-<section>
-  <h2>Σενάριο Απόφασης</h2>
-  <p>
-    Πρόκειται να κάνεις τρόχισμα μετάλλου. Τα γυαλιά προστασίας σου είναι χαραγμένα και δεν βλέπεις καθαρά.
-    Τι κάνεις;
-  </p>
-
-  <button class="scenario-option" data-type="wrong" onclick="selectScenario(this)">
-    Τα χρησιμοποιώ έτσι κι αλλιώς, γιατί η εργασία θα κρατήσει λίγο.
-  </button>
-
-  <button class="scenario-option" data-type="partial" onclick="selectScenario(this)">
-    Τα σκουπίζω γρήγορα και ξεκινώ την εργασία.
-  </button>
-
-  <button class="scenario-option" data-type="correct" onclick="selectScenario(this)">
-    Δεν ξεκινώ την εργασία μέχρι να αντικατασταθούν με κατάλληλα γυαλιά προστασίας.
-  </button>
-
-  <button class="submit-btn" onclick="submitScenario()">Οριστική απάντηση</button>
-
-  <div id="scenarioFeedback" class="feedback"></div>
-</section>
-
-<section>
-  <h2>Mini Quiz</h2>
-
-  <form id="quizForm">
-    <div class="quiz-question">
-      <p><strong>1. Τα ΜΑΠ:</strong></p>
-      <label><input type="radio" name="q1" value="1"> Μειώνουν την έκθεση στον κίνδυνο όταν χρησιμοποιούνται σωστά.</label>
-      <label><input type="radio" name="q1" value="0"> Εξαλείφουν πάντα τον κίνδυνο.</label>
-      <label><input type="radio" name="q1" value="0"> Αντικαθιστούν την εκπαίδευση.</label>
-    </div>
-
-    <div class="quiz-question">
-      <p><strong>2. Πότε ελέγχουμε τα ΜΑΠ;</strong></p>
-      <label><input type="radio" name="q2" value="1"> Πριν από κάθε χρήση.</label>
-      <label><input type="radio" name="q2" value="0"> Μόνο μία φορά τον χρόνο.</label>
-      <label><input type="radio" name="q2" value="0"> Μόνο μετά από ατύχημα.</label>
-    </div>
-
-    <div class="quiz-question">
-      <p><strong>3. Ποια είναι σωστή πρακτική;</strong></p>
-      <label><input type="radio" name="q3" value="1"> Χρησιμοποιώ ΜΑΠ κατάλληλα για τον συγκεκριμένο κίνδυνο.</label>
-      <label><input type="radio" name="q3" value="0"> Χρησιμοποιώ οποιαδήποτε γάντια υπάρχουν διαθέσιμα.</label>
-      <label><input type="radio" name="q3" value="0"> Συνεχίζω με φθαρμένα ΜΑΠ αν η εργασία είναι σύντομη.</label>
-    </div>
-
-    <div class="quiz-question">
-      <p><strong>4. Τα ΜΑΠ στην ιεράρχηση μέτρων ελέγχου είναι:</strong></p>
-      <label><input type="radio" name="q4" value="0"> Το πρώτο μέτρο που εξετάζουμε.</label>
-      <label><input type="radio" name="q4" value="1"> Το τελευταίο επίπεδο προστασίας.</label>
-      <label><input type="radio" name="q4" value="0"> Πάντα αρκετά από μόνα τους.</label>
-    </div>
-
-    <button type="button" class="submit-btn" onclick="checkQuiz()">Υποβολή Quiz</button>
-  </form>
-
-  <div class="progress-box">
-    <div id="progressBar" class="progress-bar"></div>
-  </div>
-
-  <div id="quizResult" class="feedback"></div>
-</section>
-
-<section>
-  <h2>Βασικά σημεία</h2>
-  <p class="takeaway">Τα ΜΑΠ προστατεύουν μόνο όταν είναι σωστά επιλεγμένα, σωστά φορεμένα και σε καλή κατάσταση.</p>
-  <p class="takeaway">Τα ΜΑΠ δεν αφαιρούν τον κίνδυνο. Μειώνουν την έκθεση.</p>
-  <p class="takeaway">Έλεγξε τα ΜΑΠ πριν από κάθε χρήση.</p>
-  <p class="takeaway">Μην ξεκινάς εργασία με φθαρμένα ή ακατάλληλα ΜΑΠ.</p>
-</section>
-
-</main>
-
-<footer>
-  Εκπαίδευση Βιομηχανικής Ασφάλειας | Ενότητα 4
-</footer>
-
 <script>
 let selectedScenario = null;
 
@@ -463,7 +51,9 @@ function showPPE(){
     `
   };
 
-  result.innerHTML = ppeData[task] + "<p><strong>Σημείωση:</strong> Η τελική επιλογή ΜΑΠ πρέπει να βασίζεται στην εκτίμηση κινδύνου, στη διαδικασία εργασίας και στις οδηγίες του κατασκευαστή.</p>";
+  result.innerHTML =
+    ppeData[task] +
+    "<p><strong>Σημείωση:</strong> Η τελική επιλογή ΜΑΠ πρέπει να βασίζεται στην εκτίμηση κινδύνου, στη διαδικασία εργασίας και στις οδηγίες του κατασκευαστή.</p>";
 }
 
 function selectScenario(button){
@@ -485,7 +75,8 @@ function submitScenario(){
   if(!selectedScenario){
     feedback.style.display = "block";
     feedback.className = "feedback highlight";
-    feedback.innerHTML = "Παρακαλώ επίλεξε μία απάντηση πριν πατήσεις οριστική απάντηση.";
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν πατήσεις οριστική απάντηση.";
     return;
   }
 
@@ -493,13 +84,16 @@ function submitScenario(){
 
   if(selectedScenario === "correct"){
     feedback.className = "feedback success";
-    feedback.innerHTML = "Σωστά. Φθαρμένα ή ακατάλληλα ΜΑΠ δεν πρέπει να χρησιμοποιούνται. Η εργασία ξεκινά μόνο όταν υπάρχει κατάλληλη προστασία.";
+    feedback.innerHTML =
+      "Σωστά. Φθαρμένα ή ακατάλληλα ΜΑΠ δεν πρέπει να χρησιμοποιούνται. Η εργασία ξεκινά μόνο όταν υπάρχει κατάλληλη προστασία.";
   } else if(selectedScenario === "partial"){
     feedback.className = "feedback highlight";
-    feedback.innerHTML = "Μερικώς σωστό, αλλά όχι αρκετό. Αν τα γυαλιά είναι χαραγμένα και μειώνουν την ορατότητα, πρέπει να αντικατασταθούν.";
+    feedback.innerHTML =
+      "Μερικώς σωστό, αλλά όχι αρκετό. Αν τα γυαλιά είναι χαραγμένα και μειώνουν την ορατότητα, πρέπει να αντικατασταθούν.";
   } else {
     feedback.className = "feedback danger";
-    feedback.innerHTML = "Λάθος. Η σύντομη διάρκεια εργασίας δεν μειώνει την ανάγκη για κατάλληλα και λειτουργικά ΜΑΠ.";
+    feedback.innerHTML =
+      "Λάθος. Η σύντομη διάρκεια εργασίας δεν μειώνει την ανάγκη για κατάλληλα και λειτουργικά ΜΑΠ.";
   }
 }
 
@@ -507,34 +101,64 @@ function checkQuiz(){
   const form = document.getElementById("quizForm");
   const result = document.getElementById("quizResult");
   const progressBar = document.getElementById("progressBar");
+  const progressBox = document.querySelector(".progress-box");
 
   let score = 0;
+  let answered = 0;
+
   const total = 4;
 
-  for(let i=1;i<=total;i++){
-    const answer = form.querySelector(`input[name="q"+i]:checked`);
-    if(answer && answer.value === "1"){
-      score++;
+  for(let i = 1; i <= total; i++){
+    const answer = form.querySelector(`input[name="q${i}"]:checked`);
+
+    if(answer){
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
     }
   }
 
+  if(answered < total){
+    result.style.display = "block";
+    result.className = "feedback highlight";
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    progressBar.style.width = "0%";
+
+    if(progressBox){
+      progressBox.setAttribute("aria-valuenow","0");
+    }
+
+    return;
+  }
+
   const percentage = Math.round((score / total) * 100);
+
   progressBar.style.width = percentage + "%";
+
+  if(progressBox){
+    progressBox.setAttribute("aria-valuenow", String(percentage));
+  }
 
   result.style.display = "block";
 
   if(score === total){
     result.className = "feedback success";
-    result.innerHTML = `Άριστα! Πέτυχες ${score}/${total}.`;
+    result.innerHTML =
+      `Άριστα! Πέτυχες ${score}/${total}. Κατανοείς τις βασικές αρχές σωστής επιλογής και χρήσης ΜΑΠ.`;
+
   } else if(score >= 2){
     result.className = "feedback highlight";
-    result.innerHTML = `Καλή προσπάθεια. Πέτυχες ${score}/${total}. Ξαναδές τη σωστή επιλογή και χρήση ΜΑΠ.`;
+    result.innerHTML =
+      `Καλή προσπάθεια. Πέτυχες ${score}/${total}. Ξαναδές τη σωστή επιλογή, τον έλεγχο και τη χρήση ΜΑΠ.`;
+
   } else {
     result.className = "feedback danger";
-    result.innerHTML = `Πέτυχες ${score}/${total}. Προτείνεται να επαναλάβεις την ενότητα.`;
+    result.innerHTML =
+      `Πέτυχες ${score}/${total}. Προτείνεται να επαναλάβεις την ενότητα πριν δοκιμάσεις ξανά.`;
   }
 }
 </script>
-
-</body>
-</html>
