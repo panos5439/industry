@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Module 12 | Emergency Response</title>
+
+<style>
+:root{--primary:#123c69;--secondary:#f4b400;--accent:#d62828;--success:#2a9d8f;--bg:#f5f7fa;--card:#fff;--text:#1f2933;--border:#d9e2ec}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{background:linear-gradient(135deg,var(--primary),#0b2545);color:white;padding:52px 20px;text-align:center}
+header h1{margin:0 0 12px;font-size:clamp(1.8rem,4vw,3rem)}
+header p{max-width:900px;margin:auto;font-size:1.1rem}
+main{max-width:1100px;margin:auto;padding:24px}
+section{background:var(--card);margin-bottom:24px;padding:28px;border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+h2{color:var(--primary);margin-top:0}
+h3{color:#0b2545}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{border:1px solid var(--border);border-radius:16px;padding:20px;background:white}
+.icon{font-size:2rem;display:block;margin-bottom:10px}
+.highlight{border-left:6px solid var(--secondary);background:#fff8e1;padding:18px;border-radius:12px;margin-top:16px}
+.success{border-left:6px solid var(--success);background:#eafaf7;padding:18px;border-radius:12px}
+.danger{border-left:6px solid var(--accent);background:#fff1f1;padding:18px;border-radius:12px}
+button{font-size:1rem;cursor:pointer}
+.submit-btn{background:var(--primary);color:white;border:none;padding:12px 18px;border-radius:10px;margin-top:12px}
+.submit-btn:hover,.submit-btn:focus{background:#0b2545;outline:3px solid var(--secondary);outline-offset:2px}
+.action-option,.scenario-option{display:block;width:100%;text-align:left;background:#eef4fb;color:var(--text);border:1px solid var(--border);padding:14px 16px;border-radius:12px;margin:10px 0}
+.action-option.selected,.scenario-option.selected{background:#0b2545;color:white}
+.feedback{display:none;margin-top:14px;padding:14px;border-radius:10px;font-weight:bold}
+.timeline .card{border-left:8px solid var(--primary);background:#f8fafc}
+.quiz-question{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.quiz-question label{display:block;margin:8px 0;cursor:pointer}
+.progress-box{background:#e8eef5;border-radius:999px;height:18px;overflow:hidden;margin-top:12px}
+.progress-bar{height:100%;width:0%;background:var(--success);transition:width .4s ease}
+.takeaway{font-size:1.15rem;font-weight:bold;color:var(--primary)}
+footer{text-align:center;color:#5f6c7b;padding:30px 20px;font-size:.9rem}
+@media(max-width:700px){main{padding:14px}section{padding:20px}}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Module 12: Emergency Response</h1>
+  <p>In an emergency, the correct response during the first few minutes can protect lives, limit damage and support safe evacuation.</p>
+</header>
+
+<main>
+
+<section>
+  <h2>Learning Objectives</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">🚨</span>Recognise basic types of emergency situations.</div>
+    <div class="card"><span class="icon">📢</span>Know how to raise the alarm and notify others.</div>
+    <div class="card"><span class="icon">🚪</span>Follow a safe evacuation procedure.</div>
+    <div class="card"><span class="icon">📍</span>Move correctly to the assembly point.</div>
+  </div>
+</section>
+
+<section>
+  <h2>What is an emergency?</h2>
+  <p>
+    An emergency is any situation that may immediately threaten people, facilities,
+    equipment or the environment and requires an immediate, organised response.
+  </p>
+
+  <div class="grid">
+    <div class="card"><span class="icon">🔥</span><h3>Fire or smoke</h3><p>Fire, burning smell, smoke or activation of the alarm.</p></div>
+    <div class="card"><span class="icon">🧪</span><h3>Chemical spill</h3><p>Leak, vapour, splash or unknown substance.</p></div>
+    <div class="card"><span class="icon">🚑</span><h3>Injury</h3><p>Serious injury, unconsciousness or need for first aid.</p></div>
+    <div class="card"><span class="icon">⚡</span><h3>Technical incident</h3><p>Electrical fault, explosion, gas leak or equipment failure.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Basic response principle</h2>
+  <div class="highlight">
+    <strong>Life first, equipment second.</strong> Do not try to save materials, tools or production when people may be at risk.
+  </div>
+
+  <div class="grid timeline">
+    <div class="card"><h3>1. Stop</h3><p>Do not act impulsively. Quickly assess whether there is immediate danger.</p></div>
+    <div class="card"><h3>2. Notify</h3><p>Activate the alarm or notify according to the site procedure.</p></div>
+    <div class="card"><h3>3. Evacuate</h3><p>Use the safe escape route.</p></div>
+    <div class="card"><h3>4. Assemble</h3><p>Go to the designated assembly point and report your presence.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Evacuation</h2>
+  <p>When an evacuation order is given or the alarm sounds, move immediately and calmly.</p>
+
+  <div class="grid">
+    <div class="card"><span class="icon">🚶</span><h3>Walk, do not run</h3><p>Running may cause falls or panic.</p></div>
+    <div class="card"><span class="icon">🚫</span><h3>Do not go back</h3><p>Do not return for personal belongings, tools or equipment.</p></div>
+    <div class="card"><span class="icon">🟢</span><h3>Follow signage</h3><p>Use designated escape routes and emergency exits.</p></div>
+    <div class="card"><span class="icon">📍</span><h3>Assembly point</h3><p>Remain at the assembly point until instructions are given.</p></div>
+  </div>
+
+  <div class="danger">
+    <strong>Do not use elevators during evacuation.</strong> Use stairs or approved escape routes.
+  </div>
+</section>
+
+<section>
+  <h2>What should I do in different incidents?</h2>
+
+  <div class="grid">
+    <div class="card"><span class="icon">🔥</span><h3>Fire / smoke</h3><p>Raise the alarm, move away, close doors if safe and do not intervene unless trained.</p></div>
+    <div class="card"><span class="icon">🧪</span><h3>Chemical spill</h3><p>Avoid exposure, do not touch unknown substances, mark the area and notify.</p></div>
+    <div class="card"><span class="icon">🚑</span><h3>Injury</h3><p>Call first aid. Do not move the injured person unless there is immediate danger.</p></div>
+    <div class="card"><span class="icon">⚡</span><h3>Electrical incident</h3><p>Do not touch a person or equipment that may be energised. Notify immediately.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Interactive Activity: What is the correct first action?</h2>
+  <p>Select the correct first action for the incident below:</p>
+
+  <div class="highlight">
+    <strong>Incident:</strong> The evacuation alarm sounds while you are in the production area.
+  </div>
+
+  <button class="action-option" data-type="wrong" onclick="selectAction(this)">I continue working until I finish the step I am doing.</button>
+  <button class="action-option" data-type="wrong" onclick="selectAction(this)">I go to my locker to collect my personal belongings.</button>
+  <button class="action-option" data-type="correct" onclick="selectAction(this)">I stop safely, leave through the nearest safe exit and go to the assembly point.</button>
+
+  <button class="submit-btn" onclick="submitAction()">Check Answer</button>
+  <div id="actionFeedback" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Decision Scenario</h2>
+  <p>
+    During evacuation, you see a colleague going back into the building to collect their phone.
+    What do you do?
+  </p>
+
+  <button class="scenario-option" data-type="wrong" onclick="selectScenario(this)">I let them go because it is their personal choice.</button>
+  <button class="scenario-option" data-type="partial" onclick="selectScenario(this)">I follow them to help.</button>
+  <button class="scenario-option" data-type="correct" onclick="selectScenario(this)">I warn them not to return and immediately inform the responsible person at the assembly point.</button>
+
+  <button class="submit-btn" onclick="submitScenario()">Submit Final Answer</button>
+  <div id="scenarioFeedback" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Mini Quiz</h2>
+  <form id="quizForm">
+    <div class="quiz-question">
+      <p><strong>1. In an emergency, what is the first priority?</strong></p>
+      <label><input type="radio" name="q1" value="1"> Protecting life and health.</label>
+      <label><input type="radio" name="q1" value="0"> Protecting production.</label>
+      <label><input type="radio" name="q1" value="0"> Collecting personal belongings.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>2. During evacuation:</strong></p>
+      <label><input type="radio" name="q2" value="1"> Walk quickly and calmly to the safe exit.</label>
+      <label><input type="radio" name="q2" value="0"> Run as fast as possible.</label>
+      <label><input type="radio" name="q2" value="0"> Return for personal belongings.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>3. At the assembly point:</strong></p>
+      <label><input type="radio" name="q3" value="1"> Report your presence and wait for instructions.</label>
+      <label><input type="radio" name="q3" value="0"> Leave and go home.</label>
+      <label><input type="radio" name="q3" value="0"> Return when you think everything is fine.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>4. If there is an electrical incident:</strong></p>
+      <label><input type="radio" name="q4" value="1"> Do not touch a person or equipment that may be energised.</label>
+      <label><input type="radio" name="q4" value="0"> Pull the person away with bare hands.</label>
+      <label><input type="radio" name="q4" value="0"> Throw water on the equipment.</label>
+    </div>
+
+    <button type="button" class="submit-btn" onclick="checkQuiz()">Submit Quiz</button>
+  </form>
+
+  <div class="progress-box"><div id="progressBar" class="progress-bar"></div></div>
+  <div id="quizResult" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Key Takeaways</h2>
+  <p class="takeaway">In an emergency, human life comes first.</p>
+  <p class="takeaway">Raise the alarm immediately according to the procedure.</p>
+  <p class="takeaway">Follow escape routes and go to the assembly point.</p>
+  <p class="takeaway">Do not return to a dangerous area for personal belongings.</p>
+  <p class="takeaway">Wait for instructions before returning to the workplace.</p>
+</section>
+
+</main>
+
+<footer>Industrial Safety Training | Module 12</footer>
+
+<script>
+let selectedAction=null;
+let selectedScenario=null;
+
+function selectAction(button){
+  document.querySelectorAll(".action-option").forEach(btn=>btn.classList.remove("selected"));
+  button.classList.add("selected");
+  selectedAction=button.dataset.type;
+  const feedback=document.getElementById("actionFeedback");
+  feedback.style.display="none";
+  feedback.innerHTML="";
+}
+
+function submitAction(){
+  const feedback=document.getElementById("actionFeedback");
+
+  if(!selectedAction){
+    feedback.style.display="block";
+    feedback.className="feedback highlight";
+    feedback.innerHTML="Please select one answer before checking.";
+    return;
+  }
+
+  feedback.style.display="block";
+
+  if(selectedAction==="correct"){
+    feedback.className="feedback success";
+    feedback.innerHTML="Correct. When the evacuation alarm sounds, stop safely, evacuate and go to the assembly point.";
+  }else{
+    feedback.className="feedback danger";
+    feedback.innerHTML="Incorrect. During an alarm, do not delay for work tasks or personal belongings.";
+  }
+}
+
+function selectScenario(button){
+  document.querySelectorAll(".scenario-option").forEach(btn=>btn.classList.remove("selected"));
+  button.classList.add("selected");
+  selectedScenario=button.dataset.type;
+  const feedback=document.getElementById("scenarioFeedback");
+  feedback.style.display="none";
+  feedback.innerHTML="";
+}
+
+function submitScenario(){
+  const feedback=document.getElementById("scenarioFeedback");
+
+  if(!selectedScenario){
+    feedback.style.display="block";
+    feedback.className="feedback highlight";
+    feedback.innerHTML="Please select one answer before submitting.";
+    return;
+  }
+
+  feedback.style.display="block";
+
+  if(selectedScenario==="correct"){
+    feedback.className="feedback success";
+    feedback.innerHTML="Correct. Nobody should return to a dangerous area. Inform the responsible person immediately.";
+  }else if(selectedScenario==="partial"){
+    feedback.className="feedback danger";
+    feedback.innerHTML="Incorrect. If you follow them, you also expose yourself to danger.";
+  }else{
+    feedback.className="feedback danger";
+    feedback.innerHTML="Incorrect. Returning to an evacuated area is not a personal choice; it is a serious risk.";
+  }
+}
+
+function checkQuiz(){
+  const form=document.getElementById("quizForm");
+  const result=document.getElementById("quizResult");
+  const progressBar=document.getElementById("progressBar");
+
+  let score=0,total=4;
+  for(let i=1;i<=total;i++){
+    const answer=form.querySelector(`input[name="q${i}"]:checked`);
+    if(answer && answer.value==="1"){score++;}
+  }
+
+  const percentage=Math.round((score/total)*100);
+  progressBar.style.width=percentage+"%";
+  result.style.display="block";
+
+  if(score===total){
+    result.className="feedback success";
+    result.innerHTML=`Excellent! You scored ${score}/${total}.`;
+  }else if(score>=2){
+    result.className="feedback highlight";
+    result.innerHTML=`Good effort. You scored ${score}/${total}. Review evacuation, notification and assembly point procedures.`;
+  }else{
+    result.className="feedback danger";
+    result.innerHTML=`You scored ${score}/${total}. It is recommended that you review this module.`;
+  }
+}
+</script>
+
+</body>
+</html>

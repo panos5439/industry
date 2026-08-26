@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ενότητα 3 | Εκτίμηση Επικινδυνότητας</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --border:#d9e2ec;
+  --low:#2a9d8f;
+  --medium:#f4b400;
+  --high:#d62828;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+header{
+  background:linear-gradient(135deg,var(--primary),#0b2545);
+  color:white;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:850px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{color:var(--primary);margin-top:0}
+h3{color:#0b2545}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  background:white;
+}
+
+.icon{
+  font-size:2rem;
+  display:block;
+  margin-bottom:10px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:#fff8e1;
+  padding:18px;
+  border-radius:12px;
+  margin-top:16px;
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:#eafaf7;
+  padding:18px;
+  border-radius:12px;
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:#fff1f1;
+  padding:18px;
+  border-radius:12px;
+}
+
+button, select{
+  font-size:1rem;
+}
+
+button{
+  cursor:pointer;
+}
+
+.submit-btn{
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  margin-top:12px;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:#0b2545;
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.control-step{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+.control-step strong{
+  color:var(--primary);
+  font-size:1.15rem;
+}
+
+.risk-calculator{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+  align-items:end;
+}
+
+.risk-calculator label{
+  font-weight:bold;
+  display:block;
+  margin-bottom:8px;
+}
+
+.risk-calculator select{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid var(--border);
+}
+
+.risk-result{
+  display:none;
+  margin-top:18px;
+  padding:20px;
+  border-radius:14px;
+  font-weight:bold;
+  font-size:1.1rem;
+}
+
+.low{background:#eafaf7;border-left:8px solid var(--low)}
+.medium{background:#fff8e1;border-left:8px solid var(--medium)}
+.high{background:#fff1f1;border-left:8px solid var(--high)}
+
+.scenario-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#eef4fb;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:14px 16px;
+  border-radius:12px;
+  margin:10px 0;
+}
+
+.scenario-option.selected{
+  background:#0b2545;
+  color:white;
+}
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.quiz-question{
+  margin-bottom:22px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--border);
+}
+
+.quiz-question label{
+  display:block;
+  margin:8px 0;
+  cursor:pointer;
+}
+
+.progress-box{
+  background:#e8eef5;
+  border-radius:999px;
+  height:18px;
+  overflow:hidden;
+  margin-top:12px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:var(--success);
+  transition:width .4s ease;
+}
+
+.takeaway{
+  font-size:1.15rem;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+footer{
+  text-align:center;
+  color:#5f6c7b;
+  padding:30px 20px;
+  font-size:.9rem;
+}
+
+@media(max-width:700px){
+  main{padding:14px}
+  section{padding:20px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Ενότητα 3: Εκτίμηση Επικινδυνότητας</h1>
+  <p>Δεν αρκεί να αναγνωρίζουμε έναν κίνδυνο. Πρέπει να καταλαβαίνουμε πόσο σοβαρός είναι και ποια μέτρα ελέγχου είναι πιο αποτελεσματικά.</p>
+</header>
+
+<main>
+
+<section>
+  <h2>Στόχοι μάθησης</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">📊</span>Κατανοεί τι είναι η εκτίμηση επικινδυνότητας.</div>
+    <div class="card"><span class="icon">⚖️</span>Συνδέει πιθανότητα και σοβαρότητα.</div>
+    <div class="card"><span class="icon">🛡️</span>Αναγνωρίζει αποτελεσματικά μέτρα ελέγχου.</div>
+    <div class="card"><span class="icon">✅</span>Εφαρμόζει την Ιεράρχηση Μέτρων Ελέγχου.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Τι είναι Εκτίμηση Επικινδυνότητας;</h2>
+  <p>
+    Η εκτίμηση επικινδυνότητας είναι η διαδικασία με την οποία εξετάζουμε έναν κίνδυνο,
+    εκτιμούμε πόσο πιθανό είναι να προκαλέσει βλάβη και πόσο σοβαρή μπορεί να είναι αυτή η βλάβη.
+  </p>
+
+  <div class="highlight">
+    <strong>Απλή ιδέα:</strong> Επικινδυνότητα = Πιθανότητα × Σοβαρότητα.
+  </div>
+</section>
+
+<section>
+  <h2>Πιθανότητα και Σοβαρότητα</h2>
+
+  <div class="grid">
+    <div class="card">
+      <span class="icon">🎲</span>
+      <h3>Πιθανότητα</h3>
+      <p>Πόσο πιθανό είναι να συμβεί κάτι ανεπιθύμητο;</p>
+      <p>Παράδειγμα: Ένα καλώδιο σε διάδρομο όπου περνούν πολλοί εργαζόμενοι έχει αυξημένη πιθανότητα να προκαλέσει πτώση.</p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚑</span>
+      <h3>Σοβαρότητα</h3>
+      <p>Πόσο σοβαρές μπορεί να είναι οι συνέπειες;</p>
+      <p>Παράδειγμα: Μια πτώση μπορεί να προκαλέσει από μικρό τραυματισμό μέχρι σοβαρό κάταγμα.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Διαδραστική Εκτίμηση Ρίσκου</h2>
+  <p>Επίλεξε πιθανότητα και σοβαρότητα για να δεις το επίπεδο επικινδυνότητας.</p>
+
+  <div class="risk-calculator">
+    <div>
+      <label for="likelihood">Πιθανότητα</label>
+      <select id="likelihood">
+        <option value="">Επίλεξε</option>
+        <option value="1">Χαμηλή</option>
+        <option value="2">Μεσαία</option>
+        <option value="3">Υψηλή</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="severity">Σοβαρότητα</label>
+      <select id="severity">
+        <option value="">Επίλεξε</option>
+        <option value="1">Μικρή</option>
+        <option value="2">Σοβαρή</option>
+        <option value="3">Πολύ σοβαρή</option>
+      </select>
+    </div>
+
+    <button class="submit-btn" onclick="calculateRisk()">Υπολογισμός</button>
+  </div>
+
+  <div id="riskResult" class="risk-result"></div>
+</section>
+
+<section>
+  <h2>Ιεράρχηση Μέτρων Ελέγχου</h2>
+  <p>
+    Όταν ελέγχουμε έναν κίνδυνο, δεν ξεκινάμε από τα ΜΑΠ. Πρώτα εξετάζουμε αν μπορούμε να αφαιρέσουμε ή να μειώσουμε τον κίνδυνο στην πηγή.
+  </p>
+
+  <div class="grid">
+    <div class="card control-step">
+      <strong>1. Εξάλειψη</strong>
+      <p>Αφαιρούμε πλήρως τον κίνδυνο.</p>
+      <p>Παράδειγμα: Απομακρύνουμε ένα εμπόδιο από διάδρομο.</p>
+    </div>
+
+    <div class="card control-step">
+      <strong>2. Αντικατάσταση</strong>
+      <p>Αντικαθιστούμε κάτι επικίνδυνο με κάτι λιγότερο επικίνδυνο.</p>
+      <p>Παράδειγμα: Χρησιμοποιούμε λιγότερο επικίνδυνο χημικό.</p>
+    </div>
+
+    <div class="card control-step">
+      <strong>3. Τεχνικά μέτρα</strong>
+      <p>Χρησιμοποιούμε φυσικά ή μηχανικά μέσα προστασίας.</p>
+      <p>Παράδειγμα: Προστατευτικά μηχανών, εξαερισμός, φράγματα.</p>
+    </div>
+
+    <div class="card control-step">
+      <strong>4. Οργανωτικά μέτρα</strong>
+      <p>Χρησιμοποιούμε διαδικασίες, εκπαίδευση, σήμανση και άδειες εργασίας.</p>
+      <p>Παράδειγμα: Διαδικασία LOTO ή ασφαλής οδηγία εργασίας.</p>
+    </div>
+
+    <div class="card control-step">
+      <strong>5. ΜΑΠ</strong>
+      <p>Χρησιμοποιούμε Μέσα Ατομικής Προστασίας ως τελευταίο επίπεδο προστασίας.</p>
+      <p>Παράδειγμα: Γάντια, κράνος, γυαλιά, ωτοασπίδες.</p>
+    </div>
+  </div>
+
+  <div class="danger">
+    <strong>Σημαντικό:</strong> Τα ΜΑΠ δεν αφαιρούν τον κίνδυνο. Μειώνουν μόνο την έκθεση του εργαζομένου.
+  </div>
+</section>
+
+<section>
+  <h2>Σενάριο Απόφασης</h2>
+  <p>
+    Σε ένα σημείο παραγωγής υπάρχει συχνή διέλευση πεζών δίπλα από κινούμενο περονοφόρο.
+    Ποιο μέτρο ελέγχου είναι πιο αποτελεσματικό;
+  </p>
+
+  <button class="scenario-option" data-type="wrong" onclick="selectScenario(this)">
+    Να ζητηθεί από τους πεζούς να προσέχουν περισσότερο.
+  </button>
+
+  <button class="scenario-option" data-type="partial" onclick="selectScenario(this)">
+    Να φορούν όλοι ανακλαστικό γιλέκο.
+  </button>
+
+  <button class="scenario-option" data-type="correct" onclick="selectScenario(this)">
+    Να διαχωριστεί φυσικά η κυκλοφορία πεζών και περονοφόρων, όπου είναι δυνατόν.
+  </button>
+
+  <button class="submit-btn" onclick="submitScenario()">Οριστική απάντηση</button>
+
+  <div id="scenarioFeedback" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Mini Quiz</h2>
+
+  <form id="quizForm">
+    <div class="quiz-question">
+      <p><strong>1. Τι σημαίνει εκτίμηση επικινδυνότητας;</strong></p>
+      <label><input type="radio" name="q1" value="1"> Εκτίμηση της πιθανότητας και της σοβαρότητας μιας βλάβης.</label>
+      <label><input type="radio" name="q1" value="0"> Μόνο καταγραφή ατυχημάτων.</label>
+      <label><input type="radio" name="q1" value="0"> Μόνο επιλογή ΜΑΠ.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>2. Ποιο μέτρο είναι πιο αποτελεσματικό στην ιεράρχηση;</strong></p>
+      <label><input type="radio" name="q2" value="1"> Εξάλειψη του κινδύνου.</label>
+      <label><input type="radio" name="q2" value="0"> Χρήση ΜΑΠ.</label>
+      <label><input type="radio" name="q2" value="0"> Προφορική προειδοποίηση.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>3. Τα ΜΑΠ θεωρούνται:</strong></p>
+      <label><input type="radio" name="q3" value="0"> Το πρώτο και καλύτερο μέτρο ελέγχου.</label>
+      <label><input type="radio" name="q3" value="1"> Το τελευταίο επίπεδο προστασίας.</label>
+      <label><input type="radio" name="q3" value="0"> Υποκατάστατο της εκπαίδευσης.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>4. Ποιο παράδειγμα είναι τεχνικό μέτρο ελέγχου;</strong></p>
+      <label><input type="radio" name="q4" value="1"> Προστατευτικό μηχανής.</label>
+      <label><input type="radio" name="q4" value="0"> Αφίσα στον τοίχο.</label>
+      <label><input type="radio" name="q4" value="0"> Υπενθύμιση από προϊστάμενο.</label>
+    </div>
+
+    <button type="button" class="submit-btn" onclick="checkQuiz()">Υποβολή Quiz</button>
+  </form>
+
+  <div class="progress-box">
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
+
+  <div id="quizResult" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Βασικά σημεία</h2>
+  <p class="takeaway">Η επικινδυνότητα συνδέεται με την πιθανότητα και τη σοβαρότητα.</p>
+  <p class="takeaway">Πρώτα προσπαθούμε να εξαλείψουμε τον κίνδυνο.</p>
+  <p class="takeaway">Τα τεχνικά μέτρα είναι ισχυρότερα από τις απλές οδηγίες.</p>
+  <p class="takeaway">Τα ΜΑΠ είναι σημαντικά, αλλά δεν πρέπει να είναι η μόνη προστασία.</p>
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Βιομηχανικής Ασφάλειας | Ενότητα 3
+</footer>
+
+<script>
+let selectedScenario = null;
+
+function calculateRisk(){
+  const likelihood = Number(document.getElementById("likelihood").value);
+  const severity = Number(document.getElementById("severity").value);
+  const result = document.getElementById("riskResult");
+
+  if(!likelihood || !severity){
+    result.style.display = "block";
+    result.className = "risk-result medium";
+    result.innerHTML = "Παρακαλώ επίλεξε πιθανότητα και σοβαρότητα.";
+    return;
+  }
+
+  const risk = likelihood * severity;
+  result.style.display = "block";
+
+  if(risk <= 2){
+    result.className = "risk-result low";
+    result.innerHTML = "Χαμηλή επικινδυνότητα. Παραμένει ανάγκη για έλεγχο και παρακολούθηση.";
+  } else if(risk <= 4){
+    result.className = "risk-result medium";
+    result.innerHTML = "Μεσαία επικινδυνότητα. Απαιτούνται πρόσθετα μέτρα ελέγχου.";
+  } else {
+    result.className = "risk-result high";
+    result.innerHTML = "Υψηλή επικινδυνότητα. Η εργασία δεν πρέπει να συνεχιστεί χωρίς άμεσα και αποτελεσματικά μέτρα ελέγχου.";
+  }
+}
+
+function selectScenario(button){
+  document.querySelectorAll(".scenario-option").forEach(btn=>{
+    btn.classList.remove("selected");
+  });
+
+  button.classList.add("selected");
+  selectedScenario = button.dataset.type;
+
+  const feedback = document.getElementById("scenarioFeedback");
+  feedback.style.display = "none";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+  const feedback = document.getElementById("scenarioFeedback");
+
+  if(!selectedScenario){
+    feedback.style.display = "block";
+    feedback.className = "feedback highlight";
+    feedback.innerHTML = "Παρακαλώ επίλεξε μία απάντηση πριν πατήσεις οριστική απάντηση.";
+    return;
+  }
+
+  feedback.style.display = "block";
+
+  if(selectedScenario === "correct"){
+    feedback.className = "feedback success";
+    feedback.innerHTML = "Σωστά. Ο φυσικός διαχωρισμός πεζών και περονοφόρων είναι ισχυρό μέτρο ελέγχου, γιατί μειώνει την πιθανότητα επαφής με τον κίνδυνο.";
+  } else if(selectedScenario === "partial"){
+    feedback.className = "feedback highlight";
+    feedback.innerHTML = "Μερικώς σωστό. Το ανακλαστικό γιλέκο βοηθά στην ορατότητα, αλλά δεν απομακρύνει τον κίνδυνο σύγκρουσης.";
+  } else {
+    feedback.className = "feedback danger";
+    feedback.innerHTML = "Λάθος. Η απλή προσοχή δεν είναι επαρκές μέτρο ελέγχου για σοβαρούς κινδύνους κυκλοφορίας.";
+  }
+}
+
+function checkQuiz(){
+  const form = document.getElementById("quizForm");
+  const result = document.getElementById("quizResult");
+  const progressBar = document.getElementById("progressBar");
+
+  let score = 0;
+  const total = 4;
+
+  for(let i=1;i<=total;i++){
+    const answer = form.querySelector(`input[name="q"+i]:checked`);
+    if(answer && answer.value === "1"){
+      score++;
+    }
+  }
+
+  const percentage = Math.round((score / total) * 100);
+  progressBar.style.width = percentage + "%";
+
+  result.style.display = "block";
+
+  if(score === total){
+    result.className = "feedback success";
+    result.innerHTML = `Άριστα! Πέτυχες ${score}/${total}.`;
+  } else if(score >= 2){
+    result.className = "feedback highlight";
+    result.innerHTML = `Καλή προσπάθεια. Πέτυχες ${score}/${total}. Ξαναδές την ιεράρχηση μέτρων ελέγχου.`;
+  } else {
+    result.className = "feedback danger";
+    result.innerHTML = `Πέτυχες ${score}/${total}. Προτείνεται να επαναλάβεις την ενότητα.`;
+  }
+}
+</script>
+
+</body>
+</html>

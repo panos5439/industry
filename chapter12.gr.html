@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ενότητα 12 | Αντιμετώπιση Έκτακτης Ανάγκης</title>
+
+<style>
+:root{--primary:#123c69;--secondary:#f4b400;--accent:#d62828;--success:#2a9d8f;--bg:#f5f7fa;--card:#fff;--text:#1f2933;--border:#d9e2ec}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{background:linear-gradient(135deg,var(--primary),#0b2545);color:white;padding:52px 20px;text-align:center}
+header h1{margin:0 0 12px;font-size:clamp(1.8rem,4vw,3rem)}
+header p{max-width:900px;margin:auto;font-size:1.1rem}
+main{max-width:1100px;margin:auto;padding:24px}
+section{background:var(--card);margin-bottom:24px;padding:28px;border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+h2{color:var(--primary);margin-top:0}
+h3{color:#0b2545}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{border:1px solid var(--border);border-radius:16px;padding:20px;background:white}
+.icon{font-size:2rem;display:block;margin-bottom:10px}
+.highlight{border-left:6px solid var(--secondary);background:#fff8e1;padding:18px;border-radius:12px;margin-top:16px}
+.success{border-left:6px solid var(--success);background:#eafaf7;padding:18px;border-radius:12px}
+.danger{border-left:6px solid var(--accent);background:#fff1f1;padding:18px;border-radius:12px}
+button{font-size:1rem;cursor:pointer}
+.submit-btn{background:var(--primary);color:white;border:none;padding:12px 18px;border-radius:10px;margin-top:12px}
+.submit-btn:hover,.submit-btn:focus{background:#0b2545;outline:3px solid var(--secondary);outline-offset:2px}
+.action-option,.scenario-option{display:block;width:100%;text-align:left;background:#eef4fb;color:var(--text);border:1px solid var(--border);padding:14px 16px;border-radius:12px;margin:10px 0}
+.action-option.selected,.scenario-option.selected{background:#0b2545;color:white}
+.feedback{display:none;margin-top:14px;padding:14px;border-radius:10px;font-weight:bold}
+.timeline .card{border-left:8px solid var(--primary);background:#f8fafc}
+.quiz-question{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.quiz-question label{display:block;margin:8px 0;cursor:pointer}
+.progress-box{background:#e8eef5;border-radius:999px;height:18px;overflow:hidden;margin-top:12px}
+.progress-bar{height:100%;width:0%;background:var(--success);transition:width .4s ease}
+.takeaway{font-size:1.15rem;font-weight:bold;color:var(--primary)}
+footer{text-align:center;color:#5f6c7b;padding:30px 20px;font-size:.9rem}
+@media(max-width:700px){main{padding:14px}section{padding:20px}}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Ενότητα 12: Αντιμετώπιση Έκτακτης Ανάγκης</h1>
+  <p>Σε μια έκτακτη ανάγκη, η σωστή αντίδραση στα πρώτα λεπτά μπορεί να προστατεύσει ζωές, να περιορίσει ζημιές και να βοηθήσει την οργανωμένη εκκένωση.</p>
+</header>
+
+<main>
+
+<section>
+  <h2>Στόχοι μάθησης</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">🚨</span>Αναγνωρίζει βασικούς τύπους έκτακτης ανάγκης.</div>
+    <div class="card"><span class="icon">📢</span>Γνωρίζει πώς ειδοποιεί και πότε ενεργοποιεί συναγερμό.</div>
+    <div class="card"><span class="icon">🚪</span>Ακολουθεί ασφαλή διαδικασία εκκένωσης.</div>
+    <div class="card"><span class="icon">📍</span>Κατευθύνεται σωστά στο σημείο συγκέντρωσης.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Τι είναι έκτακτη ανάγκη;</h2>
+  <p>
+    Έκτακτη ανάγκη είναι κάθε κατάσταση που μπορεί να απειλήσει άμεσα ανθρώπους, εγκαταστάσεις,
+    εξοπλισμό ή το περιβάλλον και απαιτεί άμεση, οργανωμένη αντίδραση.
+  </p>
+
+  <div class="grid">
+    <div class="card"><span class="icon">🔥</span><h3>Πυρκαγιά ή καπνός</h3><p>Φωτιά, μυρωδιά καμένου, καπνός ή ενεργοποίηση συναγερμού.</p></div>
+    <div class="card"><span class="icon">🧪</span><h3>Χημική διαρροή</h3><p>Διαρροή, ατμοί, πιτσιλίσματα ή άγνωστη ουσία.</p></div>
+    <div class="card"><span class="icon">🚑</span><h3>Τραυματισμός</h3><p>Σοβαρός τραυματισμός, απώλεια αισθήσεων ή ανάγκη πρώτων βοηθειών.</p></div>
+    <div class="card"><span class="icon">⚡</span><h3>Τεχνικό συμβάν</h3><p>Ηλεκτρική βλάβη, έκρηξη, διαρροή αερίου ή αστοχία εξοπλισμού.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Βασική αρχή αντίδρασης</h2>
+  <div class="highlight">
+    <strong>Πρώτα η ζωή, μετά ο εξοπλισμός.</strong> Μην προσπαθείς να σώσεις υλικά, εργαλεία ή παραγωγή όταν υπάρχει κίνδυνος για ανθρώπους.
+  </div>
+
+  <div class="grid timeline">
+    <div class="card"><h3>1. Σταμάτα</h3><p>Μην ενεργείς παρορμητικά. Εκτίμησε γρήγορα αν υπάρχει άμεσος κίνδυνος.</p></div>
+    <div class="card"><h3>2. Ειδοποίησε</h3><p>Ενεργοποίησε συναγερμό ή ενημέρωσε σύμφωνα με τη διαδικασία της εγκατάστασης.</p></div>
+    <div class="card"><h3>3. Απομακρύνσου</h3><p>Χρησιμοποίησε την ασφαλή οδό διαφυγής.</p></div>
+    <div class="card"><h3>4. Συγκεντρώσου</h3><p>Πήγαινε στο καθορισμένο σημείο συγκέντρωσης και δήλωσε παρουσία.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Εκκένωση χώρου</h2>
+  <p>Όταν δοθεί εντολή εκκένωσης ή ενεργοποιηθεί συναγερμός, πρέπει να κινηθείς άμεσα και ψύχραιμα.</p>
+
+  <div class="grid">
+    <div class="card"><span class="icon">🚶</span><h3>Περπάτα, μη τρέχεις</h3><p>Το τρέξιμο μπορεί να προκαλέσει πτώσεις ή πανικό.</p></div>
+    <div class="card"><span class="icon">🚫</span><h3>Μη γυρίζεις πίσω</h3><p>Μην επιστρέφεις για προσωπικά αντικείμενα ή εργαλεία.</p></div>
+    <div class="card"><span class="icon">🟢</span><h3>Ακολούθησε σήμανση</h3><p>Χρησιμοποίησε τις καθορισμένες οδούς διαφυγής και εξόδους κινδύνου.</p></div>
+    <div class="card"><span class="icon">📍</span><h3>Σημείο συγκέντρωσης</h3><p>Μείνε στο σημείο συγκέντρωσης μέχρι να δοθούν οδηγίες.</p></div>
+  </div>
+
+  <div class="danger">
+    <strong>Μην χρησιμοποιείς ανελκυστήρα σε εκκένωση.</strong> Χρησιμοποίησε τις σκάλες ή τις εγκεκριμένες οδούς διαφυγής.
+  </div>
+</section>
+
+<section>
+  <h2>Τι κάνω σε διαφορετικά περιστατικά;</h2>
+
+  <div class="grid">
+    <div class="card"><span class="icon">🔥</span><h3>Φωτιά / καπνός</h3><p>Ειδοποιώ, απομακρύνομαι, κλείνω πόρτες αν είναι ασφαλές και δεν επεμβαίνω χωρίς εκπαίδευση.</p></div>
+    <div class="card"><span class="icon">🧪</span><h3>Χημική διαρροή</h3><p>Αποφεύγω την έκθεση, δεν αγγίζω άγνωστη ουσία, σημαίνω περιοχή και ενημερώνω.</p></div>
+    <div class="card"><span class="icon">🚑</span><h3>Τραυματισμός</h3><p>Ειδοποιώ πρώτες βοήθειες, δεν μετακινώ τραυματία εκτός αν υπάρχει άμεσος κίνδυνος.</p></div>
+    <div class="card"><span class="icon">⚡</span><h3>Ηλεκτρικό συμβάν</h3><p>Δεν αγγίζω άτομο ή εξοπλισμό που μπορεί να είναι υπό τάση. Ειδοποιώ άμεσα.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Διαδραστική άσκηση: Ποια είναι η σωστή πρώτη ενέργεια;</h2>
+  <p>Επιλέξτε τη σωστή πρώτη ενέργεια για το παρακάτω περιστατικό:</p>
+
+  <div class="highlight">
+    <strong>Περιστατικό:</strong> Ακούγεται συναγερμός εκκένωσης ενώ βρίσκεσαι στον χώρο παραγωγής.
+  </div>
+
+  <button class="action-option" data-type="wrong" onclick="selectAction(this)">Συνεχίζω την εργασία μέχρι να τελειώσω το βήμα που κάνω.</button>
+  <button class="action-option" data-type="wrong" onclick="selectAction(this)">Πηγαίνω στο ντουλάπι μου να πάρω τα προσωπικά μου αντικείμενα.</button>
+  <button class="action-option" data-type="correct" onclick="selectAction(this)">Σταματώ με ασφάλεια, απομακρύνομαι από την πλησιέστερη ασφαλή έξοδο και πηγαίνω στο σημείο συγκέντρωσης.</button>
+
+  <button class="submit-btn" onclick="submitAction()">Έλεγχος απάντησης</button>
+  <div id="actionFeedback" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Σενάριο Απόφασης</h2>
+  <p>
+    Κατά την εκκένωση βλέπεις έναν συνάδελφο να επιστρέφει προς το κτίριο για να πάρει το κινητό του.
+    Τι κάνεις;
+  </p>
+
+  <button class="scenario-option" data-type="wrong" onclick="selectScenario(this)">Τον αφήνω, γιατί είναι προσωπική του επιλογή.</button>
+  <button class="scenario-option" data-type="partial" onclick="selectScenario(this)">Τον ακολουθώ για να τον βοηθήσω.</button>
+  <button class="scenario-option" data-type="correct" onclick="selectScenario(this)">Τον προειδοποιώ να μην επιστρέψει και ενημερώνω άμεσα τον υπεύθυνο στο σημείο συγκέντρωσης.</button>
+
+  <button class="submit-btn" onclick="submitScenario()">Οριστική απάντηση</button>
+  <div id="scenarioFeedback" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Mini Quiz</h2>
+  <form id="quizForm">
+    <div class="quiz-question">
+      <p><strong>1. Σε έκτακτη ανάγκη, ποια είναι η πρώτη προτεραιότητα;</strong></p>
+      <label><input type="radio" name="q1" value="1"> Η προστασία της ζωής και της υγείας.</label>
+      <label><input type="radio" name="q1" value="0"> Η προστασία της παραγωγής.</label>
+      <label><input type="radio" name="q1" value="0"> Η συλλογή προσωπικών αντικειμένων.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>2. Κατά την εκκένωση:</strong></p>
+      <label><input type="radio" name="q2" value="1"> Περπατώ γρήγορα και ήρεμα προς την ασφαλή έξοδο.</label>
+      <label><input type="radio" name="q2" value="0"> Τρέχω όσο πιο γρήγορα μπορώ.</label>
+      <label><input type="radio" name="q2" value="0"> Επιστρέφω για προσωπικά αντικείμενα.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>3. Στο σημείο συγκέντρωσης:</strong></p>
+      <label><input type="radio" name="q3" value="1"> Δηλώνω παρουσία και περιμένω οδηγίες.</label>
+      <label><input type="radio" name="q3" value="0"> Φεύγω για το σπίτι μου.</label>
+      <label><input type="radio" name="q3" value="0"> Επιστρέφω όταν νομίζω ότι όλα είναι καλά.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>4. Αν υπάρχει ηλεκτρικό συμβάν:</strong></p>
+      <label><input type="radio" name="q4" value="1"> Δεν αγγίζω άτομο ή εξοπλισμό που μπορεί να είναι υπό τάση.</label>
+      <label><input type="radio" name="q4" value="0"> Τραβάω αμέσως το άτομο με γυμνά χέρια.</label>
+      <label><input type="radio" name="q4" value="0"> Ρίχνω νερό στον εξοπλισμό.</label>
+    </div>
+
+    <button type="button" class="submit-btn" onclick="checkQuiz()">Υποβολή Quiz</button>
+  </form>
+
+  <div class="progress-box"><div id="progressBar" class="progress-bar"></div></div>
+  <div id="quizResult" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Βασικά σημεία</h2>
+  <p class="takeaway">Σε έκτακτη ανάγκη, προτεραιότητα έχει η ανθρώπινη ζωή.</p>
+  <p class="takeaway">Ειδοποίησε άμεσα σύμφωνα με τη διαδικασία.</p>
+  <p class="takeaway">Ακολούθησε τις οδούς διαφυγής και πήγαινε στο σημείο συγκέντρωσης.</p>
+  <p class="takeaway">Μην επιστρέφεις σε επικίνδυνη περιοχή για προσωπικά αντικείμενα.</p>
+  <p class="takeaway">Περίμενε οδηγίες πριν επιστρέψεις στον χώρο εργασίας.</p>
+</section>
+
+</main>
+
+<footer>Εκπαίδευση Βιομηχανικής Ασφάλειας | Ενότητα 12</footer>
+
+<script>
+let selectedAction=null;
+let selectedScenario=null;
+
+function selectAction(button){
+  document.querySelectorAll(".action-option").forEach(btn=>btn.classList.remove("selected"));
+  button.classList.add("selected");
+  selectedAction=button.dataset.type;
+  const feedback=document.getElementById("actionFeedback");
+  feedback.style.display="none";
+  feedback.innerHTML="";
+}
+
+function submitAction(){
+  const feedback=document.getElementById("actionFeedback");
+
+  if(!selectedAction){
+    feedback.style.display="block";
+    feedback.className="feedback highlight";
+    feedback.innerHTML="Παρακαλώ επίλεξε μία απάντηση πριν κάνεις έλεγχο.";
+    return;
+  }
+
+  feedback.style.display="block";
+
+  if(selectedAction==="correct"){
+    feedback.className="feedback success";
+    feedback.innerHTML="Σωστά. Σε συναγερμό εκκένωσης σταματάμε με ασφάλεια, απομακρυνόμαστε και κατευθυνόμαστε στο σημείο συγκέντρωσης.";
+  }else{
+    feedback.className="feedback danger";
+    feedback.innerHTML="Λάθος. Σε συναγερμό δεν καθυστερούμε για εργασία ή προσωπικά αντικείμενα.";
+  }
+}
+
+function selectScenario(button){
+  document.querySelectorAll(".scenario-option").forEach(btn=>btn.classList.remove("selected"));
+  button.classList.add("selected");
+  selectedScenario=button.dataset.type;
+  const feedback=document.getElementById("scenarioFeedback");
+  feedback.style.display="none";
+  feedback.innerHTML="";
+}
+
+function submitScenario(){
+  const feedback=document.getElementById("scenarioFeedback");
+
+  if(!selectedScenario){
+    feedback.style.display="block";
+    feedback.className="feedback highlight";
+    feedback.innerHTML="Παρακαλώ επίλεξε μία απάντηση πριν πατήσεις οριστική απάντηση.";
+    return;
+  }
+
+  feedback.style.display="block";
+
+  if(selectedScenario==="correct"){
+    feedback.className="feedback success";
+    feedback.innerHTML="Σωστά. Κανείς δεν πρέπει να επιστρέφει σε επικίνδυνη περιοχή. Ενημερώνεις άμεσα τον υπεύθυνο.";
+  }else if(selectedScenario==="partial"){
+    feedback.className="feedback danger";
+    feedback.innerHTML="Λάθος. Αν τον ακολουθήσεις, εκθέτεις και τον εαυτό σου σε κίνδυνο.";
+  }else{
+    feedback.className="feedback danger";
+    feedback.innerHTML="Λάθος. Η επιστροφή σε χώρο εκκένωσης δεν είναι προσωπική επιλογή, είναι σοβαρός κίνδυνος.";
+  }
+}
+
+function checkQuiz(){
+  const form=document.getElementById("quizForm");
+  const result=document.getElementById("quizResult");
+  const progressBar=document.getElementById("progressBar");
+
+  let score=0,total=4;
+  for(let i=1;i<=total;i++){
+    const answer=form.querySelector(`input[name="q${i}"]:checked`);
+    if(answer && answer.value==="1"){score++;}
+  }
+
+  const percentage=Math.round((score/total)*100);
+  progressBar.style.width=percentage+"%";
+  result.style.display="block";
+
+  if(score===total){
+    result.className="feedback success";
+    result.innerHTML=`Άριστα! Πέτυχες ${score}/${total}.`;
+  }else if(score>=2){
+    result.className="feedback highlight";
+    result.innerHTML=`Καλή προσπάθεια. Πέτυχες ${score}/${total}. Ξαναδές την εκκένωση, την ειδοποίηση και το σημείο συγκέντρωσης.`;
+  }else{
+    result.className="feedback danger";
+    result.innerHTML=`Πέτυχες ${score}/${total}. Προτείνεται να επαναλάβεις την ενότητα.`;
+  }
+}
+</script>
+
+</body>
+</html>

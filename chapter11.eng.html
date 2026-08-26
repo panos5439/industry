@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Module 11 | Fire Safety</title>
+
+<style>
+:root{--primary:#123c69;--secondary:#f4b400;--accent:#d62828;--success:#2a9d8f;--bg:#f5f7fa;--card:#fff;--text:#1f2933;--border:#d9e2ec}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{background:linear-gradient(135deg,var(--primary),#0b2545);color:white;padding:52px 20px;text-align:center}
+header h1{margin:0 0 12px;font-size:clamp(1.8rem,4vw,3rem)}
+header p{max-width:900px;margin:auto;font-size:1.1rem}
+main{max-width:1100px;margin:auto;padding:24px}
+section{background:var(--card);margin-bottom:24px;padding:28px;border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+h2{color:var(--primary);margin-top:0}
+h3{color:#0b2545}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{border:1px solid var(--border);border-radius:16px;padding:20px;background:white}
+.icon{font-size:2rem;display:block;margin-bottom:10px}
+.highlight{border-left:6px solid var(--secondary);background:#fff8e1;padding:18px;border-radius:12px;margin-top:16px}
+.success{border-left:6px solid var(--success);background:#eafaf7;padding:18px;border-radius:12px}
+.danger{border-left:6px solid var(--accent);background:#fff1f1;padding:18px;border-radius:12px}
+button,select{font-size:1rem}
+button{cursor:pointer}
+.submit-btn{background:var(--primary);color:white;border:none;padding:12px 18px;border-radius:10px;margin-top:12px}
+.submit-btn:hover,.submit-btn:focus{background:#0b2545;outline:3px solid var(--secondary);outline-offset:2px}
+.fire-triangle{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:16px}
+.triangle-card{border:1px solid var(--border);border-radius:16px;padding:22px;background:#fff8e1;text-align:center}
+.triangle-card strong{display:block;color:var(--primary);font-size:1.2rem;margin-top:8px}
+.extinguisher-selector{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;align-items:end}
+.extinguisher-selector label{display:block;font-weight:bold;margin-bottom:8px}
+.extinguisher-selector select{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px}
+.extinguisher-result{display:none;margin-top:18px;padding:18px;border-radius:14px;border-left:8px solid var(--success);background:#eafaf7;font-weight:bold}
+.extinguisher-result ul{font-weight:normal}
+.pass-steps .card{border-left:8px solid var(--primary);background:#f8fafc}
+.scenario-option{display:block;width:100%;text-align:left;background:#eef4fb;color:var(--text);border:1px solid var(--border);padding:14px 16px;border-radius:12px;margin:10px 0}
+.scenario-option.selected{background:#0b2545;color:white}
+.feedback{display:none;margin-top:14px;padding:14px;border-radius:10px;font-weight:bold}
+.quiz-question{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.quiz-question label{display:block;margin:8px 0;cursor:pointer}
+.progress-box{background:#e8eef5;border-radius:999px;height:18px;overflow:hidden;margin-top:12px}
+.progress-bar{height:100%;width:0%;background:var(--success);transition:width .4s ease}
+.takeaway{font-size:1.15rem;font-weight:bold;color:var(--primary)}
+footer{text-align:center;color:#5f6c7b;padding:30px 20px;font-size:.9rem}
+@media(max-width:700px){main{padding:14px}section{padding:20px}}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Module 11: Fire Safety</h1>
+  <p>Fire safety in industry is based on prevention, early recognition of hazards and the correct response in case of fire.</p>
+</header>
+
+<main>
+
+<section>
+  <h2>Learning Objectives</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">🔥</span>Understand how a fire starts and spreads.</div>
+    <div class="card"><span class="icon">🧯</span>Recognise basic types of fire extinguishers.</div>
+    <div class="card"><span class="icon">🚨</span>Know when to evacuate and raise the alarm.</div>
+    <div class="card"><span class="icon">🚪</span>Follow a safe evacuation procedure.</div>
+  </div>
+</section>
+
+<section>
+  <h2>The Fire Triangle</h2>
+  <p>For a fire to exist, three elements are required. If one of them is removed, the fire cannot continue.</p>
+
+  <div class="fire-triangle">
+    <div class="triangle-card"><span class="icon">🔥</span><strong>Heat</strong><p>Sparks, flame, hot surfaces, friction or electrical faults.</p></div>
+    <div class="triangle-card"><span class="icon">🪵</span><strong>Fuel</strong><p>Paper, wood, plastic, oil, gases, chemicals or dust.</p></div>
+    <div class="triangle-card"><span class="icon">🌬️</span><strong>Oxygen</strong><p>Air supports combustion and helps the fire continue.</p></div>
+  </div>
+
+  <div class="highlight">
+    <strong>Basic idea:</strong> Fire prevention means controlling ignition sources, combustible materials and unsafe conditions.
+  </div>
+</section>
+
+<section>
+  <h2>Common Causes of Fire in Industry</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">⚡</span><h3>Electrical problems</h3><p>Overloads, damaged cables, poor connections or unauthorised modifications.</p></div>
+    <div class="card"><span class="icon">🔥</span><h3>Hot work</h3><p>Welding, cutting, grinding and sparks near flammable materials.</p></div>
+    <div class="card"><span class="icon">🧪</span><h3>Flammable chemicals</h3><p>Incorrect storage, open containers or use near ignition sources.</p></div>
+    <div class="card"><span class="icon">🧹</span><h3>Poor housekeeping</h3><p>Accumulation of waste, dust, paper, oils or combustible materials.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Fire Prevention</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">🚫</span><h3>Reduce fuel load</h3><p>Remove unnecessary combustible materials from the work area.</p></div>
+    <div class="card"><span class="icon">🔌</span><h3>Control electrical equipment</h3><p>Do not use damaged cables, overloaded power strips or unauthorised equipment.</p></div>
+    <div class="card"><span class="icon">🧯</span><h3>Keep fire equipment accessible</h3><p>Do not block extinguishers, fire hose reels or emergency exits.</p></div>
+    <div class="card"><span class="icon">📋</span><h3>Hot work permit</h3><p>For welding, cutting or grinding, follow the approved procedure.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Types of Fire Extinguishers</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">💧</span><h3>Water</h3><p>For solid combustibles such as wood, paper and fabrics. Do not use on electrical equipment.</p></div>
+    <div class="card"><span class="icon">🧯</span><h3>Dry Powder</h3><p>Suitable for many fire classes. It may reduce visibility in enclosed areas.</p></div>
+    <div class="card"><span class="icon">☁️</span><h3>CO₂</h3><p>Often used for electrical equipment. It leaves no residue.</p></div>
+    <div class="card"><span class="icon">🫧</span><h3>Foam</h3><p>For flammable liquids and solid materials. Not suitable for all electrical incidents.</p></div>
+  </div>
+
+  <div class="danger">
+    <strong>Important:</strong> Use a fire extinguisher only if you are trained, the fire is small, you have a safe exit behind you and there is no smoke or immediate danger.
+  </div>
+</section>
+
+<section>
+  <h2>Interactive Fire Extinguisher Selection</h2>
+  <p>Select an incident to see which extinguisher type may be suitable.</p>
+
+  <div class="extinguisher-selector">
+    <div>
+      <label for="fireType">Incident</label>
+      <select id="fireType">
+        <option value="">Select incident</option>
+        <option value="paper">Small fire involving paper/cardboard</option>
+        <option value="electrical">Smoke from an electrical panel</option>
+        <option value="flammable">Small fire involving flammable liquid</option>
+        <option value="unknown">Unknown material with heavy smoke</option>
+      </select>
+    </div>
+    <button class="submit-btn" onclick="showExtinguisher()">Show Recommendation</button>
+  </div>
+
+  <div id="extinguisherResult" class="extinguisher-result"></div>
+</section>
+
+<section>
+  <h2>The PASS Method</h2>
+  <p>If you are trained and it is safe to use a fire extinguisher, remember the PASS method.</p>
+
+  <div class="grid pass-steps">
+    <div class="card"><h3>P — Pull</h3><p>Pull the safety pin.</p></div>
+    <div class="card"><h3>A — Aim</h3><p>Aim at the base of the fire.</p></div>
+    <div class="card"><h3>S — Squeeze</h3><p>Squeeze the handle.</p></div>
+    <div class="card"><h3>S — Sweep</h3><p>Sweep from side to side at the base of the fire.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Decision Scenario</h2>
+  <p>
+    You see smoke coming from an electrical panel and smell burning.
+    What do you do?
+  </p>
+
+  <button class="scenario-option" data-type="wrong" onclick="selectScenario(this)">
+    I throw water on it to stop the smoke.
+  </button>
+
+  <button class="scenario-option" data-type="partial" onclick="selectScenario(this)">
+    I open the panel to see what is happening.
+  </button>
+
+  <button class="scenario-option" data-type="correct" onclick="selectScenario(this)">
+    I move away, raise the alarm according to procedure and do not intervene unless it is safe and I am trained.
+  </button>
+
+  <button class="submit-btn" onclick="submitScenario()">Submit Final Answer</button>
+  <div id="scenarioFeedback" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Mini Quiz</h2>
+  <form id="quizForm">
+    <div class="quiz-question">
+      <p><strong>1. What are the three elements of the fire triangle?</strong></p>
+      <label><input type="radio" name="q1" value="1"> Heat, fuel and oxygen.</label>
+      <label><input type="radio" name="q1" value="0"> Water, air and metal.</label>
+      <label><input type="radio" name="q1" value="0"> Smoke, noise and light.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>2. When should you use a fire extinguisher?</strong></p>
+      <label><input type="radio" name="q2" value="1"> When you are trained, the fire is small and you have a safe exit.</label>
+      <label><input type="radio" name="q2" value="0"> Always, regardless of the fire size.</label>
+      <label><input type="radio" name="q2" value="0"> When there is heavy smoke and poor visibility.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>3. If there is smoke from an electrical panel:</strong></p>
+      <label><input type="radio" name="q3" value="1"> Move away and raise the alarm according to procedure.</label>
+      <label><input type="radio" name="q3" value="0"> Throw water on it.</label>
+      <label><input type="radio" name="q3" value="0"> Open the panel to inspect it.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>4. Emergency exits must be:</strong></p>
+      <label><input type="radio" name="q4" value="1"> Always clear and accessible.</label>
+      <label><input type="radio" name="q4" value="0"> Available only during evacuation drills.</label>
+      <label><input type="radio" name="q4" value="0"> Used as temporary storage areas.</label>
+    </div>
+
+    <button type="button" class="submit-btn" onclick="checkQuiz()">Submit Quiz</button>
+  </form>
+
+  <div class="progress-box"><div id="progressBar" class="progress-bar"></div></div>
+  <div id="quizResult" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Key Takeaways</h2>
+  <p class="takeaway">Prevention is the best form of fire safety.</p>
+  <p class="takeaway">Do not block fire extinguishers, emergency exits or fire hose reels.</p>
+  <p class="takeaway">Use a fire extinguisher only if it is safe and you are trained.</p>
+  <p class="takeaway">If there is smoke, unknown material or rapid fire spread, evacuate and raise the alarm.</p>
+  <p class="takeaway">No attempt to fight a fire is worth more than human life.</p>
+</section>
+
+</main>
+
+<footer>Industrial Safety Training | Module 11</footer>
+
+<script>
+let selectedScenario=null;
+
+function showExtinguisher(){
+  const type=document.getElementById("fireType").value;
+  const result=document.getElementById("extinguisherResult");
+  result.style.display="block";
+
+  if(!type){
+    result.innerHTML="Please select an incident.";
+    return;
+  }
+
+  const data={
+    paper:`<strong>Small fire involving paper/cardboard:</strong>
+    <ul><li>Possible option: water or dry powder extinguisher, depending on the site signage and procedure.</li><li>Always check the suitability of the extinguisher.</li></ul>`,
+    electrical:`<strong>Smoke from an electrical panel:</strong>
+    <ul><li>Do not use water.</li><li>Move away and raise the alarm. CO₂ may only be used by a trained person and only if it is safe.</li></ul>`,
+    flammable:`<strong>Small fire involving flammable liquid:</strong>
+    <ul><li>Possible options: foam, dry powder or CO₂, depending on the material and signage.</li><li>Do not apply water to flammable liquids unless it is an approved method for that specific incident.</li></ul>`,
+    unknown:`<strong>Unknown material with heavy smoke:</strong>
+    <ul><li>Do not intervene.</li><li>Evacuate, activate the emergency procedure and inform the responsible persons.</li></ul>`
+  };
+
+  result.innerHTML=data[type] + "<p><strong>Note:</strong> Final action must follow the site emergency procedure and the training you have received.</p>";
+}
+
+function selectScenario(button){
+  document.querySelectorAll(".scenario-option").forEach(btn=>btn.classList.remove("selected"));
+  button.classList.add("selected");
+  selectedScenario=button.dataset.type;
+  const feedback=document.getElementById("scenarioFeedback");
+  feedback.style.display="none";
+  feedback.innerHTML="";
+}
+
+function submitScenario(){
+  const feedback=document.getElementById("scenarioFeedback");
+
+  if(!selectedScenario){
+    feedback.style.display="block";
+    feedback.className="feedback highlight";
+    feedback.innerHTML="Please select one answer before submitting.";
+    return;
+  }
+
+  feedback.style.display="block";
+
+  if(selectedScenario==="correct"){
+    feedback.className="feedback success";
+    feedback.innerHTML="Correct. In an electrical smoke incident, the priority is to move away, raise the alarm and follow the emergency procedure.";
+  }else if(selectedScenario==="partial"){
+    feedback.className="feedback danger";
+    feedback.innerHTML="Incorrect. Opening an electrical panel may expose you to arc flash, smoke or fire.";
+  }else{
+    feedback.className="feedback danger";
+    feedback.innerHTML="Incorrect. Water on electrical equipment can cause electric shock or make the incident worse.";
+  }
+}
+
+function checkQuiz(){
+  const form=document.getElementById("quizForm");
+  const result=document.getElementById("quizResult");
+  const progressBar=document.getElementById("progressBar");
+
+  let score=0,total=4;
+  for(let i=1;i<=total;i++){
+    const answer=form.querySelector(`input[name="q${i}"]:checked`);
+    if(answer && answer.value==="1"){score++;}
+  }
+
+  const percentage=Math.round((score/total)*100);
+  progressBar.style.width=percentage+"%";
+  result.style.display="block";
+
+  if(score===total){
+    result.className="feedback success";
+    result.innerHTML=`Excellent! You scored ${score}/${total}.`;
+  }else if(score>=2){
+    result.className="feedback highlight";
+    result.innerHTML=`Good effort. You scored ${score}/${total}. Review the fire triangle, extinguisher selection and safe evacuation.`;
+  }else{
+    result.className="feedback danger";
+    result.innerHTML=`You scored ${score}/${total}. It is recommended that you review this module.`;
+  }
+}
+</script>
+
+</body>
+</html>

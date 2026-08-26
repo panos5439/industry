@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Module 5 | Safe Behaviour</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --border:#d9e2ec;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+header{
+  background:linear-gradient(135deg,var(--primary),#0b2545);
+  color:white;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:850px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{color:var(--primary);margin-top:0}
+h3{color:#0b2545}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  background:white;
+}
+
+.icon{
+  font-size:2rem;
+  display:block;
+  margin-bottom:10px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:#fff8e1;
+  padding:18px;
+  border-radius:12px;
+  margin-top:16px;
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:#eafaf7;
+  padding:18px;
+  border-radius:12px;
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:#fff1f1;
+  padding:18px;
+  border-radius:12px;
+}
+
+button{
+  font-size:1rem;
+  cursor:pointer;
+}
+
+.submit-btn{
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  margin-top:12px;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:#0b2545;
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.behaviour-card{
+  background:#eef4fb;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+  margin-top:12px;
+}
+
+.behaviour-text{
+  font-size:1.2rem;
+  font-weight:bold;
+  color:var(--primary);
+  margin-bottom:16px;
+}
+
+.choice-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.choice-btn{
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  color:white;
+}
+
+.safe-btn{background:var(--success)}
+.unsafe-btn{background:var(--accent)}
+
+.choice-btn:hover,
+.choice-btn:focus{
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.scenario-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#eef4fb;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:14px 16px;
+  border-radius:12px;
+  margin:10px 0;
+}
+
+.scenario-option.selected{
+  background:#0b2545;
+  color:white;
+}
+
+.quiz-question{
+  margin-bottom:22px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--border);
+}
+
+.quiz-question label{
+  display:block;
+  margin:8px 0;
+  cursor:pointer;
+}
+
+.progress-box{
+  background:#e8eef5;
+  border-radius:999px;
+  height:18px;
+  overflow:hidden;
+  margin-top:12px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:var(--success);
+  transition:width .4s ease;
+}
+
+.takeaway{
+  font-size:1.15rem;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+footer{
+  text-align:center;
+  color:#5f6c7b;
+  padding:30px 20px;
+  font-size:.9rem;
+}
+
+@media(max-width:700px){
+  main{padding:14px}
+  section{padding:20px}
+  .choice-row{flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Module 5: Safe Behaviour and Safety Culture</h1>
+  <p>Safety does not depend only on equipment and procedures. It also depends on the daily choices made by every worker.</p>
+</header>
+
+<main>
+
+<section>
+  <h2>Learning Objectives</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">✅</span>Recognise safe and unsafe behaviours.</div>
+    <div class="card"><span class="icon">⚠️</span>Understand how human factors affect safety.</div>
+    <div class="card"><span class="icon">🗣️</span>Speak up when unsafe work is observed.</div>
+    <div class="card"><span class="icon">🛑</span>Apply the right to stop unsafe work.</div>
+  </div>
+</section>
+
+<section>
+  <h2>What is safe behaviour?</h2>
+  <p>
+    Safe behaviour is any action that protects you, your colleagues,
+    the equipment and the workplace.
+  </p>
+
+  <div class="grid">
+    <div class="card"><span class="icon">📋</span><h3>Follow procedures</h3><p>Do not skip steps, even when the task seems simple.</p></div>
+    <div class="card"><span class="icon">🦺</span><h3>Use PPE correctly</h3><p>Wear it properly and inspect it before use.</p></div>
+    <div class="card"><span class="icon">🔧</span><h3>Use the correct tools</h3><p>Do not improvise with unsuitable or damaged tools.</p></div>
+    <div class="card"><span class="icon">🧹</span><h3>Keep the area tidy</h3><p>Clear walkways and organised work areas reduce accidents.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Unsafe Behaviour</h2>
+  <p>
+    Unsafe behaviour is any action or omission that increases the likelihood of an accident.
+  </p>
+
+  <div class="danger">
+    Examples: running in production areas, using a mobile phone while working, bypassing guards,
+    horseplay, rushing, ignoring procedures or working without a permit where one is required.
+  </div>
+</section>
+
+<section>
+  <h2>Human Factors</h2>
+  <p>
+    Many accidents do not happen because workers “do not know”. They happen because something affects
+    judgement, attention or behaviour.
+  </p>
+
+  <div class="grid">
+    <div class="card"><span class="icon">😴</span><h3>Fatigue</h3><p>Reduces attention and increases mistakes.</p></div>
+    <div class="card"><span class="icon">⏱️</span><h3>Time pressure</h3><p>Can lead to rushing and shortcuts.</p></div>
+    <div class="card"><span class="icon">📱</span><h3>Distraction</h3><p>One second of inattention may be enough for an accident.</p></div>
+    <div class="card"><span class="icon">😐</span><h3>Complacency</h3><p>“I always do it this way” can hide a serious risk.</p></div>
+  </div>
+
+  <div class="highlight">
+    <strong>Remember:</strong> Experience helps, but it does not replace attention and the correct procedure.
+  </div>
+</section>
+
+<section>
+  <h2>Safe or Unsafe?</h2>
+  <p>Read the behaviour and choose whether it is safe or unsafe.</p>
+
+  <div class="behaviour-card">
+    <div id="behaviourText" class="behaviour-text">I step on a pallet to reach an object at height.</div>
+
+    <div class="choice-row">
+      <button class="choice-btn safe-btn" onclick="answerBehaviour('safe')">Safe</button>
+      <button class="choice-btn unsafe-btn" onclick="answerBehaviour('unsafe')">Unsafe</button>
+      <button class="submit-btn" onclick="nextBehaviour()">Next</button>
+    </div>
+
+    <div id="behaviourFeedback" class="feedback"></div>
+    <p><strong>Score:</strong> <span id="behaviourScore">0</span>/<span id="behaviourTotal">5</span></p>
+  </div>
+</section>
+
+<section>
+  <h2>Stop Work Authority</h2>
+  <p>
+    Every worker should be able to stop a task when they believe there is an immediate or serious danger.
+  </p>
+
+  <div class="success">
+    <strong>Correct attitude:</strong> “We stop for a moment, check the risk and continue only when the task is safe.”
+  </div>
+</section>
+
+<section>
+  <h2>Decision Scenario</h2>
+  <p>
+    Your supervisor asks you to finish a task quickly and skip one step of the procedure.
+    What do you do?
+  </p>
+
+  <button class="scenario-option" data-type="wrong" onclick="selectScenario(this)">
+    I follow the shortcut to finish quickly.
+  </button>
+
+  <button class="scenario-option" data-type="partial" onclick="selectScenario(this)">
+    I ignore the supervisor and continue without explaining anything.
+  </button>
+
+  <button class="scenario-option" data-type="correct" onclick="selectScenario(this)">
+    I explain the risk and follow the approved procedure.
+  </button>
+
+  <button class="submit-btn" onclick="submitScenario()">Submit Final Answer</button>
+
+  <div id="scenarioFeedback" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Mini Quiz</h2>
+
+  <form id="quizForm">
+    <div class="quiz-question">
+      <p><strong>1. Which is a safe behaviour?</strong></p>
+      <label><input type="radio" name="q1" value="1"> I follow the procedure even when I am in a hurry.</label>
+      <label><input type="radio" name="q1" value="0"> I skip steps when I have experience.</label>
+      <label><input type="radio" name="q1" value="0"> I use any tool that is nearby.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>2. Fatigue can:</strong></p>
+      <label><input type="radio" name="q2" value="1"> Reduce attention and increase mistakes.</label>
+      <label><input type="radio" name="q2" value="0"> Improve performance.</label>
+      <label><input type="radio" name="q2" value="0"> Never affect safety.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>3. If I see unsafe work:</strong></p>
+      <label><input type="radio" name="q3" value="1"> I speak up, report the risk and ask for it to be controlled.</label>
+      <label><input type="radio" name="q3" value="0"> I ignore it if it does not affect me.</label>
+      <label><input type="radio" name="q3" value="0"> I continue because it is not my responsibility.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>4. Time pressure:</strong></p>
+      <label><input type="radio" name="q4" value="1"> Can lead to shortcuts and mistakes.</label>
+      <label><input type="radio" name="q4" value="0"> Justifies skipping safety procedures.</label>
+      <label><input type="radio" name="q4" value="0"> Always reduces risk.</label>
+    </div>
+
+    <button type="button" class="submit-btn" onclick="checkQuiz()">Submit Quiz</button>
+  </form>
+
+  <div class="progress-box">
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
+
+  <div id="quizResult" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Key Takeaways</h2>
+  <p class="takeaway">Safety is a daily behaviour.</p>
+  <p class="takeaway">Rushing and shortcuts increase the likelihood of an accident.</p>
+  <p class="takeaway">Speak up when you see something unsafe.</p>
+  <p class="takeaway">No task is so urgent that it cannot be done safely.</p>
+</section>
+
+</main>
+
+<footer>
+  Industrial Safety Training | Module 5
+</footer>
+
+<script>
+let selectedScenario = null;
+
+const behaviours = [
+  {
+    text:"I step on a pallet to reach an object at height.",
+    correct:"unsafe",
+    feedback:"Correct. A pallet is not a safe means of access and may cause a fall."
+  },
+  {
+    text:"I immediately report an oil spill on the floor.",
+    correct:"safe",
+    feedback:"Correct. Immediate reporting helps prevent slips and falls."
+  },
+  {
+    text:"I use a mobile phone while walking in an area with forklift traffic.",
+    correct:"unsafe",
+    feedback:"Correct. Distraction in traffic areas can lead to a serious accident."
+  },
+  {
+    text:"I stop the task when the machine guard is missing.",
+    correct:"safe",
+    feedback:"Correct. Work must not continue when guards are missing."
+  },
+  {
+    text:"I skip one step of the procedure because I have a lot of experience.",
+    correct:"unsafe",
+    feedback:"Correct. Experience does not justify bypassing safe procedures."
+  }
+];
+
+let currentBehaviour = 0;
+let behaviourScore = 0;
+let answeredBehaviour = false;
+
+document.getElementById("behaviourTotal").textContent = behaviours.length;
+
+function answerBehaviour(choice){
+  const feedback = document.getElementById("behaviourFeedback");
+
+  if(answeredBehaviour){
+    return;
+  }
+
+  answeredBehaviour = true;
+  feedback.style.display = "block";
+
+  if(choice === behaviours[currentBehaviour].correct){
+    behaviourScore++;
+    document.getElementById("behaviourScore").textContent = behaviourScore;
+    feedback.className = "feedback success";
+    feedback.innerHTML = behaviours[currentBehaviour].feedback;
+  } else {
+    feedback.className = "feedback danger";
+    feedback.innerHTML = "Not correct. Think about whether the behaviour reduces or increases the risk.";
+  }
+}
+
+function nextBehaviour(){
+  const feedback = document.getElementById("behaviourFeedback");
+
+  if(currentBehaviour < behaviours.length - 1){
+    currentBehaviour++;
+    document.getElementById("behaviourText").textContent = behaviours[currentBehaviour].text;
+    feedback.style.display = "none";
+    feedback.innerHTML = "";
+    answeredBehaviour = false;
+  } else {
+    feedback.style.display = "block";
+    feedback.className = "feedback success";
+    feedback.innerHTML = `The activity is complete. Final score: ${behaviourScore}/${behaviours.length}.`;
+  }
+}
+
+function selectScenario(button){
+  document.querySelectorAll(".scenario-option").forEach(btn=>{
+    btn.classList.remove("selected");
+  });
+
+  button.classList.add("selected");
+  selectedScenario = button.dataset.type;
+
+  const feedback = document.getElementById("scenarioFeedback");
+  feedback.style.display = "none";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+  const feedback = document.getElementById("scenarioFeedback");
+
+  if(!selectedScenario){
+    feedback.style.display = "block";
+    feedback.className = "feedback highlight";
+    feedback.innerHTML = "Please select one answer before submitting.";
+    return;
+  }
+
+  feedback.style.display = "block";
+
+  if(selectedScenario === "correct"){
+    feedback.className = "feedback success";
+    feedback.innerHTML = "Correct. The right response is to explain the risk and follow the approved procedure.";
+  } else if(selectedScenario === "partial"){
+    feedback.className = "feedback highlight";
+    feedback.innerHTML = "Partly correct. You should not skip the procedure, but it is important to clearly communicate the reason.";
+  } else {
+    feedback.className = "feedback danger";
+    feedback.innerHTML = "Incorrect. Time pressure does not justify bypassing safety procedures.";
+  }
+}
+
+function checkQuiz(){
+  const form = document.getElementById("quizForm");
+  const result = document.getElementById("quizResult");
+  const progressBar = document.getElementById("progressBar");
+
+  let score = 0;
+  const total = 4;
+
+  for(let i=1;i<=total;i++){
+    const answer = form.querySelector(`input[name="q"+i]:checked`);
+    if(answer && answer.value === "1"){
+      score++;
+    }
+  }
+
+  const percentage = Math.round((score / total) * 100);
+  progressBar.style.width = percentage + "%";
+
+  result.style.display = "block";
+
+  if(score === total){
+    result.className = "feedback success";
+    result.innerHTML = `Excellent! You scored ${score}/${total}.`;
+  } else if(score >= 2){
+    result.className = "feedback highlight";
+    result.innerHTML = `Good effort. You scored ${score}/${total}. Review human factors and Stop Work Authority.`;
+  } else {
+    result.className = "feedback danger";
+    result.innerHTML = `You scored ${score}/${total}. It is recommended that you review this module.`;
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Module 3 | Risk Assessment</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --border:#d9e2ec;
+  --low:#2a9d8f;
+  --medium:#f4b400;
+  --high:#d62828;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+header{
+  background:linear-gradient(135deg,var(--primary),#0b2545);
+  color:white;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:850px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{color:var(--primary);margin-top:0}
+h3{color:#0b2545}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  background:white;
+}
+
+.icon{
+  font-size:2rem;
+  display:block;
+  margin-bottom:10px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:#fff8e1;
+  padding:18px;
+  border-radius:12px;
+  margin-top:16px;
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:#eafaf7;
+  padding:18px;
+  border-radius:12px;
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:#fff1f1;
+  padding:18px;
+  border-radius:12px;
+}
+
+button, select{
+  font-size:1rem;
+}
+
+button{
+  cursor:pointer;
+}
+
+.submit-btn{
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  margin-top:12px;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:#0b2545;
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.control-step{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+.control-step strong{
+  color:var(--primary);
+  font-size:1.15rem;
+}
+
+.risk-calculator{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+  align-items:end;
+}
+
+.risk-calculator label{
+  font-weight:bold;
+  display:block;
+  margin-bottom:8px;
+}
+
+.risk-calculator select{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid var(--border);
+}
+
+.risk-result{
+  display:none;
+  margin-top:18px;
+  padding:20px;
+  border-radius:14px;
+  font-weight:bold;
+  font-size:1.1rem;
+}
+
+.low{background:#eafaf7;border-left:8px solid var(--low)}
+.medium{background:#fff8e1;border-left:8px solid var(--medium)}
+.high{background:#fff1f1;border-left:8px solid var(--high)}
+
+.scenario-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#eef4fb;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:14px 16px;
+  border-radius:12px;
+  margin:10px 0;
+}
+
+.scenario-option.selected{
+  background:#0b2545;
+  color:white;
+}
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.quiz-question{
+  margin-bottom:22px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--border);
+}
+
+.quiz-question label{
+  display:block;
+  margin:8px 0;
+  cursor:pointer;
+}
+
+.progress-box{
+  background:#e8eef5;
+  border-radius:999px;
+  height:18px;
+  overflow:hidden;
+  margin-top:12px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:var(--success);
+  transition:width .4s ease;
+}
+
+.takeaway{
+  font-size:1.15rem;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+footer{
+  text-align:center;
+  color:#5f6c7b;
+  padding:30px 20px;
+  font-size:.9rem;
+}
+
+@media(max-width:700px){
+  main{padding:14px}
+  section{padding:20px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Module 3: Risk Assessment</h1>
+  <p>It is not enough to identify a hazard. We must understand how serious the risk is and which control measures are most effective.</p>
+</header>
+
+<main>
+
+<section>
+  <h2>Learning Objectives</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">📊</span>Understand what risk assessment means.</div>
+    <div class="card"><span class="icon">⚖️</span>Connect likelihood and severity.</div>
+    <div class="card"><span class="icon">🛡️</span>Recognise effective control measures.</div>
+    <div class="card"><span class="icon">✅</span>Apply the Hierarchy of Controls.</div>
+  </div>
+</section>
+
+<section>
+  <h2>What is Risk Assessment?</h2>
+  <p>
+    Risk assessment is the process of examining a hazard, estimating how likely it is to cause harm
+    and how severe the consequences could be.
+  </p>
+
+  <div class="highlight">
+    <strong>Simple idea:</strong> Risk = Likelihood × Severity.
+  </div>
+</section>
+
+<section>
+  <h2>Likelihood and Severity</h2>
+
+  <div class="grid">
+    <div class="card">
+      <span class="icon">🎲</span>
+      <h3>Likelihood</h3>
+      <p>How likely is it that something unwanted could happen?</p>
+      <p>Example: A cable across a walkway used by many workers has an increased likelihood of causing a fall.</p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚑</span>
+      <h3>Severity</h3>
+      <p>How serious could the consequences be?</p>
+      <p>Example: A fall may cause anything from a minor injury to a serious fracture.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Interactive Risk Assessment</h2>
+  <p>Select the likelihood and severity to see the risk level.</p>
+
+  <div class="risk-calculator">
+    <div>
+      <label for="likelihood">Likelihood</label>
+      <select id="likelihood">
+        <option value="">Select</option>
+        <option value="1">Low</option>
+        <option value="2">Medium</option>
+        <option value="3">High</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="severity">Severity</label>
+      <select id="severity">
+        <option value="">Select</option>
+        <option value="1">Minor</option>
+        <option value="2">Serious</option>
+        <option value="3">Very serious</option>
+      </select>
+    </div>
+
+    <button class="submit-btn" onclick="calculateRisk()">Calculate</button>
+  </div>
+
+  <div id="riskResult" class="risk-result"></div>
+</section>
+
+<section>
+  <h2>Hierarchy of Controls</h2>
+  <p>
+    When controlling a hazard, we do not start with PPE. First, we check whether the hazard can be removed
+    or reduced at the source.
+  </p>
+
+  <div class="grid">
+    <div class="card control-step">
+      <strong>1. Elimination</strong>
+      <p>Completely remove the hazard.</p>
+      <p>Example: Remove an obstruction from a walkway.</p>
+    </div>
+
+    <div class="card control-step">
+      <strong>2. Substitution</strong>
+      <p>Replace something hazardous with something less hazardous.</p>
+      <p>Example: Use a less hazardous chemical.</p>
+    </div>
+
+    <div class="card control-step">
+      <strong>3. Engineering Controls</strong>
+      <p>Use physical or mechanical protection methods.</p>
+      <p>Example: Machine guards, ventilation systems, barriers.</p>
+    </div>
+
+    <div class="card control-step">
+      <strong>4. Administrative Controls</strong>
+      <p>Use procedures, training, signs, permits and safe systems of work.</p>
+      <p>Example: LOTO procedure or safe work instruction.</p>
+    </div>
+
+    <div class="card control-step">
+      <strong>5. PPE</strong>
+      <p>Use Personal Protective Equipment as the final level of protection.</p>
+      <p>Example: Gloves, helmet, safety glasses, hearing protection.</p>
+    </div>
+  </div>
+
+  <div class="danger">
+    <strong>Important:</strong> PPE does not remove the hazard. It only reduces the worker’s exposure.
+  </div>
+</section>
+
+<section>
+  <h2>Decision Scenario</h2>
+  <p>
+    In a production area, pedestrians frequently pass close to moving forklifts.
+    Which control measure is the most effective?
+  </p>
+
+  <button class="scenario-option" data-type="wrong" onclick="selectScenario(this)">
+    Ask pedestrians to be more careful.
+  </button>
+
+  <button class="scenario-option" data-type="partial" onclick="selectScenario(this)">
+    Require everyone to wear a high-visibility vest.
+  </button>
+
+  <button class="scenario-option" data-type="correct" onclick="selectScenario(this)">
+    Physically separate pedestrian routes from forklift traffic, where possible.
+  </button>
+
+  <button class="submit-btn" onclick="submitScenario()">Submit Final Answer</button>
+
+  <div id="scenarioFeedback" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Mini Quiz</h2>
+
+  <form id="quizForm">
+    <div class="quiz-question">
+      <p><strong>1. What does risk assessment mean?</strong></p>
+      <label><input type="radio" name="q1" value="1"> Estimating the likelihood and severity of harm.</label>
+      <label><input type="radio" name="q1" value="0"> Only recording accidents.</label>
+      <label><input type="radio" name="q1" value="0"> Only choosing PPE.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>2. Which control measure is the most effective in the hierarchy?</strong></p>
+      <label><input type="radio" name="q2" value="1"> Elimination of the hazard.</label>
+      <label><input type="radio" name="q2" value="0"> Use of PPE.</label>
+      <label><input type="radio" name="q2" value="0"> Verbal warning.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>3. PPE is considered:</strong></p>
+      <label><input type="radio" name="q3" value="0"> The first and best control measure.</label>
+      <label><input type="radio" name="q3" value="1"> The final level of protection.</label>
+      <label><input type="radio" name="q3" value="0"> A replacement for training.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>4. Which example is an engineering control?</strong></p>
+      <label><input type="radio" name="q4" value="1"> A machine guard.</label>
+      <label><input type="radio" name="q4" value="0"> A poster on the wall.</label>
+      <label><input type="radio" name="q4" value="0"> A reminder from a supervisor.</label>
+    </div>
+
+    <button type="button" class="submit-btn" onclick="checkQuiz()">Submit Quiz</button>
+  </form>
+
+  <div class="progress-box">
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
+
+  <div id="quizResult" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Key Takeaways</h2>
+  <p class="takeaway">Risk is linked to likelihood and severity.</p>
+  <p class="takeaway">First, try to eliminate the hazard.</p>
+  <p class="takeaway">Engineering controls are stronger than simple instructions.</p>
+  <p class="takeaway">PPE is important, but it should not be the only protection.</p>
+</section>
+
+</main>
+
+<footer>
+  Industrial Safety Training | Module 3
+</footer>
+
+<script>
+let selectedScenario = null;
+
+function calculateRisk(){
+  const likelihood = Number(document.getElementById("likelihood").value);
+  const severity = Number(document.getElementById("severity").value);
+  const result = document.getElementById("riskResult");
+
+  if(!likelihood || !severity){
+    result.style.display = "block";
+    result.className = "risk-result medium";
+    result.innerHTML = "Please select both likelihood and severity.";
+    return;
+  }
+
+  const risk = likelihood * severity;
+  result.style.display = "block";
+
+  if(risk <= 2){
+    result.className = "risk-result low";
+    result.innerHTML = "Low risk. Control and monitoring are still required.";
+  } else if(risk <= 4){
+    result.className = "risk-result medium";
+    result.innerHTML = "Medium risk. Additional control measures are required.";
+  } else {
+    result.className = "risk-result high";
+    result.innerHTML = "High risk. The task should not continue without immediate and effective control measures.";
+  }
+}
+
+function selectScenario(button){
+  document.querySelectorAll(".scenario-option").forEach(btn=>{
+    btn.classList.remove("selected");
+  });
+
+  button.classList.add("selected");
+  selectedScenario = button.dataset.type;
+
+  const feedback = document.getElementById("scenarioFeedback");
+  feedback.style.display = "none";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+  const feedback = document.getElementById("scenarioFeedback");
+
+  if(!selectedScenario){
+    feedback.style.display = "block";
+    feedback.className = "feedback highlight";
+    feedback.innerHTML = "Please select one answer before submitting.";
+    return;
+  }
+
+  feedback.style.display = "block";
+
+  if(selectedScenario === "correct"){
+    feedback.className = "feedback success";
+    feedback.innerHTML = "Correct. Physical separation between pedestrians and forklifts is a strong control measure because it reduces the chance of contact with the hazard.";
+  } else if(selectedScenario === "partial"){
+    feedback.className = "feedback highlight";
+    feedback.innerHTML = "Partly correct. A high-visibility vest improves visibility, but it does not remove the risk of collision.";
+  } else {
+    feedback.className = "feedback danger";
+    feedback.innerHTML = "Incorrect. Simply asking people to be more careful is not an effective control for serious traffic hazards.";
+  }
+}
+
+function checkQuiz(){
+  const form = document.getElementById("quizForm");
+  const result = document.getElementById("quizResult");
+  const progressBar = document.getElementById("progressBar");
+
+  let score = 0;
+  const total = 4;
+
+  for(let i=1;i<=total;i++){
+    const answer = form.querySelector(`input[name="q"+i]:checked`);
+    if(answer && answer.value === "1"){
+      score++;
+    }
+  }
+
+  const percentage = Math.round((score / total) * 100);
+  progressBar.style.width = percentage + "%";
+
+  result.style.display = "block";
+
+  if(score === total){
+    result.className = "feedback success";
+    result.innerHTML = `Excellent! You scored ${score}/${total}.`;
+  } else if(score >= 2){
+    result.className = "feedback highlight";
+    result.innerHTML = `Good effort. You scored ${score}/${total}. Review the hierarchy of controls.`;
+  } else {
+    result.className = "feedback danger";
+    result.innerHTML = `You scored ${score}/${total}. It is recommended that you review this module.`;
+  }
+}
+</script>
+
+</body>
+</html>

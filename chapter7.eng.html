@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta
+    name="description"
+    content="Interactive Lockout Tagout safety training module."
+  />
+
+  <title>Module 7 | Lockout / Tagout - LOTO</title>
+
+  <style>
+    :root {
+      --primary: #123c69;
+      --primary-dark: #0b2545;
+      --primary-light: #e8f1fb;
+
+      --secondary: #f4b400;
+      --danger: #d62828;
+      --success: #2a9d8f;
+
+      --background: #f5f7fa;
+      --card: #ffffff;
+      --text: #1f2933;
+      --muted: #52606d;
+      --border: #d9e2ec;
+
+      --hover-background: #e5eff9;
+      --hover-border: #8fb3d9;
+
+      --selected-background: #123c69;
+      --selected-text: #ffffff;
+
+      --focus: #f4b400;
+      --shadow: 0 8px 24px rgba(15, 35, 55, 0.08);
+
+      --radius-large: 18px;
+      --radius-medium: 12px;
+      --radius-small: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    header {
+      padding: 52px 20px;
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(255, 255, 255, 0.12),
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+      color: #ffffff;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.2;
+    }
+
+    header p {
+      max-width: 900px;
+      margin: 0 auto;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 1.1rem;
+    }
+
+    main {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    section {
+      margin-bottom: 24px;
+      padding: 28px;
+      background: var(--card);
+      border: 1px solid rgba(217, 226, 236, 0.75);
+      border-radius: var(--radius-large);
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 14px;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: var(--primary-dark);
+    }
+
+    p {
+      margin-top: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 20px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .icon {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .highlight,
+    .success,
+    .danger {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: var(--radius-medium);
+    }
+
+    .highlight {
+      background: #fff8e1;
+      border-left: 6px solid var(--secondary);
+      color: #5d4300;
+    }
+
+    .success {
+      background: #eafaf7;
+      border-left: 6px solid var(--success);
+      color: #155e55;
+    }
+
+    .danger {
+      background: #fff1f1;
+      border-left: 6px solid var(--danger);
+      color: #8a1c1c;
+    }
+
+    .loto-step {
+      background: #f8fafc;
+      border-left: 8px solid var(--primary);
+    }
+
+    .loto-step strong {
+      color: var(--primary);
+      font-size: 1.12rem;
+    }
+
+    /*
+      Shared styles for interactive answer buttons.
+      A dark background is not applied during hover.
+    */
+    .order-btn,
+    .scenario-option {
+      display: block;
+      width: 100%;
+      padding: 14px 16px;
+      background: #eef4fb;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-medium);
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease,
+        box-shadow 160ms ease,
+        transform 160ms ease;
+    }
+
+    /*
+      Hover before selection:
+      light background with dark readable text.
+    */
+    .order-btn:not(.selected-order):hover,
+    .scenario-option:not(.selected):hover {
+      background: var(--hover-background);
+      border-color: var(--hover-border);
+      color: var(--primary-dark);
+      box-shadow: 0 5px 14px rgba(18, 60, 105, 0.1);
+      transform: translateY(-1px);
+    }
+
+    /*
+      Clear keyboard focus without making the text unreadable.
+    */
+    .order-btn:focus-visible,
+    .scenario-option:focus-visible,
+    .submit-btn:focus-visible,
+    .reset-btn:focus-visible,
+    .quiz-option:focus-within {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    /*
+      Dark background only after the user selects an option.
+    */
+    .order-btn.selected-order,
+    .scenario-option.selected {
+      background: var(--selected-background);
+      border-color: var(--selected-background);
+      color: var(--selected-text);
+      box-shadow: 0 6px 16px rgba(18, 60, 105, 0.22);
+    }
+
+    /*
+      Selected options remain readable when hovered.
+    */
+    .order-btn.selected-order:hover,
+    .scenario-option.selected:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+      color: #ffffff;
+    }
+
+    .order-btn.selected-order::before,
+    .scenario-option.selected::before {
+      content: "✓";
+      display: inline-block;
+      margin-right: 9px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .order-area {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .order-list {
+      margin-top: 16px;
+      padding: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .order-list h3 {
+      margin-bottom: 6px;
+    }
+
+    .order-list ol {
+      min-height: 28px;
+      margin: 8px 0 0;
+      padding-left: 24px;
+    }
+
+    .order-list li {
+      margin-bottom: 6px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .submit-btn,
+    .reset-btn {
+      min-height: 46px;
+      padding: 12px 18px;
+      border-radius: var(--radius-small);
+      cursor: pointer;
+      transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        box-shadow 160ms ease,
+        transform 160ms ease;
+    }
+
+    .submit-btn {
+      background: var(--primary);
+      border: 1px solid var(--primary);
+      color: #ffffff;
+    }
+
+    .submit-btn:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+      color: #ffffff;
+      box-shadow: 0 6px 16px rgba(18, 60, 105, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .reset-btn {
+      background: #ffffff;
+      border: 1px solid var(--hover-border);
+      color: var(--primary-dark);
+    }
+
+    .reset-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .scenario-option {
+      margin: 10px 0;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: var(--radius-small);
+      font-weight: 700;
+    }
+
+    .quiz-question {
+      min-width: 0;
+      margin: 0 0 22px;
+      padding: 0 0 18px;
+      border: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .quiz-question:last-of-type {
+      border-bottom: 0;
+    }
+
+    .quiz-question legend {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 0;
+    }
+
+    /*
+      Quiz answers are styled as cards.
+      This avoids unreadable native option highlighting.
+    */
+    .quiz-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px 14px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-small);
+      color: var(--text);
+      cursor: pointer;
+      transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease,
+        box-shadow 160ms ease,
+        transform 160ms ease;
+    }
+
+    .quiz-option:hover {
+      background: var(--hover-background);
+      border-color: var(--hover-border);
+      color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .quiz-option:has(input:checked) {
+      background: var(--selected-background);
+      border-color: var(--selected-background);
+      color: #ffffff;
+      box-shadow: 0 5px 14px rgba(18, 60, 105, 0.2);
+    }
+
+    .quiz-option:has(input:checked):hover {
+      background: var(--primary-dark);
+      color: #ffffff;
+    }
+
+    .quiz-option input[type="radio"] {
+      flex: 0 0 auto;
+      width: 19px;
+      height: 19px;
+      margin: 3px 0 0;
+      accent-color: var(--secondary);
+      cursor: pointer;
+    }
+
+    .quiz-option span {
+      flex: 1;
+    }
+
+    .progress-box {
+      height: 18px;
+      margin-top: 18px;
+      overflow: hidden;
+      background: #e8eef5;
+      border-radius: 999px;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background:
+        linear-gradient(
+          90deg,
+          var(--success),
+          #38bfae
+        );
+      border-radius: inherit;
+      transition: width 400ms ease;
+    }
+
+    .takeaway {
+      margin-bottom: 10px;
+      color: var(--primary);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 30px 20px;
+      color: #5f6c7b;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 38px 18px;
+      }
+
+      main {
+        padding: 14px;
+      }
+
+      section {
+        padding: 20px;
+      }
+
+      .button-row {
+        flex-direction: column;
+      }
+
+      .submit-btn,
+      .reset-btn {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Module 7: Lockout / Tagout – LOTO</h1>
+
+    <p>
+      Energy isolation protects employees from unexpected startup,
+      movement, or energy release during maintenance, cleaning, or
+      other work on equipment.
+    </p>
+  </header>
+
+  <main>
+    <section aria-labelledby="learning-goals-title">
+      <h2 id="learning-goals-title">Learning Objectives</h2>
+
+      <div class="grid">
+        <div class="card">
+          <span class="icon" aria-hidden="true">🔒</span>
+
+          Understand what LOTO is and why it is used.
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">⚡</span>
+
+          Recognize hazardous forms of energy.
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🏷️</span>
+
+          Understand the purpose of locks and tags.
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">✅</span>
+
+          Follow the basic steps of safe energy isolation.
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="what-is-loto-title">
+      <h2 id="what-is-loto-title">What Is LOTO?</h2>
+
+      <p>
+        Lockout / Tagout is a safety procedure used to isolate
+        equipment from its energy sources before maintenance,
+        cleaning, adjustment, repair, or unblocking work begins.
+      </p>
+
+      <div class="highlight">
+        <strong>Simple explanation:</strong>
+
+        Lockout means physically locking an energy-isolating device
+        so that it cannot be operated. Tagout means attaching a
+        warning tag that identifies who applied the isolation and why.
+      </div>
+    </section>
+
+    <section aria-labelledby="importance-title">
+      <h2 id="importance-title">Why Is LOTO Important?</h2>
+
+      <p>
+        Equipment that appears to be stopped may still contain active
+        or stored energy. Unexpected startup, movement, or energy
+        release can cause serious or fatal injury.
+      </p>
+
+      <div class="danger">
+        <strong>Critical message:</strong>
+
+        A STOP button is not LOTO. An emergency stop is not LOTO.
+        Isolation requires an approved procedure, locking, tagging,
+        and verification of a zero-energy state.
+      </div>
+    </section>
+
+    <section aria-labelledby="energy-types-title">
+      <h2 id="energy-types-title">
+        Types of Hazardous Energy
+      </h2>
+
+      <div class="grid">
+        <div class="card">
+          <span class="icon" aria-hidden="true">⚡</span>
+
+          <h3>Electrical Energy</h3>
+
+          <p>
+            Electrical panels, wiring, motors, batteries, and power
+            supplies.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">⚙️</span>
+
+          <h3>Mechanical Energy</h3>
+
+          <p>
+            Moving parts, springs, rotating components, elevated
+            loads, and gravity.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">💧</span>
+
+          <h3>Hydraulic Energy</h3>
+
+          <p>
+            Pressurized fluids, hydraulic cylinders, accumulators, and
+            hydraulic lines.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🌬️</span>
+
+          <h3>Pneumatic Energy</h3>
+
+          <p>
+            Compressed air, valves, cylinders, receivers, and
+            pneumatic lines.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🔥</span>
+
+          <h3>Thermal Energy</h3>
+
+          <p>
+            Hot surfaces, steam, heated liquids, gases, and materials.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🧪</span>
+
+          <h3>Chemical Energy</h3>
+
+          <p>
+            Pressurized chemicals, hazardous reactions, leaks, gases,
+            vapors, and corrosive substances.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="when-required-title">
+      <h2 id="when-required-title">When Is LOTO Required?</h2>
+
+      <p>
+        LOTO may be required whenever an employee must work on
+        equipment where unexpected startup, movement, or energy
+        release could cause injury.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <span class="icon" aria-hidden="true">🔧</span>
+
+          <h3>Maintenance</h3>
+
+          <p>
+            Repairs, component replacement, inspections, and technical
+            interventions.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🧹</span>
+
+          <h3>Cleaning</h3>
+
+          <p>
+            Cleaning near moving parts, hazardous areas, or internal
+            machine components.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🚧</span>
+
+          <h3>Unblocking</h3>
+
+          <p>
+            Removing jammed or blocked materials from machinery or
+            production lines.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">⚙️</span>
+
+          <h3>Adjustment</h3>
+
+          <p>
+            Adjusting or working on equipment where movement or energy
+            release may occur.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="steps-title">
+      <h2 id="steps-title">Basic LOTO Steps</h2>
+
+      <div class="grid">
+        <div class="card loto-step">
+          <strong>1. Prepare</strong>
+
+          <p>
+            Understand the equipment, its energy sources, potential
+            hazards, and the approved procedure.
+          </p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>2. Notify</strong>
+
+          <p>
+            Inform affected employees that the equipment will be shut
+            down and isolated.
+          </p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>3. Shut Down</strong>
+
+          <p>
+            Stop the equipment using its normal shutdown procedure.
+          </p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>4. Isolate Energy</strong>
+
+          <p>
+            Disconnect or isolate every hazardous energy source.
+          </p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>5. Apply Locks and Tags</strong>
+
+          <p>
+            Apply personal locks and identification tags to each
+            energy-isolating device.
+          </p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>6. Release Stored Energy</strong>
+
+          <p>
+            Relieve pressure, discharge capacitors, lower elevated
+            loads, block movement, and drain lines where required.
+          </p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>7. Verify Zero Energy</strong>
+
+          <p>
+            Confirm that the equipment cannot start, move, or release
+            hazardous energy.
+          </p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>8. Perform the Work</strong>
+
+          <p>
+            Begin the work only after the equipment has been verified
+            as safe.
+          </p>
+        </div>
+      </div>
+
+      <div class="danger">
+        <strong>
+          Never remove another employee’s personal LOTO lock.
+        </strong>
+
+        A personal lock should only be removed by the employee who
+        applied it, except through a formally approved removal
+        procedure.
+      </div>
+    </section>
+
+    <section aria-labelledby="order-title">
+      <h2 id="order-title">
+        Interactive Exercise: Put the Steps in Order
+      </h2>
+
+      <p>
+        Select the steps in the correct order. Your goal is to arrange
+        the five basic LOTO steps.
+      </p>
+
+      <div class="order-area">
+        <button
+          type="button"
+          class="order-btn"
+          data-step="3"
+        >
+          Shut down the equipment using the normal procedure.
+        </button>
+
+        <button
+          type="button"
+          class="order-btn"
+          data-step="1"
+        >
+          Prepare and identify all hazardous energy sources.
+        </button>
+
+        <button
+          type="button"
+          class="order-btn"
+          data-step="5"
+        >
+          Apply personal locks and identification tags.
+        </button>
+
+        <button
+          type="button"
+          class="order-btn"
+          data-step="2"
+        >
+          Notify all affected employees.
+        </button>
+
+        <button
+          type="button"
+          class="order-btn"
+          data-step="4"
+        >
+          Isolate all hazardous energy sources.
+        </button>
+      </div>
+
+      <div class="order-list">
+        <h3>Your Selected Order</h3>
+
+        <ol
+          id="selectedOrder"
+          aria-live="polite"
+        ></ol>
+      </div>
+
+      <div class="button-row">
+        <button
+          type="button"
+          id="checkOrderButton"
+          class="submit-btn"
+        >
+          Check Order
+        </button>
+
+        <button
+          type="button"
+          id="resetOrderButton"
+          class="reset-btn"
+        >
+          Reset
+        </button>
+      </div>
+
+      <div
+        id="orderFeedback"
+        class="feedback"
+        role="status"
+        aria-live="polite"
+      ></div>
+    </section>
+
+    <section aria-labelledby="scenario-title">
+      <h2 id="scenario-title">Decision Scenario</h2>
+
+      <p>
+        You find a personal LOTO lock attached to a machine. The
+        employee who applied it is not present, but production needs
+        the machine to be restarted. What should you do?
+      </p>
+
+      <button
+        type="button"
+        class="scenario-option"
+        data-type="wrong"
+        aria-pressed="false"
+      >
+        Remove the lock because the employee is not present.
+      </button>
+
+      <button
+        type="button"
+        class="scenario-option"
+        data-type="partial"
+        aria-pressed="false"
+      >
+        Ask another employee whether you may remove it.
+      </button>
+
+      <button
+        type="button"
+        class="scenario-option"
+        data-type="correct"
+        aria-pressed="false"
+      >
+        Do not remove the lock. Follow the approved procedure and
+        notify the responsible supervisor.
+      </button>
+
+      <button
+        type="button"
+        id="submitScenarioButton"
+        class="submit-btn"
+      >
+        Submit Answer
+      </button>
+
+      <div
+        id="scenarioFeedback"
+        class="feedback"
+        role="status"
+        aria-live="polite"
+      ></div>
+    </section>
+
+    <section aria-labelledby="quiz-title">
+      <h2 id="quiz-title">Mini Quiz</h2>
+
+      <form id="quizForm" novalidate>
+        <fieldset class="quiz-question">
+          <legend>
+            <strong>1. What does Lockout mean?</strong>
+          </legend>
+
+          <label class="quiz-option">
+            <input
+              type="radio"
+              name="q1"
+              value="1"
+            />
+
+            <span>
+              Physically locking the energy-isolating device so it
+              cannot be operated.
+            </span>
+          </label>
+
+          <label class="quiz-option">
+            <input
+              type="radio"
+              name="q1"
+              value="0"
+            />
+
+            <span>
+              Pressing the emergency stop button.
+            </span>
+          </label>
+
+          <label class="quiz-option">
+            <input
+              type="radio"
+              name="q1"
+              value="0"
+            />
+
+            <span>
+              Placing only a warning sign near the equipment.
+            </span>
+          </label>
+        </fieldset>
+
+        <fieldset class="quiz-question">
+          <legend>
+            <strong>
+              2. Is an emergency stop the same as LOTO?
+            </strong>
+          </legend>
+
+          <label class="quiz-option">
+            <input
+              type="radio"
+              name="q2"
+              value="0"
+            />
+
+            <span>
+              Yes, they provide exactly the same protection.
+            </span>
+          </label>
+
+          <label class="quiz-option">
+            <input
+              type="radio"
+              name="q2"
+              value="1"
+            />
+
+            <span>
+              No. An emergency stop does not replace energy
+              isolation.
+            </span>
+          </label>
+
+          <label class="quiz-option">
+            <input
+              type="radio"
+              name="q2"
+              value="0"
+            />
+
+            <span>
+              Yes, if the work will only take a few minutes.
+            </span>
+          </label>
+        </fieldset>
+
+        <fieldset class="quiz-question">
+          <legend>
+            <strong>
+              3. Who should remove a personal LOTO lock?
+            </strong>
+          </legend>
+
+          <label class="quiz-option">
+            <input
+              type="radio"
+              name="q3"
+              value="1"
+            />
+
+            <span>
+              The employee who applied it, in accordance with the
+              approved procedure.
+            </span>
+          </label>
+
+          <label class="quiz-option">
+            <input
+              type="radio"
+              name="q3"
+              value="0"
+            />
+
+            <span>
+              Anyone who needs to restart the equipment.
+            </span>
+          </label>
+
+          <label class="quiz-option">
+            <input
+              type="radio"
+              name="q3"
+              value="0"
+            />
+
+            <span>
+              The first employee who notices the lock.
+            </span>
+          </label>
+        </fieldset>
+
+        <fieldset class="quiz-question">
+          <legend>
+            <strong>
+              4. Why must a zero-energy state be verified?
+            </strong>
+          </legend>
+
+          <label class="quiz-option">
+            <input
+              type="radio"
+              name="q4"
+              value="1"
+            />
+
+            <span>
+              To confirm that the equipment cannot start, move, or
+              release hazardous energy.
+            </span>
+          </label>
+
+          <label class="quiz-option">
+            <input
+              type="radio"
+              name="q4"
+              value="0"
+            />
+
+            <span>
+              To make the work progress more quickly.
+            </span>
+          </label>
+
+          <label class="quiz-option">
+            <input
+              type="radio"
+              name="q4"
+              value="0"
+            />
+
+            <span>
+              Only to complete administrative paperwork.
+            </span>
+          </label>
+        </fieldset>
+
+        <div class="button-row">
+          <button
+            type="submit"
+            class="submit-btn"
+          >
+            Submit Quiz
+          </button>
+
+          <button
+            type="button"
+            id="resetQuizButton"
+            class="reset-btn"
+          >
+            Clear Answers
+          </button>
+        </div>
+      </form>
+
+      <div
+        class="progress-box"
+        role="progressbar"
+        aria-label="Quiz score"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+      >
+        <div
+          id="progressBar"
+          class="progress-bar"
+        ></div>
+      </div>
+
+      <div
+        id="quizResult"
+        class="feedback"
+        role="status"
+        aria-live="polite"
+      ></div>
+    </section>
+
+    <section aria-labelledby="takeaways-title">
+      <h2 id="takeaways-title">Key Takeaways</h2>
+
+      <p class="takeaway">
+        A STOP button is not LOTO.
+      </p>
+
+      <p class="takeaway">
+        Equipment that appears stopped may not be safe.
+      </p>
+
+      <p class="takeaway">
+        A personal lock provides personal protection.
+      </p>
+
+      <p class="takeaway">
+        Never remove another employee’s personal LOTO lock.
+      </p>
+
+      <p class="takeaway">
+        Always verify a zero-energy state before beginning work.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Industrial Safety Training | Module 7
+  </footer>
+
+  <script>
+    "use strict";
+
+    let selectedScenario = null;
+    const selectedSteps = [];
+
+    const orderButtons =
+      document.querySelectorAll(".order-btn");
+
+    const scenarioButtons =
+      document.querySelectorAll(".scenario-option");
+
+    const selectedOrderList =
+      document.getElementById("selectedOrder");
+
+    const orderFeedback =
+      document.getElementById("orderFeedback");
+
+    const scenarioFeedback =
+      document.getElementById("scenarioFeedback");
+
+    const quizForm =
+      document.getElementById("quizForm");
+
+    const quizResult =
+      document.getElementById("quizResult");
+
+    const progressBar =
+      document.getElementById("progressBar");
+
+    const progressBox =
+      document.querySelector(".progress-box");
+
+    function showFeedback(element, type, message) {
+      element.className = `feedback ${type}`;
+      element.textContent = message;
+      element.style.display = "block";
+    }
+
+    function hideFeedback(element) {
+      element.style.display = "none";
+      element.textContent = "";
+      element.className = "feedback";
+    }
+
+    function selectStep(button) {
+      if (button.classList.contains("selected-order")) {
+        return;
+      }
+
+      const step = Number(button.dataset.step);
+      const text = button.textContent.trim();
+
+      button.classList.add("selected-order");
+      button.setAttribute("aria-pressed", "true");
+      button.disabled = true;
+
+      selectedSteps.push({
+        step,
+        text
+      });
+
+      const listItem = document.createElement("li");
+      listItem.textContent = text;
+      selectedOrderList.appendChild(listItem);
+
+      hideFeedback(orderFeedback);
+    }
+
+    function checkOrder() {
+      if (selectedSteps.length < orderButtons.length) {
+        showFeedback(
+          orderFeedback,
+          "highlight",
+          `Select all ${orderButtons.length} steps before checking your answer.`
+        );
+
+        return;
+      }
+
+      const isCorrect = selectedSteps.every(
+        (item, index) => item.step === index + 1
+      );
+
+      if (isCorrect) {
+        showFeedback(
+          orderFeedback,
+          "success",
+          "Correct. The sequence is: prepare, notify, shut down, isolate energy, and apply locks and tags."
+        );
+      } else {
+        showFeedback(
+          orderFeedback,
+          "danger",
+          "The order is not correct. Remember: prepare first, then notify, shut down, isolate energy, and apply locks and tags."
+        );
+      }
+    }
+
+    function resetOrder() {
+      selectedSteps.length = 0;
+      selectedOrderList.replaceChildren();
+
+      orderButtons.forEach((button) => {
+        button.classList.remove("selected-order");
+        button.setAttribute("aria-pressed", "false");
+        button.disabled = false;
+      });
+
+      hideFeedback(orderFeedback);
+    }
+
+    function selectScenario(button) {
+      scenarioButtons.forEach((scenarioButton) => {
+        scenarioButton.classList.remove("selected");
+        scenarioButton.setAttribute(
+          "aria-pressed",
+          "false"
+        );
+      });
+
+      button.classList.add("selected");
+      button.setAttribute("aria-pressed", "true");
+
+      selectedScenario = button.dataset.type;
+
+      hideFeedback(scenarioFeedback);
+    }
+
+    function submitScenario() {
+      if (!selectedScenario) {
+        showFeedback(
+          scenarioFeedback,
+          "highlight",
+          "Select an answer before submitting."
+        );
+
+        return;
+      }
+
+      if (selectedScenario === "correct") {
+        showFeedback(
+          scenarioFeedback,
+          "success",
+          "Correct. Never remove another employee’s personal lock. Follow the approved procedure and notify the responsible supervisor."
+        );
+
+        return;
+      }
+
+      if (selectedScenario === "partial") {
+        showFeedback(
+          scenarioFeedback,
+          "highlight",
+          "Partly correct, but asking another employee is not sufficient. Removing someone else’s lock requires a formal approved procedure."
+        );
+
+        return;
+      }
+
+      showFeedback(
+        scenarioFeedback,
+        "danger",
+        "Incorrect. Removing another employee’s personal lock may place that employee in immediate danger."
+      );
+    }
+
+    function checkQuiz(event) {
+      event.preventDefault();
+
+      const totalQuestions = 4;
+      let score = 0;
+      let answeredQuestions = 0;
+
+      for (
+        let index = 1;
+        index <= totalQuestions;
+        index += 1
+      ) {
+        const selectedAnswer = quizForm.querySelector(
+          `input[name="q${index}"]:checked`
+        );
+
+        if (selectedAnswer) {
+          answeredQuestions += 1;
+
+          if (selectedAnswer.value === "1") {
+            score += 1;
+          }
+        }
+      }
+
+      if (answeredQuestions < totalQuestions) {
+        showFeedback(
+          quizResult,
+          "highlight",
+          `Answer all ${totalQuestions} questions before submitting the quiz.`
+        );
+
+        return;
+      }
+
+      const percentage = Math.round(
+        (score / totalQuestions) * 100
+      );
+
+      progressBar.style.width = `${percentage}%`;
+
+      progressBox.setAttribute(
+        "aria-valuenow",
+        String(percentage)
+      );
+
+      if (score === totalQuestions) {
+        showFeedback(
+          quizResult,
+          "success",
+          `Excellent. You scored ${score}/${totalQuestions}.`
+        );
+
+        return;
+      }
+
+      if (score >= 2) {
+        showFeedback(
+          quizResult,
+          "highlight",
+          `Good effort. You scored ${score}/${totalQuestions}. Review the basic LOTO steps and the purpose of personal locks.`
+        );
+
+        return;
+      }
+
+      showFeedback(
+        quizResult,
+        "danger",
+        `You scored ${score}/${totalQuestions}. Please review the module and try again.`
+      );
+    }
+
+    function resetQuiz() {
+      quizForm.reset();
+
+      progressBar.style.width = "0%";
+
+      progressBox.setAttribute(
+        "aria-valuenow",
+        "0"
+      );
+
+      hideFeedback(quizResult);
+    }
+
+    orderButtons.forEach((button) => {
+      button.setAttribute("aria-pressed", "false");
+
+      button.addEventListener("click", () => {
+        selectStep(button);
+      });
+    });
+
+    scenarioButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        selectScenario(button);
+      });
+    });
+
+    document
+      .getElementById("checkOrderButton")
+      .addEventListener("click", checkOrder);
+
+    document
+      .getElementById("resetOrderButton")
+      .addEventListener("click", resetOrder);
+
+    document
+      .getElementById("submitScenarioButton")
+      .addEventListener("click", submitScenario);
+
+    document
+      .getElementById("resetQuizButton")
+      .addEventListener("click", resetQuiz);
+
+    quizForm.addEventListener("submit", checkQuiz);
+  </script>
+</body>
+</html>

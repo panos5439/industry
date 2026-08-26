@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Ενότητα 7 | Lockout / Tagout - LOTO</title>
+
+  <style>
+    :root {
+      --primary: #123c69;
+      --primary-dark: #0b2545;
+      --primary-light: #e8f1fb;
+
+      --secondary: #f4b400;
+      --accent: #d62828;
+      --success: #2a9d8f;
+
+      --background: #f5f7fa;
+      --card: #ffffff;
+      --text: #1f2933;
+      --muted: #52606d;
+      --border: #d9e2ec;
+
+      --hover-bg: #e5eff9;
+      --hover-border: #8fb3d9;
+
+      --selected-bg: #123c69;
+      --selected-text: #ffffff;
+
+      --focus: #f4b400;
+      --shadow: 0 8px 24px rgba(15, 35, 55, 0.08);
+
+      --radius-large: 18px;
+      --radius-medium: 12px;
+      --radius-small: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    header {
+      padding: 52px 20px;
+      text-align: center;
+      color: #ffffff;
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(255, 255, 255, 0.12),
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+    }
+
+    header h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.2;
+    }
+
+    header p {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    main {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    section {
+      margin-bottom: 24px;
+      padding: 28px;
+      background: var(--card);
+      border: 1px solid rgba(217, 226, 236, 0.75);
+      border-radius: var(--radius-large);
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 14px;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: var(--primary-dark);
+    }
+
+    p {
+      margin-top: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 20px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .icon {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .highlight,
+    .success,
+    .danger {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: var(--radius-medium);
+    }
+
+    .highlight {
+      background: #fff8e1;
+      border-left: 6px solid var(--secondary);
+      color: #5d4300;
+    }
+
+    .success {
+      background: #eafaf7;
+      border-left: 6px solid var(--success);
+      color: #155e55;
+    }
+
+    .danger {
+      background: #fff1f1;
+      border-left: 6px solid var(--accent);
+      color: #8a1c1c;
+    }
+
+    .loto-step {
+      background: #f8fafc;
+      border-left: 8px solid var(--primary);
+    }
+
+    .loto-step strong {
+      color: var(--primary);
+      font-size: 1.12rem;
+    }
+
+    /*
+      Κοινή βάση για τα διαδραστικά κουμπιά.
+      Το σκούρο φόντο ΔΕΝ εφαρμόζεται στο hover.
+    */
+    .order-btn,
+    .scenario-option {
+      display: block;
+      width: 100%;
+      padding: 14px 16px;
+      text-align: left;
+      color: var(--text);
+      background: #eef4fb;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-medium);
+      cursor: pointer;
+      transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease,
+        box-shadow 160ms ease,
+        transform 160ms ease;
+    }
+
+    /*
+      Hover πριν από την επιλογή:
+      ανοιχτό φόντο και σκούρο κείμενο.
+    */
+    .order-btn:not(.selected-order):hover,
+    .scenario-option:not(.selected):hover {
+      color: var(--primary-dark);
+      background: var(--hover-bg);
+      border-color: var(--hover-border);
+      box-shadow: 0 5px 14px rgba(18, 60, 105, 0.1);
+      transform: translateY(-1px);
+    }
+
+    /*
+      Keyboard focus:
+      ευδιάκριτο περίγραμμα χωρίς αλλαγή σε δυσανάγνωστο φόντο.
+    */
+    .order-btn:focus-visible,
+    .scenario-option:focus-visible,
+    .submit-btn:focus-visible,
+    .reset-btn:focus-visible,
+    .quiz-option:focus-within {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    /*
+      Σκούρο φόντο μόνο όταν έχει γίνει επιλογή.
+    */
+    .order-btn.selected-order,
+    .scenario-option.selected {
+      color: var(--selected-text);
+      background: var(--selected-bg);
+      border-color: var(--selected-bg);
+      box-shadow: 0 6px 16px rgba(18, 60, 105, 0.22);
+    }
+
+    /*
+      Διατηρεί την επιλεγμένη κατάσταση ευανάγνωστη
+      ακόμη και όταν ο δείκτης βρίσκεται επάνω της.
+    */
+    .order-btn.selected-order:hover,
+    .scenario-option.selected:hover {
+      color: #ffffff;
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+
+    .order-btn.selected-order::before,
+    .scenario-option.selected::before {
+      content: "✓";
+      display: inline-block;
+      margin-right: 9px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .order-area {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .order-list {
+      margin-top: 16px;
+      padding: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .order-list h3 {
+      margin-bottom: 6px;
+    }
+
+    .order-list ol {
+      min-height: 28px;
+      margin: 8px 0 0;
+      padding-left: 24px;
+    }
+
+    .order-list li {
+      margin-bottom: 6px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .submit-btn,
+    .reset-btn {
+      min-height: 46px;
+      padding: 12px 18px;
+      border-radius: var(--radius-small);
+      cursor: pointer;
+      transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        box-shadow 160ms ease,
+        transform 160ms ease;
+    }
+
+    .submit-btn {
+      color: #ffffff;
+      background: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .submit-btn:hover {
+      color: #ffffff;
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+      box-shadow: 0 6px 16px rgba(18, 60, 105, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .reset-btn {
+      color: var(--primary-dark);
+      background: #ffffff;
+      border: 1px solid var(--hover-border);
+    }
+
+    .reset-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .scenario-option {
+      margin: 10px 0;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: var(--radius-small);
+      font-weight: 700;
+    }
+
+    .quiz-question {
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .quiz-question:last-of-type {
+      border-bottom: 0;
+    }
+
+    .quiz-question > p {
+      margin-bottom: 10px;
+    }
+
+    /*
+      Οι απαντήσεις του quiz σχεδιάζονται ως κάρτες.
+      Έτσι δεν εμφανίζεται δυσανάγνωστο native highlight.
+    */
+    .quiz-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px 14px;
+      color: var(--text);
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-small);
+      cursor: pointer;
+      transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease,
+        box-shadow 160ms ease,
+        transform 160ms ease;
+    }
+
+    .quiz-option:hover {
+      color: var(--primary-dark);
+      background: var(--hover-bg);
+      border-color: var(--hover-border);
+      transform: translateY(-1px);
+    }
+
+    .quiz-option:has(input:checked) {
+      color: #ffffff;
+      background: var(--selected-bg);
+      border-color: var(--selected-bg);
+      box-shadow: 0 5px 14px rgba(18, 60, 105, 0.2);
+    }
+
+    .quiz-option:has(input:checked):hover {
+      color: #ffffff;
+      background: var(--primary-dark);
+    }
+
+    .quiz-option input[type="radio"] {
+      flex: 0 0 auto;
+      width: 19px;
+      height: 19px;
+      margin: 3px 0 0;
+      accent-color: var(--secondary);
+      cursor: pointer;
+    }
+
+    .quiz-option span {
+      flex: 1;
+    }
+
+    .progress-box {
+      height: 18px;
+      margin-top: 18px;
+      overflow: hidden;
+      background: #e8eef5;
+      border-radius: 999px;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background:
+        linear-gradient(
+          90deg,
+          var(--success),
+          #38bfae
+        );
+      border-radius: inherit;
+      transition: width 400ms ease;
+    }
+
+    .takeaway {
+      margin-bottom: 10px;
+      color: var(--primary);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 30px 20px;
+      color: #5f6c7b;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 38px 18px;
+      }
+
+      main {
+        padding: 14px;
+      }
+
+      section {
+        padding: 20px;
+      }
+
+      .button-row {
+        flex-direction: column;
+      }
+
+      .submit-btn,
+      .reset-btn {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Ενότητα 7: Lockout / Tagout – LOTO</h1>
+
+    <p>
+      Η απομόνωση ενέργειας προστατεύει τους εργαζομένους από
+      απρόβλεπτη εκκίνηση, κίνηση ή απελευθέρωση ενέργειας κατά
+      τη συντήρηση, τον καθαρισμό ή την παρέμβαση σε εξοπλισμό.
+    </p>
+  </header>
+
+  <main>
+    <section aria-labelledby="learning-goals-title">
+      <h2 id="learning-goals-title">Στόχοι μάθησης</h2>
+
+      <div class="grid">
+        <div class="card">
+          <span class="icon" aria-hidden="true">🔒</span>
+          Κατανοεί τι είναι το LOTO και γιατί εφαρμόζεται.
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">⚡</span>
+          Αναγνωρίζει επικίνδυνες μορφές ενέργειας.
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🏷️</span>
+          Γνωρίζει τον ρόλο της κλειδαριάς και της ετικέτας.
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">✅</span>
+          Ακολουθεί βασικά βήματα ασφαλούς απομόνωσης.
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="what-is-loto-title">
+      <h2 id="what-is-loto-title">Τι είναι LOTO;</h2>
+
+      <p>
+        Το Lockout / Tagout είναι μια διαδικασία ασφαλείας που
+        χρησιμοποιείται για να απομονωθεί ένας εξοπλισμός από τις
+        πηγές ενέργειας πριν από εργασίες όπως συντήρηση, καθαρισμός,
+        ρύθμιση ή ξεμπλοκάρισμα.
+      </p>
+
+      <div class="highlight">
+        <strong>Απλή ιδέα:</strong>
+        Lockout σημαίνει κλειδώνω την πηγή ενέργειας. Tagout σημαίνει
+        τοποθετώ ετικέτα προειδοποίησης που δείχνει ποιος έκανε την
+        απομόνωση και γιατί.
+      </div>
+    </section>
+
+    <section aria-labelledby="importance-title">
+      <h2 id="importance-title">Γιατί είναι σημαντικό;</h2>
+
+      <p>
+        Μια μηχανή που φαίνεται σταματημένη μπορεί να εξακολουθεί να
+        έχει αποθηκευμένη ή ενεργή ενέργεια. Η απρόβλεπτη εκκίνηση ή
+        απελευθέρωση ενέργειας μπορεί να προκαλέσει σοβαρό ή θανατηφόρο
+        τραυματισμό.
+      </p>
+
+      <div class="danger">
+        <strong>Κρίσιμο μήνυμα:</strong>
+        Το κουμπί STOP δεν είναι LOTO. Το emergency stop δεν είναι
+        LOTO. Η απομόνωση απαιτεί εγκεκριμένη διαδικασία, κλείδωμα,
+        σήμανση και έλεγχο μηδενικής ενέργειας.
+      </div>
+    </section>
+
+    <section aria-labelledby="energy-types-title">
+      <h2 id="energy-types-title">
+        Μορφές επικίνδυνης ενέργειας
+      </h2>
+
+      <div class="grid">
+        <div class="card">
+          <span class="icon" aria-hidden="true">⚡</span>
+          <h3>Ηλεκτρική</h3>
+          <p>Πίνακες, καλώδια, κινητήρες και τροφοδοσίες.</p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">⚙️</span>
+          <h3>Μηχανική</h3>
+          <p>
+            Κινούμενα μέρη, ελατήρια, περιστρεφόμενα μέρη και
+            βαρύτητα.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">💧</span>
+          <h3>Υδραυλική</h3>
+          <p>
+            Υγρά υπό πίεση, υδραυλικοί κύλινδροι και γραμμές.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🌬️</span>
+          <h3>Πνευματική</h3>
+          <p>
+            Πεπιεσμένος αέρας, βαλβίδες, κύλινδροι και σωληνώσεις.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🔥</span>
+          <h3>Θερμική</h3>
+          <p>Θερμές επιφάνειες, ατμός, θερμά υγρά ή υλικά.</p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🧪</span>
+          <h3>Χημική</h3>
+          <p>
+            Χημικά υπό πίεση, αντιδράσεις, διαρροές ή ατμοί.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="when-required-title">
+      <h2 id="when-required-title">Πότε απαιτείται LOTO;</h2>
+
+      <p>
+        Το LOTO μπορεί να απαιτείται όταν ένας εργαζόμενος πρέπει να
+        επέμβει σε εξοπλισμό όπου υπάρχει κίνδυνος απρόβλεπτης
+        εκκίνησης ή απελευθέρωσης ενέργειας.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <span class="icon" aria-hidden="true">🔧</span>
+          <h3>Συντήρηση</h3>
+          <p>
+            Επισκευή, αντικατάσταση εξαρτημάτων ή τεχνική παρέμβαση.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🧹</span>
+          <h3>Καθαρισμός</h3>
+          <p>
+            Καθαρισμός κοντά σε κινούμενα μέρη ή επικίνδυνα σημεία.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🚧</span>
+          <h3>Ξεμπλοκάρισμα</h3>
+          <p>
+            Αφαίρεση μπλοκαρισμένου υλικού από μηχανή ή γραμμή
+            παραγωγής.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">⚙️</span>
+          <h3>Ρύθμιση</h3>
+          <p>
+            Ρύθμιση ή παρέμβαση σε μηχανή όπου μπορεί να υπάρξει
+            κίνηση.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="steps-title">
+      <h2 id="steps-title">Βασικά βήματα LOTO</h2>
+
+      <div class="grid">
+        <div class="card loto-step">
+          <strong>1. Προετοιμασία</strong>
+          <p>
+            Κατανόησε τον εξοπλισμό, τις πηγές ενέργειας και τη
+            διαδικασία.
+          </p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>2. Ενημέρωση</strong>
+          <p>
+            Ενημέρωσε τους επηρεαζόμενους εργαζομένους ότι θα γίνει
+            απομόνωση.
+          </p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>3. Διακοπή λειτουργίας</strong>
+          <p>
+            Σταμάτησε τον εξοπλισμό με την κανονική διαδικασία.
+          </p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>4. Απομόνωση ενέργειας</strong>
+          <p>Απομόνωσε όλες τις πηγές ενέργειας.</p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>5. Κλείδωμα και ετικέτα</strong>
+          <p>Τοποθέτησε προσωπική κλειδαριά και ετικέτα.</p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>6. Απελευθέρωση αποθηκευμένης ενέργειας</strong>
+          <p>
+            Εκτόνωσε πίεση, κατέβασε φορτία και άδειασε γραμμές όπου
+            απαιτείται.
+          </p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>7. Έλεγχος μηδενικής ενέργειας</strong>
+          <p>
+            Επιβεβαίωσε ότι ο εξοπλισμός δεν μπορεί να ξεκινήσει ή να
+            κινηθεί.
+          </p>
+        </div>
+
+        <div class="card loto-step">
+          <strong>8. Εκτέλεση εργασίας</strong>
+          <p>
+            Εκτέλεσε την εργασία μόνο όταν η κατάσταση είναι ασφαλής.
+          </p>
+        </div>
+      </div>
+
+      <div class="danger">
+        <strong>
+          Ποτέ μην αφαιρείς κλειδαριά άλλου εργαζομένου.
+        </strong>
+        Η κλειδαριά αφαιρείται μόνο από το άτομο που την τοποθέτησε,
+        σύμφωνα με την εγκεκριμένη διαδικασία.
+      </div>
+    </section>
+
+    <section aria-labelledby="order-title">
+      <h2 id="order-title">
+        Διαδραστική άσκηση: Βάλε τα βήματα στη σωστή σειρά
+      </h2>
+
+      <p>
+        Πάτησε τα βήματα με τη σωστή σειρά. Στόχος είναι να επιλέξεις
+        τα πέντε βασικά βήματα LOTO.
+      </p>
+
+      <div class="order-area">
+        <button
+          type="button"
+          class="order-btn"
+          data-step="3"
+        >
+          Σταματώ τον εξοπλισμό με την κανονική διαδικασία.
+        </button>
+
+        <button
+          type="button"
+          class="order-btn"
+          data-step="1"
+        >
+          Προετοιμάζομαι και αναγνωρίζω τις πηγές ενέργειας.
+        </button>
+
+        <button
+          type="button"
+          class="order-btn"
+          data-step="5"
+        >
+          Τοποθετώ προσωπική κλειδαριά και ετικέτα.
+        </button>
+
+        <button
+          type="button"
+          class="order-btn"
+          data-step="2"
+        >
+          Ενημερώνω τους επηρεαζόμενους εργαζομένους.
+        </button>
+
+        <button
+          type="button"
+          class="order-btn"
+          data-step="4"
+        >
+          Απομονώνω τις πηγές ενέργειας.
+        </button>
+      </div>
+
+      <div class="order-list">
+        <h3>Η σειρά που επέλεξες</h3>
+        <ol id="selectedOrder" aria-live="polite"></ol>
+      </div>
+
+      <div class="button-row">
+        <button
+          type="button"
+          id="checkOrderButton"
+          class="submit-btn"
+        >
+          Έλεγχος σειράς
+        </button>
+
+        <button
+          type="button"
+          id="resetOrderButton"
+          class="reset-btn"
+        >
+          Επαναφορά
+        </button>
+      </div>
+
+      <div
+        id="orderFeedback"
+        class="feedback"
+        role="status"
+        aria-live="polite"
+      ></div>
+    </section>
+
+    <section aria-labelledby="scenario-title">
+      <h2 id="scenario-title">Σενάριο απόφασης</h2>
+
+      <p>
+        Βρίσκεις μια προσωπική κλειδαριά LOTO πάνω σε μηχάνημα. Ο
+        εργαζόμενος που την τοποθέτησε δεν βρίσκεται εκεί, αλλά
+        χρειάζεται να επανεκκινήσεις τη μηχανή για να συνεχιστεί η
+        παραγωγή. Τι κάνεις;
+      </p>
+
+      <button
+        type="button"
+        class="scenario-option"
+        data-type="wrong"
+        aria-pressed="false"
+      >
+        Αφαιρώ την κλειδαριά, αφού ο συνάδελφος δεν είναι εκεί.
+      </button>
+
+      <button
+        type="button"
+        class="scenario-option"
+        data-type="partial"
+        aria-pressed="false"
+      >
+        Ρωτάω κάποιον άλλον αν μπορώ να την αφαιρέσω.
+      </button>
+
+      <button
+        type="button"
+        class="scenario-option"
+        data-type="correct"
+        aria-pressed="false"
+      >
+        Δεν αφαιρώ την κλειδαριά. Ακολουθώ την εγκεκριμένη διαδικασία
+        και ενημερώνω τον υπεύθυνο.
+      </button>
+
+      <button
+        type="button"
+        id="submitScenarioButton"
+        class="submit-btn"
+      >
+        Οριστική απάντηση
+      </button>
+
+      <div
+        id="scenarioFeedback"
+        class="feedback"
+        role="status"
+        aria-live="polite"
+      ></div>
+    </section>
+
+    <section aria-labelledby="quiz-title">
+      <h2 id="quiz-title">Mini Quiz</h2>
+
+      <form id="quizForm" novalidate>
+        <fieldset class="quiz-question">
+          <legend>
+            <strong>1. Τι σημαίνει Lockout;</strong>
+          </legend>
+
+          <label class="quiz-option">
+            <input type="radio" name="q1" value="1" />
+            <span>
+              Κλειδώνω την πηγή ενέργειας ώστε να μην μπορεί να
+              ενεργοποιηθεί.
+            </span>
+          </label>
+
+          <label class="quiz-option">
+            <input type="radio" name="q1" value="0" />
+            <span>Πατάω το emergency stop.</span>
+          </label>
+
+          <label class="quiz-option">
+            <input type="radio" name="q1" value="0" />
+            <span>Βάζω απλώς μια προειδοποιητική πινακίδα.</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="quiz-question">
+          <legend>
+            <strong>
+              2. Το emergency stop είναι το ίδιο με LOTO;
+            </strong>
+          </legend>
+
+          <label class="quiz-option">
+            <input type="radio" name="q2" value="0" />
+            <span>Ναι, είναι ακριβώς το ίδιο.</span>
+          </label>
+
+          <label class="quiz-option">
+            <input type="radio" name="q2" value="1" />
+            <span>
+              Όχι, δεν αντικαθιστά την απομόνωση ενέργειας.
+            </span>
+          </label>
+
+          <label class="quiz-option">
+            <input type="radio" name="q2" value="0" />
+            <span>Ναι, αν η εργασία είναι σύντομη.</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="quiz-question">
+          <legend>
+            <strong>
+              3. Ποιος αφαιρεί μια προσωπική κλειδαριά LOTO;
+            </strong>
+          </legend>
+
+          <label class="quiz-option">
+            <input type="radio" name="q3" value="1" />
+            <span>
+              Το άτομο που την τοποθέτησε, σύμφωνα με τη διαδικασία.
+            </span>
+          </label>
+
+          <label class="quiz-option">
+            <input type="radio" name="q3" value="0" />
+            <span>
+              Οποιοσδήποτε χρειάζεται να ξεκινήσει τη μηχανή.
+            </span>
+          </label>
+
+          <label class="quiz-option">
+            <input type="radio" name="q3" value="0" />
+            <span>Ο πρώτος εργαζόμενος που θα τη βρει.</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="quiz-question">
+          <legend>
+            <strong>
+              4. Γιατί ελέγχουμε μηδενική ενέργεια;
+            </strong>
+          </legend>
+
+          <label class="quiz-option">
+            <input type="radio" name="q4" value="1" />
+            <span>
+              Για να επιβεβαιώσουμε ότι ο εξοπλισμός δεν μπορεί να
+              ξεκινήσει ή να κινηθεί.
+            </span>
+          </label>
+
+          <label class="quiz-option">
+            <input type="radio" name="q4" value="0" />
+            <span>Για να κάνουμε την εργασία πιο γρήγορα.</span>
+          </label>
+
+          <label class="quiz-option">
+            <input type="radio" name="q4" value="0" />
+            <span>Μόνο για λόγους γραφειοκρατίας.</span>
+          </label>
+        </fieldset>
+
+        <div class="button-row">
+          <button type="submit" class="submit-btn">
+            Υποβολή Quiz
+          </button>
+
+          <button
+            type="button"
+            id="resetQuizButton"
+            class="reset-btn"
+          >
+            Καθαρισμός απαντήσεων
+          </button>
+        </div>
+      </form>
+
+      <div
+        class="progress-box"
+        role="progressbar"
+        aria-label="Βαθμολογία quiz"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+      >
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+
+      <div
+        id="quizResult"
+        class="feedback"
+        role="status"
+        aria-live="polite"
+      ></div>
+    </section>
+
+    <section aria-labelledby="takeaways-title">
+      <h2 id="takeaways-title">Βασικά σημεία</h2>
+
+      <p class="takeaway">Το STOP button δεν είναι LOTO.</p>
+
+      <p class="takeaway">
+        Η μηχανή που φαίνεται σταματημένη μπορεί να μην είναι ασφαλής.
+      </p>
+
+      <p class="takeaway">
+        Προσωπική κλειδαριά σημαίνει προσωπική προστασία.
+      </p>
+
+      <p class="takeaway">
+        Ποτέ μην αφαιρείς κλειδαριά άλλου εργαζομένου.
+      </p>
+
+      <p class="takeaway">
+        Πριν από εργασία επιβεβαίωσε μηδενική ενέργεια.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Εκπαίδευση Βιομηχανικής Ασφάλειας | Ενότητα 7
+  </footer>
+
+  <script>
+    "use strict";
+
+    let selectedScenario = null;
+    const selectedSteps = [];
+
+    const orderButtons =
+      document.querySelectorAll(".order-btn");
+
+    const scenarioButtons =
+      document.querySelectorAll(".scenario-option");
+
+    const selectedOrderList =
+      document.getElementById("selectedOrder");
+
+    const orderFeedback =
+      document.getElementById("orderFeedback");
+
+    const scenarioFeedback =
+      document.getElementById("scenarioFeedback");
+
+    const quizForm =
+      document.getElementById("quizForm");
+
+    const quizResult =
+      document.getElementById("quizResult");
+
+    const progressBar =
+      document.getElementById("progressBar");
+
+    const progressBox =
+      document.querySelector(".progress-box");
+
+    function showFeedback(element, type, message) {
+      element.className = `feedback ${type}`;
+      element.textContent = message;
+      element.style.display = "block";
+    }
+
+    function hideFeedback(element) {
+      element.style.display = "none";
+      element.textContent = "";
+      element.className = "feedback";
+    }
+
+    function selectStep(button) {
+      if (button.classList.contains("selected-order")) {
+        return;
+      }
+
+      const step = Number(button.dataset.step);
+      const text = button.textContent.trim();
+
+      button.classList.add("selected-order");
+      button.setAttribute("aria-pressed", "true");
+      button.disabled = true;
+
+      selectedSteps.push({ step, text });
+
+      const listItem = document.createElement("li");
+      listItem.textContent = text;
+      selectedOrderList.appendChild(listItem);
+
+      hideFeedback(orderFeedback);
+    }
+
+    function checkOrder() {
+      if (selectedSteps.length < orderButtons.length) {
+        showFeedback(
+          orderFeedback,
+          "highlight",
+          `Επίλεξε και τα ${orderButtons.length} βήματα πριν κάνεις έλεγχο.`
+        );
+        return;
+      }
+
+      const isCorrect = selectedSteps.every(
+        (item, index) => item.step === index + 1
+      );
+
+      if (isCorrect) {
+        showFeedback(
+          orderFeedback,
+          "success",
+          "Σωστά! Η σειρά είναι: προετοιμασία, ενημέρωση, διακοπή, απομόνωση, κλείδωμα και ετικέτα."
+        );
+      } else {
+        showFeedback(
+          orderFeedback,
+          "danger",
+          "Η σειρά δεν είναι σωστή. Θυμήσου: πρώτα προετοιμάζομαι, μετά ενημερώνω, σταματώ, απομονώνω και έπειτα κλειδώνω και τοποθετώ ετικέτα."
+        );
+      }
+    }
+
+    function resetOrder() {
+      selectedSteps.length = 0;
+      selectedOrderList.replaceChildren();
+
+      orderButtons.forEach((button) => {
+        button.classList.remove("selected-order");
+        button.setAttribute("aria-pressed", "false");
+        button.disabled = false;
+      });
+
+      hideFeedback(orderFeedback);
+    }
+
+    function selectScenario(button) {
+      scenarioButtons.forEach((scenarioButton) => {
+        scenarioButton.classList.remove("selected");
+        scenarioButton.setAttribute("aria-pressed", "false");
+      });
+
+      button.classList.add("selected");
+      button.setAttribute("aria-pressed", "true");
+
+      selectedScenario = button.dataset.type;
+      hideFeedback(scenarioFeedback);
+    }
+
+    function submitScenario() {
+      if (!selectedScenario) {
+        showFeedback(
+          scenarioFeedback,
+          "highlight",
+          "Παρακαλώ επίλεξε μία απάντηση πριν πατήσεις οριστική απάντηση."
+        );
+        return;
+      }
+
+      if (selectedScenario === "correct") {
+        showFeedback(
+          scenarioFeedback,
+          "success",
+          "Σωστά. Δεν αφαιρούμε ποτέ κλειδαριά άλλου εργαζομένου. Ακολουθούμε την εγκεκριμένη διαδικασία και ενημερώνουμε τον υπεύθυνο."
+        );
+        return;
+      }
+
+      if (selectedScenario === "partial") {
+        showFeedback(
+          scenarioFeedback,
+          "highlight",
+          "Μερικώς σωστό, αλλά όχι αρκετό. Η αφαίρεση ξένης κλειδαριάς απαιτεί αυστηρή εγκεκριμένη διαδικασία και όχι απλή άδεια από οποιονδήποτε."
+        );
+        return;
+      }
+
+      showFeedback(
+        scenarioFeedback,
+        "danger",
+        "Λάθος. Η αφαίρεση κλειδαριάς άλλου εργαζομένου μπορεί να θέσει τη ζωή του σε άμεσο κίνδυνο."
+      );
+    }
+
+    function checkQuiz(event) {
+      event.preventDefault();
+
+      const totalQuestions = 4;
+      let score = 0;
+      let answeredQuestions = 0;
+
+      for (let index = 1; index <= totalQuestions; index += 1) {
+        const selectedAnswer = quizForm.querySelector(
+          `input[name="q${index}"]:checked`
+        );
+
+        if (selectedAnswer) {
+          answeredQuestions += 1;
+
+          if (selectedAnswer.value === "1") {
+            score += 1;
+          }
+        }
+      }
+
+      if (answeredQuestions < totalQuestions) {
+        showFeedback(
+          quizResult,
+          "highlight",
+          `Απάντησε και στις ${totalQuestions} ερωτήσεις πριν υποβάλεις το quiz.`
+        );
+        return;
+      }
+
+      const percentage = Math.round(
+        (score / totalQuestions) * 100
+      );
+
+      progressBar.style.width = `${percentage}%`;
+      progressBox.setAttribute(
+        "aria-valuenow",
+        String(percentage)
+      );
+
+      if (score === totalQuestions) {
+        showFeedback(
+          quizResult,
+          "success",
+          `Άριστα! Πέτυχες ${score}/${totalQuestions}.`
+        );
+        return;
+      }
+
+      if (score >= 2) {
+        showFeedback(
+          quizResult,
+          "highlight",
+          `Καλή προσπάθεια. Πέτυχες ${score}/${totalQuestions}. Ξαναδές τα βασικά βήματα LOTO και τον ρόλο της προσωπικής κλειδαριάς.`
+        );
+        return;
+      }
+
+      showFeedback(
+        quizResult,
+        "danger",
+        `Πέτυχες ${score}/${totalQuestions}. Προτείνεται να επαναλάβεις την ενότητα.`
+      );
+    }
+
+    function resetQuiz() {
+      quizForm.reset();
+      progressBar.style.width = "0%";
+      progressBox.setAttribute("aria-valuenow", "0");
+      hideFeedback(quizResult);
+    }
+
+    orderButtons.forEach((button) => {
+      button.setAttribute("aria-pressed", "false");
+
+      button.addEventListener("click", () => {
+        selectStep(button);
+      });
+    });
+
+    scenarioButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        selectScenario(button);
+      });
+    });
+
+    document
+      .getElementById("checkOrderButton")
+      .addEventListener("click", checkOrder);
+
+    document
+      .getElementById("resetOrderButton")
+      .addEventListener("click", resetOrder);
+
+    document
+      .getElementById("submitScenarioButton")
+      .addEventListener("click", submitScenario);
+
+    document
+      .getElementById("resetQuizButton")
+      .addEventListener("click", resetQuiz);
+
+    quizForm.addEventListener("submit", checkQuiz);
+  </script>
+</body>
+</html>

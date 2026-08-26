@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ενότητα 11 | Πυρασφάλεια</title>
+
+<style>
+:root{--primary:#123c69;--secondary:#f4b400;--accent:#d62828;--success:#2a9d8f;--bg:#f5f7fa;--card:#fff;--text:#1f2933;--border:#d9e2ec}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{background:linear-gradient(135deg,var(--primary),#0b2545);color:white;padding:52px 20px;text-align:center}
+header h1{margin:0 0 12px;font-size:clamp(1.8rem,4vw,3rem)}
+header p{max-width:900px;margin:auto;font-size:1.1rem}
+main{max-width:1100px;margin:auto;padding:24px}
+section{background:var(--card);margin-bottom:24px;padding:28px;border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+h2{color:var(--primary);margin-top:0}
+h3{color:#0b2545}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{border:1px solid var(--border);border-radius:16px;padding:20px;background:white}
+.icon{font-size:2rem;display:block;margin-bottom:10px}
+.highlight{border-left:6px solid var(--secondary);background:#fff8e1;padding:18px;border-radius:12px;margin-top:16px}
+.success{border-left:6px solid var(--success);background:#eafaf7;padding:18px;border-radius:12px}
+.danger{border-left:6px solid var(--accent);background:#fff1f1;padding:18px;border-radius:12px}
+button,select{font-size:1rem}
+button{cursor:pointer}
+.submit-btn{background:var(--primary);color:white;border:none;padding:12px 18px;border-radius:10px;margin-top:12px}
+.submit-btn:hover,.submit-btn:focus{background:#0b2545;outline:3px solid var(--secondary);outline-offset:2px}
+
+.fire-triangle{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:16px}
+.triangle-card{border:1px solid var(--border);border-radius:16px;padding:22px;background:#fff8e1;text-align:center}
+.triangle-card strong{display:block;color:var(--primary);font-size:1.2rem;margin-top:8px}
+
+.extinguisher-selector{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;align-items:end}
+.extinguisher-selector label{display:block;font-weight:bold;margin-bottom:8px}
+.extinguisher-selector select{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px}
+.extinguisher-result{display:none;margin-top:18px;padding:18px;border-radius:14px;border-left:8px solid var(--success);background:#eafaf7;font-weight:bold}
+.extinguisher-result ul{font-weight:normal}
+
+.pass-steps .card{border-left:8px solid var(--primary);background:#f8fafc}
+
+.scenario-option{display:block;width:100%;text-align:left;background:#eef4fb;color:var(--text);border:1px solid var(--border);padding:14px 16px;border-radius:12px;margin:10px 0}
+.scenario-option.selected{background:#0b2545;color:white}
+.feedback{display:none;margin-top:14px;padding:14px;border-radius:10px;font-weight:bold}
+.quiz-question{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.quiz-question label{display:block;margin:8px 0;cursor:pointer}
+.progress-box{background:#e8eef5;border-radius:999px;height:18px;overflow:hidden;margin-top:12px}
+.progress-bar{height:100%;width:0%;background:var(--success);transition:width .4s ease}
+.takeaway{font-size:1.15rem;font-weight:bold;color:var(--primary)}
+footer{text-align:center;color:#5f6c7b;padding:30px 20px;font-size:.9rem}
+@media(max-width:700px){main{padding:14px}section{padding:20px}}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Ενότητα 11: Πυρασφάλεια</h1>
+  <p>Η πυρασφάλεια στη βιομηχανία βασίζεται στην πρόληψη, στην έγκαιρη αναγνώριση κινδύνων και στη σωστή αντίδραση σε περίπτωση πυρκαγιάς.</p>
+</header>
+
+<main>
+
+<section>
+  <h2>Στόχοι μάθησης</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">🔥</span>Κατανοεί πώς ξεκινά και εξαπλώνεται μια φωτιά.</div>
+    <div class="card"><span class="icon">🧯</span>Αναγνωρίζει βασικούς τύπους πυροσβεστήρων.</div>
+    <div class="card"><span class="icon">🚨</span>Γνωρίζει πότε πρέπει να απομακρυνθεί και να ειδοποιήσει.</div>
+    <div class="card"><span class="icon">🚪</span>Ακολουθεί ασφαλή διαδικασία εκκένωσης.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Το τρίγωνο της φωτιάς</h2>
+  <p>Για να υπάρξει φωτιά χρειάζονται τρία στοιχεία. Αν αφαιρέσουμε ένα από αυτά, η φωτιά δεν μπορεί να συνεχιστεί.</p>
+
+  <div class="fire-triangle">
+    <div class="triangle-card"><span class="icon">🔥</span><strong>Θερμότητα</strong><p>Σπινθήρας, φλόγα, θερμή επιφάνεια, τριβή ή ηλεκτρικό πρόβλημα.</p></div>
+    <div class="triangle-card"><span class="icon">🪵</span><strong>Καύσιμο</strong><p>Χαρτί, ξύλο, πλαστικό, λάδι, αέρια, χημικά ή σκόνη.</p></div>
+    <div class="triangle-card"><span class="icon">🌬️</span><strong>Οξυγόνο</strong><p>Ο αέρας τροφοδοτεί την καύση και βοηθά τη φωτιά να συνεχιστεί.</p></div>
+  </div>
+
+  <div class="highlight">
+    <strong>Βασική ιδέα:</strong> Η πρόληψη πυρκαγιάς σημαίνει έλεγχο πηγών ανάφλεξης, καυσίμων υλικών και επικίνδυνων συνθηκών.
+  </div>
+</section>
+
+<section>
+  <h2>Συνηθισμένες αιτίες πυρκαγιάς στη βιομηχανία</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">⚡</span><h3>Ηλεκτρικά προβλήματα</h3><p>Υπερφορτώσεις, φθαρμένα καλώδια, κακές συνδέσεις ή μη εγκεκριμένες παρεμβάσεις.</p></div>
+    <div class="card"><span class="icon">🔥</span><h3>Θερμές εργασίες</h3><p>Συγκόλληση, κοπή, τρόχισμα και σπινθήρες κοντά σε εύφλεκτα υλικά.</p></div>
+    <div class="card"><span class="icon">🧪</span><h3>Εύφλεκτα χημικά</h3><p>Λανθασμένη αποθήκευση, ανοιχτά δοχεία ή χρήση κοντά σε πηγές ανάφλεξης.</p></div>
+    <div class="card"><span class="icon">🧹</span><h3>Κακή τάξη και καθαριότητα</h3><p>Συσσώρευση απορριμμάτων, σκόνης, χαρτιών, λαδιών ή εύφλεκτων υλικών.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Πρόληψη πυρκαγιάς</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">🚫</span><h3>Μείωση καυσίμων</h3><p>Απομάκρυνε περιττά εύφλεκτα υλικά από τον χώρο εργασίας.</p></div>
+    <div class="card"><span class="icon">🔌</span><h3>Έλεγχος ηλεκτρικών</h3><p>Μη χρησιμοποιείς φθαρμένα καλώδια, πολύπριζα ή μη εγκεκριμένο εξοπλισμό.</p></div>
+    <div class="card"><span class="icon">🧯</span><h3>Προσβάσιμα μέσα πυρόσβεσης</h3><p>Μην μπλοκάρεις πυροσβεστήρες, πυροσβεστικές φωλιές ή εξόδους κινδύνου.</p></div>
+    <div class="card"><span class="icon">📋</span><h3>Άδεια θερμής εργασίας</h3><p>Για συγκόλληση, κοπή ή τρόχισμα ακολούθησε την εγκεκριμένη διαδικασία.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Τύποι πυροσβεστήρων</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">💧</span><h3>Νερού</h3><p>Για στερεά καύσιμα όπως ξύλο, χαρτί και υφάσματα. Δεν χρησιμοποιείται σε ηλεκτρικό εξοπλισμό.</p></div>
+    <div class="card"><span class="icon">🧯</span><h3>Ξηράς σκόνης</h3><p>Κατάλληλος για πολλές κατηγορίες πυρκαγιάς. Μπορεί να μειώσει την ορατότητα σε κλειστούς χώρους.</p></div>
+    <div class="card"><span class="icon">☁️</span><h3>CO₂</h3><p>Συχνά χρησιμοποιείται για ηλεκτρικό εξοπλισμό. Δεν αφήνει υπολείμματα.</p></div>
+    <div class="card"><span class="icon">🫧</span><h3>Αφρού</h3><p>Για υγρά καύσιμα και στερεά υλικά. Δεν είναι κατάλληλος για όλα τα ηλεκτρικά περιστατικά.</p></div>
+  </div>
+
+  <div class="danger">
+    <strong>Σημαντικό:</strong> Χρησιμοποίησε πυροσβεστήρα μόνο αν έχεις εκπαιδευτεί, η φωτιά είναι μικρή, υπάρχει ασφαλής έξοδος πίσω σου και δεν υπάρχει καπνός ή άμεσος κίνδυνος.
+  </div>
+</section>
+
+<section>
+  <h2>Διαδραστική επιλογή πυροσβεστήρα</h2>
+  <p>Επίλεξε ένα περιστατικό και δες ποιος τύπος πυροσβεστήρα είναι ενδεικτικά κατάλληλος.</p>
+
+  <div class="extinguisher-selector">
+    <div>
+      <label for="fireType">Περιστατικό</label>
+      <select id="fireType">
+        <option value="">Επίλεξε περιστατικό</option>
+        <option value="paper">Μικρή φωτιά σε χαρτί/χαρτόνι</option>
+        <option value="electrical">Καπνός από ηλεκτρικό πίνακα</option>
+        <option value="flammable">Μικρή φωτιά σε εύφλεκτο υγρό</option>
+        <option value="unknown">Άγνωστο υλικό με έντονο καπνό</option>
+      </select>
+    </div>
+    <button class="submit-btn" onclick="showExtinguisher()">Εμφάνιση πρότασης</button>
+  </div>
+
+  <div id="extinguisherResult" class="extinguisher-result"></div>
+</section>
+
+<section>
+  <h2>Μέθοδος PASS</h2>
+  <p>Αν έχεις εκπαιδευτεί και είναι ασφαλές να χρησιμοποιήσεις πυροσβεστήρα, θυμήσου τη μέθοδο PASS.</p>
+
+  <div class="grid pass-steps">
+    <div class="card"><h3>P — Pull</h3><p>Τράβηξε την ασφάλεια.</p></div>
+    <div class="card"><h3>A — Aim</h3><p>Στόχευσε στη βάση της φωτιάς.</p></div>
+    <div class="card"><h3>S — Squeeze</h3><p>Πίεσε τη λαβή.</p></div>
+    <div class="card"><h3>S — Sweep</h3><p>Κάνε σαρωτική κίνηση στη βάση της φωτιάς.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Σενάριο Απόφασης</h2>
+  <p>
+    Βλέπεις καπνό να βγαίνει από ηλεκτρικό πίνακα και υπάρχει μυρωδιά καμένου.
+    Τι κάνεις;
+  </p>
+
+  <button class="scenario-option" data-type="wrong" onclick="selectScenario(this)">
+    Ρίχνω νερό για να σταματήσει ο καπνός.
+  </button>
+
+  <button class="scenario-option" data-type="partial" onclick="selectScenario(this)">
+    Ανοίγω τον πίνακα για να δω τι συμβαίνει.
+  </button>
+
+  <button class="scenario-option" data-type="correct" onclick="selectScenario(this)">
+    Απομακρύνομαι, ειδοποιώ άμεσα σύμφωνα με τη διαδικασία και δεν επεμβαίνω αν δεν είναι ασφαλές και δεν είμαι εκπαιδευμένος.
+  </button>
+
+  <button class="submit-btn" onclick="submitScenario()">Οριστική απάντηση</button>
+  <div id="scenarioFeedback" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Mini Quiz</h2>
+  <form id="quizForm">
+    <div class="quiz-question">
+      <p><strong>1. Ποια είναι τα τρία στοιχεία του τριγώνου της φωτιάς;</strong></p>
+      <label><input type="radio" name="q1" value="1"> Θερμότητα, καύσιμο, οξυγόνο.</label>
+      <label><input type="radio" name="q1" value="0"> Νερό, αέρας, μέταλλο.</label>
+      <label><input type="radio" name="q1" value="0"> Καπνός, θόρυβος, φως.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>2. Πότε χρησιμοποιώ πυροσβεστήρα;</strong></p>
+      <label><input type="radio" name="q2" value="1"> Όταν είμαι εκπαιδευμένος, η φωτιά είναι μικρή και έχω ασφαλή έξοδο.</label>
+      <label><input type="radio" name="q2" value="0"> Πάντα, ανεξάρτητα από το μέγεθος της φωτιάς.</label>
+      <label><input type="radio" name="q2" value="0"> Όταν υπάρχει πολύς καπνός και δεν βλέπω καλά.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>3. Σε ηλεκτρικό πίνακα με καπνό:</strong></p>
+      <label><input type="radio" name="q3" value="1"> Απομακρύνομαι και ειδοποιώ σύμφωνα με τη διαδικασία.</label>
+      <label><input type="radio" name="q3" value="0"> Ρίχνω νερό.</label>
+      <label><input type="radio" name="q3" value="0"> Ανοίγω τον πίνακα για έλεγχο.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>4. Οι έξοδοι κινδύνου πρέπει να είναι:</strong></p>
+      <label><input type="radio" name="q4" value="1"> Πάντα ελεύθερες και προσβάσιμες.</label>
+      <label><input type="radio" name="q4" value="0"> Διαθέσιμες μόνο κατά την άσκηση εκκένωσης.</label>
+      <label><input type="radio" name="q4" value="0"> Χώρος προσωρινής αποθήκευσης.</label>
+    </div>
+
+    <button type="button" class="submit-btn" onclick="checkQuiz()">Υποβολή Quiz</button>
+  </form>
+
+  <div class="progress-box"><div id="progressBar" class="progress-bar"></div></div>
+  <div id="quizResult" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Βασικά σημεία</h2>
+  <p class="takeaway">Η πρόληψη είναι η καλύτερη πυρασφάλεια.</p>
+  <p class="takeaway">Μην μπλοκάρεις πυροσβεστήρες, εξόδους κινδύνου ή πυροσβεστικές φωλιές.</p>
+  <p class="takeaway">Χρησιμοποίησε πυροσβεστήρα μόνο αν είναι ασφαλές και έχεις εκπαιδευτεί.</p>
+  <p class="takeaway">Σε καπνό, άγνωστο υλικό ή γρήγορη εξάπλωση, απομακρύνσου και ειδοποίησε.</p>
+  <p class="takeaway">Καμία προσπάθεια κατάσβεσης δεν αξίζει περισσότερο από την ανθρώπινη ζωή.</p>
+</section>
+
+</main>
+
+<footer>Εκπαίδευση Βιομηχανικής Ασφάλειας | Ενότητα 11</footer>
+
+<script>
+let selectedScenario=null;
+
+function showExtinguisher(){
+  const type=document.getElementById("fireType").value;
+  const result=document.getElementById("extinguisherResult");
+  result.style.display="block";
+
+  if(!type){
+    result.innerHTML="Παρακαλώ επίλεξε ένα περιστατικό.";
+    return;
+  }
+
+  const data={
+    paper:`<strong>Μικρή φωτιά σε χαρτί/χαρτόνι:</strong>
+    <ul><li>Ενδεικτικά: πυροσβεστήρας νερού ή σκόνης, ανάλογα με τη σήμανση και τη διαδικασία του χώρου.</li><li>Έλεγξε πάντα την καταλληλότητα του πυροσβεστήρα.</li></ul>`,
+    electrical:`<strong>Καπνός από ηλεκτρικό πίνακα:</strong>
+    <ul><li>Μην χρησιμοποιείς νερό.</li><li>Απομακρύνσου και ειδοποίησε. CO₂ μπορεί να χρησιμοποιηθεί μόνο από εκπαιδευμένο άτομο και εφόσον είναι ασφαλές.</li></ul>`,
+    flammable:`<strong>Μικρή φωτιά σε εύφλεκτο υγρό:</strong>
+    <ul><li>Ενδεικτικά: αφρός, σκόνη ή CO₂, ανάλογα με το υλικό και τη σήμανση.</li><li>Μην ρίχνεις νερό σε εύφλεκτα υγρά αν δεν είναι κατάλληλη μέθοδος για το συγκεκριμένο περιστατικό.</li></ul>`,
+    unknown:`<strong>Άγνωστο υλικό με έντονο καπνό:</strong>
+    <ul><li>Μην επέμβεις.</li><li>Απομακρύνσου, ενεργοποίησε τη διαδικασία έκτακτης ανάγκης και ενημέρωσε τους υπεύθυνους.</li></ul>`
+  };
+
+  result.innerHTML=data[type] + "<p><strong>Σημείωση:</strong> Η τελική ενέργεια πρέπει να ακολουθεί τη διαδικασία της εγκατάστασης και την εκπαίδευση που έχεις λάβει.</p>";
+}
+
+function selectScenario(button){
+  document.querySelectorAll(".scenario-option").forEach(btn=>btn.classList.remove("selected"));
+  button.classList.add("selected");
+  selectedScenario=button.dataset.type;
+  const feedback=document.getElementById("scenarioFeedback");
+  feedback.style.display="none";
+  feedback.innerHTML="";
+}
+
+function submitScenario(){
+  const feedback=document.getElementById("scenarioFeedback");
+
+  if(!selectedScenario){
+    feedback.style.display="block";
+    feedback.className="feedback highlight";
+    feedback.innerHTML="Παρακαλώ επίλεξε μία απάντηση πριν πατήσεις οριστική απάντηση.";
+    return;
+  }
+
+  feedback.style.display="block";
+
+  if(selectedScenario==="correct"){
+    feedback.className="feedback success";
+    feedback.innerHTML="Σωστά. Σε ηλεκτρικό περιστατικό με καπνό, η προτεραιότητα είναι απομάκρυνση, ειδοποίηση και εφαρμογή της διαδικασίας έκτακτης ανάγκης.";
+  }else if(selectedScenario==="partial"){
+    feedback.className="feedback danger";
+    feedback.innerHTML="Λάθος. Το άνοιγμα ηλεκτρικού πίνακα μπορεί να σε εκθέσει σε ηλεκτρικό τόξο, καπνό ή φωτιά.";
+  }else{
+    feedback.className="feedback danger";
+    feedback.innerHTML="Λάθος. Το νερό σε ηλεκτρικό εξοπλισμό μπορεί να προκαλέσει ηλεκτροπληξία ή επιδείνωση του περιστατικού.";
+  }
+}
+
+function checkQuiz(){
+  const form=document.getElementById("quizForm");
+  const result=document.getElementById("quizResult");
+  const progressBar=document.getElementById("progressBar");
+
+  let score=0,total=4;
+  for(let i=1;i<=total;i++){
+    const answer=form.querySelector(`input[name="q${i}"]:checked`);
+    if(answer && answer.value==="1"){score++;}
+  }
+
+  const percentage=Math.round((score/total)*100);
+  progressBar.style.width=percentage+"%";
+  result.style.display="block";
+
+  if(score===total){
+    result.className="feedback success";
+    result.innerHTML=`Άριστα! Πέτυχες ${score}/${total}.`;
+  }else if(score>=2){
+    result.className="feedback highlight";
+    result.innerHTML=`Καλή προσπάθεια. Πέτυχες ${score}/${total}. Ξαναδές το τρίγωνο της φωτιάς, τους πυροσβεστήρες και την ασφαλή εκκένωση.`;
+  }else{
+    result.className="feedback danger";
+    result.innerHTML=`Πέτυχες ${score}/${total}. Προτείνεται να επαναλάβεις την ενότητα.`;
+  }
+}
+</script>
+
+</body>
+</html>

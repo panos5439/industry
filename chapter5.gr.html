@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ενότητα 5 | Ασφαλής Συμπεριφορά</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --border:#d9e2ec;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+header{
+  background:linear-gradient(135deg,var(--primary),#0b2545);
+  color:white;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:850px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{color:var(--primary);margin-top:0}
+h3{color:#0b2545}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  background:white;
+}
+
+.icon{
+  font-size:2rem;
+  display:block;
+  margin-bottom:10px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:#fff8e1;
+  padding:18px;
+  border-radius:12px;
+  margin-top:16px;
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:#eafaf7;
+  padding:18px;
+  border-radius:12px;
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:#fff1f1;
+  padding:18px;
+  border-radius:12px;
+}
+
+button{
+  font-size:1rem;
+  cursor:pointer;
+}
+
+.submit-btn{
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  margin-top:12px;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:#0b2545;
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.behaviour-card{
+  background:#eef4fb;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+  margin-top:12px;
+}
+
+.behaviour-text{
+  font-size:1.2rem;
+  font-weight:bold;
+  color:var(--primary);
+  margin-bottom:16px;
+}
+
+.choice-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.choice-btn{
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  color:white;
+}
+
+.safe-btn{background:var(--success)}
+.unsafe-btn{background:var(--accent)}
+
+.choice-btn:hover,
+.choice-btn:focus{
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.scenario-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#eef4fb;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:14px 16px;
+  border-radius:12px;
+  margin:10px 0;
+}
+
+.scenario-option.selected{
+  background:#0b2545;
+  color:white;
+}
+
+.quiz-question{
+  margin-bottom:22px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--border);
+}
+
+.quiz-question label{
+  display:block;
+  margin:8px 0;
+  cursor:pointer;
+}
+
+.progress-box{
+  background:#e8eef5;
+  border-radius:999px;
+  height:18px;
+  overflow:hidden;
+  margin-top:12px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:var(--success);
+  transition:width .4s ease;
+}
+
+.takeaway{
+  font-size:1.15rem;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+footer{
+  text-align:center;
+  color:#5f6c7b;
+  padding:30px 20px;
+  font-size:.9rem;
+}
+
+@media(max-width:700px){
+  main{padding:14px}
+  section{padding:20px}
+  .choice-row{flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Ενότητα 5: Ασφαλής Συμπεριφορά και Κουλτούρα Ασφάλειας</h1>
+  <p>Η ασφάλεια δεν εξαρτάται μόνο από τον εξοπλισμό και τις διαδικασίες. Εξαρτάται και από τις καθημερινές επιλογές κάθε εργαζομένου.</p>
+</header>
+
+<main>
+
+<section>
+  <h2>Στόχοι μάθησης</h2>
+  <div class="grid">
+    <div class="card"><span class="icon">✅</span>Αναγνωρίζει ασφαλείς και μη ασφαλείς συμπεριφορές.</div>
+    <div class="card"><span class="icon">⚠️</span>Κατανοεί πώς οι ανθρώπινοι παράγοντες επηρεάζουν την ασφάλεια.</div>
+    <div class="card"><span class="icon">🗣️</span>Μιλάει όταν εντοπίζει μη ασφαλή εργασία.</div>
+    <div class="card"><span class="icon">🛑</span>Εφαρμόζει το δικαίωμα διακοπής μη ασφαλούς εργασίας.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Τι είναι ασφαλής συμπεριφορά;</h2>
+  <p>
+    Ασφαλής συμπεριφορά είναι κάθε ενέργεια που προστατεύει εσένα, τους συναδέλφους σου,
+    τον εξοπλισμό και το περιβάλλον εργασίας.
+  </p>
+
+  <div class="grid">
+    <div class="card"><span class="icon">📋</span><h3>Ακολουθώ διαδικασίες</h3><p>Δεν παρακάμπτω βήματα, ακόμα και όταν η εργασία φαίνεται απλή.</p></div>
+    <div class="card"><span class="icon">🦺</span><h3>Χρησιμοποιώ σωστά τα ΜΑΠ</h3><p>Τα φοράω σωστά και τα ελέγχω πριν από τη χρήση.</p></div>
+    <div class="card"><span class="icon">🔧</span><h3>Χρησιμοποιώ σωστά εργαλεία</h3><p>Δεν αυτοσχεδιάζω με ακατάλληλα ή φθαρμένα εργαλεία.</p></div>
+    <div class="card"><span class="icon">🧹</span><h3>Διατηρώ τάξη</h3><p>Καθαροί διάδρομοι και οργανωμένος χώρος μειώνουν τα ατυχήματα.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Μη ασφαλής συμπεριφορά</h2>
+  <p>
+    Μη ασφαλής συμπεριφορά είναι κάθε ενέργεια ή παράλειψη που αυξάνει την πιθανότητα ατυχήματος.
+  </p>
+
+  <div class="danger">
+    Παραδείγματα: τρέξιμο στον χώρο παραγωγής, χρήση κινητού κατά την εργασία, παράκαμψη προστατευτικών,
+    αστεϊσμοί, βιασύνη, αγνόηση διαδικασιών ή εργασία χωρίς άδεια όπου απαιτείται.
+  </div>
+</section>
+
+<section>
+  <h2>Ανθρώπινοι παράγοντες</h2>
+  <p>
+    Πολλά ατυχήματα δεν συμβαίνουν επειδή ο εργαζόμενος «δεν ξέρει», αλλά επειδή κάτι επηρεάζει την κρίση,
+    την προσοχή ή τη συμπεριφορά του.
+  </p>
+
+  <div class="grid">
+    <div class="card"><span class="icon">😴</span><h3>Κόπωση</h3><p>Μειώνει την προσοχή και αυξάνει τα λάθη.</p></div>
+    <div class="card"><span class="icon">⏱️</span><h3>Πίεση χρόνου</h3><p>Οδηγεί σε βιασύνη και παρακάμψεις.</p></div>
+    <div class="card"><span class="icon">📱</span><h3>Απόσπαση προσοχής</h3><p>Ένα δευτερόλεπτο απροσεξίας μπορεί να αρκεί για ατύχημα.</p></div>
+    <div class="card"><span class="icon">😐</span><h3>Συνήθεια</h3><p>Το «το κάνω πάντα έτσι» μπορεί να κρύβει σοβαρό κίνδυνο.</p></div>
+  </div>
+
+  <div class="highlight">
+    <strong>Θυμήσου:</strong> Η εμπειρία βοηθά, αλλά δεν αντικαθιστά την προσοχή και τη σωστή διαδικασία.
+  </div>
+</section>
+
+<section>
+  <h2>Safe or Unsafe?</h2>
+  <p>Διάβασε τη συμπεριφορά και επίλεξε αν είναι ασφαλής ή μη ασφαλής.</p>
+
+  <div class="behaviour-card">
+    <div id="behaviourText" class="behaviour-text">Πατάω πάνω σε παλέτα για να φτάσω ένα αντικείμενο σε ύψος.</div>
+
+    <div class="choice-row">
+      <button class="choice-btn safe-btn" onclick="answerBehaviour('safe')">Ασφαλής</button>
+      <button class="choice-btn unsafe-btn" onclick="answerBehaviour('unsafe')">Μη ασφαλής</button>
+      <button class="submit-btn" onclick="nextBehaviour()">Επόμενο</button>
+    </div>
+
+    <div id="behaviourFeedback" class="feedback"></div>
+    <p><strong>Σκορ:</strong> <span id="behaviourScore">0</span>/<span id="behaviourTotal">5</span></p>
+  </div>
+</section>
+
+<section>
+  <h2>Stop Work Authority</h2>
+  <p>
+    Κάθε εργαζόμενος πρέπει να έχει τη δυνατότητα να σταματήσει μια εργασία όταν πιστεύει ότι υπάρχει άμεσος ή σοβαρός κίνδυνος.
+  </p>
+
+  <div class="success">
+    <strong>Σωστή στάση:</strong> «Σταματάμε για λίγο, ελέγχουμε τον κίνδυνο και συνεχίζουμε όταν η εργασία είναι ασφαλής.»
+  </div>
+</section>
+
+<section>
+  <h2>Σενάριο Απόφασης</h2>
+  <p>
+    Ο προϊστάμενος σου ζητά να τελειώσεις γρήγορα μια εργασία και να παρακάμψεις ένα βήμα της διαδικασίας.
+    Τι κάνεις;
+  </p>
+
+  <button class="scenario-option" data-type="wrong" onclick="selectScenario(this)">
+    Ακολουθώ τη σύντομη διαδρομή για να τελειώσω γρήγορα.
+  </button>
+
+  <button class="scenario-option" data-type="partial" onclick="selectScenario(this)">
+    Αγνοώ τον προϊστάμενο και συνεχίζω χωρίς να εξηγήσω τίποτα.
+  </button>
+
+  <button class="scenario-option" data-type="correct" onclick="selectScenario(this)">
+    Εξηγώ τον κίνδυνο και ακολουθώ την εγκεκριμένη διαδικασία.
+  </button>
+
+  <button class="submit-btn" onclick="submitScenario()">Οριστική απάντηση</button>
+
+  <div id="scenarioFeedback" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Mini Quiz</h2>
+
+  <form id="quizForm">
+    <div class="quiz-question">
+      <p><strong>1. Ποια είναι ασφαλής συμπεριφορά;</strong></p>
+      <label><input type="radio" name="q1" value="1"> Ακολουθώ τη διαδικασία ακόμη και όταν βιάζομαι.</label>
+      <label><input type="radio" name="q1" value="0"> Παρακάμπτω βήματα όταν έχω εμπειρία.</label>
+      <label><input type="radio" name="q1" value="0"> Χρησιμοποιώ οποιοδήποτε εργαλείο είναι κοντά μου.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>2. Η κόπωση μπορεί να:</strong></p>
+      <label><input type="radio" name="q2" value="1"> Μειώσει την προσοχή και να αυξήσει τα λάθη.</label>
+      <label><input type="radio" name="q2" value="0"> Βελτιώσει την απόδοση.</label>
+      <label><input type="radio" name="q2" value="0"> Μην επηρεάσει ποτέ την ασφάλεια.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>3. Αν δω μη ασφαλή εργασία:</strong></p>
+      <label><input type="radio" name="q3" value="1"> Μιλάω, αναφέρω τον κίνδυνο και ζητώ να ελεγχθεί.</label>
+      <label><input type="radio" name="q3" value="0"> Την αγνοώ αν δεν με αφορά.</label>
+      <label><input type="radio" name="q3" value="0"> Συνεχίζω γιατί δεν είναι δική μου ευθύνη.</label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>4. Η πίεση χρόνου:</strong></p>
+      <label><input type="radio" name="q4" value="1"> Μπορεί να οδηγήσει σε παρακάμψεις και λάθη.</label>
+      <label><input type="radio" name="q4" value="0"> Δικαιολογεί την παράκαμψη διαδικασιών.</label>
+      <label><input type="radio" name="q4" value="0"> Μειώνει πάντα τον κίνδυνο.</label>
+    </div>
+
+    <button type="button" class="submit-btn" onclick="checkQuiz()">Υποβολή Quiz</button>
+  </form>
+
+  <div class="progress-box">
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
+
+  <div id="quizResult" class="feedback"></div>
+</section>
+
+<section>
+  <h2>Βασικά σημεία</h2>
+  <p class="takeaway">Η ασφάλεια είναι καθημερινή συμπεριφορά.</p>
+  <p class="takeaway">Η βιασύνη και οι παρακάμψεις αυξάνουν την πιθανότητα ατυχήματος.</p>
+  <p class="takeaway">Μίλα όταν βλέπεις κάτι επικίνδυνο.</p>
+  <p class="takeaway">Καμία εργασία δεν είναι τόσο επείγουσα ώστε να μη γίνει με ασφάλεια.</p>
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Βιομηχανικής Ασφάλειας | Ενότητα 5
+</footer>
+
+<script>
+let selectedScenario = null;
+
+const behaviours = [
+  {
+    text:"Πατάω πάνω σε παλέτα για να φτάσω ένα αντικείμενο σε ύψος.",
+    correct:"unsafe",
+    feedback:"Σωστά. Η παλέτα δεν είναι ασφαλές μέσο πρόσβασης και μπορεί να προκαλέσει πτώση."
+  },
+  {
+    text:"Αναφέρω άμεσα μια διαρροή λαδιού στο δάπεδο.",
+    correct:"safe",
+    feedback:"Σωστά. Η άμεση αναφορά βοηθά στην πρόληψη ολίσθησης και πτώσης."
+  },
+  {
+    text:"Χρησιμοποιώ κινητό τηλέφωνο ενώ περπατώ σε περιοχή με περονοφόρα.",
+    correct:"unsafe",
+    feedback:"Σωστά. Η απόσπαση προσοχής σε περιοχή κυκλοφορίας μπορεί να οδηγήσει σε σοβαρό ατύχημα."
+  },
+  {
+    text:"Σταματώ την εργασία όταν το προστατευτικό της μηχανής λείπει.",
+    correct:"safe",
+    feedback:"Σωστά. Η εργασία δεν πρέπει να συνεχίζεται με αφαιρεμένα προστατευτικά."
+  },
+  {
+    text:"Παρακάμπτω ένα βήμα της διαδικασίας επειδή έχω μεγάλη εμπειρία.",
+    correct:"unsafe",
+    feedback:"Σωστά. Η εμπειρία δεν δικαιολογεί την παράκαμψη ασφαλών διαδικασιών."
+  }
+];
+
+let currentBehaviour = 0;
+let behaviourScore = 0;
+let answeredBehaviour = false;
+
+document.getElementById("behaviourTotal").textContent = behaviours.length;
+
+function answerBehaviour(choice){
+  const feedback = document.getElementById("behaviourFeedback");
+
+  if(answeredBehaviour){
+    return;
+  }
+
+  answeredBehaviour = true;
+  feedback.style.display = "block";
+
+  if(choice === behaviours[currentBehaviour].correct){
+    behaviourScore++;
+    document.getElementById("behaviourScore").textContent = behaviourScore;
+    feedback.className = "feedback success";
+    feedback.innerHTML = behaviours[currentBehaviour].feedback;
+  } else {
+    feedback.className = "feedback danger";
+    feedback.innerHTML = "Όχι σωστά. Σκέψου αν η συμπεριφορά μειώνει ή αυξάνει τον κίνδυνο.";
+  }
+}
+
+function nextBehaviour(){
+  const feedback = document.getElementById("behaviourFeedback");
+
+  if(currentBehaviour < behaviours.length - 1){
+    currentBehaviour++;
+    document.getElementById("behaviourText").textContent = behaviours[currentBehaviour].text;
+    feedback.style.display = "none";
+    feedback.innerHTML = "";
+    answeredBehaviour = false;
+  } else {
+    feedback.style.display = "block";
+    feedback.className = "feedback success";
+    feedback.innerHTML = `Η δραστηριότητα ολοκληρώθηκε. Τελικό σκορ: ${behaviourScore}/${behaviours.length}.`;
+  }
+}
+
+function selectScenario(button){
+  document.querySelectorAll(".scenario-option").forEach(btn=>{
+    btn.classList.remove("selected");
+  });
+
+  button.classList.add("selected");
+  selectedScenario = button.dataset.type;
+
+  const feedback = document.getElementById("scenarioFeedback");
+  feedback.style.display = "none";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+  const feedback = document.getElementById("scenarioFeedback");
+
+  if(!selectedScenario){
+    feedback.style.display = "block";
+    feedback.className = "feedback highlight";
+    feedback.innerHTML = "Παρακαλώ επίλεξε μία απάντηση πριν πατήσεις οριστική απάντηση.";
+    return;
+  }
+
+  feedback.style.display = "block";
+
+  if(selectedScenario === "correct"){
+    feedback.className = "feedback success";
+    feedback.innerHTML = "Σωστά. Η σωστή αντίδραση είναι να εξηγήσεις τον κίνδυνο και να ακολουθήσεις την εγκεκριμένη διαδικασία.";
+  } else if(selectedScenario === "partial"){
+    feedback.className = "feedback highlight";
+    feedback.innerHTML = "Μερικώς σωστό. Δεν πρέπει να παρακάμψεις τη διαδικασία, αλλά είναι σημαντικό να επικοινωνήσεις καθαρά τον λόγο.";
+  } else {
+    feedback.className = "feedback danger";
+    feedback.innerHTML = "Λάθος. Η πίεση χρόνου δεν δικαιολογεί παράκαμψη διαδικασιών ασφαλείας.";
+  }
+}
+
+function checkQuiz(){
+  const form = document.getElementById("quizForm");
+  const result = document.getElementById("quizResult");
+  const progressBar = document.getElementById("progressBar");
+
+  let score = 0;
+  const total = 4;
+
+  for(let i=1;i<=total;i++){
+    const answer = form.querySelector(`input[name="q"+i]:checked`);
+    if(answer && answer.value === "1"){
+      score++;
+    }
+  }
+
+  const percentage = Math.round((score / total) * 100);
+  progressBar.style.width = percentage + "%";
+
+  result.style.display = "block";
+
+  if(score === total){
+    result.className = "feedback success";
+    result.innerHTML = `Άριστα! Πέτυχες ${score}/${total}.`;
+  } else if(score >= 2){
+    result.className = "feedback highlight";
+    result.innerHTML = `Καλή προσπάθεια. Πέτυχες ${score}/${total}. Ξαναδές τους ανθρώπινους παράγοντες και το Stop Work Authority.`;
+  } else {
+    result.className = "feedback danger";
+    result.innerHTML = `Πέτυχες ${score}/${total}. Προτείνεται να επαναλάβεις την ενότητα.`;
+  }
+}
+</script>
+
+</body>
+</html>
