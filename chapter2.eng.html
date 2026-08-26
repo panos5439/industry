@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Module 2 | Hazard Identification</title>
+
+  <style>
+    :root {
+      --primary: #123c69;
+      --primary-dark: #0b2545;
+      --secondary: #f4b400;
+      --danger: #d62828;
+      --success: #2a9d8f;
+      --background: #f5f7fa;
+      --surface: #ffffff;
+      --text: #1f2933;
+      --muted: #5f6c7b;
+      --border: #d9e2ec;
+      --focus: #2563eb;
+      --shadow: 0 10px 30px rgba(15, 35, 55, 0.08);
+      --radius: 18px;
+      --content-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    input:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, 0.4);
+      outline-offset: 3px;
+    }
+
+    header {
+      position: relative;
+      overflow: hidden;
+      padding: 58px 20px;
+      color: #ffffff;
+      text-align: center;
+      background:
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(255, 255, 255, 0.15),
+          transparent 32%
+        ),
+        linear-gradient(135deg, var(--primary), var(--primary-dark));
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      right: -110px;
+      bottom: -170px;
+      width: 360px;
+      height: 360px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 45px rgba(255, 255, 255, 0.03),
+        0 0 0 90px rgba(255, 255, 255, 0.025);
+      pointer-events: none;
+    }
+
+    header h1,
+    header p {
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.35rem);
+      line-height: 1.15;
+    }
+
+    header p {
+      max-width: 850px;
+      margin: 0 auto;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      opacity: 0.95;
+    }
+
+    main {
+      width: min(100% - 32px, var(--content-width));
+      margin: 28px auto;
+    }
+
+    section {
+      margin-bottom: 24px;
+      padding: clamp(20px, 4vw, 30px);
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid rgba(217, 226, 236, 0.8);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      color: var(--primary);
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin-top: 0;
+      color: var(--primary-dark);
+    }
+
+    p {
+      margin-top: 0;
+    }
+
+    .section-intro {
+      max-width: 800px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 20px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .card .icon {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .method-step {
+      position: relative;
+      min-height: 190px;
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .method-step:hover {
+      transform: translateY(-4px);
+      border-color: rgba(18, 60, 105, 0.35);
+      box-shadow: 0 14px 30px rgba(15, 35, 55, 0.09);
+    }
+
+    .method-step strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .highlight,
+    .danger,
+    .success {
+      padding: 18px;
+      border-radius: 12px;
+    }
+
+    .highlight {
+      border-left: 6px solid var(--secondary);
+      background: #fff8e1;
+    }
+
+    .danger {
+      border-left: 6px solid var(--danger);
+      background: #fff1f1;
+    }
+
+    .success {
+      border-left: 6px solid var(--success);
+      background: #eafaf7;
+    }
+
+    /* =========================================================
+       FIND THE HAZARD
+       ========================================================= */
+
+    .hazard-game {
+      margin-top: 22px;
+    }
+
+    .game-instructions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding: 12px 15px;
+      color: #334155;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .game-instructions span {
+      flex: 0 0 auto;
+      font-size: 1.35rem;
+    }
+
+    .factory-scene {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
+      isolation: isolate;
+      background: #111827;
+      border: 1px solid #cbd5e1;
+      border-radius: 18px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18);
+    }
+
+    .factory-scene img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .factory-scene::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(2, 6, 23, 0.02),
+          rgba(2, 6, 23, 0.12)
+        );
+    }
+
+    .hotspot {
+      position: absolute;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      width: clamp(36px, 4.8vw, 54px);
+      height: clamp(36px, 4.8vw, 54px);
+      padding: 0;
+      color: #ffffff;
+      font-size: clamp(17px, 2.2vw, 23px);
+      font-weight: 800;
+      line-height: 1;
+      cursor: pointer;
+      background: rgba(214, 40, 40, 0.94);
+      border: 3px solid #ffffff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow:
+        0 0 0 0 rgba(214, 40, 40, 0.55),
+        0 8px 20px rgba(0, 0, 0, 0.4);
+      animation: hotspotPulse 2s infinite;
+      transition:
+        transform 180ms ease,
+        background-color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .hotspot::before {
+      content: "";
+      position: absolute;
+      inset: -9px;
+      pointer-events: none;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      border-radius: inherit;
+    }
+
+    .hotspot:hover,
+    .hotspot:focus-visible {
+      transform: translate(-50%, -50%) scale(1.12);
+      box-shadow:
+        0 0 0 8px rgba(214, 40, 40, 0.18),
+        0 10px 24px rgba(0, 0, 0, 0.42);
+    }
+
+    .hotspot.found {
+      cursor: default;
+      background: var(--success);
+      animation: none;
+      box-shadow:
+        0 0 0 7px rgba(42, 157, 143, 0.2),
+        0 8px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    /*
+      Responsive hotspot positions.
+      Values are percentages of the image dimensions.
+    */
+
+    /* Worker near moving machine parts */
+    .hs-machine {
+      left: 22%;
+      top: 42%;
+    }
+
+    /* Pallet blocking the emergency exit */
+    .hs-exit {
+      left: 52%;
+      top: 38%;
+    }
+
+    /* Cable across the walkway */
+    .hs-cable {
+      left: 54%;
+      top: 66%;
+    }
+
+    /* Liquid spill on the floor */
+    .hs-spill {
+      left: 39%;
+      top: 84%;
+    }
+
+    /* Unsafe manual lifting */
+    .hs-lifting {
+      left: 80%;
+      top: 64%;
+    }
+
+    /* Pedestrian too close to the forklift */
+    .hs-forklift {
+      left: 68%;
+      top: 42%;
+    }
+
+    .hazard-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .hazard-counter {
+      margin: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .hazard-progress {
+      flex: 1 1 240px;
+      height: 12px;
+      overflow: hidden;
+      background: #e8eef5;
+      border-radius: 999px;
+    }
+
+    .hazard-progress-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--success), #52b788);
+      border-radius: inherit;
+      transition: width 350ms ease;
+    }
+
+    .button {
+      min-height: 44px;
+      padding: 10px 17px;
+      color: #ffffff;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--primary);
+      border: 0;
+      border-radius: 11px;
+      transition:
+        transform 160ms ease,
+        background-color 160ms ease,
+        box-shadow 160ms ease;
+    }
+
+    .button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(18, 60, 105, 0.2);
+    }
+
+    .button.secondary {
+      color: var(--primary);
+      background: #eef5fb;
+      border: 1px solid #c9dced;
+    }
+
+    .button.secondary:hover {
+      background: #e2edf7;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-radius: 12px;
+    }
+
+    .feedback strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    /* =========================================================
+       SCENARIO AND QUIZ
+       ========================================================= */
+
+    .scenario-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .scenario-actions .button {
+      width: 100%;
+      text-align: left;
+    }
+
+    .quiz-question {
+      margin-bottom: 18px;
+      padding: 18px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .quiz-question p {
+      margin-bottom: 12px;
+    }
+
+    .quiz-question label {
+      display: block;
+      margin: 8px 0;
+      padding: 11px 13px;
+      cursor: pointer;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition:
+        border-color 160ms ease,
+        background-color 160ms ease;
+    }
+
+    .quiz-question label:hover {
+      border-color: rgba(18, 60, 105, 0.45);
+      background: #f7fbff;
+    }
+
+    .quiz-question input {
+      margin-right: 8px;
+    }
+
+    .progress-box {
+      height: 18px;
+      overflow: hidden;
+      margin-top: 16px;
+      background: #e7edf3;
+      border-radius: 999px;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: var(--success);
+      transition: width 400ms ease;
+    }
+
+    .takeaway {
+      margin-bottom: 10px;
+      padding-left: 16px;
+      color: var(--primary);
+      font-size: 1.08rem;
+      font-weight: 700;
+      border-left: 4px solid var(--secondary);
+    }
+
+    footer {
+      padding: 30px 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @keyframes hotspotPulse {
+      0% {
+        box-shadow:
+          0 0 0 0 rgba(214, 40, 40, 0.55),
+          0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      70% {
+        box-shadow:
+          0 0 0 14px rgba(214, 40, 40, 0),
+          0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      100% {
+        box-shadow:
+          0 0 0 0 rgba(214, 40, 40, 0),
+          0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    @media (max-width: 700px) {
+      main {
+        width: min(100% - 20px, var(--content-width));
+        margin-top: 16px;
+      }
+
+      header {
+        padding: 42px 16px;
+      }
+
+      section {
+        padding: 20px 16px;
+        border-radius: 15px;
+      }
+
+      .factory-scene {
+        border-radius: 14px;
+      }
+
+      .hotspot {
+        border-width: 2px;
+      }
+
+      .hotspot::before {
+        inset: -6px;
+      }
+
+      .hazard-toolbar {
+        align-items: stretch;
+      }
+
+      .hazard-progress {
+        flex-basis: 100%;
+        order: 3;
+      }
+
+      .hazard-toolbar .button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+    <h1>Module 2: Hazard Identification</h1>
+
+    <p>
+      Every accident starts with a hazard. The sooner we identify it,
+      the easier it is to control it.
+    </p>
+  </header>
+
+  <main>
+
+    <!-- =====================================================
+         LEARNING OBJECTIVES
+         ===================================================== -->
+
+    <section aria-labelledby="learning-title">
+
+      <h2 id="learning-title">Learning Objectives</h2>
+
+      <p class="section-intro">
+        By the end of this module, the worker will be able to:
+      </p>
+
+      <div class="grid">
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">👀</span>
+          Identify hazards in the workplace.
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">⚠️</span>
+          Distinguish between a Hazard and a Risk.
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🧠</span>
+          Apply the Look – Think – Act method.
+        </div>
+
+        <div class="card">
+          <span class="icon" aria-hidden="true">🗣️</span>
+          Report unsafe conditions before an accident occurs.
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         HAZARD AND RISK
+         ===================================================== -->
+
+    <section aria-labelledby="definitions-title">
+
+      <h2 id="definitions-title">Hazard and Risk</h2>
+
+      <div class="grid">
+
+        <article class="card">
+          <span class="icon" aria-hidden="true">⚡</span>
+
+          <h3>Hazard</h3>
+
+          <p>
+            Anything with the potential to cause injury, illness,
+            damage or another unwanted consequence.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="icon" aria-hidden="true">📊</span>
+
+          <h3>Risk</h3>
+
+          <p>
+            The combination of the likelihood that a hazardous event
+            will occur and the severity of its potential consequences.
+          </p>
+        </article>
+
+      </div>
+
+      <div class="highlight">
+        <strong>Example:</strong>
+        Liquid on the floor is the hazard. The possibility that someone
+        may slip and be injured represents the risk.
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         LOOK – THINK – ACT
+         ===================================================== -->
+
+    <section aria-labelledby="method-title">
+
+      <h2 id="method-title">Look – Think – Act Method</h2>
+
+      <div class="grid">
+
+        <article class="card method-step">
+          <span class="icon" aria-hidden="true">👀</span>
+
+          <strong>LOOK</strong>
+
+          Look at the workplace, equipment, tools and the people
+          around you.
+        </article>
+
+        <article class="card method-step">
+          <span class="icon" aria-hidden="true">🧠</span>
+
+          <strong>THINK</strong>
+
+          Think about what could go wrong and who could be injured.
+        </article>
+
+        <article class="card method-step">
+          <span class="icon" aria-hidden="true">✅</span>
+
+          <strong>ACT</strong>
+
+          Take action, report the hazard or stop the work when
+          it cannot be carried out safely.
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         FIND THE HAZARD
+         ===================================================== -->
+
+    <section
+      id="find-the-hazard"
+      aria-labelledby="hazard-game-title"
+    >
+
+      <h2 id="hazard-game-title">Find the Hazard</h2>
+
+      <p class="section-intro">
+        Identify the six hazards in the industrial scene.
+        Click the red markers to learn why each situation
+        is unsafe.
+      </p>
+
+      <div class="hazard-game">
+
+        <div class="game-instructions">
+
+          <span aria-hidden="true">🎯</span>
+
+          <div>
+            Each marker turns green when the corresponding
+            hazard has been identified.
+          </div>
+
+        </div>
+
+        <div
+          class="factory-scene"
+          role="group"
+          aria-label="Interactive industrial workplace image with six hazard hotspots"
+        >
+
+          <img
+            src="https://panos5439.github.io/industry/hazard2.png"
+            alt="Industrial workplace with machinery, a forklift, workers, cables, a liquid spill and obstructions"
+            width="1536"
+            height="1024"
+            loading="eager"
+            decoding="async"
+          >
+
+          <!-- MOVING MACHINE PARTS -->
+
+          <button
+            type="button"
+            class="hotspot hs-machine"
+            aria-label="Check hazard near the machine"
+            aria-pressed="false"
+            data-title="Exposure to moving machine parts"
+            data-message="The worker is positioned too close to moving machine parts. Inadequate guarding or unsafe access can result in entanglement, crushing or serious injury."
+          >
+            !
+          </button>
+
+          <!-- BLOCKED EMERGENCY EXIT -->
+
+          <button
+            type="button"
+            class="hotspot hs-exit"
+            aria-label="Check hazard at the emergency exit"
+            aria-pressed="false"
+            data-title="Blocked emergency exit"
+            data-message="The pallet and boxes are obstructing the emergency exit. Emergency escape routes must remain clear and immediately accessible at all times."
+          >
+            !
+          </button>
+
+          <!-- CABLE ACROSS WALKWAY -->
+
+          <button
+            type="button"
+            class="hotspot hs-cable"
+            aria-label="Check hazard caused by the cable across the walkway"
+            aria-pressed="false"
+            data-title="Cable across the walkway"
+            data-message="The electrical cable runs across a pedestrian route. This creates a trip and fall hazard and may also damage the cable insulation."
+          >
+            !
+          </button>
+
+          <!-- LIQUID SPILL -->
+
+          <button
+            type="button"
+            class="hotspot hs-spill"
+            aria-label="Check hazard caused by the floor spill"
+            aria-pressed="false"
+            data-title="Liquid spill on the floor"
+            data-message="Liquid has been spilled on the floor. The area should be isolated and cleaned immediately to prevent slips and falls."
+          >
+            !
+          </button>
+
+          <!-- MANUAL LIFTING -->
+
+          <button
+            type="button"
+            class="hotspot hs-lifting"
+            aria-label="Check hazard during manual lifting"
+            aria-pressed="false"
+            data-title="Unsafe manual lifting"
+            data-message="The worker is lifting a heavy component with a bent back and without suitable mechanical assistance. This creates a significant risk of musculoskeletal injury."
+          >
+            !
+          </button>
+
+          <!-- FORKLIFT / PEDESTRIAN -->
+
+          <button
+            type="button"
+            class="hotspot hs-forklift"
+            aria-label="Check hazard near the forklift"
+            aria-pressed="false"
+            data-title="Unsafe pedestrian proximity to a forklift"
+            data-message="The pedestrian is within the forklift operating area. Pedestrians and vehicle routes must be clearly separated to prevent collision or struck-by incidents."
+          >
+            !
+          </button>
+
+        </div>
+
+        <div class="hazard-toolbar">
+
+          <p
+            class="hazard-counter"
+            aria-live="polite"
+          >
+            Hazards identified:
+            <span id="hazardScore">0</span>/<span id="hazardTotal">6</span>
+          </p>
+
+          <div
+            class="hazard-progress"
+            role="progressbar"
+            aria-label="Hazard identification progress"
+            aria-valuemin="0"
+            aria-valuemax="6"
+            aria-valuenow="0"
+          >
+
+            <div
+              id="hazardProgressBar"
+              class="hazard-progress-bar"
+            ></div>
+
+          </div>
+
+          <button
+            type="button"
+            id="resetHazards"
+            class="button secondary"
+          >
+            Restart
+          </button>
+
+        </div>
+
+        <div
+          id="hazardFeedback"
+          class="feedback"
+          role="status"
+          aria-live="polite"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         WORKPLACE SCENARIO
+         ===================================================== -->
+
+    <section aria-labelledby="scenario-title">
+
+      <h2 id="scenario-title">Workplace Scenario</h2>
+
+      <p>
+        You notice a cable running across the main pedestrian
+        walkway. What should you do?
+      </p>
+
+      <div class="scenario-actions">
+
+        <button
+          type="button"
+          class="button"
+          data-scenario="correct"
+        >
+          I report it and make sure it is removed or properly secured.
+        </button>
+
+        <button
+          type="button"
+          class="button"
+          data-scenario="partial"
+        >
+          I carefully walk around it.
+        </button>
+
+        <button
+          type="button"
+          class="button"
+          data-scenario="wrong"
+        >
+          I ignore it because no accident has happened yet.
+        </button>
+
+      </div>
+
+      <div
+        id="scenarioFeedback"
+        class="feedback"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+    </section>
+
+    <!-- =====================================================
+         QUIZ
+         ===================================================== -->
+
+    <section aria-labelledby="quiz-title">
+
+      <h2 id="quiz-title">Quick Quiz</h2>
+
+      <form id="safetyQuiz">
+
+        <div class="quiz-question">
+
+          <p>
+            <strong>1. What is a Hazard?</strong>
+          </p>
+
+          <label>
+            <input
+              type="radio"
+              name="q1"
+              value="1"
+            >
+            Anything with the potential to cause harm.
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="q1"
+              value="0"
+            >
+            Only an accident that has already occurred.
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="q1"
+              value="0"
+            >
+            A production process without workers.
+          </label>
+
+        </div>
+
+        <div class="quiz-question">
+
+          <p>
+            <strong>2. What is Risk?</strong>
+          </p>
+
+          <label>
+            <input
+              type="radio"
+              name="q2"
+              value="0"
+            >
+            The presence of a machine.
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="q2"
+              value="1"
+            >
+            The combination of likelihood and severity.
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="q2"
+              value="0"
+            >
+            The speed at which a task is completed.
+          </label>
+
+        </div>
+
+        <div class="quiz-question">
+
+          <p>
+            <strong>
+              3. What should we do when we identify a serious hazard?
+            </strong>
+          </p>
+
+          <label>
+            <input
+              type="radio"
+              name="q3"
+              value="0"
+            >
+            Continue until the task is completed.
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="q3"
+              value="1"
+            >
+            Take action, report the hazard or stop the work.
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="q3"
+              value="0"
+            >
+            Wait for someone else to notice it.
+          </label>
+
+        </div>
+
+        <div class="quiz-question">
+
+          <p>
+            <strong>4. What does Look – Think – Act mean?</strong>
+          </p>
+
+          <label>
+            <input
+              type="radio"
+              name="q4"
+              value="1"
+            >
+            Observe, think and act safely.
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="q4"
+              value="0"
+            >
+            Complete the task as quickly as possible.
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="q4"
+              value="0"
+            >
+            Stop every task without assessing the situation.
+          </label>
+
+        </div>
+
+        <button
+          type="submit"
+          class="button"
+        >
+          Submit Quiz
+        </button>
+
+      </form>
+
+      <div
+        class="progress-box"
+        role="progressbar"
+        aria-label="Quiz result"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+      >
+
+        <div
+          id="progressBar"
+          class="progress-bar"
+        ></div>
+
+      </div>
+
+      <div
+        id="quizResult"
+        class="feedback"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+    </section>
+
+    <!-- =====================================================
+         KEY TAKEAWAYS
+         ===================================================== -->
+
+    <section aria-labelledby="takeaways-title">
+
+      <h2 id="takeaways-title">Key Takeaways</h2>
+
+      <p class="takeaway">
+        Every accident starts with a hazard.
+      </p>
+
+      <p class="takeaway">
+        Early hazard identification helps prevent injuries.
+      </p>
+
+      <p class="takeaway">
+        A Hazard is a source of potential harm. Risk reflects
+        the likelihood and severity of that harm.
+      </p>
+
+      <p class="takeaway">
+        Apply Look – Think – Act before every task.
+      </p>
+
+      <p class="takeaway">
+        If you see something unsafe, speak up and report it.
+      </p>
+
+    </section>
+
+  </main>
+
+  <footer>
+    Industrial Health &amp; Safety Training | Module 2
+  </footer>
+
+  <script>
+    "use strict";
+
+    /* =========================================================
+       FIND THE HAZARD
+       ========================================================= */
+
+    const hazardButtons = Array.from(
+      document.querySelectorAll(".hotspot")
+    );
+
+    const hazardFeedback =
+      document.getElementById("hazardFeedback");
+
+    const hazardScore =
+      document.getElementById("hazardScore");
+
+    const hazardTotal =
+      document.getElementById("hazardTotal");
+
+    const hazardProgressBar =
+      document.getElementById("hazardProgressBar");
+
+    const hazardProgress =
+      document.querySelector(".hazard-progress");
+
+    const resetHazardsButton =
+      document.getElementById("resetHazards");
+
+    let hazardsFound = 0;
+
+    const totalHazards =
+      hazardButtons.length;
+
+    hazardTotal.textContent =
+      String(totalHazards);
+
+    hazardProgress.setAttribute(
+      "aria-valuemax",
+      String(totalHazards)
+    );
+
+    function updateHazardProgress() {
+
+      const percentage =
+        totalHazards > 0
+          ? (hazardsFound / totalHazards) * 100
+          : 0;
+
+      hazardScore.textContent =
+        String(hazardsFound);
+
+      hazardProgressBar.style.width =
+        percentage + "%";
+
+      hazardProgress.setAttribute(
+        "aria-valuenow",
+        String(hazardsFound)
+      );
+    }
+
+    function showHazard(button) {
+
+      const title =
+        button.dataset.title || "Hazard";
+
+      const message =
+        button.dataset.message || "";
+
+      const alreadyFound =
+        button.classList.contains("found");
+
+      if (!alreadyFound) {
+
+        button.classList.add("found");
+
+        button.textContent = "✓";
+
+        button.setAttribute(
+          "aria-pressed",
+          "true"
+        );
+
+        hazardsFound += 1;
+
+        updateHazardProgress();
+      }
+
+      hazardFeedback.style.display =
+        "block";
+
+      hazardFeedback.className =
+        "feedback success";
+
+      if (hazardsFound === totalHazards) {
+
+        hazardFeedback.innerHTML =
+          "<strong>Well done! You identified all the hazards.</strong>" +
+          "The final hazard was: " +
+          escapeHTML(title) +
+          ". " +
+          escapeHTML(message);
+
+      } else {
+
+        hazardFeedback.innerHTML =
+          "<strong>" +
+          escapeHTML(title) +
+          "</strong>" +
+          escapeHTML(message);
+      }
+    }
+
+    function resetHazards() {
+
+      hazardsFound = 0;
+
+      hazardButtons.forEach(
+        function (button) {
+
+          button.classList.remove("found");
+
+          button.textContent = "!";
+
+          button.setAttribute(
+            "aria-pressed",
+            "false"
+          );
+        }
+      );
+
+      hazardFeedback.style.display =
+        "none";
+
+      hazardFeedback.textContent =
+        "";
+
+      updateHazardProgress();
+
+      const firstHotspot =
+        hazardButtons[0];
+
+      if (firstHotspot) {
+        firstHotspot.focus();
+      }
+    }
+
+    hazardButtons.forEach(
+      function (button) {
+
+        button.addEventListener(
+          "click",
+          function () {
+            showHazard(button);
+          }
+        );
+      }
+    );
+
+    resetHazardsButton.addEventListener(
+      "click",
+      resetHazards
+    );
+
+    /* =========================================================
+       SCENARIO
+       ========================================================= */
+
+    const scenarioFeedback =
+      document.getElementById(
+        "scenarioFeedback"
+      );
+
+    const scenarioButtons =
+      document.querySelectorAll(
+        "[data-scenario]"
+      );
+
+    scenarioButtons.forEach(
+      function (button) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            showScenarioFeedback(
+              button.dataset.scenario
+            );
+          }
+        );
+      }
+    );
+
+    function showScenarioFeedback(type) {
+
+      scenarioFeedback.style.display =
+        "block";
+
+      if (type === "correct") {
+
+        scenarioFeedback.className =
+          "feedback success";
+
+        scenarioFeedback.textContent =
+          "Correct. The hazard should be reported and controlled before it causes an accident.";
+
+      } else if (type === "partial") {
+
+        scenarioFeedback.className =
+          "feedback highlight";
+
+        scenarioFeedback.textContent =
+          "Partially correct. Walking carefully around the cable may temporarily protect you, but the hazard remains for other workers.";
+
+      } else {
+
+        scenarioFeedback.className =
+          "feedback danger";
+
+        scenarioFeedback.textContent =
+          "Incorrect. Ignoring a hazard allows the unsafe condition to develop into an accident.";
+      }
+    }
+
+    /* =========================================================
+       QUIZ
+       ========================================================= */
+
+    const safetyQuiz =
+      document.getElementById(
+        "safetyQuiz"
+      );
+
+    const quizResult =
+      document.getElementById(
+        "quizResult"
+      );
+
+    const quizProgressBar =
+      document.getElementById(
+        "progressBar"
+      );
+
+    const quizProgress =
+      document.querySelector(
+        ".progress-box"
+      );
+
+    safetyQuiz.addEventListener(
+      "submit",
+      function (event) {
+
+        event.preventDefault();
+
+        checkQuiz();
+      }
+    );
+
+    function checkQuiz() {
+
+      const questionNames = [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ];
+
+      let score = 0;
+      let answered = 0;
+
+      questionNames.forEach(
+        function (name) {
+
+          const selected =
+            safetyQuiz.querySelector(
+              'input[name="' +
+              name +
+              '"]:checked'
+            );
+
+          if (selected) {
+
+            answered += 1;
+
+            score +=
+              Number(selected.value);
+          }
+        }
+      );
+
+      quizResult.style.display =
+        "block";
+
+      if (
+        answered <
+        questionNames.length
+      ) {
+
+        quizResult.className =
+          "feedback highlight";
+
+        quizResult.textContent =
+          "Please answer all questions before submitting the quiz.";
+
+        return;
+      }
+
+      const percentage =
+        Math.round(
+          (score /
+            questionNames.length) *
+          100
+        );
+
+      quizProgressBar.style.width =
+        percentage + "%";
+
+      quizProgress.setAttribute(
+        "aria-valuenow",
+        String(percentage)
+      );
+
+      if (percentage === 100) {
+
+        quizResult.className =
+          "feedback success";
+
+        quizResult.textContent =
+          "Excellent! You answered all four questions correctly.";
+
+      } else if (
+        percentage >= 75
+      ) {
+
+        quizResult.className =
+          "feedback success";
+
+        quizResult.textContent =
+          "Very good! Your score is " +
+          percentage +
+          "%.";
+
+      } else {
+
+        quizResult.className =
+          "feedback danger";
+
+        quizResult.textContent =
+          "Your score is " +
+          percentage +
+          "%. Review the key points and try again.";
+      }
+    }
+
+    /* Prevent dataset text from being inserted as HTML. */
+
+    function escapeHTML(value) {
+
+      const element =
+        document.createElement("div");
+
+      element.textContent =
+        String(value);
+
+      return element.innerHTML;
+    }
+
+    updateHazardProgress();
+
+  </script>
+
+</body>
+</html>
