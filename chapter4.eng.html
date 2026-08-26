@@ -3,21 +3,34 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 <title>Module 4 | Personal Protective Equipment</title>
 
 <style>
 :root{
   --primary:#123c69;
+  --primary-dark:#0b2545;
   --secondary:#f4b400;
   --accent:#d62828;
   --success:#2a9d8f;
   --bg:#f5f7fa;
   --card:#ffffff;
   --text:#1f2933;
+  --muted:#5f6c7b;
   --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
   margin:0;
@@ -27,8 +40,19 @@ body{
   line-height:1.6;
 }
 
+button,
+select,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
 header{
-  background:linear-gradient(135deg,var(--primary),#0b2545);
+  background:
+    linear-gradient(135deg,var(--primary),var(--primary-dark));
   color:white;
   padding:52px 20px;
   text-align:center;
@@ -59,8 +83,14 @@ section{
   box-shadow:0 8px 24px rgba(0,0,0,.06);
 }
 
-h2{color:var(--primary);margin-top:0}
-h3{color:#0b2545}
+h2{
+  color:var(--primary);
+  margin-top:0;
+}
+
+h3{
+  color:var(--primary-dark);
+}
 
 .grid{
   display:grid;
@@ -75,6 +105,12 @@ h3{color:#0b2545}
   background:white;
 }
 
+.card:hover{
+  transform:translateY(-2px);
+  transition:.2s ease;
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
 .icon{
   font-size:2rem;
   display:block;
@@ -83,7 +119,7 @@ h3{color:#0b2545}
 
 .highlight{
   border-left:6px solid var(--secondary);
-  background:#fff8e1;
+  background:var(--warning-bg);
   padding:18px;
   border-radius:12px;
   margin-top:16px;
@@ -91,24 +127,16 @@ h3{color:#0b2545}
 
 .success{
   border-left:6px solid var(--success);
-  background:#eafaf7;
+  background:var(--success-bg);
   padding:18px;
   border-radius:12px;
 }
 
 .danger{
   border-left:6px solid var(--accent);
-  background:#fff1f1;
+  background:var(--danger-bg);
   padding:18px;
   border-radius:12px;
-}
-
-button, select{
-  font-size:1rem;
-}
-
-button{
-  cursor:pointer;
 }
 
 .submit-btn{
@@ -118,11 +146,12 @@ button{
   padding:12px 18px;
   border-radius:10px;
   margin-top:12px;
+  font-weight:bold;
 }
 
 .submit-btn:hover,
 .submit-btn:focus{
-  background:#0b2545;
+  background:var(--primary-dark);
   outline:3px solid var(--secondary);
   outline-offset:2px;
 }
@@ -145,6 +174,13 @@ button{
   padding:12px;
   border:1px solid var(--border);
   border-radius:10px;
+  background:white;
+}
+
+.ppe-selector select:focus{
+  outline:3px solid rgba(244,180,0,.45);
+  outline-offset:2px;
+  border-color:var(--primary);
 }
 
 .ppe-result{
@@ -153,7 +189,7 @@ button{
   padding:18px;
   border-radius:14px;
   border-left:8px solid var(--success);
-  background:#eafaf7;
+  background:var(--success-bg);
   font-weight:bold;
 }
 
@@ -166,6 +202,10 @@ button{
   margin-bottom:6px;
 }
 
+/* =====================================================
+   DECISION SCENARIO
+   ===================================================== */
+
 .scenario-option{
   display:block;
   width:100%;
@@ -176,11 +216,37 @@ button{
   padding:14px 16px;
   border-radius:12px;
   margin:10px 0;
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease;
 }
 
+/* Light hover for readability */
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  color:var(--text);
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.55);
+  outline-offset:2px;
+}
+
+/* Selected option remains visible and readable */
 .scenario-option.selected{
-  background:#0b2545;
-  color:white;
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+}
+
+.scenario-option.selected:hover,
+.scenario-option.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+  border-color:var(--primary);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
 }
 
 .feedback{
@@ -200,7 +266,20 @@ button{
 .quiz-question label{
   display:block;
   margin:8px 0;
+  padding:10px 12px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#f8fafc;
   cursor:pointer;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question input{
+  margin-right:8px;
 }
 
 .progress-box{
@@ -226,14 +305,23 @@ button{
 
 footer{
   text-align:center;
-  color:#5f6c7b;
+  color:var(--muted);
   padding:30px 20px;
   font-size:.9rem;
 }
 
 @media(max-width:700px){
-  main{padding:14px}
-  section{padding:20px}
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .scenario-option{
+    padding:14px;
+  }
 }
 </style>
 </head>
@@ -242,79 +330,223 @@ footer{
 
 <header>
   <h1>Module 4: Personal Protective Equipment</h1>
-  <p>PPE is important, but it does not automatically make a task safe. It protects workers when hazards cannot be fully eliminated.</p>
+
+  <p>
+    PPE is important, but it does not automatically make a task safe.
+    It protects workers when hazards cannot be fully eliminated.
+  </p>
 </header>
 
 <main>
 
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
 <section>
   <h2>Learning Objectives</h2>
+
   <div class="grid">
-    <div class="card"><span class="icon">🦺</span>Understand the role of PPE in worker protection.</div>
-    <div class="card"><span class="icon">🛡️</span>Recognise the main categories of PPE.</div>
-    <div class="card"><span class="icon">🔍</span>Inspect PPE before use.</div>
-    <div class="card"><span class="icon">✅</span>Select suitable PPE according to the task.</div>
+
+    <div class="card">
+      <span class="icon">🦺</span>
+      Understand the role of PPE in worker protection.
+    </div>
+
+    <div class="card">
+      <span class="icon">🛡️</span>
+      Recognise the main categories of PPE.
+    </div>
+
+    <div class="card">
+      <span class="icon">🔍</span>
+      Inspect PPE before use.
+    </div>
+
+    <div class="card">
+      <span class="icon">✅</span>
+      Select suitable PPE according to the task.
+    </div>
+
   </div>
 </section>
+
+<!-- =====================================================
+     WHAT IS PPE
+     ===================================================== -->
 
 <section>
   <h2>What is PPE?</h2>
+
   <p>
-    Personal Protective Equipment is equipment worn or used by a worker to reduce exposure
-    to hazards that cannot be fully eliminated.
+    Personal Protective Equipment is equipment worn or used by a worker
+    to reduce exposure to hazards that cannot be fully eliminated.
   </p>
 
   <div class="highlight">
-    <strong>Important:</strong> PPE does not remove the hazard. It reduces the likelihood or severity of injury when used correctly.
+    <strong>Important:</strong>
+    PPE does not remove the hazard. It reduces the likelihood or severity
+    of injury when used correctly.
   </div>
 </section>
+
+<!-- =====================================================
+     HIERARCHY OF CONTROLS
+     ===================================================== -->
 
 <section>
   <h2>Why is PPE the last level of protection?</h2>
+
   <p>
-    According to the hierarchy of controls, we should first try to eliminate or reduce the hazard at the source.
-    PPE is used when exposure still remains.
+    According to the hierarchy of controls, we should first try to eliminate
+    or reduce the hazard at the source. PPE is used when exposure still remains.
   </p>
 
   <div class="danger">
-    <strong>Example:</strong> If there is a risk of flying particles, safety glasses are necessary.
-    However, engineering controls such as guards, covers or isolation of the source should also be considered first.
+    <strong>Example:</strong>
+    If there is a risk of flying particles, safety glasses are necessary.
+    However, engineering controls such as guards, covers or isolation of the
+    source should also be considered first.
   </div>
 </section>
+
+<!-- =====================================================
+     PPE CATEGORIES
+     ===================================================== -->
 
 <section>
   <h2>Main Categories of PPE</h2>
 
   <div class="grid">
-    <div class="card"><span class="icon">⛑️</span><h3>Head Protection</h3><p>Safety helmet for falling objects or impact hazards.</p></div>
-    <div class="card"><span class="icon">🥽</span><h3>Eye Protection</h3><p>Safety glasses or face shield for particles, chemicals or splashes.</p></div>
-    <div class="card"><span class="icon">🎧</span><h3>Hearing Protection</h3><p>Earplugs or earmuffs in high-noise areas.</p></div>
-    <div class="card"><span class="icon">😷</span><h3>Respiratory Protection</h3><p>Masks or respirators for dust, vapours or gases.</p></div>
-    <div class="card"><span class="icon">🧤</span><h3>Hand Protection</h3><p>Gloves selected according to the hazard: cuts, heat, chemicals or abrasion.</p></div>
-    <div class="card"><span class="icon">🥾</span><h3>Foot Protection</h3><p>Safety footwear for impact, slipping or puncture hazards.</p></div>
-    <div class="card"><span class="icon">🦺</span><h3>Body Protection</h3><p>High-visibility vests, coveralls, aprons or special protective clothing.</p></div>
-    <div class="card"><span class="icon">🧗</span><h3>Fall Protection</h3><p>Harnesses, lanyards and fall-arrest systems for work at height.</p></div>
+
+    <div class="card">
+      <span class="icon">⛑️</span>
+      <h3>Head Protection</h3>
+      <p>
+        Safety helmet for falling objects or impact hazards.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🥽</span>
+      <h3>Eye Protection</h3>
+      <p>
+        Safety glasses or face shield for particles, chemicals or splashes.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🎧</span>
+      <h3>Hearing Protection</h3>
+      <p>
+        Earplugs or earmuffs in high-noise areas.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">😷</span>
+      <h3>Respiratory Protection</h3>
+      <p>
+        Masks or respirators for dust, vapours or gases.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧤</span>
+      <h3>Hand Protection</h3>
+      <p>
+        Gloves selected according to the hazard: cuts, heat,
+        chemicals or abrasion.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🥾</span>
+      <h3>Foot Protection</h3>
+      <p>
+        Safety footwear for impact, slipping or puncture hazards.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🦺</span>
+      <h3>Body Protection</h3>
+      <p>
+        High-visibility vests, coveralls, aprons or special protective clothing.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧗</span>
+      <h3>Fall Protection</h3>
+      <p>
+        Harnesses, lanyards and fall-arrest systems for work at height.
+      </p>
+    </div>
+
   </div>
 </section>
+
+<!-- =====================================================
+     INSPECTION
+     ===================================================== -->
 
 <section>
   <h2>Inspection Before Use</h2>
 
   <div class="grid">
-    <div class="card"><span class="icon">🔍</span><h3>Is it in good condition?</h3><p>Check for damage, cracks, tears, broken parts or expiry dates.</p></div>
-    <div class="card"><span class="icon">📏</span><h3>Does it fit correctly?</h3><p>PPE must fit properly and must not interfere with safe work.</p></div>
-    <div class="card"><span class="icon">🏷️</span><h3>Is it suitable for the hazard?</h3><p>Not all gloves, filters or glasses are suitable for every task.</p></div>
-    <div class="card"><span class="icon">🧼</span><h3>Is it clean and maintained?</h3><p>Dirty or poorly maintained PPE may lose its effectiveness.</p></div>
+
+    <div class="card">
+      <span class="icon">🔍</span>
+      <h3>Is it in good condition?</h3>
+      <p>
+        Check for damage, cracks, tears, broken parts or expiry dates.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📏</span>
+      <h3>Does it fit correctly?</h3>
+      <p>
+        PPE must fit properly and must not interfere with safe work.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🏷️</span>
+      <h3>Is it suitable for the hazard?</h3>
+      <p>
+        Not all gloves, filters or glasses are suitable for every task.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧼</span>
+      <h3>Is it clean and maintained?</h3>
+      <p>
+        Dirty or poorly maintained PPE may lose its effectiveness.
+      </p>
+    </div>
+
   </div>
 </section>
 
+<!-- =====================================================
+     INTERACTIVE PPE SELECTION
+     ===================================================== -->
+
 <section>
   <h2>Interactive PPE Selection</h2>
-  <p>Select a task to see examples of PPE that may be required.</p>
+
+  <p>
+    Select a task to see examples of PPE that may be required.
+  </p>
 
   <div class="ppe-selector">
+
     <div>
       <label for="taskSelect">Task</label>
+
       <select id="taskSelect">
         <option value="">Select task</option>
         <option value="grinding">Metal grinding</option>
@@ -324,84 +556,267 @@ footer{
       </select>
     </div>
 
-    <button class="submit-btn" onclick="showPPE()">Show PPE</button>
+    <button
+      type="button"
+      class="submit-btn"
+      onclick="showPPE()">
+      Show PPE
+    </button>
+
   </div>
 
-  <div id="ppeResult" class="ppe-result"></div>
+  <div
+    id="ppeResult"
+    class="ppe-result"
+    aria-live="polite">
+  </div>
 </section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
 
 <section>
   <h2>Decision Scenario</h2>
+
   <p>
-    You are about to grind metal. Your safety glasses are scratched and you cannot see clearly.
-    What do you do?
+    You are about to grind metal. Your safety glasses are scratched
+    and you cannot see clearly.
   </p>
 
-  <button class="scenario-option" data-type="wrong" onclick="selectScenario(this)">
+  <p>
+    <strong>What do you do?</strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
     I use them anyway because the task will only take a short time.
   </button>
 
-  <button class="scenario-option" data-type="partial" onclick="selectScenario(this)">
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
     I quickly wipe them and start the task.
   </button>
 
-  <button class="scenario-option" data-type="correct" onclick="selectScenario(this)">
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
     I do not start the task until they are replaced with suitable safety glasses.
   </button>
 
-  <button class="submit-btn" onclick="submitScenario()">Submit Final Answer</button>
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Submit Final Answer
+  </button>
 
-  <div id="scenarioFeedback" class="feedback"></div>
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
 </section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
 
 <section>
   <h2>Mini Quiz</h2>
 
   <form id="quizForm">
+
     <div class="quiz-question">
-      <p><strong>1. PPE:</strong></p>
-      <label><input type="radio" name="q1" value="1"> Reduces exposure to hazards when used correctly.</label>
-      <label><input type="radio" name="q1" value="0"> Always eliminates the hazard.</label>
-      <label><input type="radio" name="q1" value="0"> Replaces training.</label>
+
+      <p>
+        <strong>1. PPE:</strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+        Reduces exposure to hazards when used correctly.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+        Always eliminates the hazard.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+        Replaces training.
+      </label>
+
     </div>
 
     <div class="quiz-question">
-      <p><strong>2. When should PPE be inspected?</strong></p>
-      <label><input type="radio" name="q2" value="1"> Before every use.</label>
-      <label><input type="radio" name="q2" value="0"> Only once a year.</label>
-      <label><input type="radio" name="q2" value="0"> Only after an accident.</label>
+
+      <p>
+        <strong>2. When should PPE be inspected?</strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+        Before every use.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+        Only once a year.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+        Only after an accident.
+      </label>
+
     </div>
 
     <div class="quiz-question">
-      <p><strong>3. Which is the correct practice?</strong></p>
-      <label><input type="radio" name="q3" value="1"> Use PPE suitable for the specific hazard.</label>
-      <label><input type="radio" name="q3" value="0"> Use any gloves that are available.</label>
-      <label><input type="radio" name="q3" value="0"> Continue with damaged PPE if the task is short.</label>
+
+      <p>
+        <strong>3. Which is the correct practice?</strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+        Use PPE suitable for the specific hazard.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+        Use any gloves that are available.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+        Continue with damaged PPE if the task is short.
+      </label>
+
     </div>
 
     <div class="quiz-question">
-      <p><strong>4. In the hierarchy of controls, PPE is:</strong></p>
-      <label><input type="radio" name="q4" value="0"> The first control measure we consider.</label>
-      <label><input type="radio" name="q4" value="1"> The final level of protection.</label>
-      <label><input type="radio" name="q4" value="0"> Always enough on its own.</label>
+
+      <p>
+        <strong>4. In the hierarchy of controls, PPE is:</strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+        The first control measure we consider.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+        The final level of protection.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+        Always enough on its own.
+      </label>
+
     </div>
 
-    <button type="button" class="submit-btn" onclick="checkQuiz()">Submit Quiz</button>
+    <button
+      type="button"
+      class="submit-btn"
+      onclick="checkQuiz()">
+      Submit Quiz
+    </button>
+
   </form>
 
-  <div class="progress-box">
-    <div id="progressBar" class="progress-bar"></div>
+  <div
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
   </div>
 
-  <div id="quizResult" class="feedback"></div>
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
 </section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
 
 <section>
   <h2>Key Takeaways</h2>
-  <p class="takeaway">PPE protects only when it is correctly selected, correctly worn and in good condition.</p>
-  <p class="takeaway">PPE does not remove the hazard. It reduces exposure.</p>
-  <p class="takeaway">Inspect PPE before every use.</p>
-  <p class="takeaway">Do not start work with damaged or unsuitable PPE.</p>
+
+  <p class="takeaway">
+    PPE protects only when it is correctly selected,
+    correctly worn and in good condition.
+  </p>
+
+  <p class="takeaway">
+    PPE does not remove the hazard. It reduces exposure.
+  </p>
+
+  <p class="takeaway">
+    Inspect PPE before every use.
+  </p>
+
+  <p class="takeaway">
+    Do not start work with damaged or unsuitable PPE.
+  </p>
 </section>
 
 </main>
@@ -411,22 +826,37 @@ footer{
 </footer>
 
 <script>
+"use strict";
+
 let selectedScenario = null;
 
+/* =====================================================
+   INTERACTIVE PPE SELECTION
+   ===================================================== */
+
 function showPPE(){
-  const task = document.getElementById("taskSelect").value;
-  const result = document.getElementById("ppeResult");
+
+  const task =
+    document.getElementById("taskSelect").value;
+
+  const result =
+    document.getElementById("ppeResult");
 
   result.style.display = "block";
 
   if(!task){
-    result.innerHTML = "Please select a task.";
+
+    result.innerHTML =
+      "Please select a task.";
+
     return;
   }
 
   const ppeData = {
+
     grinding: `
       <strong>Metal grinding — Example PPE:</strong>
+
       <ul class="ppe-list">
         <li>Safety glasses or face shield</li>
         <li>Gloves suitable for mechanical hazards</li>
@@ -435,8 +865,10 @@ function showPPE(){
         <li>Safety footwear</li>
       </ul>
     `,
+
     chemical: `
       <strong>Chemical handling — Example PPE:</strong>
+
       <ul class="ppe-list">
         <li>Chemical-resistant gloves suitable for the product</li>
         <li>Sealed safety goggles or face shield</li>
@@ -444,16 +876,20 @@ function showPPE(){
         <li>Respiratory protection, if required by the SDS</li>
       </ul>
     `,
+
     forklift: `
       <strong>Working near forklifts — Example PPE:</strong>
+
       <ul class="ppe-list">
         <li>High-visibility vest</li>
         <li>Safety footwear</li>
         <li>Helmet where there is a risk of impact or falling objects</li>
       </ul>
     `,
+
     height: `
       <strong>Working at height — Example PPE:</strong>
+
       <ul class="ppe-list">
         <li>Helmet with chin strap</li>
         <li>Fall protection system, where required</li>
@@ -463,75 +899,200 @@ function showPPE(){
     `
   };
 
-  result.innerHTML = ppeData[task] + "<p><strong>Note:</strong> Final PPE selection must be based on the risk assessment, the work procedure and the manufacturer’s instructions.</p>";
+  result.innerHTML =
+    ppeData[task] +
+    `
+      <p>
+        <strong>Note:</strong>
+        Final PPE selection must be based on the risk assessment,
+        the work procedure and the manufacturer’s instructions.
+      </p>
+    `;
 }
 
+/* =====================================================
+   DECISION SCENARIO
+   ===================================================== */
+
 function selectScenario(button){
-  document.querySelectorAll(".scenario-option").forEach(btn=>{
-    btn.classList.remove("selected");
-  });
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
 
   button.classList.add("selected");
-  selectedScenario = button.dataset.type;
 
-  const feedback = document.getElementById("scenarioFeedback");
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
   feedback.style.display = "none";
+
   feedback.innerHTML = "";
 }
 
 function submitScenario(){
-  const feedback = document.getElementById("scenarioFeedback");
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
 
   if(!selectedScenario){
+
     feedback.style.display = "block";
-    feedback.className = "feedback highlight";
-    feedback.innerHTML = "Please select one answer before submitting.";
+
+    feedback.className =
+      "feedback highlight";
+
+    feedback.innerHTML =
+      "Please select one answer before submitting.";
+
     return;
   }
 
   feedback.style.display = "block";
 
   if(selectedScenario === "correct"){
-    feedback.className = "feedback success";
-    feedback.innerHTML = "Correct. Damaged or unsuitable PPE must not be used. The task should only start when suitable protection is available.";
-  } else if(selectedScenario === "partial"){
-    feedback.className = "feedback highlight";
-    feedback.innerHTML = "Partly correct, but not enough. If safety glasses are scratched and reduce visibility, they must be replaced.";
-  } else {
-    feedback.className = "feedback danger";
-    feedback.innerHTML = "Incorrect. A short task still requires suitable and functional PPE.";
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Correct. Damaged or unsuitable PPE must not be used. " +
+      "The task should only start when suitable protection is available.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback highlight";
+
+    feedback.innerHTML =
+      "Partly correct, but not enough. " +
+      "If safety glasses are scratched and reduce visibility, they must be replaced.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Incorrect. A short task still requires suitable and functional PPE.";
   }
 }
 
+/* =====================================================
+   MINI QUIZ
+   ===================================================== */
+
 function checkQuiz(){
-  const form = document.getElementById("quizForm");
-  const result = document.getElementById("quizResult");
-  const progressBar = document.getElementById("progressBar");
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.querySelector(".progress-box");
 
   let score = 0;
+  let answered = 0;
+
   const total = 4;
 
-  for(let i=1;i<=total;i++){
-    const answer = form.querySelector(`input[name="q"+i]:checked`);
-    if(answer && answer.value === "1"){
-      score++;
+  for(let i = 1; i <= total; i++){
+
+    /*
+      Corrected selector:
+      q1, q2, q3, q4
+    */
+    const answer =
+      form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
     }
   }
 
-  const percentage = Math.round((score / total) * 100);
-  progressBar.style.width = percentage + "%";
+  /*
+    Require all questions to be answered.
+  */
+  if(answered < total){
+
+    result.style.display = "block";
+
+    result.className =
+      "feedback highlight";
+
+    result.innerHTML =
+      "Please answer all four questions before submitting the quiz.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
 
   result.style.display = "block";
 
   if(score === total){
-    result.className = "feedback success";
-    result.innerHTML = `Excellent! You scored ${score}/${total}.`;
-  } else if(score >= 2){
-    result.className = "feedback highlight";
-    result.innerHTML = `Good effort. You scored ${score}/${total}. Review the correct selection and use of PPE.`;
-  } else {
-    result.className = "feedback danger";
-    result.innerHTML = `You scored ${score}/${total}. It is recommended that you review this module.`;
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      `Excellent! You scored ${score}/${total}. ` +
+      "You understand the key PPE principles.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback highlight";
+
+    result.innerHTML =
+      `Good effort. You scored ${score}/${total}. ` +
+      "Review the correct selection, inspection and use of PPE.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      `You scored ${score}/${total}. ` +
+      "It is recommended that you review this module before trying again.";
   }
 }
 </script>
