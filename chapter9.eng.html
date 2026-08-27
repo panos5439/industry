@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Module 9 | Slips, Trips and Falls</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   REALISTIC PHOTO ACTIVITY
+   ===================================================== */
+
+.fall-image-container{
+  position:relative;
+  width:100%;
+
+  margin-top:18px;
+  margin-bottom:16px;
+
+  overflow:hidden;
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  background:#eef4fb;
+
+  box-shadow:
+    0 6px 18px rgba(15,23,42,.08);
+}
+
+.fall-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   HOTSPOTS
+   ===================================================== */
+
+.hotspot{
+  position:absolute;
+  z-index:10;
+
+  width:52px;
+  height:52px;
+
+  display:grid;
+  place-items:center;
+
+  border:4px solid #fff;
+  border-radius:50%;
+
+  background:var(--accent);
+  color:#fff;
+
+  font-size:1.15rem;
+  font-weight:bold;
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.38),
+    0 0 0 2px rgba(214,40,40,.20);
+
+  transition:
+    transform .2s ease,
+    background-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.hotspot:hover,
+.hotspot:focus{
+  transform:scale(1.09);
+
+  outline:4px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.hotspot.found{
+  background:var(--success);
+}
+
+/*
+  HOTSPOT POSITIONS ON slips.png
+
+  1 = Oil / liquid spill
+  2 = Cable across floor
+  3 = Pallet / box obstructing route
+  4 = Unsafe ladder position
+*/
+
+.hs-spill{
+  left:23%;
+  bottom:23%;
+}
+
+.hs-cable{
+  left:52%;
+  bottom:22%;
+}
+
+.hs-box{
+  right:21%;
+  bottom:25%;
+}
+
+.hs-ladder{
+  right:13%;
+  top:31%;
+}
+
+/* =====================================================
+   ACTIVITY STATUS
+   ===================================================== */
+
+.activity-status{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+
+  margin-top:16px;
+  padding:14px 16px;
+
+  border-radius:12px;
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   SCENARIO OPTIONS
+   ===================================================== */
+
+.scenario-option{
+  display:block;
+  width:100%;
+
+  margin:10px 0;
+  padding:14px 16px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  color:var(--text);
+
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.scenario-option.selected:hover,
+.scenario-option.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  color:var(--text);
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* =====================================================
+   QUIZ PROGRESS
+   ===================================================== */
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .hotspot{
+    width:43px;
+    height:43px;
+    font-size:.95rem;
+  }
+
+  .hs-spill{
+    left:20%;
+    bottom:21%;
+  }
+
+  .hs-cable{
+    left:49%;
+    bottom:20%;
+  }
+
+  .hs-box{
+    right:18%;
+    bottom:23%;
+  }
+
+  .hs-ladder{
+    right:10%;
+    top:29%;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Module 9: Slips, Trips and Falls
+  </h1>
+
+  <p>
+    Slips, trips and falls may appear to be simple incidents,
+    but they can cause serious injuries,
+    fractures and time away from work.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Learning Objectives</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">👣</span>
+      Distinguish between slips,
+      trips and falls.
+    </div>
+
+    <div class="card">
+      <span class="icon">⚠️</span>
+      Recognise common
+      causes of falls.
+    </div>
+
+    <div class="card">
+      <span class="icon">🧹</span>
+      Apply good housekeeping
+      in the workplace.
+    </div>
+
+    <div class="card">
+      <span class="icon">🗣️</span>
+      Report spills,
+      obstructions and unsafe conditions immediately.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SLIP TRIP FALL
+     ===================================================== -->
+
+<section>
+
+  <h2>Slip, Trip, Fall</h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🧊</span>
+
+      <h3>Slip</h3>
+
+      <p>
+        A slip occurs when the foot
+        loses traction with the floor surface.
+      </p>
+
+      <p>
+        <strong>Example:</strong>
+        Oil, water, dust
+        or a slippery surface.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔌</span>
+
+      <h3>Trip</h3>
+
+      <p>
+        A trip occurs when the foot
+        strikes an obstruction
+        and the body loses balance.
+      </p>
+
+      <p>
+        <strong>Example:</strong>
+        A cable, pallet,
+        tool or uneven floor surface.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⬇️</span>
+
+      <h3>Fall</h3>
+
+      <p>
+        A fall occurs when the body drops
+        to the same level or from a height.
+      </p>
+
+      <p>
+        <strong>Example:</strong>
+        Falling from a ladder,
+        platform or onto the production floor.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Key message:</strong>
+
+    Many falls begin
+    with small everyday hazards
+    that were not corrected in time.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     COMMON CAUSES
+     ===================================================== -->
+
+<section>
+
+  <h2>Common Causes</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">💧</span>
+      <h3>Spills</h3>
+      <p>
+        Water, oil, grease,
+        chemicals or cleaning fluids on the floor.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+      <h3>Obstructions</h3>
+      <p>
+        Boxes, pallets,
+        tools or materials
+        left in walkways.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔌</span>
+      <h3>Cables</h3>
+      <p>
+        Cables crossing walkways
+        or work areas.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">💡</span>
+      <h3>Poor Lighting</h3>
+      <p>
+        Shadows, low lighting
+        or failed lamps.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🪜</span>
+      <h3>Unsafe Ladder Use</h3>
+      <p>
+        A ladder positioned incorrectly,
+        unstable or not checked before use.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👟</span>
+      <h3>Unsuitable Footwear</h3>
+      <p>
+        Footwear with poor grip
+        or footwear in poor condition.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PREVENTION
+     ===================================================== -->
+
+<section>
+
+  <h2>Prevention in Practice</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🧹</span>
+      <h3>Clear Walkways</h3>
+      <p>
+        Keep walkways,
+        exits and access points
+        free from obstructions.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🟡</span>
+      <h3>Immediate Warning</h3>
+      <p>
+        Mark spills or wet areas immediately
+        until they are controlled.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧽</span>
+      <h3>Cleaning</h3>
+      <p>
+        Clean the spill
+        or arrange for it to be cleaned safely.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📢</span>
+      <h3>Reporting</h3>
+      <p>
+        Report floor damage,
+        poor lighting,
+        obstructions and unsafe conditions.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="success">
+
+    <strong>Remember:</strong>
+
+    Good housekeeping
+    is not about appearance.
+    It is a fundamental accident-prevention measure.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     LADDER
+     ===================================================== -->
+
+<section>
+
+  <h2>Safe Ladder Use</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔍</span>
+      <h3>Inspect Before Use</h3>
+      <p>
+        Check for damage,
+        broken rungs,
+        slippery feet or instability.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📐</span>
+      <h3>Correct Positioning</h3>
+      <p>
+        The ladder must be stable
+        and positioned appropriately
+        for the type of ladder and task.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🤲</span>
+      <h3>Three Points of Contact</h3>
+      <p>
+        Maintain three points of contact
+        when climbing or descending
+        where this is applicable.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚫</span>
+      <h3>Do Not Overreach</h3>
+      <p>
+        Do not lean excessively
+        to reach a distant point.
+        Climb down and reposition the ladder.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE PHOTO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Interactive Activity: Find the Fall Hazards
+  </h2>
+
+  <p>
+    Select the four red markers
+    to identify slip, trip and fall hazards
+    in the industrial workplace.
+  </p>
+
+  <div class="fall-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/slips.png"
+      alt="Industrial workplace with a floor spill, cable across the walkway, pallet with a box and a mobile access ladder"
+      class="fall-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+    <!-- SPILL -->
+
+    <button
+      type="button"
+      class="hotspot hs-spill"
+      data-original="!"
+      data-message="<strong>Floor spill:</strong> Oil or another liquid can reduce traction and cause a slip. The area should be controlled, warning provided where required, and the spill dealt with promptly."
+      onclick="findFallHazard(this)">
+      !
+    </button>
+
+    <!-- CABLE -->
+
+    <button
+      type="button"
+      class="hotspot hs-cable"
+      data-original="!"
+      data-message="<strong>Cable across the walkway:</strong> The cable creates a trip hazard. Cables should be routed or protected appropriately so they do not obstruct pedestrian routes."
+      onclick="findFallHazard(this)">
+      !
+    </button>
+
+    <!-- BOX / PALLET -->
+
+    <button
+      type="button"
+      class="hotspot hs-box"
+      data-original="!"
+      data-message="<strong>Obstruction in the route:</strong> The pallet and box are positioned in or very close to the walkway. Access routes should remain clear and unobstructed."
+      onclick="findFallHazard(this)">
+      !
+    </button>
+
+    <!-- LADDER -->
+
+    <button
+      type="button"
+      class="hotspot hs-ladder"
+      data-original="!"
+      data-message="<strong>Ladder / access equipment:</strong> A ladder should only be used when suitable for the task, positioned securely and used in accordance with safe-use instructions."
+      onclick="findFallHazard(this)">
+      !
+    </button>
+
+  </div>
+
+  <div class="activity-status">
+
+    <strong>
+      Hazards identified:
+      <span id="fallScore">0</span>/4
+    </strong>
+
+    <span id="fallInstruction">
+      Select all four markers.
+    </span>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetFallActivity()">
+    Restart Activity
+  </button>
+
+  <div
+    id="fallFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>Decision Scenario</h2>
+
+  <p>
+    You notice an oil spill
+    in a walkway used by workers
+    and material-handling equipment.
+  </p>
+
+  <p>
+    <strong>What should you do?</strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Walk around it carefully
+    because it is not my responsibility.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Tell someone later
+    after I finish my current task.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Warn others and control the area immediately
+    as far as I can do so safely,
+    and report the spill
+    so that it can be dealt with without delay.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Submit Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Reset Scenario
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <!-- QUESTION 1 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. What is a slip?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        When the foot loses traction with the floor.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        When the foot strikes an obstacle.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Only when someone falls from height.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 2 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Which is a safe practice?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Keep walkways free from obstructions.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Leave cables across a walkway
+        if the task is short.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Carefully step over or around spills.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 3 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. If I see a spill on the floor:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        I control or warn others about the area,
+        report it immediately
+        and ensure it is dealt with
+        in accordance with the workplace procedure.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        I ignore it
+        if it does not affect me.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        I wait for someone else to notice it.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 4 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. When climbing or descending a ladder, which practice is important?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Maintain three points of contact
+        where applicable.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Maintain only one point of contact.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Stretch as far as possible
+        to avoid repositioning the ladder.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Submit Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Reset Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Key Takeaways</h2>
+
+  <div class="takeaway">
+    <span>💧</span>
+    <div>
+      Small spills can cause serious injuries.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🚶</span>
+    <div>
+      Clear, unobstructed walkways
+      support safer movement.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>📢</span>
+    <div>
+      Spills and other hazards
+      should be reported immediately.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🔌</span>
+    <div>
+      Cables, tools and materials
+      should not create obstructions in walkways.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🪜</span>
+    <div>
+      Use ladders correctly,
+      maintain safe contact
+      and do not overreach.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Industrial Health & Safety Training | Module 9
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   FALL HAZARD ACTIVITY
+   ===================================================== */
+
+let fallHazardsFound = 0;
+const totalFallHazards = 4;
+
+function findFallHazard(button){
+
+  const feedback =
+    document.getElementById("fallFeedback");
+
+  const score =
+    document.getElementById("fallScore");
+
+  const instruction =
+    document.getElementById("fallInstruction");
+
+  if(!button.classList.contains("found")){
+
+    button.classList.add("found");
+
+    button.textContent = "✓";
+
+    fallHazardsFound++;
+
+    score.textContent =
+      fallHazardsFound;
+  }
+
+  feedback.style.display = "block";
+  feedback.className = "feedback success";
+  feedback.innerHTML = button.dataset.message;
+
+  if(fallHazardsFound === totalFallHazards){
+
+    instruction.textContent =
+      "Activity completed.";
+
+    feedback.innerHTML +=
+      "<br><br><strong>Well done!</strong> " +
+      "You identified all four key hazards.";
+  }
+}
+
+function resetFallActivity(){
+
+  fallHazardsFound = 0;
+
+  document
+    .querySelectorAll(".hotspot")
+    .forEach(function(button){
+
+      button.classList.remove("found");
+
+      button.textContent =
+        button.dataset.original;
+
+    });
+
+  document.getElementById(
+    "fallScore"
+  ).textContent = "0";
+
+  document.getElementById(
+    "fallInstruction"
+  ).textContent =
+    "Select all four markers.";
+
+  const feedback =
+    document.getElementById("fallFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "Immediate warning, controlling the area where this can be done safely, " +
+      "and prompt reporting help reduce the risk to everyone.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "<strong>This is not enough.</strong> " +
+      "Delaying action leaves the hazard active " +
+      "and other workers may still be exposed.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "The unsafe condition should not be ignored. " +
+      "The spill should be reported and the area controlled without unnecessary delay.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Please answer all four questions before submitting.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Excellent!</strong> You scored " +
+      score + "/" + total +
+      ". You understand the key principles for preventing slips, trips and falls.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Good effort.</strong> You scored " +
+      score + "/" + total +
+      ". Review the causes of slips and trips, " +
+      "good housekeeping and safe ladder use.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score + "/" + total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

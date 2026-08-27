@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ενότητα 8 | Χειρωνακτική Διακίνηση Φορτίων</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+.step-card{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+  transition:background-color .2s ease,transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  margin-left:8px;
+  background:#52606d;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   POSTURE IMAGE
+   ===================================================== */
+
+.posture-image-wrapper{
+  margin-top:20px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
+}
+
+.posture-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   POSTURE CHOICES
+   ===================================================== */
+
+.posture-choices{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:18px;
+}
+
+.posture-choice{
+  width:100%;
+  min-height:132px;
+  padding:16px;
+
+  border:2px solid var(--border);
+  border-radius:14px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease,
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.posture-choice:hover,
+.posture-choice:focus{
+  background:#dcecff;
+  color:var(--text);
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.posture-choice.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:3px solid var(--primary);
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.posture-choice.selected:hover,
+.posture-choice.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+}
+
+.choice-letter{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  margin-bottom:10px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-size:1.15rem;
+  font-weight:bold;
+}
+
+.posture-choice strong{
+  display:block;
+  margin-bottom:4px;
+  color:inherit;
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+.scenario-option{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:14px 16px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  color:var(--text);
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  border:2px solid var(--primary);
+  color:var(--primary-dark);
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+  margin-top:18px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--success),#52b788);
+  transition:width .4s ease;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin:14px 0;
+  padding:15px;
+  border-radius:12px;
+  background:var(--info-bg);
+  color:var(--primary-dark);
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .posture-choices{
+    grid-template-columns:1fr;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 8: Χειρωνακτική Διακίνηση Φορτίων
+  </h1>
+
+  <p>
+    Η χειρωνακτική διακίνηση φορτίων είναι καθημερινή εργασία
+    στη βιομηχανία, αλλά η λανθασμένη τεχνική μπορεί να προκαλέσει
+    τραυματισμούς στη μέση, στους ώμους, στα χέρια και στα γόνατα.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Στόχοι Μάθησης</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">📦</span>
+      Αναγνωρίζει κινδύνους από χειρωνακτική διακίνηση φορτίων.
+    </div>
+
+    <div class="card">
+      <span class="icon">🧍</span>
+      Εφαρμόζει βασικές αρχές σωστής στάσης σώματος.
+    </div>
+
+    <div class="card">
+      <span class="icon">🛠️</span>
+      Χρησιμοποιεί βοηθητικά μέσα όπου απαιτείται.
+    </div>
+
+    <div class="card">
+      <span class="icon">✅</span>
+      Αποφεύγει ανύψωση όταν το φορτίο δεν είναι ασφαλές.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DEFINITION
+     ===================================================== -->
+
+<section>
+
+  <h2>Τι είναι η Χειρωνακτική Διακίνηση;</h2>
+
+  <p>
+    Χειρωνακτική διακίνηση είναι κάθε εργασία όπου
+    ο εργαζόμενος σηκώνει, μεταφέρει, σπρώχνει,
+    τραβά, κρατά ή τοποθετεί ένα φορτίο
+    χρησιμοποιώντας τη δύναμη του σώματός του.
+  </p>
+
+  <div class="highlight">
+
+    <strong>Σημαντικό:</strong>
+
+    Δεν είναι επικίνδυνο μόνο το βάρος.
+    Κίνδυνο δημιουργούν επίσης η στάση σώματος,
+    η απόσταση μεταφοράς, η συχνότητα,
+    η κακή λαβή, το περιβάλλον εργασίας
+    και η πίεση χρόνου.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>Πότε ένα Φορτίο γίνεται Επικίνδυνο;</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🏋️</span>
+      <h3>Είναι πολύ βαρύ</h3>
+      <p>
+        Αν απαιτεί υπερβολική δύναμη
+        ή δεν μπορεί να ελεγχθεί με ασφάλεια.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📐</span>
+      <h3>Έχει δύσκολο σχήμα</h3>
+      <p>
+        Μεγάλο, ασταθές, αιχμηρό
+        ή χωρίς κατάλληλα σημεία λαβής.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">↔️</span>
+      <h3>Είναι μακριά από το σώμα</h3>
+      <p>
+        Όσο πιο μακριά βρίσκεται το φορτίο,
+        τόσο αυξάνεται η μηχανική επιβάρυνση της μέσης.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔁</span>
+      <h3>Επαναλαμβάνεται συχνά</h3>
+      <p>
+        Οι συχνές επαναλήψεις αυξάνουν
+        την κόπωση και τον κίνδυνο τραυματισμού.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚧</span>
+      <h3>Ο χώρος δεν είναι ασφαλής</h3>
+      <p>
+        Ολισθηρό δάπεδο, εμπόδια,
+        κακός φωτισμός ή στενοί διάδρομοι
+        αυξάνουν τον κίνδυνο.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⏱️</span>
+      <h3>Υπάρχει πίεση χρόνου</h3>
+      <p>
+        Η βιασύνη μπορεί να οδηγήσει
+        σε λανθασμένη στάση και κακές αποφάσεις.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SAFE LIFTING TECHNIQUE
+     ===================================================== -->
+
+<section>
+
+  <h2>Βασική Τεχνική Ασφαλούς Ανύψωσης</h2>
+
+  <div class="grid">
+
+    <div class="card step-card">
+      <h3>1. Σκέψου πριν σηκώσεις</h3>
+      <p>
+        Έλεγξε το βάρος, τη διαδρομή,
+        το σημείο τοποθέτησης
+        και αν χρειάζεσαι βοήθεια.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>2. Πλησίασε το φορτίο</h3>
+      <p>
+        Κράτησε το φορτίο
+        όσο πιο κοντά γίνεται στο σώμα.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>3. Σταθερή βάση</h3>
+      <p>
+        Τοποθέτησε τα πόδια σταθερά
+        ώστε να έχεις καλή ισορροπία.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>4. Λύγισε τα γόνατα</h3>
+      <p>
+        Χρησιμοποίησε τα πόδια
+        και διατήρησε την πλάτη
+        όσο γίνεται σε ουδέτερη θέση.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>5. Μην στρίβεις τον κορμό</h3>
+      <p>
+        Αν πρέπει να αλλάξεις κατεύθυνση,
+        γύρισε ολόκληρο το σώμα
+        μετακινώντας τα πόδια.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>6. Άφησε το φορτίο ελεγχόμενα</h3>
+      <p>
+        Τοποθέτησε το φορτίο
+        με ελεγχόμενη κίνηση.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="danger">
+    <strong>Μην προσπαθείς να αποδείξεις δύναμη.</strong>
+    Αν το φορτίο είναι βαρύ, ασταθές ή άβολο,
+    ζήτησε βοήθεια ή χρησιμοποίησε
+    κατάλληλο μηχανικό μέσο.
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MECHANICAL AIDS
+     ===================================================== -->
+
+<section>
+
+  <h2>Χρήση Βοηθητικών Μέσων</h2>
+
+  <p>
+    Συχνά η καλύτερη λύση δεν είναι να σηκώσεις καλύτερα,
+    αλλά να αποφύγεις εντελώς την περιττή ανύψωση.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🛒</span>
+      <h3>Καρότσια</h3>
+      <p>
+        Για μεταφορά κιβωτίων,
+        εργαλείων ή υλικών
+        σε μεγαλύτερες αποστάσεις.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🏗️</span>
+      <h3>Ανυψωτικά Μέσα</h3>
+      <p>
+        Παλάγκα, γερανογέφυρες,
+        ανυψωτικά τραπέζια
+        ή περονοφόρα.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🤝</span>
+      <h3>Ομαδική Ανύψωση</h3>
+      <p>
+        Όταν το φορτίο είναι μεγάλο ή ασταθές,
+        απαιτείται συντονισμός
+        και σαφής επικοινωνία.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+      <h3>Μείωση Βάρους</h3>
+      <p>
+        Χώρισε το φορτίο
+        σε μικρότερα μέρη όπου είναι εφικτό.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE POSTURE ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>Διαδραστική Άσκηση: Ποια στάση είναι σωστή;</h2>
+
+  <p>
+    Παρατήρησε προσεκτικά τις τρεις στάσεις
+    στην εικόνα και επίλεξε Α, Β ή Γ.
+  </p>
+
+  <div class="posture-image-wrapper">
+
+    <img
+      src="https://panos5439.github.io/industry/box.png"
+      alt="Τρεις στάσεις εργαζομένου κατά τη χειρωνακτική ανύψωση κιβωτίου"
+      class="posture-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+  </div>
+
+  <div class="posture-choices">
+
+    <button
+      type="button"
+      class="posture-choice"
+      data-type="correct"
+      onclick="selectPosture(this)"
+      aria-pressed="false">
+
+      <span class="choice-letter">Α</span>
+
+      <strong>Στάση Α</strong>
+
+      Φορτίο κοντά στο σώμα,
+      σταθερά πόδια,
+      χωρίς στρίψιμο κορμού.
+
+    </button>
+
+    <button
+      type="button"
+      class="posture-choice"
+      data-type="wrong-b"
+      onclick="selectPosture(this)"
+      aria-pressed="false">
+
+      <span class="choice-letter">Β</span>
+
+      <strong>Στάση Β</strong>
+
+      Λύγισμα από τη μέση
+      και φορτίο μακριά από το σώμα.
+
+    </button>
+
+    <button
+      type="button"
+      class="posture-choice"
+      data-type="wrong-c"
+      onclick="selectPosture(this)"
+      aria-pressed="false">
+
+      <span class="choice-letter">Γ</span>
+
+      <strong>Στάση Γ</strong>
+
+      Σήκωμα φορτίου
+      με στρίψιμο κορμού.
+
+    </button>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitPosture()">
+    Έλεγχος Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetPosture()">
+    Επαναφορά Άσκησης
+  </button>
+
+  <div
+    id="postureFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>Σενάριο Απόφασης</h2>
+
+  <p>
+    Πρέπει να μεταφέρεις ένα βαρύ κιβώτιο
+    σε απόσταση 30 μέτρων.
+    Το κιβώτιο δεν έχει καλή λαβή
+    και η διαδρομή περιλαμβάνει σκαλοπάτι.
+  </p>
+
+  <p>
+    <strong>Τι κάνεις;</strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Το σηκώνω μόνος μου
+    για να τελειώσω γρήγορα.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Το σηκώνω προσεκτικά
+    και κάνω μικρά βήματα.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Σταματώ, αξιολογώ την εργασία
+    και ζητώ βοήθεια
+    ή κατάλληλο βοηθητικό μέσο.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form id="quizForm" onsubmit="return false;">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Τι αυξάνει τον κίνδυνο στη χειρωνακτική διακίνηση;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        Φορτίο μακριά από το σώμα και στρίψιμο κορμού.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Σταθερή βάση ποδιών.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Χρήση καροτσιού.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Ποια είναι σωστή πρακτική πριν από την ανύψωση;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Σκέφτομαι τη διαδρομή και το φορτίο πριν ξεκινήσω.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Σηκώνω πρώτα και σκέφτομαι μετά.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Σηκώνω μόνος μου για να μη χάσω χρόνο.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Αν το φορτίο είναι πολύ βαρύ ή άβολο:
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        Ζητώ βοήθεια ή χρησιμοποιώ κατάλληλο βοηθητικό μέσο.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Το σηκώνω γρήγορα.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Το κρατάω μακριά από το σώμα.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Όταν αλλάζω κατεύθυνση με φορτίο:
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        Γυρίζω με τα πόδια, όχι στρίβοντας τη μέση.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Στρίβω γρήγορα τον κορμό.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Κρατάω το φορτίο όσο πιο μακριά μπορώ.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Βασικά Σημεία</h2>
+
+  <div class="takeaway">
+    <span>🧠</span>
+    <div>
+      Σκέψου πριν σηκώσεις.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>📦</span>
+    <div>
+      Κράτα το φορτίο κοντά στο σώμα.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>↩️</span>
+    <div>
+      Μην στρίβεις τη μέση όταν κρατάς φορτίο.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛒</span>
+    <div>
+      Χρησιμοποίησε βοηθητικά μέσα
+      όταν το φορτίο είναι βαρύ,
+      άβολο ή ασταθές.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛡️</span>
+    <div>
+      Η ασφαλέστερη επιλογή είναι συχνά
+      να αποφύγεις την περιττή χειρωνακτική ανύψωση.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 8
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   POSTURE ACTIVITY
+   ===================================================== */
+
+let selectedPosture = null;
+
+function selectPosture(button){
+
+  const buttons =
+    document.querySelectorAll(".posture-choice");
+
+  buttons.forEach(function(option){
+    option.classList.remove("selected");
+    option.setAttribute("aria-pressed","false");
+  });
+
+  button.classList.add("selected");
+  button.setAttribute("aria-pressed","true");
+
+  selectedPosture = button.dataset.type;
+
+  const feedback =
+    document.getElementById("postureFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitPosture(){
+
+  const feedback =
+    document.getElementById("postureFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedPosture){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε Α, Β ή Γ πριν από τον έλεγχο.";
+
+    return;
+  }
+
+  if(selectedPosture === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά — Στάση Α.</strong> " +
+      "Το φορτίο παραμένει κοντά στο σώμα, " +
+      "τα πόδια παρέχουν σταθερή βάση " +
+      "και αποφεύγεται το στρίψιμο του κορμού.";
+
+  }else if(selectedPosture === "wrong-b"){
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Όχι — η Στάση Β δεν είναι η ασφαλέστερη επιλογή.</strong> " +
+      "Το λύγισμα από τη μέση και η διατήρηση του φορτίου " +
+      "μακριά από το σώμα αυξάνουν τη μηχανική επιβάρυνση.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Όχι — η Στάση Γ δεν είναι η ασφαλέστερη επιλογή.</strong> " +
+      "Η ανύψωση ή μεταφορά φορτίου με στρίψιμο του κορμού " +
+      "αυξάνει την επιβάρυνση. " +
+      "Για αλλαγή κατεύθυνσης μετακίνησε τα πόδια και γύρισε ολόκληρο το σώμα.";
+  }
+}
+
+function resetPosture(){
+
+  selectedPosture = null;
+
+  document
+    .querySelectorAll(".posture-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+      option.setAttribute("aria-pressed","false");
+
+    });
+
+  const feedback =
+    document.getElementById("postureFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Όταν το φορτίο είναι βαρύ ή άβολο και η διαδρομή " +
+      "παρουσιάζει πρόσθετους κινδύνους, πρέπει πρώτα να αξιολογηθεί η εργασία " +
+      "και να χρησιμοποιηθεί κατάλληλη βοήθεια ή μηχανικό μέσο.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "<strong>Δεν είναι η καλύτερη επιλογή.</strong> " +
+      "Η προσεκτική κίνηση βοηθά, αλλά δεν αντιμετωπίζει επαρκώς " +
+      "το βάρος, την κακή λαβή, την απόσταση και το σκαλοπάτι.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Η βιασύνη και η ατομική μεταφορά ενός βαριού ή άβολου φορτίου " +
+      "αυξάνουν σημαντικά τον κίνδυνο τραυματισμού.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className = "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round((score / total) * 100);
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className = "feedback success";
+
+    result.innerHTML =
+      "<strong>Άριστα!</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Κατανοείς τις βασικές αρχές της ασφαλούς χειρωνακτικής διακίνησης.";
+
+  }else if(score >= 2){
+
+    result.className = "feedback warning";
+
+    result.innerHTML =
+      "<strong>Καλή προσπάθεια.</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Ξαναδές τη σωστή στάση σώματος, " +
+      "τη θέση του φορτίου και τη χρήση βοηθητικών μέσων.";
+
+  }else{
+
+    result.className = "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score + "/" + total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector('input[name="q1"]');
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

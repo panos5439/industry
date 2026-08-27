@@ -1,0 +1,2433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Module 10 | Chemicals & Safe Handling</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   INDUSTRIAL CHEMICAL PROCESS
+   ===================================================== */
+
+.process-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(210px,1fr));
+  gap:16px;
+
+  margin-top:20px;
+}
+
+.process-card{
+  position:relative;
+
+  padding:22px 18px 18px;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  background:#f8fafc;
+}
+
+.process-number{
+  width:38px;
+  height:38px;
+
+  display:grid;
+  place-items:center;
+
+  margin-bottom:12px;
+
+  border-radius:50%;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+}
+
+/* =====================================================
+   GHS GRID
+   ===================================================== */
+
+.ghs-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+
+  gap:18px;
+
+  margin-top:20px;
+}
+
+.ghs-item{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+
+  min-height:175px;
+
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  background:#fff;
+
+  box-shadow:
+    0 4px 12px rgba(15,23,42,.05);
+}
+
+.ghs-icon{
+  flex:0 0 82px;
+
+  width:82px;
+  height:82px;
+
+  display:grid;
+  place-items:center;
+
+  padding:4px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#fff;
+}
+
+.ghs-icon img{
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+}
+
+.ghs-content{
+  flex:1;
+  min-width:0;
+}
+
+.ghs-title{
+  margin:0 0 5px;
+
+  color:var(--primary-dark);
+
+  font-weight:bold;
+  font-size:1.05rem;
+}
+
+.ghs-sub{
+  margin:0 0 7px;
+
+  color:var(--muted);
+}
+
+.ghs-content ul{
+  margin:7px 0 0;
+  padding-left:20px;
+}
+
+/* =====================================================
+   INTERACTIVE RISK ACTIVITY
+   ===================================================== */
+
+.risk-options{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(240px,1fr));
+
+  gap:14px;
+
+  margin-top:20px;
+}
+
+.risk-choice{
+  width:100%;
+
+  min-height:160px;
+
+  padding:18px;
+
+  border:2px solid var(--border);
+  border-radius:14px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease,
+    box-shadow .2s ease;
+}
+
+.risk-choice:hover,
+.risk-choice:focus{
+  background:#dcecff;
+  color:var(--text);
+
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.risk-choice.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:3px solid var(--primary);
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.risk-letter{
+  width:38px;
+  height:38px;
+
+  display:grid;
+  place-items:center;
+
+  margin-bottom:10px;
+
+  border-radius:50%;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+}
+
+/* =====================================================
+   SCENARIO OPTIONS
+   ===================================================== */
+
+.scenario-option{
+  display:block;
+
+  width:100%;
+
+  margin:10px 0;
+  padding:14px 16px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* =====================================================
+   QUIZ PROGRESS
+   ===================================================== */
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .ghs-item{
+    flex-direction:column;
+  }
+
+  .ghs-icon{
+    width:72px;
+    height:72px;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Module 10: Chemicals & Safe Handling
+  </h1>
+
+  <p>
+    Chemicals are used
+    in many industrial processes,
+    maintenance activities,
+    cleaning operations and production tasks.
+
+    Safe use begins
+    with correctly identifying the product
+    and understanding its hazards.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Learning Objectives</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🧪</span>
+      Recognise key
+      chemical hazards in an industrial workplace.
+    </div>
+
+    <div class="card">
+      <span class="icon">🏷️</span>
+      Understand the importance
+      of labels and Safety Data Sheets.
+    </div>
+
+    <div class="card">
+      <span class="icon">🦺</span>
+      Identify the required
+      protective measures and PPE.
+    </div>
+
+    <div class="card">
+      <span class="icon">🚨</span>
+      Respond appropriately
+      to a spill, exposure or other chemical incident.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     10.1 INDUSTRIAL CHEMICALS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    10.1 Where Do We Encounter Chemicals in Industry?
+  </h2>
+
+  <p>
+    Chemicals may be used
+    in many different activities
+    throughout an industrial facility.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🧽</span>
+
+      <h3>Cleaning & Degreasing</h3>
+
+      <p>
+        Cleaners,
+        degreasers,
+        disinfectants
+        and solvents.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🛢️</span>
+
+      <h3>Oils & Lubricants</h3>
+
+      <p>
+        Machine lubricants,
+        hydraulic fluids
+        and industrial oils.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🎨</span>
+
+      <h3>Paints & Solvents</h3>
+
+      <p>
+        Paints,
+        thinners,
+        adhesives
+        and other coating materials.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🧯</span>
+
+      <h3>Gases & Cylinders</h3>
+
+      <p>
+        Oxygen,
+        nitrogen,
+        propane
+        and other gases under pressure.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🧪</span>
+
+      <h3>Acids & Alkalis</h3>
+
+      <p>
+        Corrosive products
+        used in cleaning
+        or production processes.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔧</span>
+
+      <h3>Maintenance</h3>
+
+      <p>
+        Sprays,
+        cleaners,
+        adhesives,
+        lubricants and specialised maintenance chemicals.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Key message:</strong>
+
+    A substance should not be considered safe
+    simply because it is used every day
+    or because only a small amount is present.
+
+    First identify the product
+    and read the hazard information.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     10.2 RISKS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    10.2 Main Hazards from Chemicals
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">👁️</span>
+
+      <h3>Eye or Skin Contact</h3>
+
+      <p>
+        Contact may cause
+        irritation,
+        burns
+        or serious injury.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🫁</span>
+
+      <h3>Inhalation</h3>
+
+      <p>
+        Vapours,
+        gases,
+        mists or dusts
+        may affect the respiratory system.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔥</span>
+
+      <h3>Fire / Explosion</h3>
+
+      <p>
+        Some substances
+        may ignite
+        from heat,
+        a spark or a flame.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⚗️</span>
+
+      <h3>Incompatible Chemicals</h3>
+
+      <p>
+        Mixing
+        incompatible products
+        may cause
+        a hazardous reaction.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🧴</span>
+
+      <h3>Incorrect Transfer</h3>
+
+      <p>
+        A chemical without the correct label
+        can result
+        in misuse
+        or serious exposure.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🌊</span>
+
+      <h3>Environmental Pollution</h3>
+
+      <p>
+        Spills or incorrect disposal
+        can affect
+        drains,
+        soil and the aquatic environment.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     10.3 BEFORE USING
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    10.3 Before Using a Chemical
+  </h2>
+
+  <div class="process-grid">
+
+    <div class="process-card">
+
+      <div class="process-number">1</div>
+
+      <h3>Identify the Product</h3>
+
+      <p>
+        Make sure you know
+        exactly which product you are using
+        and what task it is intended for.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">2</div>
+
+      <h3>Read the Label</h3>
+
+      <p>
+        Check the pictograms,
+        warnings
+        and key safety instructions.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">3</div>
+
+      <h3>Check the SDS</h3>
+
+      <p>
+        Use the Safety Data Sheet
+        for information about hazards,
+        protection,
+        storage and emergency actions.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">4</div>
+
+      <h3>Check Protective Measures</h3>
+
+      <p>
+        Make sure
+        the required PPE,
+        ventilation
+        and safe working conditions are available.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Never use an unknown product.</strong>
+
+    If a container has no label
+    or you cannot confirm
+    what it contains,
+    do not use it.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     GHS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    10.4 Chemical Hazard Pictograms (GHS)
+  </h2>
+
+  <p>
+    The following are the same pictograms
+    used in the original training material.
+
+    A pictogram provides a hazard warning,
+    but the complete assessment
+    must be based on the label
+    and the SDS for the specific product.
+  </p>
+
+  <div class="ghs-grid">
+
+    <!-- SKULL -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/5/58/GHS-pictogram-skull.svg"
+          alt="GHS skull and crossbones pictogram"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Acute Toxicity
+        </div>
+
+        <p class="ghs-sub">
+          Examples:
+          toxic pesticides,
+          hydrogen sulfide,
+          some strong solvents.
+        </p>
+
+        <ul>
+          <li>
+            Risk of severe poisoning
+            through inhalation,
+            swallowing or contact.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- FLAMMABLE -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6d/GHS-pictogram-flamme.svg"
+          alt="GHS flammable pictogram"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Flammable
+        </div>
+
+        <p class="ghs-sub">
+          Examples:
+          alcohols,
+          gasoline,
+          aerosols,
+          solvents.
+        </p>
+
+        <ul>
+          <li>
+            May ignite
+            from heat,
+            flame or a spark.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- OXIDISING -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/e/e5/GHS-pictogram-rondflam.svg"
+          alt="GHS oxidising pictogram"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Oxidising
+        </div>
+
+        <p class="ghs-sub">
+          Examples:
+          hydrogen peroxide,
+          nitrates,
+          some bleaching products.
+        </p>
+
+        <ul>
+          <li>
+            May intensify combustion
+            or cause
+            a violent reaction.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- EXPLOSIVE -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://panos5439.github.io/sotaoffice/ghs01.jpeg"
+          alt="GHS explosive pictogram"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Explosive
+        </div>
+
+        <p class="ghs-sub">
+          Examples:
+          explosive mixtures,
+          pyrotechnic materials,
+          unstable organic peroxides.
+        </p>
+
+        <ul>
+          <li>
+            Risk of explosion
+            from heat,
+            impact,
+            friction or flame.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- CORROSIVE -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/a/a1/GHS-pictogram-acid.svg"
+          alt="GHS corrosive pictogram"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Corrosive
+        </div>
+
+        <p class="ghs-sub">
+          Examples:
+          hydrochloric acid,
+          sulfuric acid,
+          strong cleaning products.
+        </p>
+
+        <ul>
+          <li>
+            May cause
+            severe skin burns,
+            serious eye damage
+            and corrosion of metals.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- EXCLAMATION -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/c/c3/GHS-pictogram-exclam.svg"
+          alt="GHS exclamation mark pictogram"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Irritant / Harmful
+        </div>
+
+        <p class="ghs-sub">
+          Examples:
+          detergents,
+          adhesives,
+          mild cleaning products.
+        </p>
+
+        <ul>
+          <li>
+            May cause
+            skin,
+            eye or respiratory irritation.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- HEALTH -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://panos5439.github.io/sotaoffice/ghs08.jpeg"
+          alt="GHS serious health hazard pictogram"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Serious Health Hazard
+        </div>
+
+        <p class="ghs-sub">
+          Examples:
+          carcinogenic
+          or mutagenic substances.
+        </p>
+
+        <ul>
+          <li>
+            May be associated
+            with serious long-term
+            health effects.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- ENVIRONMENT -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/b/b9/GHS-pictogram-pollu.svg"
+          alt="GHS environmental hazard pictogram"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Hazardous to the Environment
+        </div>
+
+        <p class="ghs-sub">
+          Examples:
+          pesticides,
+          oils
+          and industrial chemicals.
+        </p>
+
+        <ul>
+          <li>
+            May cause
+            water pollution
+            and harm to organisms.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- GAS -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://panos5439.github.io/sotaoffice/ghs04.png"
+          alt="GHS gas under pressure pictogram"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Gas Under Pressure
+        </div>
+
+        <p class="ghs-sub">
+          Examples:
+          oxygen,
+          propane
+          and compressed nitrogen.
+        </p>
+
+        <ul>
+          <li>
+            Hazard from high pressure,
+            heating
+            or violent pressure release.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Never remove hazard labels.</strong>
+
+    Pictograms,
+    hazard statements
+    and label instructions
+    provide essential safety information.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     10.5 STORAGE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    10.5 Safe Storage and Transfer
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🏷️</span>
+
+      <h3>Keep the Label</h3>
+
+      <p>
+        The product must
+        remain identifiable
+        throughout its use.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🧴</span>
+
+      <h3>Use a Suitable Container</h3>
+
+      <p>
+        Do not transfer chemicals
+        into water bottles,
+        soft-drink bottles
+        or other unrelated containers.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⚗️</span>
+
+      <h3>Separate Incompatible Materials</h3>
+
+      <p>
+        Products that may
+        react with each other
+        must be stored
+        according to their requirements.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🌡️</span>
+
+      <h3>Suitable Conditions</h3>
+
+      <p>
+        Follow the instructions
+        for temperature,
+        ventilation
+        and ignition sources.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Practical rule:</strong>
+
+    If you cannot positively identify
+    the contents of a container,
+    do not use it.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE RISK ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Interactive Activity:
+    Which Practice is the Most Dangerous?
+  </h2>
+
+  <p>
+    Select the scenario
+    that presents
+    the most serious immediate hazard.
+  </p>
+
+  <div class="risk-options">
+
+    <button
+      type="button"
+      class="risk-choice"
+      data-type="safe"
+      onclick="selectRisk(this)">
+
+      <span class="risk-letter">A</span>
+
+      <strong>
+        Correctly labelled cleaner
+      </strong>
+
+      <br><br>
+
+      It is used
+      according to the label,
+      with the required ventilation
+      and appropriate PPE.
+
+    </button>
+
+    <button
+      type="button"
+      class="risk-choice"
+      data-type="medium"
+      onclick="selectRisk(this)">
+
+      <span class="risk-letter">B</span>
+
+      <strong>
+        Two different products
+      </strong>
+
+      <br><br>
+
+      They are used one after another
+      without first
+      reading the instructions
+      or compatibility information.
+
+    </button>
+
+    <button
+      type="button"
+      class="risk-choice"
+      data-type="danger"
+      onclick="selectRisk(this)">
+
+      <span class="risk-letter">C</span>
+
+      <strong>
+        Chemical in a water bottle
+      </strong>
+
+      <br><br>
+
+      A chemical product
+      has been transferred
+      into an empty water bottle
+      without a label.
+
+    </button>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitRisk()">
+    Check Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetRisk()">
+    Restart Activity
+  </button>
+
+  <div
+    id="riskFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SPILL
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    10.6 In Case of a Spill or Exposure
+  </h2>
+
+  <div class="process-grid">
+
+    <div class="process-card">
+
+      <div class="process-number">1</div>
+
+      <h3>Stop and Assess</h3>
+
+      <p>
+        Do not approach
+        or clean up an unknown spill
+        without understanding the hazard.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">2</div>
+
+      <h3>Warn Others</h3>
+
+      <p>
+        Protect nearby workers
+        and restrict access
+        where this can be done safely.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">3</div>
+
+      <h3>Follow the SDS</h3>
+
+      <p>
+        Use the instructions
+        for spills,
+        exposure,
+        PPE
+        and initial response actions.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">4</div>
+
+      <h3>Inform the Responsible Person</h3>
+
+      <p>
+        Follow the facility's
+        emergency response
+        or incident-reporting
+        procedure.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Important:</strong>
+
+    Not every spill
+    should be handled in the same way.
+
+    The appropriate action depends
+    on the specific product,
+    the hazard,
+    the quantity
+    and the instructions in the SDS
+    and the facility procedure.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>Decision Scenario</h2>
+
+  <p>
+    During maintenance on a production line,
+    you find a plastic container
+    containing a clear liquid.
+
+    There is no label
+    and nobody in the area
+    knows what it contains.
+  </p>
+
+  <p>
+    <strong>What should you do?</strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Open the container
+    and carefully smell the contents
+    to identify the substance.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Move the container somewhere else
+    so that it is not in the way
+    and continue working.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Do not use
+    or open the container.
+
+    Stop the activity
+    and inform the responsible person
+    so that the substance can be identified
+    and managed according
+    to the facility procedure.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Submit Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Reset Scenario
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <!-- Q1 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. What is a key step before using a chemical product?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Read the label
+        and the available safety information.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Test it first
+        using a small amount.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Rely only
+        on colour and smell.
+      </label>
+
+    </div>
+
+    <!-- Q2 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Is it acceptable to transfer a chemical into an unlabelled water bottle?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Yes,
+        if it will be used immediately.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        No.
+        It creates a serious risk
+        of misidentification and exposure.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Yes,
+        if colleagues know what it contains.
+      </label>
+
+    </div>
+
+    <!-- Q3 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. What information can you find in an SDS?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Information about hazards,
+        protection,
+        storage
+        and emergency actions.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Only the commercial price of the product.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Only the colour of the product.
+      </label>
+
+    </div>
+
+    <!-- Q4 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. What should we do with incompatible chemical products?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Follow the product's
+        storage and compatibility requirements.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Store them together
+        so they are easy to find.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Mix them
+        to reduce the number of containers.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Submit Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Reset Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Key Takeaways</h2>
+
+  <div class="takeaway">
+
+    <span>🏷️</span>
+
+    <div>
+      Identify the product
+      and read the label
+      before using it.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>📄</span>
+
+    <div>
+      The SDS provides
+      critical information
+      about hazards
+      and protective measures.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🧴</span>
+
+    <div>
+      Never place chemicals
+      in water bottles
+      or other unsuitable,
+      unlabelled containers.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>⚗️</span>
+
+    <div>
+      Do not mix
+      or store incompatible products
+      without knowing their requirements.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🚨</span>
+
+    <div>
+      In case of a spill or exposure,
+      do not improvise:
+      follow the SDS
+      and the facility procedure.
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Industrial Health & Safety Training | Module 10
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   RISK ACTIVITY
+   ===================================================== */
+
+let selectedRisk = null;
+
+function selectRisk(button){
+
+  document
+    .querySelectorAll(".risk-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedRisk =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("riskFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitRisk(){
+
+  const feedback =
+    document.getElementById("riskFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedRisk){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Please select a scenario before checking your answer.";
+
+    return;
+  }
+
+  if(selectedRisk === "danger"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "Transferring a chemical into an unlabelled water bottle creates a serious risk of misidentification, misuse or accidental ingestion.";
+
+  }else if(selectedRisk === "medium"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "<strong>There is a hazard, but this is not the most dangerous option.</strong> " +
+      "Using different products without reading the instructions may result in hazardous incompatibility.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Not correct.</strong> " +
+      "Scenario A describes controlled use with correct labelling, ventilation and required protective measures.";
+  }
+}
+
+function resetRisk(){
+
+  selectedRisk = null;
+
+  document
+    .querySelectorAll(".risk-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("riskFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "An unknown and unlabelled chemical should not be used or opened without proper identification. " +
+      "It must be identified and managed according to the facility procedure.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "<strong>This is not safe.</strong> " +
+      "Moving an unknown container without identifying it may create additional exposure or spill risks.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "Do not use smell to identify an unknown chemical. " +
+      "Inhalation may itself be a route of exposure.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Please answer all four questions before submitting.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Excellent!</strong> You scored " +
+      score + "/" + total +
+      ". You understand the key principles of safe chemical handling.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Good effort.</strong> You scored " +
+      score + "/" + total +
+      ". Review chemical labels, the SDS, chemical transfers and the storage of incompatible products.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score + "/" + total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

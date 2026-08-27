@@ -1,0 +1,2334 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Ενότητα 18 | Ασφάλεια Οδήγησης</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:white;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  color:var(--primary);
+  margin-top:0;
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  background:white;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.danger,
+.success,
+.info{
+  padding:18px;
+  border-radius:12px;
+  margin-top:16px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+.step-card{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+/* =====================================================
+   TAGS
+   ===================================================== */
+
+.tag{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:.85rem;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.tag-danger{
+  background:#ffe2e2;
+  color:#a31515;
+}
+
+.tag-warning{
+  background:#fff1b8;
+  color:#795800;
+}
+
+.tag-info{
+  background:#dcecff;
+  color:#123c69;
+}
+
+/* =====================================================
+   CHECKLIST
+   ===================================================== */
+
+.checklist{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.checklist li{
+  position:relative;
+  padding:10px 0 10px 34px;
+  border-bottom:1px solid #edf1f5;
+}
+
+.checklist li:last-child{
+  border-bottom:none;
+}
+
+.checklist li::before{
+  content:"✓";
+  position:absolute;
+  left:0;
+  top:10px;
+  width:23px;
+  height:23px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--success);
+  color:white;
+  font-size:.85rem;
+  font-weight:bold;
+}
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.table-wrapper{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  min-width:760px;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:14px;
+  border:1px solid var(--border);
+  text-align:left;
+  vertical-align:top;
+}
+
+th{
+  background:var(--primary);
+  color:white;
+}
+
+tbody tr:nth-child(even){
+  background:#f8fafc;
+}
+
+/* =====================================================
+   SAFETY IMAGE
+   ===================================================== */
+
+.safety-image-container{
+  position:relative;
+  width:100%;
+  margin-top:18px;
+  margin-bottom:16px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:#eef4fb;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
+}
+
+.safety-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   HOTSPOTS
+   ===================================================== */
+
+.hotspot{
+  position:absolute;
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:4px solid white;
+  background:var(--accent);
+  color:white;
+  font-size:1.1rem;
+  font-weight:bold;
+  z-index:10;
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.35),
+    0 0 0 2px rgba(214,40,40,.2);
+
+  transition:
+    transform .2s ease,
+    background-color .2s ease;
+}
+
+.hotspot:hover,
+.hotspot:focus{
+  transform:scale(1.08);
+  outline:4px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.hotspot.found{
+  background:var(--success);
+}
+
+/*
+  1 = Καιρός / βρεγμένος δρόμος
+  2 = Όριο ταχύτητας
+  3 = Κινητό τηλέφωνο
+  4 = Οδικός / πλευρικός κίνδυνος
+  5 = Απόσπαση προσοχής στο όχημα
+*/
+
+.hs-weather{
+  left:18%;
+  top:16%;
+}
+
+.hs-speed{
+  right:12%;
+  top:34%;
+}
+
+.hs-phone{
+  left:57%;
+  bottom:27%;
+}
+
+.hs-road{
+  left:17%;
+  top:55%;
+}
+
+.hs-distraction{
+  right:10%;
+  bottom:10%;
+}
+
+.activity-status{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:16px;
+  padding:14px 16px;
+  border-radius:12px;
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   OPTIONS
+   ===================================================== */
+
+.option-button{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:15px 17px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#eef4fb;
+  color:var(--text);
+  text-align:left;
+  font-weight:500;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.option-button:hover,
+.option-button:focus{
+  background:#dcecff;
+  color:#1f2933;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.6);
+  outline-offset:2px;
+}
+
+.option-button.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.option-button.selected:hover,
+.option-button.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  background:var(--primary);
+  color:white;
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:white;
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+  margin-top:18px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin:14px 0;
+  padding:15px;
+  border-radius:12px;
+  background:var(--info-bg);
+  color:var(--primary-dark);
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 20px;
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .hotspot{
+    width:44px;
+    height:44px;
+    font-size:.95rem;
+  }
+
+  .hs-weather{
+    left:15%;
+    top:14%;
+  }
+
+  .hs-speed{
+    right:9%;
+    top:32%;
+  }
+
+  .hs-phone{
+    left:55%;
+    bottom:25%;
+  }
+
+  .hs-road{
+    left:14%;
+    top:53%;
+  }
+
+  .hs-distraction{
+    right:8%;
+    bottom:8%;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 18: Ασφάλεια Οδήγησης
+  </h1>
+
+  <p>
+    Μάθετε πώς ο σχεδιασμός της διαδρομής,
+    οι έλεγχοι του οχήματος,
+    η αμυντική οδήγηση
+    και η ασφαλής λήψη αποφάσεων
+    μπορούν να αποτρέψουν τροχαία περιστατικά
+    και να προστατεύσουν οδηγούς,
+    επιβάτες και άλλους χρήστες του δρόμου.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Μαθησιακοί Στόχοι</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🚗</span>
+      <h3>Αναγνώριση κινδύνων</h3>
+      <p>
+        Να αναγνωρίζετε τους βασικούς κινδύνους
+        που σχετίζονται με την επαγγελματική οδήγηση.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🗺️</span>
+      <h3>Σχεδιασμός διαδρομής</h3>
+      <p>
+        Να λαμβάνετε υπόψη
+        διαδρομή, καιρό, κυκλοφορία,
+        κόπωση και κατάσταση οχήματος.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🛡️</span>
+      <h3>Αμυντική οδήγηση</h3>
+      <p>
+        Να διατηρείτε ασφαλή ταχύτητα,
+        απόσταση και συνεχή παρατήρηση.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🛑</span>
+      <h3>Ασφαλείς αποφάσεις</h3>
+      <p>
+        Να διακόπτετε ή να αναβάλλετε
+        την οδήγηση όταν οι συνθήκες δεν είναι ασφαλείς.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     WHY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Γιατί είναι σημαντική η Ασφάλεια Οδήγησης;
+  </h2>
+
+  <p>
+    Η επαγγελματική οδήγηση μπορεί να φαίνεται συνηθισμένη,
+    αλλά συνδυάζει την κατάσταση του οδηγού,
+    του οχήματος, του δρόμου,
+    του καιρού και της κυκλοφορίας.
+  </p>
+
+  <div class="danger">
+
+    <strong>Πρώτα το γιατί:</strong>
+
+    Ένα τροχαίο περιστατικό μπορεί να προκαλέσει
+    θανάσιμο τραυματισμό,
+    μόνιμη αναπηρία,
+    υλικές ζημιές
+    και σοβαρή διακοπή λειτουργίας.
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Σημαντικό:</strong>
+
+    Καμία παράδοση,
+    προθεσμία,
+    συνάντηση
+    ή παραγωγικός στόχος
+    δεν είναι σημαντικότερος
+    από την ασφαλή οδήγηση.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Βασικοί Κίνδυνοι Οδήγησης
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">😴</span>
+      <span class="tag tag-danger">Ανθρώπινος Παράγοντας</span>
+      <h3>Κόπωση</h3>
+      <p>
+        Η κόπωση μειώνει
+        τη συγκέντρωση,
+        την κρίση
+        και τον χρόνο αντίδρασης.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📱</span>
+      <span class="tag tag-danger">Απόσπαση Προσοχής</span>
+      <h3>Κινητές Συσκευές</h3>
+      <p>
+        Τα μηνύματα,
+        οι κλήσεις
+        και οι αλλαγές πλοήγησης
+        απομακρύνουν την προσοχή από τον δρόμο.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🏎️</span>
+      <span class="tag tag-danger">Ταχύτητα</span>
+      <h3>Ακατάλληλη Ταχύτητα</h3>
+      <p>
+        Η υπερβολική ταχύτητα
+        μειώνει τον διαθέσιμο χρόνο αντίδρασης
+        και αυξάνει τη σοβαρότητα μιας σύγκρουσης.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌧️</span>
+      <span class="tag tag-warning">Περιβάλλον</span>
+      <h3>Δυσμενείς Συνθήκες</h3>
+      <p>
+        Βροχή,
+        ομίχλη,
+        άνεμος,
+        πάγος ή αντηλιά
+        μειώνουν την πρόσφυση ή την ορατότητα.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔧</span>
+      <span class="tag tag-warning">Όχημα</span>
+      <h3>Βλάβες Οχήματος</h3>
+      <p>
+        Ελαστικά,
+        φρένα,
+        φώτα
+        ή σύστημα διεύθυνσης
+        μπορεί να επηρεάσουν την ασφαλή λειτουργία.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚶</span>
+      <span class="tag tag-info">Χρήστες Δρόμου</span>
+      <h3>Πεζοί και Ποδηλάτες</h3>
+      <p>
+        Οι ευάλωτοι χρήστες
+        μπορεί να είναι δύσκολο να γίνουν αντιληπτοί
+        και μπορεί να κινηθούν απρόβλεπτα.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     JOURNEY PLANNING
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Ασφαλής Σχεδιασμός Διαδρομής
+  </h2>
+
+  <p>
+    Η ασφαλής οδήγηση ξεκινά
+    πριν κινηθεί το όχημα.
+  </p>
+
+  <div class="grid">
+
+    <div class="card step-card">
+      <h3>1. Ανάγκη Μετακίνησης</h3>
+      <p>
+        Επιβεβαιώστε ότι η μετακίνηση
+        είναι πραγματικά απαραίτητη.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>2. Επιλογή Διαδρομής</h3>
+      <p>
+        Εξετάστε τύπο δρόμου,
+        περιορισμούς και γνωστούς κινδύνους.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>3. Έλεγχος Συνθηκών</h3>
+      <p>
+        Ελέγξτε κυκλοφορία,
+        καιρό και ορατότητα.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>4. Χρόνος και Διαλείμματα</h3>
+      <p>
+        Προβλέψτε επαρκή χρόνο
+        ώστε να αποφευχθεί η βιασύνη.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>5. Καταλληλότητα Οδηγού</h3>
+      <p>
+        Βεβαιωθείτε ότι ο οδηγός
+        είναι ξεκούραστος και σε κατάλληλη κατάσταση.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>6. Έκτακτη Ανάγκη</h3>
+      <p>
+        Γνωρίζετε τις διαδικασίες
+        βλάβης και περιστατικού.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DRIVER FITNESS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Καταλληλότητα του Οδηγού
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">😴</span>
+      <h3>Κόπωση</h3>
+      <p>
+        Μην οδηγείτε όταν
+        η συγκέντρωση ή η εγρήγορση έχουν μειωθεί.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">💊</span>
+      <h3>Φαρμακευτική Αγωγή</h3>
+      <p>
+        Ελέγξτε αν κάποιο φάρμακο
+        μπορεί να προκαλέσει υπνηλία
+        ή μειωμένες αντιδράσεις.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🍺</span>
+      <h3>Αλκοόλ και Ουσίες</h3>
+      <p>
+        Μην οδηγείτε υπό την επήρεια
+        ουσιών που επηρεάζουν
+        την ικανότητα οδήγησης.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🤒</span>
+      <h3>Ασθένεια και Έντονο Άγχος</h3>
+      <p>
+        Η ασθένεια,
+        το άγχος ή η συναισθηματική φόρτιση
+        μπορεί να μειώσουν την ασφαλή απόδοση.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="danger">
+    Αν δεν είστε σε κατάλληλη κατάσταση
+    για ασφαλή οδήγηση,
+    μην ξεκινήσετε ή μη συνεχίσετε τη διαδρομή.
+  </div>
+
+</section>
+
+<!-- =====================================================
+     VEHICLE CHECK
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Έλεγχος Οχήματος πριν από την Οδήγηση
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <h3>Εξωτερικός Έλεγχος</h3>
+
+      <ul class="checklist">
+        <li>Τα ελαστικά είναι χωρίς εμφανείς ζημιές.</li>
+        <li>Τα φώτα και τα φλας λειτουργούν.</li>
+        <li>Παράθυρα και καθρέφτες είναι καθαρά.</li>
+        <li>Δεν υπάρχουν εμφανείς διαρροές.</li>
+        <li>Οι πόρτες και τα φορτία είναι ασφαλισμένα.</li>
+        <li>Η περιοχή γύρω από το όχημα είναι ελεύθερη.</li>
+      </ul>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Έλεγχος Καμπίνας</h3>
+
+      <ul class="checklist">
+        <li>Κάθισμα και καθρέφτες είναι σωστά ρυθμισμένα.</li>
+        <li>Οι ζώνες ασφαλείας λειτουργούν.</li>
+        <li>Φρένα και τιμόνι λειτουργούν κανονικά.</li>
+        <li>Οι υαλοκαθαριστήρες λειτουργούν.</li>
+        <li>Τα χαλαρά αντικείμενα είναι ασφαλισμένα.</li>
+        <li>Ο απαιτούμενος εξοπλισμός είναι διαθέσιμος.</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+    Αναφέρετε άμεσα κάθε βλάβη.
+    Μην χρησιμοποιείτε όχημα
+    όταν μια βλάβη επηρεάζει
+    την ασφαλή λειτουργία του.
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SPEED & DISTANCE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Ταχύτητα και Απόσταση Ασφαλείας
+  </h2>
+
+  <p>
+    Το όριο ταχύτητας
+    είναι η μέγιστη επιτρεπόμενη ταχύτητα
+    υπό κατάλληλες συνθήκες.
+    Η ασφαλής ταχύτητα μπορεί να είναι χαμηλότερη.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">↔️</span>
+      <h3>Διατήρηση Απόστασης</h3>
+      <p>
+        Διατηρείτε αρκετό χώρο
+        ώστε να μπορείτε να αντιδράσετε
+        και να σταματήσετε με ασφάλεια.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌧️</span>
+      <h3>Αύξηση Απόστασης</h3>
+      <p>
+        Αυξήστε την απόσταση
+        σε βροχή,
+        ομίχλη,
+        σκοτάδι ή έντονη κυκλοφορία.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👀</span>
+      <h3>Παρατήρηση Μπροστά</h3>
+      <p>
+        Παρατηρείτε συνεχώς
+        για οχήματα,
+        πεζούς,
+        σήματα και εμπόδια.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🛑</span>
+      <h3>Έγκαιρη Αντίδραση</h3>
+      <p>
+        Η έγκαιρη παρατήρηση
+        μειώνει την ανάγκη
+        για απότομο φρενάρισμα.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DISTRACTION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Οδήγηση χωρίς Περισπασμούς
+  </h2>
+
+  <div class="danger">
+    Η ανάγνωση ή αποστολή μηνυμάτων,
+    η χρήση κινητού στο χέρι
+    ή οποιαδήποτε απόσπαση της προσοχής
+    μπορεί να οδηγήσει σε σοβαρό περιστατικό.
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">📵</span>
+      <h3>Κινητό Τηλέφωνο</h3>
+      <p>
+        Ρυθμίστε πλοήγηση
+        και επικοινωνία πριν από την εκκίνηση.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🅿️</span>
+      <h3>Ασφαλής Στάση</h3>
+      <p>
+        Σταματήστε σε ασφαλές σημείο
+        πριν χρησιμοποιήσετε συσκευή.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🍔</span>
+      <h3>Άλλοι Περισπασμοί</h3>
+      <p>
+        Αποφύγετε φαγητό,
+        χειρισμό αντικειμένων
+        και άλλες ενέργειες που μειώνουν τον έλεγχο.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧠</span>
+      <h3>Πνευματική Συγκέντρωση</h3>
+      <p>
+        Έντονα συναισθήματα
+        και πολύπλοκες συζητήσεις
+        μπορούν επίσης να μειώσουν την προσοχή.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     ADVERSE CONDITIONS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Οδήγηση σε Δυσμενείς Συνθήκες
+  </h2>
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Συνθήκη</th>
+          <th>Βασικοί Κίνδυνοι</th>
+          <th>Ασφαλής Αντίδραση</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>Έντονη βροχή</td>
+          <td>
+            Μειωμένη πρόσφυση,
+            ορατότητα
+            και αυξημένη απόσταση ακινητοποίησης
+          </td>
+          <td>
+            Μειώστε ταχύτητα
+            και αυξήστε απόσταση ασφαλείας
+          </td>
+        </tr>
+
+        <tr>
+          <td>Ομίχλη</td>
+          <td>
+            Περιορισμένη ορατότητα
+            και δύσκολη εκτίμηση απόστασης
+          </td>
+          <td>
+            Μειώστε ταχύτητα
+            και χρησιμοποιήστε κατάλληλο φωτισμό
+          </td>
+        </tr>
+
+        <tr>
+          <td>Πάγος ή χιόνι</td>
+          <td>
+            Απώλεια ελέγχου διεύθυνσης
+            και πέδησης
+          </td>
+          <td>
+            Αποφύγετε περιττές μετακινήσεις
+            και χρησιμοποιήστε πολύ ομαλούς χειρισμούς
+          </td>
+        </tr>
+
+        <tr>
+          <td>Ισχυρός άνεμος</td>
+          <td>
+            Αστάθεια οχήματος
+            και αιφνίδια μετατόπιση
+          </td>
+          <td>
+            Μειώστε την ταχύτητα
+            και αυξήστε την προσοχή
+          </td>
+        </tr>
+
+        <tr>
+          <td>Αντηλιά ή σκοτάδι</td>
+          <td>
+            Μειωμένη ικανότητα
+            αναγνώρισης κινδύνων
+          </td>
+          <td>
+            Μειώστε την ταχύτητα
+            και χρησιμοποιήστε κατάλληλο φωτισμό
+          </td>
+        </tr>
+
+        <tr>
+          <td>Ακραία ζέστη</td>
+          <td>
+            Κόπωση οδηγού,
+            καταπόνηση ελαστικών
+            και υπερθέρμανση
+          </td>
+          <td>
+            Ελέγξτε το όχημα,
+            ενυδατωθείτε
+            και κάντε διαλείμματα
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     REVERSING
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Οπισθοπορεία και Ελιγμοί Χαμηλής Ταχύτητας
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">👀</span>
+      <h3>Έλεγχος Περιοχής</h3>
+      <p>
+        Ελέγξτε για πεζούς,
+        εμπόδια και τυφλά σημεία.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">↩️</span>
+      <h3>Αργή Οπισθοπορεία</h3>
+      <p>
+        Χρησιμοποιήστε ελεγχόμενη ταχύτητα
+        και σταματήστε όταν χαθεί η ορατότητα.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🦺</span>
+      <h3>Καθοδηγητής</h3>
+      <p>
+        Χρησιμοποιήστε εκπαιδευμένο καθοδηγητή
+        όπου απαιτείται.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🛑</span>
+      <h3>Stop if Unsure</h3>
+      <p>
+        Μην συνεχίζετε τον ελιγμό
+        όταν υπάρχει αμφιβολία.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PHOTO HOTSPOT ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική Δραστηριότητα: Επιθεώρηση Σκηνής Οδήγησης
+  </h2>
+
+  <p>
+    Εντόπισε τα πέντε κρίσιμα σημεία ασφάλειας
+    στη φωτογραφία.
+  </p>
+
+  <div class="safety-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/car.png"
+      alt="Άποψη οδηγού σε βρεγμένο δρόμο με πινακίδα ταχύτητας, κινητό τηλέφωνο και οδικούς κινδύνους"
+      class="safety-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+    <button
+      type="button"
+      class="hotspot hs-weather"
+      data-original="1"
+      data-message="<strong>Καιρικές και οδικές συνθήκες:</strong> Η βροχή και ο βρεγμένος δρόμος μειώνουν την πρόσφυση και αυξάνουν την απόσταση ακινητοποίησης. Μείωσε την ταχύτητα και αύξησε την απόσταση ασφαλείας."
+      onclick="findDrivingHazard(this)">
+      1
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-speed"
+      data-original="2"
+      data-message="<strong>Όριο ταχύτητας:</strong> Το αναγραφόμενο όριο είναι η μέγιστη επιτρεπόμενη ταχύτητα υπό κατάλληλες συνθήκες. Η πραγματική ασφαλής ταχύτητα μπορεί να πρέπει να είναι χαμηλότερη."
+      onclick="findDrivingHazard(this)">
+      2
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-phone"
+      data-original="3"
+      data-message="<strong>Κινητό τηλέφωνο:</strong> Μην χρησιμοποιείς ή χειρίζεσαι κινητό τηλέφωνο ενώ οδηγείς. Σταμάτησε και στάθμευσε σε ασφαλές σημείο πριν το χρησιμοποιήσεις."
+      onclick="findDrivingHazard(this)">
+      3
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-road"
+      data-original="4"
+      data-message="<strong>Οδικός κίνδυνος:</strong> Παρατήρησε έγκαιρα λακκούβες, νερά, αντικείμενα, περιορισμένο πλάτος ή άλλους κινδύνους και προσαρμόζεις τη θέση και την ταχύτητα του οχήματος."
+      onclick="findDrivingHazard(this)">
+      4
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-distraction"
+      data-original="5"
+      data-message="<strong>Απόσπαση προσοχής μέσα στο όχημα:</strong> Τρόφιμα, ποτά, χαλαρά αντικείμενα ή χειρισμός εξοπλισμού μπορούν να απομακρύνουν την προσοχή από τον δρόμο. Ασφάλισε τα αντικείμενα πριν ξεκινήσεις."
+      onclick="findDrivingHazard(this)">
+      5
+    </button>
+
+  </div>
+
+  <div class="activity-status">
+
+    <strong>
+      Σημεία που εντοπίστηκαν:
+      <span id="hazardScore">0</span>/5
+    </strong>
+
+    <span id="activityInstruction">
+      Επίλεξε και τους πέντε δείκτες.
+    </span>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetDrivingActivity()">
+    Επανεκκίνηση δραστηριότητας
+  </button>
+
+  <div
+    id="hazardFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     FATIGUE WARNING SIGNS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Προειδοποιητικές Ενδείξεις Κόπωσης
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🥱</span>
+      <h3>Συχνό Χασμουρητό</h3>
+      <p>
+        Επαναλαμβανόμενο χασμουρητό
+        ή βαριά βλέφαρα
+        μπορεί να υποδηλώνουν μειωμένη εγρήγορση.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧠</span>
+      <h3>Μειωμένη Συγκέντρωση</h3>
+      <p>
+        Παράλειψη πινακίδων
+        ή αδυναμία ανάκλησης
+        πρόσφατου τμήματος της διαδρομής.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">↔️</span>
+      <h3>Απόκλιση από Λωρίδα</h3>
+      <p>
+        Ασταθής πορεία
+        και απότομες διορθώσεις
+        μπορεί να υποδηλώνουν κόπωση.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">😠</span>
+      <h3>Ευερεθιστότητα</h3>
+      <p>
+        Αυξημένη απογοήτευση
+        και κακή κρίση
+        μπορεί να συνοδεύουν την κούραση.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    Το άνοιγμα παραθύρου,
+    η δυνατή μουσική
+    ή η καφεΐνη
+    δεν αποτελούν αξιόπιστο υποκατάστατο
+    της ασφαλούς στάσης και ανάπαυσης.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PHONE SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Σενάριο Απόφασης: Χρήση Κινητού
+  </h2>
+
+  <p>
+    Κατά την οδήγηση προς εγκατάσταση πελάτη,
+    ο οδηγός λαμβάνει επείγον μήνυμα
+    από τον προϊστάμενο
+    που ζητά άμεση απάντηση.
+  </p>
+
+  <p>
+    <strong>
+      Τι πρέπει να κάνει;
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="option-button phone-option"
+    data-value="wrong"
+    onclick="selectPhoneOption(this)">
+    Να διαβάσει και να απαντήσει γρήγορα
+    επειδή η κυκλοφορία κινείται αργά.
+  </button>
+
+  <button
+    type="button"
+    class="option-button phone-option"
+    data-value="partial"
+    onclick="selectPhoneOption(this)">
+    Να κρατήσει το κινητό χαμηλά,
+    κάτω από το τιμόνι.
+  </button>
+
+  <button
+    type="button"
+    class="option-button phone-option"
+    data-value="correct"
+    onclick="selectPhoneOption(this)">
+    Να συνεχίσει να οδηγεί με ασφάλεια
+    και να απαντήσει
+    μόνο αφού σταθμεύσει σε ασφαλές σημείο.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitPhoneDecision()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetPhoneDecision()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="phoneFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     FATIGUE SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Σενάριο Απόφασης: Κόπωση
+  </h2>
+
+  <p>
+    Μετά από αρκετές ώρες οδήγησης,
+    ένας οδηγός χασμουριέται επανειλημμένα
+    και δυσκολεύεται να θυμηθεί
+    το τελευταίο τμήμα της διαδρομής.
+    Ο προορισμός απέχει μόνο 20 λεπτά.
+  </p>
+
+  <button
+    type="button"
+    class="option-button fatigue-option"
+    data-value="wrong"
+    onclick="selectFatigueOption(this)">
+    Να συνεχίσει,
+    επειδή ο προορισμός είναι κοντά.
+  </button>
+
+  <button
+    type="button"
+    class="option-button fatigue-option"
+    data-value="partial"
+    onclick="selectFatigueOption(this)">
+    Να ανοίξει το παράθυρο
+    και να αυξήσει την ένταση της μουσικής.
+  </button>
+
+  <button
+    type="button"
+    class="option-button fatigue-option"
+    data-value="correct"
+    onclick="selectFatigueOption(this)">
+    Να σταματήσει σε ασφαλές σημείο
+    και να ξεκουραστεί
+    πριν συνεχίσει.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitFatigueDecision()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetFatigueDecision()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="fatigueFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INCIDENT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Ενέργειες μετά από Περιστατικό ή Βλάβη
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🛑</span>
+      <h3>Ασφαλής Ακινητοποίηση</h3>
+      <p>
+        Απομακρυνθείτε από τη ροή κυκλοφορίας
+        όπου είναι δυνατό.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚨</span>
+      <h3>Προειδοποίηση των Άλλων</h3>
+      <p>
+        Χρησιμοποιήστε αλάρμ
+        και εγκεκριμένα μέσα προειδοποίησης
+        όπου απαιτείται.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📞</span>
+      <h3>Κλήση Βοήθειας</h3>
+      <p>
+        Επικοινωνήστε με τις αρμόδιες υπηρεσίες
+        ή την επιχείρηση.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📋</span>
+      <h3>Αναφορά Συμβάντος</h3>
+      <p>
+        Ακολουθήστε τη διαδικασία
+        αναφοράς ατυχήματος,
+        ζημιάς ή near miss.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    Μην επιχειρείτε επισκευή
+    στην άκρη του δρόμου
+    όταν η κυκλοφορία,
+    η ορατότητα
+    ή η θέση του οχήματος
+    δημιουργούν μη αποδεκτό κίνδυνο.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Mini Quiz
+  </h2>
+
+  <form id="quizForm">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Τι πρέπει να κάνει ένας οδηγός
+          όταν εμφανίζονται σημάδια κόπωσης;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        Να σταματήσει σε ασφαλές σημείο
+        και να ξεκουραστεί πριν συνεχίσει.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Να οδηγήσει γρηγορότερα
+        για να φτάσει νωρίτερα.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Να ανοίξει το παράθυρο
+        και να συνεχίσει.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Πότε πρέπει να χρησιμοποιεί
+          ο οδηγός το κινητό τηλέφωνο;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Όταν η κυκλοφορία κινείται αργά.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Αφού σταθμεύσει με ασφάλεια
+        σε κατάλληλο σημείο.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Όταν το μήνυμα σχετίζεται με την εργασία.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Τι πρέπει να συμβεί
+          όταν εντοπιστεί κρίσιμη βλάβη ασφαλείας;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Να συνεχιστεί η διαδρομή
+        αν είναι σύντομη.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Να αναφερθεί αργότερα.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        Να αναφερθεί η βλάβη
+        και να μη χρησιμοποιηθεί το όχημα
+        μέχρι να είναι ασφαλές.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Γιατί αυξάνεται η απόσταση ασφαλείας στη βροχή;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Επειδή τα άλλα οχήματα
+        κινούνται συνήθως γρηγορότερα.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        Επειδή μειώνεται η πρόσφυση
+        και αυξάνεται η απόσταση ακινητοποίησης.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Επειδή οι πινακίδες
+        φαίνονται μεγαλύτερες.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Βασικά σημεία
+  </h2>
+
+  <div class="takeaway">
+    <span>🗺️</span>
+    <div>
+      Η ασφαλής οδήγηση ξεκινά
+      πριν κινηθεί το όχημα.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>📵</span>
+    <div>
+      Οι κινητές συσκευές
+      και οι άλλοι περισπασμοί
+      δεν πρέπει να απομακρύνουν
+      την προσοχή από τον δρόμο.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛣️</span>
+    <div>
+      Η ταχύτητα και η απόσταση
+      πρέπει να προσαρμόζονται
+      στις πραγματικές συνθήκες.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>😴</span>
+    <div>
+      Η κόπωση αποτελεί σοβαρό κίνδυνο.
+      Σταματήστε και ξεκουραστείτε.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛑</span>
+    <div>
+      Καμία προθεσμία
+      δεν είναι σημαντικότερη
+      από την ασφαλή άφιξη.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 18
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   HOTSPOT ACTIVITY
+   ===================================================== */
+
+let drivingHazardsFound = 0;
+const totalDrivingHazards = 5;
+
+function findDrivingHazard(button){
+
+  const score =
+    document.getElementById("hazardScore");
+
+  const feedback =
+    document.getElementById("hazardFeedback");
+
+  const instruction =
+    document.getElementById("activityInstruction");
+
+  if(!button.classList.contains("found")){
+
+    button.classList.add("found");
+
+    button.textContent = "✓";
+
+    drivingHazardsFound++;
+
+    score.textContent =
+      drivingHazardsFound;
+  }
+
+  feedback.style.display = "block";
+  feedback.className = "feedback success";
+  feedback.innerHTML = button.dataset.message;
+
+  if(drivingHazardsFound === totalDrivingHazards){
+
+    instruction.textContent =
+      "Η δραστηριότητα ολοκληρώθηκε.";
+
+    feedback.innerHTML +=
+      "<br><br><strong>Εξαιρετικά!</strong> " +
+      "Εντόπισες και τα πέντε κρίσιμα σημεία ασφάλειας οδήγησης.";
+  }
+}
+
+function resetDrivingActivity(){
+
+  drivingHazardsFound = 0;
+
+  document
+    .querySelectorAll(".hotspot")
+    .forEach(function(button){
+
+      button.classList.remove("found");
+
+      button.textContent =
+        button.dataset.original;
+
+    });
+
+  document.getElementById(
+    "hazardScore"
+  ).textContent = "0";
+
+  document.getElementById(
+    "activityInstruction"
+  ).textContent =
+    "Επίλεξε και τους πέντε δείκτες.";
+
+  const feedback =
+    document.getElementById(
+      "hazardFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   PHONE SCENARIO
+   ===================================================== */
+
+let selectedPhoneDecision = null;
+
+function selectPhoneOption(button){
+
+  document
+    .querySelectorAll(".phone-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedPhoneDecision =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById("phoneFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitPhoneDecision(){
+
+  const feedback =
+    document.getElementById("phoneFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedPhoneDecision){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedPhoneDecision === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Ένα επαγγελματικό μήνυμα δεν δικαιολογεί " +
+      "τη χρήση κινητού κατά την οδήγηση. " +
+      "Η απάντηση πρέπει να γίνει μόνο αφού το όχημα σταθμεύσει με ασφάλεια.";
+
+  }else if(selectedPhoneDecision === "partial"){
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Η απόκρυψη του κινητού δεν μειώνει την απόσπαση προσοχής.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Ακόμη και η αργή κυκλοφορία απαιτεί πλήρη προσοχή.";
+  }
+}
+
+function resetPhoneDecision(){
+
+  selectedPhoneDecision = null;
+
+  document
+    .querySelectorAll(".phone-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("phoneFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   FATIGUE SCENARIO
+   ===================================================== */
+
+let selectedFatigueDecision = null;
+
+function selectFatigueOption(button){
+
+  document
+    .querySelectorAll(".fatigue-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedFatigueDecision =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById("fatigueFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitFatigueDecision(){
+
+  const feedback =
+    document.getElementById("fatigueFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedFatigueDecision){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedFatigueDecision === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Το επαναλαμβανόμενο χασμουρητό και τα κενά μνήμης " +
+      "είναι σοβαρές ενδείξεις κόπωσης. " +
+      "Ο οδηγός πρέπει να σταματήσει με ασφάλεια και να ξεκουραστεί.";
+
+  }else if(selectedFatigueDecision === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Η δυνατή μουσική και ο καθαρός αέρας " +
+      "δεν αποκαθιστούν την ασφαλή οδηγική ικανότητα.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Η κόπωση παραμένει επικίνδυνη " +
+      "ακόμη και όταν ο προορισμός είναι κοντά.";
+  }
+}
+
+function resetFatigueDecision(){
+
+  selectedFatigueDecision = null;
+
+  document
+    .querySelectorAll(".fatigue-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("fatigueFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "Άριστα! Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Κατανοείς τις βασικές αρχές Ασφάλειας Οδήγησης.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Καλή προσπάθεια. Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Ξαναδές τη διαχείριση κόπωσης, " +
+      "την απόσπαση προσοχής και τους ελέγχους οχήματος.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  document.getElementById(
+    "progressBar"
+  ).style.width = "0%";
+
+  document.getElementById(
+    "quizProgress"
+  ).setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  const result =
+    document.getElementById("quizResult");
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector('input[name="q1"]');
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ενότητα 9 | Ολισθήσεις, Παραπατήματα και Πτώσεις</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   REALISTIC PHOTO ACTIVITY
+   ===================================================== */
+
+.fall-image-container{
+  position:relative;
+  width:100%;
+
+  margin-top:18px;
+  margin-bottom:16px;
+
+  overflow:hidden;
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  background:#eef4fb;
+
+  box-shadow:
+    0 6px 18px rgba(15,23,42,.08);
+}
+
+.fall-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   HOTSPOTS
+   ===================================================== */
+
+.hotspot{
+  position:absolute;
+  z-index:10;
+
+  width:52px;
+  height:52px;
+
+  display:grid;
+  place-items:center;
+
+  border:4px solid #fff;
+  border-radius:50%;
+
+  background:var(--accent);
+  color:#fff;
+
+  font-size:1.15rem;
+  font-weight:bold;
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.38),
+    0 0 0 2px rgba(214,40,40,.20);
+
+  transition:
+    transform .2s ease,
+    background-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.hotspot:hover,
+.hotspot:focus{
+  transform:scale(1.09);
+
+  outline:4px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.hotspot.found{
+  background:var(--success);
+}
+
+/*
+  HOTSPOT POSITIONS ON slips.png
+
+  1 = Oil / liquid spill
+  2 = Cable across floor
+  3 = Pallet / box obstructing route
+  4 = Unsafe ladder position
+*/
+
+.hs-spill{
+  left:23%;
+  bottom:23%;
+}
+
+.hs-cable{
+  left:52%;
+  bottom:22%;
+}
+
+.hs-box{
+  right:21%;
+  bottom:25%;
+}
+
+.hs-ladder{
+  right:13%;
+  top:31%;
+}
+
+/* =====================================================
+   ACTIVITY STATUS
+   ===================================================== */
+
+.activity-status{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+
+  margin-top:16px;
+  padding:14px 16px;
+
+  border-radius:12px;
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   SCENARIO OPTIONS
+   ===================================================== */
+
+.scenario-option{
+  display:block;
+  width:100%;
+
+  margin:10px 0;
+  padding:14px 16px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  color:var(--text);
+
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.scenario-option.selected:hover,
+.scenario-option.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  color:var(--text);
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* =====================================================
+   QUIZ PROGRESS
+   ===================================================== */
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .hotspot{
+    width:43px;
+    height:43px;
+    font-size:.95rem;
+  }
+
+  .hs-spill{
+    left:20%;
+    bottom:21%;
+  }
+
+  .hs-cable{
+    left:49%;
+    bottom:20%;
+  }
+
+  .hs-box{
+    right:18%;
+    bottom:23%;
+  }
+
+  .hs-ladder{
+    right:10%;
+    top:29%;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 9: Ολισθήσεις, Παραπατήματα και Πτώσεις
+  </h1>
+
+  <p>
+    Οι ολισθήσεις, τα παραπατήματα και οι πτώσεις
+    μπορεί να φαίνονται απλά περιστατικά,
+    αλλά μπορούν να προκαλέσουν σοβαρούς τραυματισμούς,
+    κατάγματα και απουσίες από την εργασία.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Στόχοι Μάθησης</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">👣</span>
+      Διακρίνει ολίσθηση,
+      παραπάτημα και πτώση.
+    </div>
+
+    <div class="card">
+      <span class="icon">⚠️</span>
+      Αναγνωρίζει συνηθισμένες
+      αιτίες πτώσεων.
+    </div>
+
+    <div class="card">
+      <span class="icon">🧹</span>
+      Εφαρμόζει καλή τάξη
+      και καθαριότητα στον χώρο εργασίας.
+    </div>
+
+    <div class="card">
+      <span class="icon">🗣️</span>
+      Αναφέρει άμεσα διαρροές,
+      εμπόδια και επικίνδυνες συνθήκες.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SLIP TRIP FALL
+     ===================================================== -->
+
+<section>
+
+  <h2>Slip, Trip, Fall</h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🧊</span>
+
+      <h3>Ολίσθηση</h3>
+
+      <p>
+        Συμβαίνει όταν το πόδι
+        χάνει πρόσφυση με το δάπεδο.
+      </p>
+
+      <p>
+        <strong>Παράδειγμα:</strong>
+        Λάδι, νερό, σκόνη
+        ή ολισθηρή επιφάνεια.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔌</span>
+
+      <h3>Παραπάτημα</h3>
+
+      <p>
+        Συμβαίνει όταν το πόδι
+        χτυπά σε εμπόδιο
+        και το σώμα χάνει την ισορροπία του.
+      </p>
+
+      <p>
+        <strong>Παράδειγμα:</strong>
+        Καλώδιο, παλέτα,
+        εργαλείο ή ανωμαλία δαπέδου.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⬇️</span>
+
+      <h3>Πτώση</h3>
+
+      <p>
+        Συμβαίνει όταν το σώμα πέφτει
+        στο ίδιο επίπεδο ή από ύψος.
+      </p>
+
+      <p>
+        <strong>Παράδειγμα:</strong>
+        Πτώση σε σκάλα,
+        πλατφόρμα ή δάπεδο παραγωγής.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Βασικό μήνυμα:</strong>
+
+    Πολλές πτώσεις ξεκινούν
+    από μικρές καθημερινές συνθήκες
+    που δεν διορθώθηκαν έγκαιρα.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     COMMON CAUSES
+     ===================================================== -->
+
+<section>
+
+  <h2>Συνηθισμένες Αιτίες</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">💧</span>
+      <h3>Διαρροές</h3>
+      <p>
+        Νερό, λάδι, γράσο,
+        χημικά ή υγρά καθαρισμού στο δάπεδο.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+      <h3>Εμπόδια</h3>
+      <p>
+        Κιβώτια, παλέτες,
+        εργαλεία ή υλικά
+        σε διαδρόμους κυκλοφορίας.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔌</span>
+      <h3>Καλώδια</h3>
+      <p>
+        Καλώδια που περνούν
+        από διαδρόμους
+        ή περιοχές εργασίας.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">💡</span>
+      <h3>Κακός Φωτισμός</h3>
+      <p>
+        Σκιές, χαμηλός φωτισμός
+        ή καμένοι λαμπτήρες.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🪜</span>
+      <h3>Λανθασμένη Χρήση Σκάλας</h3>
+      <p>
+        Σκάλα σε ακατάλληλη θέση,
+        με αστάθεια ή χωρίς κατάλληλο έλεγχο.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👟</span>
+      <h3>Ακατάλληλα Υποδήματα</h3>
+      <p>
+        Υποδήματα χωρίς κατάλληλη πρόσφυση
+        ή σε κακή κατάσταση.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PREVENTION
+     ===================================================== -->
+
+<section>
+
+  <h2>Πρόληψη στην Πράξη</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🧹</span>
+      <h3>Καθαροί Διάδρομοι</h3>
+      <p>
+        Κράτα διαδρόμους,
+        εξόδους και σημεία πρόσβασης
+        ελεύθερα από εμπόδια.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🟡</span>
+      <h3>Άμεση Σήμανση</h3>
+      <p>
+        Σήμανε άμεσα
+        διαρροές ή υγρά σημεία
+        μέχρι να ελεγχθούν.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧽</span>
+      <h3>Καθαρισμός</h3>
+      <p>
+        Καθάρισε ή ζήτησε
+        ασφαλή καθαρισμό της διαρροής.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📢</span>
+      <h3>Αναφορά</h3>
+      <p>
+        Ανάφερε φθορές,
+        κακό φωτισμό,
+        εμπόδια και επικίνδυνες συνθήκες.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="success">
+
+    <strong>Θυμήσου:</strong>
+
+    Η τάξη και η καθαριότητα
+    δεν είναι θέμα εικόνας.
+    Είναι βασικό μέτρο πρόληψης ατυχημάτων.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     LADDER
+     ===================================================== -->
+
+<section>
+
+  <h2>Ασφαλής Χρήση Σκάλας</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔍</span>
+      <h3>Έλεγχος πριν τη χρήση</h3>
+      <p>
+        Έλεγξε για φθορές,
+        σπασμένα σκαλοπάτια,
+        ολισθηρά πέλματα ή αστάθεια.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📐</span>
+      <h3>Σωστή Τοποθέτηση</h3>
+      <p>
+        Η σκάλα πρέπει να είναι σταθερή
+        και κατάλληλα τοποθετημένη
+        για τον συγκεκριμένο τύπο σκάλας και εργασίας.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🤲</span>
+      <h3>Τρία Σημεία Επαφής</h3>
+      <p>
+        Διατήρησε τρία σημεία επαφής
+        κατά την ανάβαση και κάθοδο
+        όπου αυτό είναι εφαρμόσιμο.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚫</span>
+      <h3>Μην Υπερεκτείνεσαι</h3>
+      <p>
+        Μη γέρνεις υπερβολικά
+        για να φτάσεις μακριά.
+        Κατέβα και επανατοποθέτησε τη σκάλα.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE PHOTO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική Δραστηριότητα: Εντόπισε τους Κινδύνους Πτώσης
+  </h2>
+
+  <p>
+    Πάτησε στους τέσσερις κόκκινους δείκτες
+    για να εντοπίσεις κινδύνους ολίσθησης,
+    παραπατήματος ή πτώσης
+    στον πραγματικό βιομηχανικό χώρο.
+  </p>
+
+  <div class="fall-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/slips.png"
+      alt="Βιομηχανικός χώρος με διαρροή στο δάπεδο, καλώδιο στον διάδρομο, παλέτα με κιβώτιο και κινητή σκάλα"
+      class="fall-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+    <!-- SPILL -->
+
+    <button
+      type="button"
+      class="hotspot hs-spill"
+      data-original="!"
+      data-message="<strong>Διαρροή στο δάπεδο:</strong> Το λάδι ή άλλο υγρό μειώνει την πρόσφυση και μπορεί να προκαλέσει ολίσθηση. Η περιοχή πρέπει να ελεγχθεί, να σημανθεί όπου απαιτείται και η διαρροή να αντιμετωπιστεί άμεσα."
+      onclick="findFallHazard(this)">
+      !
+    </button>
+
+    <!-- CABLE -->
+
+    <button
+      type="button"
+      class="hotspot hs-cable"
+      data-original="!"
+      data-message="<strong>Καλώδιο στον διάδρομο:</strong> Το καλώδιο δημιουργεί εμπόδιο στην πορεία και μπορεί να προκαλέσει παραπάτημα. Τα καλώδια πρέπει να δρομολογούνται ή να προστατεύονται κατάλληλα."
+      onclick="findFallHazard(this)">
+      !
+    </button>
+
+    <!-- BOX / PALLET -->
+
+    <button
+      type="button"
+      class="hotspot hs-box"
+      data-original="!"
+      data-message="<strong>Εμπόδιο στη διαδρομή:</strong> Η παλέτα και το κιβώτιο βρίσκονται μέσα ή πολύ κοντά σε περιοχή κυκλοφορίας. Οι διάδρομοι πρέπει να παραμένουν ελεύθεροι και σαφώς προσβάσιμοι."
+      onclick="findFallHazard(this)">
+      !
+    </button>
+
+    <!-- LADDER -->
+
+    <button
+      type="button"
+      class="hotspot hs-ladder"
+      data-original="!"
+      data-message="<strong>Σκάλα / μέσο πρόσβασης:</strong> Η σκάλα πρέπει να χρησιμοποιείται μόνο όταν είναι κατάλληλη για την εργασία, σε σταθερή θέση και σύμφωνα με τις οδηγίες ασφαλούς χρήσης."
+      onclick="findFallHazard(this)">
+      !
+    </button>
+
+  </div>
+
+  <div class="activity-status">
+
+    <strong>
+      Εντοπίστηκαν:
+      <span id="fallScore">0</span>/4
+    </strong>
+
+    <span id="fallInstruction">
+      Επίλεξε και τους τέσσερις δείκτες.
+    </span>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetFallActivity()">
+    Επανεκκίνηση Δραστηριότητας
+  </button>
+
+  <div
+    id="fallFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>Σενάριο Απόφασης</h2>
+
+  <p>
+    Βλέπεις διαρροή λαδιού
+    σε διάδρομο όπου περνούν εργαζόμενοι
+    και μέσα διακίνησης υλικών.
+  </p>
+
+  <p>
+    <strong>Τι κάνεις;</strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Την προσπερνώ προσεκτικά,
+    γιατί δεν είναι δική μου δουλειά.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Ενημερώνω κάποιον αργότερα
+    όταν τελειώσω τη δουλειά μου.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Προειδοποιώ και ελέγχω άμεσα την περιοχή
+    στο μέτρο που μπορώ να το κάνω με ασφάλεια
+    και αναφέρω τη διαρροή
+    ώστε να αντιμετωπιστεί χωρίς καθυστέρηση.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <!-- QUESTION 1 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Τι είναι ολίσθηση;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Όταν το πόδι
+        χάνει πρόσφυση με το δάπεδο.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Όταν το πόδι
+        χτυπά σε εμπόδιο.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Μόνο όταν υπάρχει
+        πτώση από ύψος.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 2 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Ποια είναι σωστή πρακτική;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Κρατώ τους διαδρόμους
+        ελεύθερους από εμπόδια.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Αφήνω καλώδια στον διάδρομο
+        αν η εργασία είναι σύντομη.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Περνάω προσεκτικά
+        πάνω ή δίπλα από διαρροές.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 3 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Αν δω διαρροή στο δάπεδο:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Ελέγχω ή προειδοποιώ για την περιοχή,
+        την αναφέρω άμεσα
+        και φροντίζω να αντιμετωπιστεί
+        σύμφωνα με τη διαδικασία του χώρου.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Την αγνοώ
+        αν δεν εμποδίζει εμένα.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Περιμένω
+        να τη δει κάποιος άλλος.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 4 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Κατά την ανάβαση ή κάθοδο σε σκάλα, ποια πρακτική είναι σημαντική;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Διατηρώ τρία σημεία επαφής
+        όπου αυτό είναι εφαρμόσιμο.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Κρατώ μόνο ένα σημείο επαφής.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Τεντώνομαι όσο περισσότερο γίνεται
+        για να μη χρειαστεί να μετακινήσω τη σκάλα.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Βασικά Σημεία</h2>
+
+  <div class="takeaway">
+    <span>💧</span>
+    <div>
+      Μικρές διαρροές
+      μπορούν να προκαλέσουν σοβαρό τραυματισμό.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🚶</span>
+    <div>
+      Καθαροί και ελεύθεροι διάδρομοι
+      σημαίνουν ασφαλέστερη κυκλοφορία.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>📢</span>
+    <div>
+      Οι διαρροές και άλλοι κίνδυνοι
+      πρέπει να αναφέρονται άμεσα.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🔌</span>
+    <div>
+      Καλώδια, εργαλεία και υλικά
+      δεν πρέπει να δημιουργούν εμπόδια στους διαδρόμους.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🪜</span>
+    <div>
+      Χρησιμοποίησε τη σκάλα σωστά,
+      διατήρησε ασφαλή επαφή
+      και μην υπερεκτείνεσαι.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 9
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   FALL HAZARD ACTIVITY
+   ===================================================== */
+
+let fallHazardsFound = 0;
+const totalFallHazards = 4;
+
+function findFallHazard(button){
+
+  const feedback =
+    document.getElementById("fallFeedback");
+
+  const score =
+    document.getElementById("fallScore");
+
+  const instruction =
+    document.getElementById("fallInstruction");
+
+  if(!button.classList.contains("found")){
+
+    button.classList.add("found");
+
+    button.textContent = "✓";
+
+    fallHazardsFound++;
+
+    score.textContent =
+      fallHazardsFound;
+  }
+
+  feedback.style.display = "block";
+  feedback.className = "feedback success";
+  feedback.innerHTML = button.dataset.message;
+
+  if(fallHazardsFound === totalFallHazards){
+
+    instruction.textContent =
+      "Η δραστηριότητα ολοκληρώθηκε.";
+
+    feedback.innerHTML +=
+      "<br><br><strong>Μπράβο!</strong> " +
+      "Εντόπισες και τους τέσσερις βασικούς κινδύνους.";
+  }
+}
+
+function resetFallActivity(){
+
+  fallHazardsFound = 0;
+
+  document
+    .querySelectorAll(".hotspot")
+    .forEach(function(button){
+
+      button.classList.remove("found");
+
+      button.textContent =
+        button.dataset.original;
+
+    });
+
+  document.getElementById(
+    "fallScore"
+  ).textContent = "0";
+
+  document.getElementById(
+    "fallInstruction"
+  ).textContent =
+    "Επίλεξε και τους τέσσερις δείκτες.";
+
+  const feedback =
+    document.getElementById("fallFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Η άμεση προειδοποίηση, ο έλεγχος της περιοχής όπου αυτό μπορεί να γίνει με ασφάλεια " +
+      "και η γρήγορη αναφορά μειώνουν τον κίνδυνο για όλους.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "<strong>Δεν είναι αρκετό.</strong> " +
+      "Η καθυστέρηση αφήνει τον κίνδυνο ενεργό " +
+      "και άλλοι εργαζόμενοι μπορεί να εκτεθούν στη διαρροή.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Η επικίνδυνη συνθήκη δεν πρέπει να αγνοηθεί. " +
+      "Η διαρροή πρέπει να αναφερθεί και η περιοχή να ελεγχθεί χωρίς αδικαιολόγητη καθυστέρηση.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Άριστα!</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Κατανοείς τις βασικές αρχές πρόληψης ολισθήσεων, παραπατημάτων και πτώσεων.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Καλή προσπάθεια.</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Ξαναδές τις αιτίες ολίσθησης, παραπατήματος, " +
+      "την καλή τάξη και καθαριότητα και την ασφαλή χρήση σκάλας.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score + "/" + total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

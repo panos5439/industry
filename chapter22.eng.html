@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Module 22 | Safety Signage</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+
+  --yellow:#facc15;
+  --red:#dc2626;
+  --blue:#2f55d4;
+  --green:#00a95c;
+
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+
+  color:white;
+
+  padding:52px 20px;
+
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+
+  font-size:
+    clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+
+  margin:auto;
+
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+
+  margin:auto;
+
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+
+  margin-bottom:24px;
+
+  padding:28px;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+
+  border:1px solid var(--border);
+
+  border-radius:16px;
+
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+
+  margin-bottom:10px;
+
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+
+  margin-top:16px;
+
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:
+    6px solid var(--secondary);
+
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:
+    6px solid var(--success);
+
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:
+    6px solid var(--accent);
+
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:
+    6px solid var(--primary);
+
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+
+  padding:12px 18px;
+
+  border:none;
+
+  border-radius:10px;
+
+  background:var(--primary);
+
+  color:white;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:
+    3px solid var(--secondary);
+
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   ORIGINAL SIGN VISUALS
+   ===================================================== */
+
+.sign-list{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:12px;
+
+  margin-top:20px;
+}
+
+.sign-row{
+  display:flex;
+
+  align-items:center;
+
+  gap:18px;
+
+  padding:16px;
+
+  border:1px solid var(--border);
+
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.sign-box{
+  flex:0 0 74px;
+
+  width:74px;
+
+  height:74px;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:12px;
+
+  background:#edf2f7;
+}
+
+.sign-copy{
+  flex:1;
+}
+
+.sign-copy h3{
+  margin:0 0 4px;
+}
+
+.sign-copy p{
+  margin:0;
+}
+
+/* =====================================================
+   1. WARNING
+   EXACT ORIGINAL LOGIC:
+   YELLOW TRIANGLE
+   ===================================================== */
+
+.symbol-warning{
+  width:0;
+  height:0;
+
+  border-left:
+    24px solid transparent;
+
+  border-right:
+    24px solid transparent;
+
+  border-bottom:
+    44px solid var(--yellow);
+}
+
+/* =====================================================
+   2. PROHIBITION
+   EXACT ORIGINAL LOGIC:
+   RED CIRCLE + RED DIAGONAL
+   ===================================================== */
+
+.symbol-prohibition{
+  position:relative;
+
+  width:48px;
+  height:48px;
+
+  border-radius:50%;
+
+  border:6px solid var(--red);
+
+  background:white;
+}
+
+.symbol-prohibition::after{
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:6px;
+  height:52px;
+
+  background:var(--red);
+
+  transform:
+    translate(-50%,-50%)
+    rotate(-45deg);
+}
+
+/* =====================================================
+   3. MANDATORY
+   EXACT ORIGINAL LOGIC:
+   BLUE CIRCLE
+   NO EXTRA SYMBOL
+   ===================================================== */
+
+.symbol-mandatory{
+  width:46px;
+  height:46px;
+
+  border-radius:50%;
+
+  background:var(--blue);
+}
+
+/* =====================================================
+   4. ESCAPE / FIRST AID
+   EXACT ORIGINAL LOGIC:
+   GREEN RECTANGLE
+   NO EXTRA SYMBOL
+   ===================================================== */
+
+.symbol-escape{
+  width:52px;
+  height:30px;
+
+  border-radius:2px;
+
+  background:var(--green);
+}
+
+/* =====================================================
+   5. FIRE EQUIPMENT
+   EXACT ORIGINAL LOGIC:
+   RED SQUARE
+   NO EXTRA SYMBOL
+   ===================================================== */
+
+.symbol-fire{
+  width:44px;
+  height:44px;
+
+  background:var(--red);
+}
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+.activity-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(190px,1fr));
+
+  gap:14px;
+
+  margin-top:20px;
+}
+
+.sign-choice{
+  width:100%;
+
+  min-height:150px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:14px;
+
+  padding:16px;
+
+  border:
+    2px solid var(--border);
+
+  border-radius:14px;
+
+  background:#eef4fb;
+
+  color:var(--text);
+
+  text-align:center;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.sign-choice:hover,
+.sign-choice:focus{
+  background:#dcecff;
+
+  border-color:var(--primary);
+
+  outline:
+    3px solid rgba(244,180,0,.65);
+
+  outline-offset:2px;
+}
+
+.sign-choice.selected{
+  background:#d9e9f8;
+
+  border:
+    3px solid var(--primary);
+
+  color:var(--primary-dark);
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.activity-symbol-box{
+  width:70px;
+
+  height:70px;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:12px;
+
+  background:white;
+
+  border:1px solid var(--border);
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+
+  padding:18px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+
+  padding:11px 13px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:10px;
+
+  background:white;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:
+    2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:10px;
+}
+
+/* =====================================================
+   PROGRESS
+   ===================================================== */
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--success),
+      #52b788
+    );
+
+  transition:
+    width .4s ease;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:
+    6px solid var(--success);
+
+  background:var(--success-bg);
+
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:
+    6px solid var(--accent);
+
+  background:var(--danger-bg);
+
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:
+    6px solid var(--secondary);
+
+  background:var(--warning-bg);
+
+  color:#6f5100;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+
+  gap:12px;
+
+  align-items:flex-start;
+
+  margin:14px 0;
+
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .sign-row{
+    align-items:flex-start;
+  }
+
+  .sign-box{
+    flex-basis:62px;
+
+    width:62px;
+
+    height:62px;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Module 22: Safety Signage
+  </h1>
+
+  <p>
+    Safety signage uses
+    colours, shapes and symbols
+    to help us recognise
+    hazards, prohibitions,
+    mandatory actions and safe routes.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Learning Objectives</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">⚠️</span>
+      Recognise the main
+      categories of safety signs.
+    </div>
+
+    <div class="card">
+      <span class="icon">🎨</span>
+      Correctly associate
+      colour and shape
+      with the sign message.
+    </div>
+
+    <div class="card">
+      <span class="icon">🚪</span>
+      Recognise escape
+      and safety signs.
+    </div>
+
+    <div class="card">
+      <span class="icon">📢</span>
+      Report signs
+      that are missing,
+      damaged
+      or not visible.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     22.1
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    22.1 What is Safety Signage?
+  </h2>
+
+  <p>
+    Safety signage
+    is a system of symbols,
+    colours and shapes
+    that helps us quickly understand
+    what hazard exists
+    and what action is required.
+  </p>
+
+  <div class="highlight">
+
+    <strong>Key message:</strong>
+
+    Safety signage provides
+    an immediate visual message,
+    but it does not replace
+    training,
+    safe procedures
+    or protective measures.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     22.2
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    22.2 General Rules
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">👀</span>
+
+      <h3>Know the Signs</h3>
+
+      <p>
+        Know the safety signs
+        that are present
+        in your workplace.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">✅</span>
+
+      <h3>Follow the Instructions</h3>
+
+      <p>
+        Follow the instruction,
+        prohibition or mandatory action
+        indicated by the sign.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">📢</span>
+
+      <h3>Report Problems</h3>
+
+      <p>
+        If a sign
+        is missing,
+        damaged
+        or not visible,
+        report it to the responsible person.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚫</span>
+
+      <h3>Do Not Remove Signage</h3>
+
+      <p>
+        Do not cover,
+        move
+        or remove
+        safety signs and labels.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     22.3
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    22.3 Categories of Safety Signs
+  </h2>
+
+  <p>
+    Shape and colour
+    help us immediately recognise
+    the type of message.
+  </p>
+
+  <div class="sign-list">
+
+    <!-- WARNING -->
+
+    <div class="sign-row">
+
+      <div class="sign-box">
+
+        <div
+          class="symbol-warning"
+          aria-hidden="true">
+        </div>
+
+      </div>
+
+      <div class="sign-copy">
+
+        <h3>
+          Warning Signs
+        </h3>
+
+        <p>
+          Yellow triangle –
+          warns of a hazard
+          (e.g. risk of electric shock).
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- PROHIBITION -->
+
+    <div class="sign-row">
+
+      <div class="sign-box">
+
+        <div
+          class="symbol-prohibition"
+          aria-hidden="true">
+        </div>
+
+      </div>
+
+      <div class="sign-copy">
+
+        <h3>
+          Prohibition Signs
+        </h3>
+
+        <p>
+          Red circle
+          with a diagonal line –
+          something is prohibited
+          (e.g. smoking).
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- MANDATORY -->
+
+    <div class="sign-row">
+
+      <div class="sign-box">
+
+        <div
+          class="symbol-mandatory"
+          aria-hidden="true">
+        </div>
+
+      </div>
+
+      <div class="sign-copy">
+
+        <h3>
+          Mandatory Signs
+        </h3>
+
+        <p>
+          Blue circle –
+          an action must be carried out
+          (e.g. wearing gloves).
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ESCAPE -->
+
+    <div class="sign-row">
+
+      <div class="sign-box">
+
+        <div
+          class="symbol-escape"
+          aria-hidden="true">
+        </div>
+
+      </div>
+
+      <div class="sign-copy">
+
+        <h3>
+          Escape / Safety Signs
+        </h3>
+
+        <p>
+          Green rectangle –
+          indicates an emergency exit
+          or first-aid facilities.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- FIRE -->
+
+    <div class="sign-row">
+
+      <div class="sign-box">
+
+        <div
+          class="symbol-fire"
+          aria-hidden="true">
+        </div>
+
+      </div>
+
+      <div class="sign-copy">
+
+        <h3>
+          Fire-Fighting Equipment Signs
+        </h3>
+
+        <p>
+          Red square –
+          indicates fire extinguishers,
+          fire hose points, etc.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Important:</strong>
+
+    Know the signs
+    that are present in your workplace
+    and always follow
+    the instruction or restriction
+    they communicate.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Interactive Activity:
+    Identify the Sign
+  </h2>
+
+  <p>
+    Which category of sign
+    indicates that
+    a specific action must be carried out?
+  </p>
+
+  <div class="activity-grid">
+
+    <!-- WARNING -->
+
+    <button
+      type="button"
+      class="sign-choice"
+      data-type="wrong"
+      onclick="selectSign(this)">
+
+      <span class="activity-symbol-box">
+
+        <span class="symbol-warning"></span>
+
+      </span>
+
+      Warning
+
+    </button>
+
+    <!-- PROHIBITION -->
+
+    <button
+      type="button"
+      class="sign-choice"
+      data-type="wrong"
+      onclick="selectSign(this)">
+
+      <span class="activity-symbol-box">
+
+        <span class="symbol-prohibition"></span>
+
+      </span>
+
+      Prohibition
+
+    </button>
+
+    <!-- MANDATORY -->
+
+    <button
+      type="button"
+      class="sign-choice"
+      data-type="correct"
+      onclick="selectSign(this)">
+
+      <span class="activity-symbol-box">
+
+        <span class="symbol-mandatory"></span>
+
+      </span>
+
+      Mandatory
+
+    </button>
+
+    <!-- ESCAPE -->
+
+    <button
+      type="button"
+      class="sign-choice"
+      data-type="wrong"
+      onclick="selectSign(this)">
+
+      <span class="activity-symbol-box">
+
+        <span class="symbol-escape"></span>
+
+      </span>
+
+      Escape / Safety
+
+    </button>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitSignActivity()">
+
+    Check Answer
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetSignActivity()">
+
+    Restart Activity
+
+  </button>
+
+  <div
+    id="signFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     22.4
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    22.4 Special Labels and Markings
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🧪</span>
+
+      <h3>Chemical Substances</h3>
+
+      <p>
+        Each container
+        should retain
+        its required label.
+      </p>
+
+      <p>
+        Do not remove
+        or alter
+        hazard labels.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚪</span>
+
+      <h3>Exits and Escape Routes</h3>
+
+      <p>
+        Exit signage
+        should remain visible
+        and escape routes
+        should remain free from obstructions.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⚡</span>
+
+      <h3>Electrical Panels</h3>
+
+      <p>
+        Electrical installations
+        may carry
+        specific warning signage.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🦺</span>
+
+      <h3>Mandatory PPE</h3>
+
+      <p>
+        Signage may indicate
+        specific PPE
+        that must be used
+        before entry or work begins.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     22.5
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    22.5 Practical Tips
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🚪</span>
+
+      <h3>Know the Exit</h3>
+
+      <p>
+        Know where
+        the nearest emergency exit is located.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">💧</span>
+
+      <h3>Do Not Ignore Warnings</h3>
+
+      <p>
+        If temporary signage
+        is in place for a slippery floor
+        or another hazardous condition,
+        follow it.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🧯</span>
+
+      <h3>Keep Signage Visible</h3>
+
+      <p>
+        Fire-fighting equipment signage
+        should remain
+        clearly visible.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">📢</span>
+
+      <h3>Report Damage</h3>
+
+      <p>
+        If a sign
+        is missing or damaged,
+        report it immediately.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <!-- QUESTION 1 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. What does a yellow triangular sign indicate?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        No entry.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Warning
+        about a hazard.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Emergency exit location.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 2 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. What does a red circle with a diagonal line mean?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Something is prohibited.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        PPE must be worn.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        It indicates an emergency exit.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 3 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. If an emergency exit sign is covered:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Report the problem immediately
+        so that
+        its visibility can be restored.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Ignore it
+        if you already know where the exit is.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Wait until
+        the next evacuation drill.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 4 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Which behaviour is correct?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Keep signs
+        and labels
+        clean and visible
+        and report any damage.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Remove labels
+        from containers
+        if you know their contents.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Move a sign
+        if it temporarily gets in the way.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+
+        Submit Quiz
+
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+
+        Reset Quiz
+
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Key Takeaways</h2>
+
+  <div class="takeaway">
+
+    <span>⚠️</span>
+
+    <div>
+      Yellow triangle:
+      hazard warning.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🚫</span>
+
+    <div>
+      Red circle
+      with diagonal line:
+      prohibition.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🔵</span>
+
+    <div>
+      Blue circle:
+      mandatory action.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🟩</span>
+
+    <div>
+      Green rectangle:
+      escape,
+      safety or first aid.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🟥</span>
+
+    <div>
+      Red square:
+      fire-fighting equipment.
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Occupational Health & Safety Training | Module 22
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   SIGN ACTIVITY
+   ===================================================== */
+
+let selectedSign = null;
+
+function selectSign(button){
+
+  document
+    .querySelectorAll(".sign-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedSign =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("signFeedback");
+
+  feedback.style.display = "none";
+
+  feedback.className = "feedback";
+
+  feedback.innerHTML = "";
+}
+
+function submitSignActivity(){
+
+  const feedback =
+    document.getElementById("signFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedSign){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Please select one sign category.";
+
+    return;
+  }
+
+  if(selectedSign === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "A blue circular sign indicates that a specific action must be carried out.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Not correct.</strong> " +
+      "The correct answer is the blue circular mandatory sign.";
+  }
+}
+
+function resetSignActivity(){
+
+  selectedSign = null;
+
+  document
+    .querySelectorAll(".sign-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("signFeedback");
+
+  feedback.style.display = "none";
+
+  feedback.className = "feedback";
+
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Please answer all four questions before submitting.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Excellent!</strong> You scored " +
+      score + "/" + total +
+      ". You correctly recognise the main categories of safety signs.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Good effort.</strong> You scored " +
+      score + "/" + total +
+      ". Review the colour and shape of each main sign category.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score + "/" + total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+
+  result.className = "feedback";
+
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

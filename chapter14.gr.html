@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Ενότητα 14 | Κλειστοί / Περιορισμένοι Χώροι</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:white;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  color:var(--primary);
+  margin-top:0;
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  background:white;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  font-size:2rem;
+  display:block;
+  margin-bottom:10px;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  padding:18px;
+  border-radius:12px;
+  margin-top:16px;
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.step-card{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+/* =====================================================
+   GENERAL BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  margin-top:12px;
+  font-weight:bold;
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   SAFETY IMAGE
+   ===================================================== */
+
+.safety-image-container{
+  width:100%;
+  margin-top:18px;
+  margin-bottom:16px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:#eef4fb;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
+}
+
+.safety-image{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:cover;
+}
+
+/* =====================================================
+   ENTRY / SCENARIO OPTIONS
+   ===================================================== */
+
+.entry-option,
+.scenario-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#eef4fb;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:15px 17px;
+  border-radius:12px;
+  margin:10px 0;
+  font-weight:500;
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+/* Light hover so text remains readable */
+
+.entry-option:hover,
+.entry-option:focus,
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  color:#1f2933;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.6);
+  outline-offset:2px;
+}
+
+/* Selected option remains clear and readable */
+
+.entry-option.selected,
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.entry-option.selected:hover,
+.entry-option.selected:focus,
+.scenario-option.selected:hover,
+.scenario-option.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+  border-color:var(--primary);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  background:#ffffff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  cursor:pointer;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  background:#e8eef5;
+  border-radius:999px;
+  height:18px;
+  overflow:hidden;
+  margin-top:18px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+  transition:width .4s ease;
+}
+
+.takeaway{
+  font-size:1.15rem;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 20px;
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 14: Κλειστοί / Περιορισμένοι Χώροι
+  </h1>
+
+  <p>
+    Οι κλειστοί χώροι μπορεί να φαίνονται ακίνδυνοι,
+    αλλά μπορούν να περιέχουν θανατηφόρες ατμόσφαιρες,
+    έλλειψη οξυγόνου ή παγιδευμένη ενέργεια.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Στόχοι μάθησης
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🚪</span>
+      Κατανοεί τι είναι κλειστός ή περιορισμένος χώρος.
+    </div>
+
+    <div class="card">
+      <span class="icon">⚠️</span>
+      Αναγνωρίζει βασικούς κινδύνους πριν από την είσοδο.
+    </div>
+
+    <div class="card">
+      <span class="icon">📋</span>
+      Κατανοεί τη σημασία άδειας εργασίας και ατμοσφαιρικού ελέγχου.
+    </div>
+
+    <div class="card">
+      <span class="icon">🚑</span>
+      Γνωρίζει γιατί η διάσωση πρέπει να είναι οργανωμένη
+      και όχι αυθόρμητη.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DEFINITION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Τι είναι κλειστός / περιορισμένος χώρος;
+  </h2>
+
+  <p>
+    Κλειστός ή περιορισμένος χώρος είναι ένας χώρος που δεν έχει
+    σχεδιαστεί για συνεχή παραμονή ανθρώπων, έχει περιορισμένη
+    είσοδο ή έξοδο και μπορεί να περιέχει επικίνδυνη ατμόσφαιρα
+    ή άλλους σοβαρούς κινδύνους.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🛢️</span>
+
+      <h3>
+        Δεξαμενές
+      </h3>
+
+      <p>
+        Δεξαμενές υγρών, χημικών, καυσίμων ή νερού.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🌾</span>
+
+      <h3>
+        Σιλό
+      </h3>
+
+      <p>
+        Σιλό σκόνης, πρώτων υλών ή κόκκων
+        με κίνδυνο καταπλάκωσης.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🕳️</span>
+
+      <h3>
+        Φρεάτια / Pits
+      </h3>
+
+      <p>
+        Φρεάτια, υπόγειοι χώροι, κανάλια
+        ή λάκκοι συντήρησης.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔩</span>
+
+      <h3>
+        Αγωγοί / Vessels
+      </h3>
+
+      <p>
+        Μεγάλοι σωλήνες, δοχεία πίεσης
+        ή κλειστά τμήματα εξοπλισμού.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>
+      Βασικό μήνυμα:
+    </strong>
+
+    Δεν μπαίνουμε ποτέ σε περιορισμένο χώρο
+    «για λίγο» χωρίς εγκεκριμένη διαδικασία.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MAIN HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Κύριοι κίνδυνοι
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🫁</span>
+
+      <h3>
+        Έλλειψη οξυγόνου
+      </h3>
+
+      <p>
+        Η ατμόσφαιρα μπορεί να μην έχει αρκετό
+        οξυγόνο για ασφαλή αναπνοή.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">☠️</span>
+
+      <h3>
+        Τοξικά αέρια
+      </h3>
+
+      <p>
+        Αέρια ή ατμοί μπορεί να προκαλέσουν
+        δηλητηρίαση, απώλεια αισθήσεων ή θάνατο.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔥</span>
+
+      <h3>
+        Εύφλεκτη ατμόσφαιρα
+      </h3>
+
+      <p>
+        Ατμοί ή αέρια μπορεί να αναφλεγούν
+        από σπινθήρα ή θερμή εργασία.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🌊</span>
+
+      <h3>
+        Παγίδευση / Καταπλάκωση
+      </h3>
+
+      <p>
+        Υλικά, υγρά ή κόκκοι μπορεί να
+        παγιδεύσουν εργαζόμενο.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⚡</span>
+
+      <h3>
+        Ενέργεια εξοπλισμού
+      </h3>
+
+      <p>
+        Κινούμενα μέρη, αναδευτήρες,
+        πίεση ή ηλεκτρική ενέργεια
+        απαιτούν απομόνωση.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚪</span>
+
+      <h3>
+        Δύσκολη διάσωση
+      </h3>
+
+      <p>
+        Η περιορισμένη πρόσβαση δυσκολεύει
+        την έξοδο και την παροχή βοήθειας.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     BEFORE ENTRY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Πριν από την είσοδο
+  </h2>
+
+  <div class="grid">
+
+    <div class="card step-card">
+
+      <h3>
+        1. Άδεια εργασίας
+      </h3>
+
+      <p>
+        Η είσοδος πρέπει να εγκρίνεται με κατάλληλη
+        άδεια και σαφείς προϋποθέσεις.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        2. Απομόνωση
+      </h3>
+
+      <p>
+        Απομόνωση ενέργειας, γραμμών,
+        βαλβίδων και άλλων κινδύνων
+        με εγκεκριμένη διαδικασία.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        3. Ατμοσφαιρικός έλεγχος
+      </h3>
+
+      <p>
+        Έλεγχος οξυγόνου, εύφλεκτων
+        και τοξικών αερίων πριν
+        και κατά τη διάρκεια της εργασίας.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        4. Εξαερισμός
+      </h3>
+
+      <p>
+        Χρήση κατάλληλου εξαερισμού
+        όπου απαιτείται.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        5. Επιτηρητής
+      </h3>
+
+      <p>
+        Ο επιτηρητής παραμένει έξω,
+        παρακολουθεί και επικοινωνεί
+        με τους εργαζομένους.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        6. Σχέδιο διάσωσης
+      </h3>
+
+      <p>
+        Πρέπει να υπάρχει σχέδιο διάσωσης
+        πριν την είσοδο και όχι όταν συμβεί
+        το περιστατικό.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>
+      Κρίσιμο:
+    </strong>
+
+    Η αυθόρμητη διάσωση σε κλειστό χώρο
+    μπορεί να δημιουργήσει δεύτερο θύμα.
+    Δεν μπαίνουμε για διάσωση χωρίς εκπαίδευση,
+    εξοπλισμό και σχέδιο.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     ATTENDANT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Ο ρόλος του επιτηρητή
+  </h2>
+
+  <p>
+    Ο επιτηρητής δεν μπαίνει στον κλειστό χώρο.
+    Παραμένει έξω, διατηρεί επικοινωνία,
+    παρακολουθεί την κατάσταση και ενεργοποιεί
+    τη διαδικασία έκτακτης ανάγκης αν χρειαστεί.
+  </p>
+
+  <div class="safety-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/confined.png"
+      alt="Είσοδος σε περιορισμένο χώρο με τρίποδα διάσωσης, εξοπλισμό ατμοσφαιρικού ελέγχου, εργαζόμενο και επιτηρητή"
+      class="safety-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+  </div>
+
+  <div class="success">
+
+    <strong>
+      Σωστή πρακτική:
+    </strong>
+
+    Ο επιτηρητής πρέπει να γνωρίζει ποιος είναι μέσα,
+    πόση ώρα βρίσκεται μέσα, να διατηρεί επικοινωνία
+    και να γνωρίζει πώς θα ενεργοποιηθεί άμεσα η βοήθεια.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     ENTRY ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική άσκηση: Είναι ασφαλής η είσοδος;
+  </h2>
+
+  <p>
+    Επίλεξε τη σωστή απόφαση για το παρακάτω περιστατικό.
+  </p>
+
+  <div class="highlight">
+
+    <strong>
+      Περιστατικό:
+    </strong>
+
+    Πρέπει να μπει εργαζόμενος σε δεξαμενή για καθαρισμό.
+    Η άδεια δεν έχει εκδοθεί ακόμη και δεν έχει γίνει
+    ατμοσφαιρικός έλεγχος.
+
+  </div>
+
+  <button
+    type="button"
+    class="entry-option"
+    data-type="wrong"
+    onclick="selectEntry(this)">
+
+    Μπαίνει γρήγορα για έναν πρώτο έλεγχο,
+    αφού η εργασία θα κρατήσει λίγο.
+
+  </button>
+
+  <button
+    type="button"
+    class="entry-option"
+    data-type="partial"
+    onclick="selectEntry(this)">
+
+    Μπαίνει μόνο αν φορά κράνος και γάντια.
+
+  </button>
+
+  <button
+    type="button"
+    class="entry-option"
+    data-type="correct"
+    onclick="selectEntry(this)">
+
+    Δεν επιτρέπεται είσοδος μέχρι να ολοκληρωθεί
+    η άδεια, η απομόνωση, ο ατμοσφαιρικός έλεγχος,
+    ο εξαερισμός όπου απαιτείται και το σχέδιο διάσωσης.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitEntry()">
+
+    Έλεγχος απάντησης
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetEntry()">
+
+    Επαναφορά άσκησης
+
+  </button>
+
+  <div
+    id="entryFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Σενάριο Απόφασης
+  </h2>
+
+  <p>
+    Βλέπεις συνάδελφο να χάνει τις αισθήσεις του
+    μέσα σε περιορισμένο χώρο.
+  </p>
+
+  <p>
+    <strong>
+      Τι κάνεις;
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Μπαίνω αμέσως για να τον τραβήξω έξω.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Ζητώ από άλλον συνάδελφο να μπει μαζί μου
+    για βοήθεια.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Δεν μπαίνω. Ενεργοποιώ άμεσα τη διαδικασία
+    διάσωσης και ενημερώνω τους υπεύθυνους
+    έκτακτης ανάγκης.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+
+    Οριστική απάντηση
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+
+    Επαναφορά σεναρίου
+
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Mini Quiz
+  </h2>
+
+  <form id="quizForm">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Κλειστός / περιορισμένος χώρος είναι:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Χώρος με περιορισμένη είσοδο ή έξοδο
+        που δεν έχει σχεδιαστεί για συνεχή παραμονή
+        και μπορεί να περιλαμβάνει σοβαρούς κινδύνους.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Οποιοδήποτε μεγάλο δωμάτιο παραγωγής.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Μόνο ένας υπόγειος χώρος.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Πριν την είσοδο απαιτείται:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Άδεια, απομόνωση, ατμοσφαιρικός έλεγχος
+        και σχέδιο διάσωσης σύμφωνα με τη διαδικασία.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Μόνο κράνος και γάντια.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Μόνο ένας γρήγορος οπτικός έλεγχος.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Ο επιτηρητής:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Παραμένει έξω, παρακολουθεί και ενεργοποιεί
+        βοήθεια αν χρειαστεί.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Μπαίνει μέσα για να βοηθά την εργασία.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Φεύγει όταν ξεκινήσει η εργασία.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Αν κάποιος χάσει τις αισθήσεις του
+          μέσα σε περιορισμένο χώρο:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Δεν μπαίνω αυθόρμητα.
+        Ενεργοποιώ τη διαδικασία διάσωσης.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Μπαίνω αμέσως μόνος μου.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Περιμένω να συνέλθει.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+
+        Υποβολή Quiz
+
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+
+        Επαναφορά Quiz
+
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Βασικά σημεία
+  </h2>
+
+  <p class="takeaway">
+    Δεν μπαίνουμε ποτέ σε κλειστό χώρο χωρίς εγκεκριμένη διαδικασία.
+  </p>
+
+  <p class="takeaway">
+    Η ατμόσφαιρα μπορεί να είναι επικίνδυνη
+    ακόμη κι αν ο χώρος φαίνεται καθαρός.
+  </p>
+
+  <p class="takeaway">
+    Ο ατμοσφαιρικός έλεγχος και ο εξαερισμός
+    είναι κρίσιμα μέτρα.
+  </p>
+
+  <p class="takeaway">
+    Ο επιτηρητής παραμένει έξω και παρακολουθεί.
+  </p>
+
+  <p class="takeaway">
+    Η διάσωση πρέπει να είναι σχεδιασμένη
+    πριν από την είσοδο.
+  </p>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 14
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   ENTRY ACTIVITY
+   ===================================================== */
+
+let selectedEntry = null;
+
+function selectEntry(button){
+
+  document
+    .querySelectorAll(".entry-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedEntry =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById(
+      "entryFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.innerHTML =
+    "";
+}
+
+function submitEntry(){
+
+  const feedback =
+    document.getElementById(
+      "entryFeedback"
+    );
+
+  if(!selectedEntry){
+
+    feedback.style.display =
+      "block";
+
+    feedback.className =
+      "feedback highlight";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν κάνεις έλεγχο.";
+
+    return;
+  }
+
+  feedback.style.display =
+    "block";
+
+  if(selectedEntry === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Η είσοδος σε περιορισμένο χώρο απαιτεί κατάλληλη προετοιμασία, άδεια, απομόνωση, ατμοσφαιρικό έλεγχο και σχέδιο διάσωσης.";
+
+  }else if(selectedEntry === "partial"){
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Τα ΜΑΠ από μόνα τους δεν καθιστούν ασφαλή την είσοδο. Πρέπει να έχουν ολοκληρωθεί όλες οι απαιτούμενες προϋποθέσεις εισόδου.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Η σύντομη διάρκεια της εργασίας δεν μειώνει τον κίνδυνο επικίνδυνης ατμόσφαιρας ή άλλων κινδύνων.";
+  }
+}
+
+function resetEntry(){
+
+  selectedEntry =
+    null;
+
+  document
+    .querySelectorAll(".entry-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "entryFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.className =
+    "feedback";
+
+  feedback.innerHTML =
+    "";
+}
+
+/* =====================================================
+   DECISION SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.innerHTML =
+    "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  if(!selectedScenario){
+
+    feedback.style.display =
+      "block";
+
+    feedback.className =
+      "feedback highlight";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν πατήσεις οριστική απάντηση.";
+
+    return;
+  }
+
+  feedback.style.display =
+    "block";
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Η αυθόρμητη είσοδος μπορεί να δημιουργήσει δεύτερο θύμα. Ενεργοποιούμε άμεσα το οργανωμένο σχέδιο διάσωσης.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Η είσοδος δεύτερου εργαζομένου χωρίς οργανωμένο σχέδιο διάσωσης μπορεί να δημιουργήσει ακόμη περισσότερα θύματα.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Δεν μπαίνουμε αυθόρμητα σε περιορισμένο χώρο για διάσωση χωρίς εκπαίδευση, εξοπλισμό και εγκεκριμένη διαδικασία.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario =
+    null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.className =
+    "feedback";
+
+  feedback.innerHTML =
+    "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById(
+      "quizForm"
+    );
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  const progressBar =
+    document.getElementById(
+      "progressBar"
+    );
+
+  const progressBox =
+    document.getElementById(
+      "quizProgress"
+    );
+
+  let score = 0;
+  let answered = 0;
+
+  const total = 4;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  /* Require every question to be answered */
+
+  if(answered < total){
+
+    result.style.display =
+      "block";
+
+    result.className =
+      "feedback highlight";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  result.style.display =
+    "block";
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "Άριστα! Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Κατανοείς τις βασικές αρχές ασφαλούς εργασίας σε περιορισμένους χώρους.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback highlight";
+
+    result.innerHTML =
+      "Καλή προσπάθεια. Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Ξαναδές την άδεια εισόδου, τον ατμοσφαιρικό έλεγχο, τον ρόλο του επιτηρητή και τη διάσωση.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById(
+      "quizForm"
+    );
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  const progressBar =
+    document.getElementById(
+      "progressBar"
+    );
+
+  const progressBox =
+    document.getElementById(
+      "quizProgress"
+    );
+
+  form.reset();
+
+  progressBar.style.width =
+    "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display =
+    "none";
+
+  result.className =
+    "feedback";
+
+  result.innerHTML =
+    "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+</script>
+
+</body>
+</html>

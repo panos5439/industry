@@ -1,0 +1,2493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Module 23 | Accident Response & First Aid in Industry</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:920px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   RESPONSE FLOW
+   ===================================================== */
+
+.response-flow{
+  display:grid;
+
+  grid-template-columns:
+    repeat(5,1fr);
+
+  gap:12px;
+
+  margin-top:22px;
+}
+
+.response-step{
+  position:relative;
+
+  min-height:165px;
+
+  padding:18px 14px;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  background:#f8fafc;
+
+  text-align:center;
+}
+
+.response-number{
+  width:44px;
+  height:44px;
+
+  display:grid;
+  place-items:center;
+
+  margin:0 auto 12px;
+
+  border-radius:50%;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+  font-size:1.05rem;
+}
+
+.response-step strong{
+  display:block;
+
+  margin-bottom:6px;
+
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   FIRST AID CARDS
+   ===================================================== */
+
+.first-aid-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.first-aid-card::before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:5px;
+
+  background:var(--primary);
+}
+
+/* =====================================================
+   INDUSTRIAL INCIDENT CARDS
+   ===================================================== */
+
+.incident-card{
+  position:relative;
+
+  padding-top:24px;
+}
+
+.incident-tag{
+  display:inline-block;
+
+  margin-bottom:10px;
+  padding:5px 10px;
+
+  border-radius:999px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-size:.85rem;
+  font-weight:bold;
+}
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+.activity-options{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(240px,1fr));
+
+  gap:14px;
+
+  margin-top:20px;
+}
+
+.activity-choice{
+  width:100%;
+  min-height:165px;
+
+  padding:18px;
+
+  border:2px solid var(--border);
+  border-radius:14px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.activity-choice:hover,
+.activity-choice:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.activity-choice.selected{
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:3px solid var(--primary);
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.activity-letter{
+  width:38px;
+  height:38px;
+
+  display:grid;
+  place-items:center;
+
+  margin-bottom:10px;
+
+  border-radius:50%;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+}
+
+/* =====================================================
+   SCENARIO OPTIONS
+   ===================================================== */
+
+.scenario-option{
+  display:block;
+
+  width:100%;
+
+  margin:10px 0;
+  padding:14px 16px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* =====================================================
+   PROGRESS
+   ===================================================== */
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:850px){
+
+  .response-flow{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .response-flow{
+    grid-template-columns:1fr;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Module 23: Accident Response & First Aid in Industry
+  </h1>
+
+  <p>
+    When an accident occurs,
+    the first actions must be
+    quick but also safe.
+
+    The aim is to protect ourselves,
+    activate help without delay,
+    support the injured person
+    and prevent a second injury.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Learning Objectives</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🛑</span>
+      Apply the correct sequence of actions
+      when an accident occurs.
+    </div>
+
+    <div class="card">
+      <span class="icon">📞</span>
+      Recognise
+      when immediate
+      emergency assistance is required.
+    </div>
+
+    <div class="card">
+      <span class="icon">🩹</span>
+      Understand basic actions
+      for common
+      industrial injuries.
+    </div>
+
+    <div class="card">
+      <span class="icon">❤️</span>
+      Understand the role
+      of CPR and an AED
+      during an emergency.
+    </div>
+
+    <div class="card">
+      <span class="icon">📋</span>
+      Understand the importance
+      of reporting,
+      investigation and learning
+      after an incident.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.1 CENTRAL MODEL
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.1 The Response Model:
+    Protect → Alert → Assess → Assist → Report
+  </h2>
+
+  <p>
+    When an accident occurs,
+    the first instinct may be
+    to run immediately towards the injured person.
+
+    In an industrial environment, however,
+    the hazard may still be active.
+  </p>
+
+  <div class="response-flow">
+
+    <div class="response-step">
+
+      <div class="response-number">1</div>
+
+      <strong>PROTECT</strong>
+
+      First check
+      whether you can approach
+      without putting yourself at risk.
+
+    </div>
+
+    <div class="response-step">
+
+      <div class="response-number">2</div>
+
+      <strong>ALERT</strong>
+
+      Call for help
+      and activate
+      the emergency response procedure.
+
+    </div>
+
+    <div class="response-step">
+
+      <div class="response-number">3</div>
+
+      <strong>ASSESS</strong>
+
+      Check the condition
+      of the injured person
+      and look for immediately
+      life-threatening conditions.
+
+    </div>
+
+    <div class="response-step">
+
+      <div class="response-number">4</div>
+
+      <strong>ASSIST</strong>
+
+      Provide appropriate
+      first aid
+      according to your training.
+
+    </div>
+
+    <div class="response-step">
+
+      <div class="response-number">5</div>
+
+      <strong>REPORT</strong>
+
+      After the incident,
+      reporting
+      and investigation follow.
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Core rule:</strong>
+
+    Do not become a second casualty.
+
+    Assistance begins
+    only when the approach
+    can be made safely.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.2 ACTIVE HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.2 Before You Approach: Is the Hazard Still Active?
+  </h2>
+
+  <p>
+    In an industrial workplace,
+    the accident may have already happened,
+    but the source of the hazard
+    may still be active.
+  </p>
+
+  <div class="grid">
+
+    <div class="card incident-card">
+
+      <span class="incident-tag">
+        Electrical Energy
+      </span>
+
+      <span class="icon">⚡</span>
+
+      <h3>Electrical Incident</h3>
+
+      <p>
+        Do not touch the injured person
+        until it has been confirmed
+        that they are no longer
+        in contact with an energised electrical source.
+      </p>
+
+    </div>
+
+    <div class="card incident-card">
+
+      <span class="incident-tag">
+        Mechanical Energy
+      </span>
+
+      <span class="icon">⚙️</span>
+
+      <h3>Machinery</h3>
+
+      <p>
+        Check for
+        moving parts,
+        stored energy
+        or the possibility
+        of unexpected movement.
+      </p>
+
+    </div>
+
+    <div class="card incident-card">
+
+      <span class="incident-tag">
+        Chemical Exposure
+      </span>
+
+      <span class="icon">🧪</span>
+
+      <h3>Spill or Vapour</h3>
+
+      <p>
+        Do not enter
+        an area with an unknown chemical exposure
+        without proper hazard control
+        and an appropriate response.
+      </p>
+
+    </div>
+
+    <div class="card incident-card">
+
+      <span class="incident-tag">
+        Fire
+      </span>
+
+      <span class="icon">🔥</span>
+
+      <h3>Heat / Smoke</h3>
+
+      <p>
+        Do not enter
+        an area involving fire,
+        dense smoke
+        or another uncontrolled hazard.
+      </p>
+
+    </div>
+
+    <div class="card incident-card">
+
+      <span class="incident-tag">
+        Traffic
+      </span>
+
+      <span class="icon">🚜</span>
+
+      <h3>Vehicles & Mobile Equipment</h3>
+
+      <p>
+        Make sure
+        the area is protected
+        from vehicles,
+        forklifts
+        or other moving equipment.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.3 INITIAL ASSESSMENT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.3 Initial Assessment of the Injured Person
+  </h2>
+
+  <div class="grid">
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🗣️</span>
+
+      <h3>Responsiveness</h3>
+
+      <p>
+        Check whether the person
+        responds
+        and call for immediate help
+        when required.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🫁</span>
+
+      <h3>Breathing</h3>
+
+      <p>
+        If the person
+        is unresponsive
+        and is not breathing normally,
+        this is a situation
+        requiring immediate emergency response.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🩸</span>
+
+      <h3>Severe Bleeding</h3>
+
+      <p>
+        Look for
+        heavy or uncontrolled bleeding
+        that requires
+        immediate attention.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Priority:</strong>
+
+    In a serious incident,
+    do not delay
+    activating
+    emergency assistance.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.4 BLEEDING
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.4 Severe Bleeding
+  </h2>
+
+  <p>
+    Severe external bleeding
+    can quickly develop
+    into a life-threatening emergency.
+  </p>
+
+  <div class="grid">
+
+    <div class="card first-aid-card">
+
+      <span class="icon">📞</span>
+
+      <h3>Call for Help</h3>
+
+      <p>
+        Immediately activate
+        the required
+        emergency response.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🧤</span>
+
+      <h3>Protect Yourself</h3>
+
+      <p>
+        When available,
+        use an appropriate protective barrier
+        to reduce contact
+        with blood.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🩹</span>
+
+      <h3>Direct Pressure</h3>
+
+      <p>
+        Apply firm,
+        direct pressure
+        to the bleeding area
+        using an appropriate dressing or material,
+        in accordance with your training.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Severe or uncontrolled bleeding = emergency.</strong>
+
+    Monitor the injured person
+    until appropriate
+    personnel take over.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.5 BURNS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.5 Burns
+  </h2>
+
+  <div class="grid">
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🔥</span>
+
+      <h3>Stop the Exposure</h3>
+
+      <p>
+        Remove the person
+        from the source of the burn
+        only when this
+        can be done safely.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">💧</span>
+
+      <h3>Cool a Thermal Burn</h3>
+
+      <p>
+        For a thermal burn,
+        cool the affected area
+        with cool running water
+        in accordance with your training
+        and first-aid procedure.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🚫</span>
+
+      <h3>Do Not Improvise</h3>
+
+      <p>
+        Do not apply
+        ice,
+        creams,
+        oil
+        or other unapproved substances
+        to the burn.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="info">
+
+    <strong>Note:</strong>
+
+    Chemical and electrical burns
+    require additional precautions.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.6 CHEMICAL EXPOSURE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.6 Chemical Exposure as a First-Aid Incident
+  </h2>
+
+  <p>
+    Chemical safety
+    has already been covered
+    in a previous module.
+
+    Here we focus only
+    on the response
+    after exposure has already occurred.
+  </p>
+
+  <div class="grid">
+
+    <div class="card first-aid-card">
+
+      <span class="icon">👁️</span>
+
+      <h3>Chemical in the Eyes</h3>
+
+      <p>
+        Begin flushing immediately
+        using the designated
+        eyewash station
+        and follow
+        the product-specific instructions
+        and site procedure.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">✋</span>
+
+      <h3>Chemical on the Skin</h3>
+
+      <p>
+        Stop the exposure
+        and follow
+        the required procedure
+        for removing the product
+        and contaminated clothing.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🫁</span>
+
+      <h3>Inhalation</h3>
+
+      <p>
+        Do not enter
+        a hazardous atmosphere
+        without the required protection.
+
+        Activate appropriate assistance
+        immediately.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">👄</span>
+
+      <h3>Ingestion</h3>
+
+      <p>
+        Do not induce vomiting
+        unless specifically instructed
+        by an appropriate medical source
+        or by the product instructions.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>There is no single first-aid response for every chemical.</strong>
+
+    Use
+    the first-aid information
+    for the specific product
+    and follow the site's
+    emergency procedure.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.7 ELECTRICAL
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.7 Electrical Accident
+  </h2>
+
+  <div class="grid">
+
+    <div class="card first-aid-card">
+
+      <span class="icon">⚡</span>
+
+      <h3>Do Not Touch the Injured Person</h3>
+
+      <p>
+        If they may still be
+        in contact with electrical current,
+        do not touch them.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🔌</span>
+
+      <h3>Isolate the Hazard</h3>
+
+      <p>
+        The electrical source
+        must be placed
+        in a safe condition
+        before approaching.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">❤️</span>
+
+      <h3>Monitor the Person</h3>
+
+      <p>
+        Electrical injury
+        can affect
+        the heart and breathing.
+
+        Activate emergency assistance
+        and monitor
+        the person's condition.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.8 EYE / FRACTURE / FALL
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.8 Other Common Industrial Injuries
+  </h2>
+
+  <div class="grid">
+
+    <div class="card first-aid-card">
+
+      <span class="icon">👁️</span>
+
+      <h3>Eye Injury</h3>
+
+      <p>
+        Do not rub the eye.
+
+        If an object
+        has penetrated the eye,
+        do not attempt
+        to remove it.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🦴</span>
+
+      <h3>Possible Fracture</h3>
+
+      <p>
+        Do not attempt
+        to straighten
+        or reposition
+        an injured limb.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">⬇️</span>
+
+      <h3>Serious Fall</h3>
+
+      <p>
+        Avoid unnecessary movement
+        of a seriously injured person,
+        unless there is
+        an immediate danger
+        at the scene.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.9 CPR AED
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.9 Unresponsiveness, CPR & AED
+  </h2>
+
+  <div class="process-grid">
+
+    <div class="process-card">
+
+      <div class="process-number">1</div>
+
+      <h3>Check Responsiveness</h3>
+
+      <p>
+        If the person
+        does not respond,
+        call for help immediately.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">2</div>
+
+      <h3>Check Breathing</h3>
+
+      <p>
+        If they are not breathing normally,
+        activate
+        the emergency response
+        without delay.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">3</div>
+
+      <h3>CPR</h3>
+
+      <p>
+        Begin CPR
+        according to your training
+        or the instructions
+        provided by the emergency service.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">4</div>
+
+      <h3>AED</h3>
+
+      <p>
+        Ask for an AED,
+        switch it on
+        and follow
+        the device's
+        voice and visual instructions.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="success">
+
+    <strong>Time is critical.</strong>
+
+    Rapid recognition,
+    calling for help,
+    CPR
+    and early use of an AED
+    are key elements
+    of emergency response.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Interactive Activity:
+    What is the First Correct Action?
+  </h2>
+
+  <p>
+    You hear a loud noise
+    in a production area.
+
+    You see a worker
+    lying on the floor
+    next to a machine
+    that appears to still be operating.
+  </p>
+
+  <p>
+    <strong>
+      What should you do first?
+    </strong>
+  </p>
+
+  <div class="activity-options">
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">A</span>
+
+      Enter the machine zone immediately
+      and pull the worker away.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="correct"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">B</span>
+
+      First check
+      the active hazard,
+      activate assistance
+      and do not enter
+      the hazardous zone
+      until it is safe.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">C</span>
+
+      Wait
+      to see whether the worker
+      gets up on their own.
+
+    </button>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitActivity()">
+    Check Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetActivity()">
+    Restart Activity
+  </button>
+
+  <div
+    id="activityFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>Decision Scenario</h2>
+
+  <p>
+    During work,
+    a colleague
+    suffers a serious cut
+    from a metal component.
+
+    There is heavy bleeding.
+  </p>
+
+  <p>
+    <strong>
+      What is the most appropriate response?
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Tell them to wait
+    for a while
+    to see whether the bleeding stops by itself.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Give them a cloth
+    and continue
+    with your own work.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Activate assistance immediately,
+    protect yourself from contact with blood
+    and apply firm direct pressure
+    to the bleeding area,
+    according to your training,
+    until appropriate personnel take over.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Submit Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Reset Scenario
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.10 REPORTING
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.10 After the Immediate Response
+  </h2>
+
+  <p>
+    The response
+    does not end
+    when the injured person leaves
+    or when the area has been made safe.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">📢</span>
+
+      <h3>Incident Reporting</h3>
+
+      <p>
+        The incident
+        should be reported
+        according to the organisation's
+        procedure.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔍</span>
+
+      <h3>Investigation</h3>
+
+      <p>
+        The facts,
+        conditions
+        and contributing factors
+        are examined.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🛠️</span>
+
+      <h3>Corrective Actions</h3>
+
+      <p>
+        Findings
+        are converted into measures
+        that reduce
+        the likelihood of recurrence.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">📚</span>
+
+      <h3>Organisational Learning</h3>
+
+      <p>
+        Accidents
+        and near misses
+        are used
+        to improve
+        prevention and preparedness.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="success">
+
+    <strong>Purpose:</strong>
+
+    Learn
+    from the incident
+    and reduce
+    the likelihood of it happening again.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <!-- Q1 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. What is the first priority when an accident occurs?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Check whether I can approach
+        without exposing myself
+        to an active hazard.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Move the injured person immediately.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Take photographs
+        of the scene.
+      </label>
+
+    </div>
+
+    <!-- Q2 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. In the case of severe external bleeding:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Activate assistance
+        and apply firm direct pressure,
+        according to my training.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Wait
+        for it to stop on its own.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Ask the injured person
+        to return to work.
+      </label>
+
+    </div>
+
+    <!-- Q3 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. In a possible electrical accident:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Do not touch the injured person
+        until the electrical hazard
+        has been controlled.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Pull them away immediately
+        with my hands.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Pour water
+        onto the area.
+      </label>
+
+    </div>
+
+    <!-- Q4 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. If a chemical splashes into the eyes:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Begin the required flushing immediately
+        and follow
+        the specific product
+        and site instructions.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Rub the eye
+        to remove the chemical.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Wait
+        until pain develops.
+      </label>
+
+    </div>
+
+    <!-- Q5 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          5. If a person is unresponsive and is not breathing normally:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q5"
+          value="1">
+
+        Activate the emergency response immediately,
+        begin CPR
+        according to training or instructions
+        and use an AED when available.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q5"
+          value="0">
+
+        Wait a few minutes
+        to see whether they recover.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q5"
+          value="0">
+
+        Sit them upright.
+      </label>
+
+    </div>
+
+    <!-- Q6 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          6. Why do we investigate an accident or near miss?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q6"
+          value="1">
+
+        To understand
+        the causes
+        and apply measures
+        that reduce
+        the likelihood of recurrence.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q6"
+          value="0">
+
+        Only to identify
+        who made a mistake.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q6"
+          value="0">
+
+        It is not necessary
+        if nobody was injured.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Submit Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Reset Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Key Takeaways</h2>
+
+  <div class="takeaway">
+
+    <span>🛑</span>
+
+    <div>
+      PROTECT:
+      first check
+      that the area is safe.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>📞</span>
+
+    <div>
+      ALERT:
+      in a serious incident,
+      activate assistance immediately.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>👀</span>
+
+    <div>
+      ASSESS:
+      check responsiveness,
+      breathing
+      and severe bleeding.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🩹</span>
+
+    <div>
+      ASSIST:
+      provide
+      appropriate first aid
+      according to your training.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>📋</span>
+
+    <div>
+      REPORT:
+      the incident
+      should lead
+      to investigation,
+      learning and prevention.
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Industrial Occupational Health & Safety Training | Module 23
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+let selectedActivity = null;
+
+function selectActivity(button){
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedActivity =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitActivity(){
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedActivity){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before checking.";
+
+    return;
+  }
+
+  if(selectedActivity === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "Before approaching the injured person, we must check whether the machine or another source of danger remains active. " +
+      "Responder safety is the first priority.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "Entering an active hazardous zone can cause a second accident. " +
+      "First control or assess the hazard and activate assistance.";
+  }
+}
+
+function resetActivity(){
+
+  selectedActivity = null;
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   DECISION SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "Severe bleeding requires immediate action. " +
+      "Activate assistance, protect yourself from exposure to blood and apply firm direct pressure according to your training.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>This is not enough.</strong> " +
+      "Severe bleeding requires continuous immediate attention and emergency assistance.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "With heavy bleeding, do not wait for it to stop on its own.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 6;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Please answer all six questions before submitting.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Excellent!</strong> You scored " +
+      score + "/" + total +
+      ". You understand the correct response sequence for an industrial accident and the basic principles of first aid.";
+
+  }else if(score >= 4){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Good effort.</strong> You scored " +
+      score + "/" + total +
+      ". Review the sequence Protect → Alert → Assess → Assist → Report.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score + "/" + total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

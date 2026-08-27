@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Ενότητα 16 | Άδεια Εργασίας</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:white;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  color:var(--primary);
+  margin-top:0;
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  background:white;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  font-size:2rem;
+  display:block;
+  margin-bottom:10px;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  padding:18px;
+  border-radius:12px;
+  margin-top:16px;
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+  padding:18px;
+  border-radius:12px;
+  margin-top:16px;
+}
+
+.step-card{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+/* =====================================================
+   TAGS
+   ===================================================== */
+
+.tag{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:.85rem;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.tag-danger{
+  background:#ffe2e2;
+  color:#a31515;
+}
+
+.tag-warning{
+  background:#fff1b8;
+  color:#795800;
+}
+
+.tag-info{
+  background:#dcecff;
+  color:#123c69;
+}
+
+/* =====================================================
+   CHECKLIST
+   ===================================================== */
+
+.checklist{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.checklist li{
+  position:relative;
+  padding:10px 0 10px 34px;
+  border-bottom:1px solid #edf1f5;
+}
+
+.checklist li:last-child{
+  border-bottom:none;
+}
+
+.checklist li::before{
+  content:"✓";
+  position:absolute;
+  left:0;
+  top:10px;
+  width:23px;
+  height:23px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--success);
+  color:white;
+  font-size:.85rem;
+  font-weight:bold;
+}
+
+/* =====================================================
+   IMAGE
+   ===================================================== */
+
+.safety-image-container{
+  position:relative;
+  width:100%;
+  margin-top:18px;
+  margin-bottom:16px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:#eef4fb;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
+}
+
+.safety-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   HOTSPOTS
+   ===================================================== */
+
+.hotspot{
+  position:absolute;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  border:4px solid white;
+  background:var(--accent);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:1.1rem;
+  font-weight:bold;
+  box-shadow:0 5px 14px rgba(0,0,0,.35);
+  z-index:5;
+  transition:
+    transform .2s ease,
+    background-color .2s ease;
+}
+
+.hotspot:hover,
+.hotspot:focus{
+  transform:scale(1.08);
+  outline:4px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.hotspot.found{
+  background:var(--success);
+}
+
+/*
+  1 = Machine isolation
+  2 = Valve / stored pressure
+  3 = Permit to Work
+  4 = Worker briefing
+*/
+
+.hs1{
+  left:16%;
+  top:58%;
+}
+
+.hs2{
+  left:61%;
+  top:18%;
+}
+
+.hs3{
+  right:8%;
+  top:61%;
+}
+
+.hs4{
+  left:49%;
+  top:49%;
+}
+
+.activity-status{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+  margin-top:16px;
+  padding:14px 16px;
+  border-radius:12px;
+  background:#eef4fb;
+}
+
+/* =====================================================
+   OPTIONS
+   ===================================================== */
+
+.option-button{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#eef4fb;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:15px 17px;
+  border-radius:12px;
+  margin:10px 0;
+  font-weight:500;
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.option-button:hover,
+.option-button:focus{
+  background:#dcecff;
+  color:#1f2933;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.6);
+  outline-offset:2px;
+}
+
+.option-button.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.option-button.selected:hover,
+.option-button.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  margin-top:12px;
+  font-weight:bold;
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:10px;
+  cursor:pointer;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  background:#e8eef5;
+  border-radius:999px;
+  height:18px;
+  overflow:hidden;
+  margin-top:18px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+  transition:width .4s ease;
+}
+
+.takeaway{
+  font-size:1.15rem;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 20px;
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .hotspot{
+    width:44px;
+    height:44px;
+    font-size:.95rem;
+  }
+
+  .hs1{
+    left:14%;
+    top:58%;
+  }
+
+  .hs2{
+    left:59%;
+    top:16%;
+  }
+
+  .hs3{
+    right:5%;
+    top:60%;
+  }
+
+  .hs4{
+    left:46%;
+    top:48%;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 16: Άδεια Εργασίας
+  </h1>
+
+  <p>
+    Η Άδεια Εργασίας αποτελεί βασικό σύστημα ελέγχου
+    για εργασίες υψηλού κινδύνου. Βοηθά να επιβεβαιωθεί
+    ότι οι κίνδυνοι, οι απομονώσεις, τα μέτρα προστασίας
+    και οι αρμοδιότητες έχουν ελεγχθεί πριν ξεκινήσει η εργασία.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Στόχοι μάθησης</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">📄</span>
+      <h3>Κατανόηση του σκοπού</h3>
+      <p>
+        Κατανόηση του ρόλου της Άδειας Εργασίας
+        στον έλεγχο εργασιών υψηλού κινδύνου.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⚠️</span>
+      <h3>Αναγνώριση εργασιών</h3>
+      <p>
+        Αναγνώριση δραστηριοτήτων
+        που μπορεί να απαιτούν επίσημη άδεια.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👥</span>
+      <h3>Κατανόηση αρμοδιοτήτων</h3>
+      <p>
+        Κατανόηση των ευθυνών του εκδότη,
+        του παραλήπτη και της ομάδας εργασίας.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">✅</span>
+      <h3>Σωστή διαδικασία</h3>
+      <p>
+        Εφαρμογή της διαδικασίας
+        από τον σχεδιασμό μέχρι το ασφαλές κλείσιμο.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     WHY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Γιατί είναι σημαντική η Άδεια Εργασίας;
+  </h2>
+
+  <p>
+    Ορισμένες εργασίες περιλαμβάνουν κινδύνους
+    που δεν μπορούν να ελεγχθούν μόνο
+    μέσω των συνήθων διαδικασιών λειτουργίας.
+  </p>
+
+  <div class="danger">
+
+    <strong>Πρώτα το γιατί:</strong>
+
+    Η Άδεια Εργασίας βοηθά να μην ξεκινήσει
+    μια εργασία υψηλού κινδύνου πριν επιβεβαιωθούν
+    οι κίνδυνοι, οι απομονώσεις,
+    τα μέτρα προστασίας και οι αρμοδιότητες.
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Σημαντικό:</strong>
+
+    Μια υπογεγραμμένη άδεια δεν σημαίνει
+    ότι η εργασία είναι αυτόματα ασφαλής.
+    Η εκτίμηση κινδύνου,
+    οι διαδικασίες και τα μέτρα ελέγχου
+    εξακολουθούν να απαιτούνται.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     WHAT IS PTW
+     ===================================================== -->
+
+<section>
+
+  <h2>Τι είναι η Άδεια Εργασίας;</h2>
+
+  <p>
+    Η Άδεια Εργασίας είναι επίσημη,
+    τεκμηριωμένη έγκριση για συγκεκριμένη
+    εργασία υψηλού κινδύνου,
+    σε συγκεκριμένο χώρο
+    και για συγκεκριμένο χρονικό διάστημα.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">📍</span>
+      <h3>Τοποθεσία</h3>
+      <p>
+        Καθορίζει ακριβώς τον χώρο,
+        τον εξοπλισμό ή το σύστημα.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🛠️</span>
+      <h3>Αντικείμενο εργασίας</h3>
+      <p>
+        Καθορίζει τι ακριβώς επιτρέπεται
+        να εκτελεστεί.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔒</span>
+      <h3>Μέτρα ελέγχου</h3>
+      <p>
+        Καταγράφει απομονώσεις,
+        ΜΑΠ και άλλα απαιτούμενα μέτρα.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⏱️</span>
+      <h3>Χρονική ισχύς</h3>
+      <p>
+        Καθορίζει ώρα έναρξης,
+        λήξης και πιθανής επανέγκρισης.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PERMIT TYPES
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Εργασίες που μπορεί να απαιτούν Άδεια Εργασίας
+  </h2>
+
+  <p>
+    Οι κατηγορίες αδειών διαφέρουν ανά οργανισμό.
+    Ακολουθείτε πάντα την τοπική διαδικασία
+    και τους κανόνες της εγκατάστασης.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔥</span>
+      <span class="tag tag-danger">Θερμές Εργασίες</span>
+      <h3>Hot Work</h3>
+      <p>
+        Συγκόλληση, κοπή,
+        λείανση ή άλλες πηγές ανάφλεξης.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🕳️</span>
+      <span class="tag tag-warning">Περιορισμένος Χώρος</span>
+      <h3>Confined Space Entry</h3>
+      <p>
+        Είσοδος σε δεξαμενές,
+        φρεάτια, σιλό ή περιορισμένους χώρους.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⚡</span>
+      <span class="tag tag-danger">Ηλεκτρική Εργασία</span>
+      <h3>Electrical Work</h3>
+      <p>
+        Εργασία σε ή κοντά
+        σε ηλεκτρικά συστήματα.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔧</span>
+      <span class="tag tag-info">Συντήρηση</span>
+      <h3>Mechanical Work</h3>
+      <p>
+        Συντήρηση με αποθηκευμένη ενέργεια,
+        πίεση ή κινούμενα μέρη.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⬆️</span>
+      <span class="tag tag-warning">Εργασία σε Ύψος</span>
+      <h3>Working at Height</h3>
+      <p>
+        Εργασία με κίνδυνο πτώσης
+        εργαζομένου ή αντικειμένων.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⛏️</span>
+      <span class="tag tag-info">Εκσκαφή</span>
+      <h3>Excavation</h3>
+      <p>
+        Εργασίες εδάφους
+        κοντά σε υπόγεια δίκτυα.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PROCESS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Η Διαδικασία Άδειας Εργασίας
+  </h2>
+
+  <div class="grid">
+
+    <div class="card step-card">
+      <h3>1. Σχεδιασμός</h3>
+      <p>
+        Καθορισμός εργασίας,
+        εξοπλισμού και τοποθεσίας.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>2. Αναγνώριση κινδύνων</h3>
+      <p>
+        Αξιολόγηση κινδύνων
+        και παράλληλων δραστηριοτήτων.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>3. Μέτρα ελέγχου</h3>
+      <p>
+        Απομονώσεις,
+        εμπόδια, έλεγχοι και ΜΑΠ.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>4. Επιθεώρηση</h3>
+      <p>
+        Επιβεβαίωση των πραγματικών
+        συνθηκών του χώρου.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>5. Έγκριση</h3>
+      <p>
+        Έλεγχος και αποδοχή
+        της άδειας.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>6. Ενημέρωση ομάδας</h3>
+      <p>
+        Toolbox talk
+        πριν από την έναρξη.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>7. Παρακολούθηση</h3>
+      <p>
+        Έλεγχος ότι τα μέτρα
+        παραμένουν αποτελεσματικά.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>8. Κλείσιμο</h3>
+      <p>
+        Ασφαλής αποκατάσταση
+        και επίσημο κλείσιμο.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PRE-WORK
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Πριν από την Έναρξη της Εργασίας
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <h3>Έλεγχος Άδειας</h3>
+
+      <ul class="checklist">
+        <li>Η εργασία και η τοποθεσία είναι σωστές.</li>
+        <li>Η άδεια είναι εγκεκριμένη και σε ισχύ.</li>
+        <li>Η ομάδα κατανοεί το αντικείμενο.</li>
+        <li>Η εκτίμηση κινδύνου έχει ελεγχθεί.</li>
+        <li>Οι απομονώσεις έχουν εφαρμοστεί.</li>
+        <li>Τα σωστά ΜΑΠ χρησιμοποιούνται.</li>
+      </ul>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Έλεγχος Χώρου</h3>
+
+      <ul class="checklist">
+        <li>Ο χώρος έχει επιθεωρηθεί.</li>
+        <li>Υπάρχουν εμπόδια και σήμανση όπου απαιτείται.</li>
+        <li>Οι οδοί διαφυγής είναι ελεύθερες.</li>
+        <li>Οι απαραίτητοι έλεγχοι έχουν ολοκληρωθεί.</li>
+        <li>Υπάρχει ετοιμότητα έκτακτης ανάγκης.</li>
+        <li>Οι παράλληλες εργασίες έχουν συντονιστεί.</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     HOTSPOT ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική Δραστηριότητα: Επιθεώρηση Χώρου Εργασίας
+  </h2>
+
+  <p>
+    Εντόπισε τα τέσσερα κρίσιμα σημεία
+    που πρέπει να επιβεβαιωθούν
+    πριν ξεκινήσει η εργασία.
+  </p>
+
+  <div class="safety-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/permit-work.png.png"
+      alt="Βιομηχανικός χώρος συντήρησης με κινητήρα, σωληνώσεις, βάνα, εργαζόμενο και έντυπο Permit to Work"
+      class="safety-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+    <button
+      type="button"
+      class="hotspot hs1"
+      data-original="1"
+      data-message="<strong>Απομόνωση μηχανής:</strong> Η ηλεκτρική, μηχανική ή άλλη πηγή ενέργειας πρέπει να έχει απομονωθεί, ασφαλιστεί και επαληθευτεί πριν από τη συντήρηση."
+      onclick="findPermitHazard(this)">
+      1
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs2"
+      data-original="2"
+      data-message="<strong>Βάνα και αποθηκευμένη πίεση:</strong> Η γραμμή πρέπει να έχει απομονωθεί και πιθανή υπολειπόμενη πίεση να έχει ελεγχθεί πριν από την εργασία."
+      onclick="findPermitHazard(this)">
+      2
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs3"
+      data-original="3"
+      data-message="<strong>Άδεια Εργασίας:</strong> Πρέπει να είναι πλήρης, εγκεκριμένη, σε ισχύ και να αντιστοιχεί στη συγκεκριμένη εργασία και τοποθεσία."
+      onclick="findPermitHazard(this)">
+      3
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs4"
+      data-original="4"
+      data-message="<strong>Ενημέρωση εργαζομένου:</strong> Ο εργαζόμενος πρέπει να γνωρίζει το αντικείμενο, τους κινδύνους, τα μέτρα ελέγχου και πότε πρέπει να σταματήσει την εργασία."
+      onclick="findPermitHazard(this)">
+      4
+    </button>
+
+  </div>
+
+  <div class="activity-status">
+
+    <strong>
+      Σημεία που εντοπίστηκαν:
+      <span id="permitHazardScore">0</span>/4
+    </strong>
+
+    <span id="activityInstruction">
+      Επίλεξε και τους τέσσερις δείκτες.
+    </span>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetPermitActivity()">
+    Επανεκκίνηση δραστηριότητας
+  </button>
+
+  <div
+    id="permitHazardFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>Σενάριο Απόφασης</h2>
+
+  <p>
+    Μια ομάδα συντήρησης έχει έγκυρη άδεια
+    για αντικατάσταση αντλίας.
+    Κατά τη διάρκεια της εργασίας διαπιστώνει
+    ότι πρέπει να ανοίξει έναν επιπλέον σωλήνα
+    που δεν περιλαμβάνεται στην άδεια.
+    Ο σωλήνας μπορεί να περιέχει υπολειπόμενη πίεση.
+  </p>
+
+  <button
+    type="button"
+    class="option-button scenario-option"
+    data-value="wrong"
+    onclick="selectScenarioOption(this)">
+    Να ανοίξει προσεκτικά τον σωλήνα.
+  </button>
+
+  <button
+    type="button"
+    class="option-button scenario-option"
+    data-value="partial"
+    onclick="selectScenarioOption(this)">
+    Να ζητήσει από τον πιο έμπειρο εργαζόμενο να αποφασίσει.
+  </button>
+
+  <button
+    type="button"
+    class="option-button scenario-option"
+    data-value="correct"
+    onclick="selectScenarioOption(this)">
+    Να σταματήσει την εργασία,
+    να ασφαλίσει τον χώρο
+    και να ζητήσει νέα αξιολόγηση και επίσημη έγκριση.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     VALIDITY
+     ===================================================== -->
+
+<section>
+
+  <h2>Έλεγχος Ισχύος Άδειας</h2>
+
+  <div class="info">
+
+    Η ομάδα επιστρέφει μετά από διάλειμμα.
+    Οι συνθήκες έχουν αλλάξει
+    και η ώρα λήξης της άδειας έχει παρέλθει.
+
+  </div>
+
+  <button
+    type="button"
+    class="option-button validity-option"
+    data-value="wrong"
+    onclick="selectValidityOption(this)">
+    Να συνεχίσει επειδή είχε ήδη ξεκινήσει.
+  </button>
+
+  <button
+    type="button"
+    class="option-button validity-option"
+    data-value="wrong"
+    onclick="selectValidityOption(this)">
+    Να συνεχίσει μέχρι το τέλος του τρέχοντος σταδίου.
+  </button>
+
+  <button
+    type="button"
+    class="option-button validity-option"
+    data-value="correct"
+    onclick="selectValidityOption(this)">
+    Να μην επανεκκινήσει μέχρι να γίνει νέα αξιολόγηση και νέα έγκυρη άδεια.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitValidityCheck()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetValidityCheck()">
+    Επαναφορά Άσκησης
+  </button>
+
+  <div
+    id="validityFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form id="quizForm">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Ποιος είναι ο βασικός σκοπός της Άδειας Εργασίας;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        Να ελέγχει και να κοινοποιεί επίσημα
+        τις συνθήκες για εργασία υψηλού κινδύνου.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Να αντικαθιστά την εκτίμηση κινδύνου.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Να επιτρέπει εργασία χωρίς πρόσθετους ελέγχους.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Τι πρέπει να γίνει όταν αλλάζει το αντικείμενο της εργασίας;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Η εργασία συνεχίζεται αν η αλλαγή φαίνεται μικρή.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Η εργασία σταματά,
+        επανεκτιμάται και εγκρίνεται επίσημα.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Η αλλαγή καταγράφεται μετά την ολοκλήρωση.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Ποιος πρέπει να κατανοεί τους όρους της άδειας;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Μόνο ο εκδότης.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Μόνο ο επιβλέπων.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        Όλοι όσοι συμμετέχουν ή επηρεάζονται από την εργασία.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Πότε μπορεί να συνεχιστεί εργασία με ληγμένη άδεια;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Όταν η εργασία έχει σχεδόν ολοκληρωθεί.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Όταν παραμένει η ίδια ομάδα.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        Μόνο αφού η άδεια επανεγκριθεί,
+        παραταθεί ή επανεκδοθεί επίσημα.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Βασικά σημεία</h2>
+
+  <p class="takeaway">
+    Η Άδεια Εργασίας είναι διαδικασία ελέγχου,
+    όχι απλώς ένα έντυπο.
+  </p>
+
+  <p class="takeaway">
+    Οι απομονώσεις πρέπει να εφαρμόζονται
+    και να επαληθεύονται.
+  </p>
+
+  <p class="takeaway">
+    Όλη η ομάδα πρέπει να κατανοεί τους όρους.
+  </p>
+
+  <p class="takeaway">
+    Η εργασία σταματά όταν αλλάζουν
+    οι συνθήκες ή το αντικείμενο.
+  </p>
+
+  <p class="takeaway">
+    Η άδεια κλείνει μόνο όταν ο χώρος είναι ασφαλής.
+  </p>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 16
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   HOTSPOTS
+   ===================================================== */
+
+let permitHazardsFound = 0;
+const totalPermitHazards = 4;
+
+function findPermitHazard(button){
+
+  const score =
+    document.getElementById("permitHazardScore");
+
+  const feedback =
+    document.getElementById("permitHazardFeedback");
+
+  const instruction =
+    document.getElementById("activityInstruction");
+
+  if(!button.classList.contains("found")){
+
+    button.classList.add("found");
+    button.textContent = "✓";
+
+    permitHazardsFound++;
+
+    score.textContent =
+      permitHazardsFound;
+  }
+
+  feedback.style.display = "block";
+  feedback.className = "feedback success";
+  feedback.innerHTML = button.dataset.message;
+
+  if(permitHazardsFound === totalPermitHazards){
+
+    instruction.textContent =
+      "Η δραστηριότητα ολοκληρώθηκε.";
+
+    feedback.innerHTML +=
+      "<br><br><strong>Εξαιρετικά!</strong> " +
+      "Εντόπισες και τα τέσσερα κρίσιμα σημεία ελέγχου.";
+  }
+}
+
+function resetPermitActivity(){
+
+  permitHazardsFound = 0;
+
+  document
+    .querySelectorAll(".hotspot")
+    .forEach(function(button){
+
+      button.classList.remove("found");
+      button.textContent = button.dataset.original;
+
+    });
+
+  document.getElementById(
+    "permitHazardScore"
+  ).textContent = "0";
+
+  document.getElementById(
+    "activityInstruction"
+  ).textContent =
+    "Επίλεξε και τους τέσσερις δείκτες.";
+
+  const feedback =
+    document.getElementById(
+      "permitHazardFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenarioOption(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Η νέα εργασία βρίσκεται εκτός του εγκεκριμένου αντικειμένου. " +
+      "Η εργασία πρέπει να σταματήσει και να γίνει νέα αξιολόγηση και επίσημη έγκριση.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Η εμπειρία δεν αντικαθιστά την επίσημη εκτίμηση κινδύνου και την έγκριση.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Η μη αξιολογημένη εργασία μπορεί να οδηγήσει σε απελευθέρωση πίεσης ή άλλης επικίνδυνης ενέργειας.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   VALIDITY
+   ===================================================== */
+
+let selectedValidity = null;
+
+function selectValidityOption(button){
+
+  document
+    .querySelectorAll(".validity-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedValidity =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById(
+      "validityFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.innerHTML = "";
+}
+
+function submitValidityCheck(){
+
+  const feedback =
+    document.getElementById(
+      "validityFeedback"
+    );
+
+  feedback.style.display = "block";
+
+  if(!selectedValidity){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedValidity === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Οι αλλαγμένες συνθήκες και η ληγμένη άδεια απαιτούν νέα αξιολόγηση και επίσημη επανέγκριση.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Η εργασία δεν πρέπει να συνεχίζεται με ληγμένη άδεια ή όταν έχουν αλλάξει οι συνθήκες.";
+  }
+}
+
+function resetValidityCheck(){
+
+  selectedValidity = null;
+
+  document
+    .querySelectorAll(".validity-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "validityFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  let score = 0;
+  let answered = 0;
+
+  const total = 4;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "Άριστα! Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Κατανοείς τις βασικές αρχές της Άδειας Εργασίας.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Καλή προσπάθεια. Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Ξαναδές την ισχύ της άδειας και τις αλλαγές αντικειμένου.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  document.getElementById(
+    "progressBar"
+  ).style.width = "0%";
+
+  document.getElementById(
+    "quizProgress"
+  ).setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

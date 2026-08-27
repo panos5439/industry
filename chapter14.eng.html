@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Module 14 | Confined / Restricted Spaces</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:white;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  color:var(--primary);
+  margin-top:0;
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  background:white;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  font-size:2rem;
+  display:block;
+  margin-bottom:10px;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  padding:18px;
+  border-radius:12px;
+  margin-top:16px;
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.step-card{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+/* =====================================================
+   GENERAL BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  margin-top:12px;
+  font-weight:bold;
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   SAFETY IMAGE
+   ===================================================== */
+
+.safety-image-container{
+  width:100%;
+  margin-top:18px;
+  margin-bottom:16px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:#eef4fb;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
+}
+
+.safety-image{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:cover;
+}
+
+/* =====================================================
+   ENTRY / SCENARIO OPTIONS
+   ===================================================== */
+
+.entry-option,
+.scenario-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#eef4fb;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:15px 17px;
+  border-radius:12px;
+  margin:10px 0;
+  font-weight:500;
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+/* Light hover so text remains readable */
+
+.entry-option:hover,
+.entry-option:focus,
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  color:#1f2933;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.6);
+  outline-offset:2px;
+}
+
+/* Selected option remains clear and readable */
+
+.entry-option.selected,
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.entry-option.selected:hover,
+.entry-option.selected:focus,
+.scenario-option.selected:hover,
+.scenario-option.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+  border-color:var(--primary);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  background:#ffffff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  cursor:pointer;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  background:#e8eef5;
+  border-radius:999px;
+  height:18px;
+  overflow:hidden;
+  margin-top:18px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+  transition:width .4s ease;
+}
+
+.takeaway{
+  font-size:1.15rem;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 20px;
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Module 14: Confined / Restricted Spaces
+  </h1>
+
+  <p>
+    Confined spaces may appear harmless, but they can contain
+    fatal atmospheres, oxygen deficiency or hazardous stored energy.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Learning Objectives
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🚪</span>
+      Understand what a confined or restricted space is.
+    </div>
+
+    <div class="card">
+      <span class="icon">⚠️</span>
+      Recognise key hazards before entry.
+    </div>
+
+    <div class="card">
+      <span class="icon">📋</span>
+      Understand the importance of permits and atmospheric testing.
+    </div>
+
+    <div class="card">
+      <span class="icon">🚑</span>
+      Understand why rescue must be planned and not improvised.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DEFINITION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    What is a Confined / Restricted Space?
+  </h2>
+
+  <p>
+    A confined or restricted space is an area that is not designed
+    for continuous human occupancy, has limited means of entry or exit,
+    and may contain a hazardous atmosphere or other serious hazards.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🛢️</span>
+
+      <h3>
+        Tanks
+      </h3>
+
+      <p>
+        Tanks containing liquids, chemicals, fuels or water.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🌾</span>
+
+      <h3>
+        Silos
+      </h3>
+
+      <p>
+        Silos containing dust, raw materials or grain,
+        with a potential engulfment hazard.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🕳️</span>
+
+      <h3>
+        Pits / Manholes
+      </h3>
+
+      <p>
+        Manholes, underground spaces,
+        channels or maintenance pits.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔩</span>
+
+      <h3>
+        Pipes / Vessels
+      </h3>
+
+      <p>
+        Large pipes, pressure vessels
+        or enclosed sections of equipment.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>
+      Key message:
+    </strong>
+
+    Never enter a confined space “just for a moment”
+    without an approved entry procedure.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MAIN HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Main Hazards
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🫁</span>
+
+      <h3>
+        Oxygen Deficiency
+      </h3>
+
+      <p>
+        The atmosphere may not contain enough oxygen
+        for safe breathing.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">☠️</span>
+
+      <h3>
+        Toxic Gases
+      </h3>
+
+      <p>
+        Gases or vapours may cause poisoning,
+        unconsciousness or death.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔥</span>
+
+      <h3>
+        Flammable Atmosphere
+      </h3>
+
+      <p>
+        Vapours or gases may ignite from a spark
+        or hot-work activity.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🌊</span>
+
+      <h3>
+        Engulfment / Entrapment
+      </h3>
+
+      <p>
+        Liquids, materials or grain can trap
+        or engulf a worker.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⚡</span>
+
+      <h3>
+        Hazardous Energy
+      </h3>
+
+      <p>
+        Moving parts, agitators, pressure
+        or electrical energy must be isolated.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚪</span>
+
+      <h3>
+        Difficult Rescue
+      </h3>
+
+      <p>
+        Restricted access can make evacuation
+        and rescue significantly more difficult.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     BEFORE ENTRY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Before Entry
+  </h2>
+
+  <div class="grid">
+
+    <div class="card step-card">
+
+      <h3>
+        1. Permit to Work
+      </h3>
+
+      <p>
+        Entry must be authorised through the appropriate
+        permit system with clear conditions and controls.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        2. Isolation
+      </h3>
+
+      <p>
+        Isolate energy sources, lines, valves
+        and other hazards using an approved procedure.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        3. Atmospheric Testing
+      </h3>
+
+      <p>
+        Test oxygen levels, flammable gases
+        and toxic substances before entry
+        and during the work as required.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        4. Ventilation
+      </h3>
+
+      <p>
+        Use suitable ventilation where required.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        5. Attendant
+      </h3>
+
+      <p>
+        The attendant remains outside,
+        monitors the situation and maintains communication
+        with the workers inside.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        6. Rescue Plan
+      </h3>
+
+      <p>
+        A rescue plan must be in place before entry,
+        not after an emergency occurs.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>
+      Critical:
+    </strong>
+
+    An unplanned rescue attempt in a confined space
+    can create a second casualty. Do not enter for rescue
+    without the required training, equipment and rescue procedure.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     ATTENDANT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    The Role of the Attendant
+  </h2>
+
+  <p>
+    The attendant does not enter the confined space.
+    They remain outside, maintain communication,
+    monitor conditions and activate the emergency
+    response procedure when required.
+  </p>
+
+  <div class="safety-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/confined.png"
+      alt="Confined space entry with rescue tripod, atmospheric monitoring equipment, entrant and attendant"
+      class="safety-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+  </div>
+
+  <div class="success">
+
+    <strong>
+      Safe practice:
+    </strong>
+
+    The attendant must know who is inside,
+    how long they have been inside,
+    maintain communication and know how
+    emergency assistance will be activated.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     ENTRY ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Interactive Activity: Is Entry Safe?
+  </h2>
+
+  <p>
+    Select the correct decision for the situation below.
+  </p>
+
+  <div class="highlight">
+
+    <strong>
+      Situation:
+    </strong>
+
+    A worker needs to enter a tank for cleaning.
+    The permit has not yet been issued and atmospheric
+    testing has not been completed.
+
+  </div>
+
+  <button
+    type="button"
+    class="entry-option"
+    data-type="wrong"
+    onclick="selectEntry(this)">
+
+    The worker enters quickly for an initial check
+    because the task will only take a short time.
+
+  </button>
+
+  <button
+    type="button"
+    class="entry-option"
+    data-type="partial"
+    onclick="selectEntry(this)">
+
+    The worker enters as long as a helmet
+    and gloves are worn.
+
+  </button>
+
+  <button
+    type="button"
+    class="entry-option"
+    data-type="correct"
+    onclick="selectEntry(this)">
+
+    Entry is not permitted until the permit,
+    isolation, atmospheric testing, ventilation
+    where required and rescue planning are complete.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitEntry()">
+
+    Check Answer
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetEntry()">
+
+    Reset Activity
+
+  </button>
+
+  <div
+    id="entryFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Decision Scenario
+  </h2>
+
+  <p>
+    You see a colleague lose consciousness
+    inside a confined space.
+  </p>
+
+  <p>
+    <strong>
+      What do you do?
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    I enter immediately and try to pull them out.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    I ask another colleague to enter with me
+    to help with the rescue.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    I do not enter. I immediately activate the rescue
+    procedure and notify the emergency response team.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+
+    Submit Final Answer
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+
+    Reset Scenario
+
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Mini Quiz
+  </h2>
+
+  <form id="quizForm">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. A confined / restricted space is:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        A space with limited entry or exit,
+        not designed for continuous occupancy,
+        which may contain serious hazards.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Any large production room.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Only an underground space.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Before entry, you may need:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        A permit, isolation, atmospheric testing
+        and a rescue plan in accordance with the procedure.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Only a helmet and gloves.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Only a quick visual inspection.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. The attendant:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Remains outside, monitors the entry
+        and activates assistance when needed.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Enters the confined space to assist with the work.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Leaves once the work has started.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. If someone loses consciousness
+          inside a confined space:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        I do not enter impulsively.
+        I activate the rescue procedure.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        I enter immediately on my own.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        I wait to see if they recover.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+
+        Submit Quiz
+
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+
+        Reset Quiz
+
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Key Takeaways
+  </h2>
+
+  <p class="takeaway">
+    Never enter a confined space without an approved procedure.
+  </p>
+
+  <p class="takeaway">
+    The atmosphere may be hazardous even when the space appears clean.
+  </p>
+
+  <p class="takeaway">
+    Atmospheric testing and ventilation are critical controls.
+  </p>
+
+  <p class="takeaway">
+    The attendant remains outside and monitors the entry.
+  </p>
+
+  <p class="takeaway">
+    Rescue must be planned before entry.
+  </p>
+
+</section>
+
+</main>
+
+<footer>
+  Industrial Safety Training | Module 14
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   ENTRY ACTIVITY
+   ===================================================== */
+
+let selectedEntry = null;
+
+function selectEntry(button){
+
+  document
+    .querySelectorAll(".entry-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedEntry =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById(
+      "entryFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.innerHTML =
+    "";
+}
+
+function submitEntry(){
+
+  const feedback =
+    document.getElementById(
+      "entryFeedback"
+    );
+
+  if(!selectedEntry){
+
+    feedback.style.display =
+      "block";
+
+    feedback.className =
+      "feedback highlight";
+
+    feedback.innerHTML =
+      "Please select an answer before checking your response.";
+
+    return;
+  }
+
+  feedback.style.display =
+    "block";
+
+  if(selectedEntry === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Correct. Confined space entry requires proper preparation, authorisation, isolation, atmospheric testing and rescue planning.";
+
+  }else if(selectedEntry === "partial"){
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Incorrect. PPE alone does not make confined space entry safe. All required entry controls must be completed first.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Incorrect. The short duration of the task does not remove the risk of a hazardous atmosphere or other confined-space hazards.";
+  }
+}
+
+function resetEntry(){
+
+  selectedEntry =
+    null;
+
+  document
+    .querySelectorAll(".entry-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "entryFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.className =
+    "feedback";
+
+  feedback.innerHTML =
+    "";
+}
+
+/* =====================================================
+   DECISION SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.innerHTML =
+    "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  if(!selectedScenario){
+
+    feedback.style.display =
+      "block";
+
+    feedback.className =
+      "feedback highlight";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting your final response.";
+
+    return;
+  }
+
+  feedback.style.display =
+    "block";
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Correct. An impulsive rescue attempt may create a second casualty. The organised rescue plan must be activated immediately.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Incorrect. Sending another unprotected worker into the space may create additional casualties.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Incorrect. Do not enter a confined space for rescue without the required training, equipment and approved rescue procedure.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario =
+    null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.className =
+    "feedback";
+
+  feedback.innerHTML =
+    "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById(
+      "quizForm"
+    );
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  const progressBar =
+    document.getElementById(
+      "progressBar"
+    );
+
+  const progressBox =
+    document.getElementById(
+      "quizProgress"
+    );
+
+  let score = 0;
+  let answered = 0;
+
+  const total = 4;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  /* Require every question to be answered */
+
+  if(answered < total){
+
+    result.style.display =
+      "block";
+
+    result.className =
+      "feedback highlight";
+
+    result.innerHTML =
+      "Please answer all four questions before submitting the quiz.";
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  result.style.display =
+    "block";
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "Excellent! You scored " +
+      score +
+      "/" +
+      total +
+      ". You understand the key principles of confined space safety.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback highlight";
+
+    result.innerHTML =
+      "Good effort. You scored " +
+      score +
+      "/" +
+      total +
+      ". Review the entry permit, atmospheric testing, attendant role and rescue planning.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score +
+      "/" +
+      total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById(
+      "quizForm"
+    );
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  const progressBar =
+    document.getElementById(
+      "progressBar"
+    );
+
+  const progressBox =
+    document.getElementById(
+      "quizProgress"
+    );
+
+  form.reset();
+
+  progressBar.style.width =
+    "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display =
+    "none";
+
+  result.className =
+    "feedback";
+
+  result.innerHTML =
+    "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ενότητα 6 | Ασφάλεια Μηχανών</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   REALISTIC MACHINE PHOTO
+   ===================================================== */
+
+.machine-image-container{
+  position:relative;
+  width:100%;
+
+  margin-top:18px;
+  margin-bottom:16px;
+
+  overflow:hidden;
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  background:#eef4fb;
+
+  box-shadow:
+    0 6px 18px rgba(15,23,42,.08);
+}
+
+.machine-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   MACHINE HOTSPOTS
+   ===================================================== */
+
+.machine-hotspot{
+  position:absolute;
+  z-index:10;
+
+  width:52px;
+  height:52px;
+
+  display:grid;
+  place-items:center;
+
+  border:4px solid #fff;
+  border-radius:50%;
+
+  background:var(--accent);
+  color:#fff;
+
+  font-size:1.15rem;
+  font-weight:bold;
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.38),
+    0 0 0 2px rgba(214,40,40,.20);
+
+  transition:
+    transform .2s ease,
+    background-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.machine-hotspot:hover,
+.machine-hotspot:focus{
+  transform:scale(1.09);
+
+  outline:4px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.machine-hotspot.found{
+  background:var(--success);
+}
+
+/*
+  HOTSPOT POSITIONS ON machine.png
+
+  1 = Exposed / insufficiently guarded saw blade
+  2 = Conveyor / roller trapping point
+  3 = Emergency stop / control panel
+  4 = Worker hands too close to cutting area
+*/
+
+.hs-guard{
+  left:52%;
+  top:28%;
+}
+
+.hs-conveyor{
+  left:17%;
+  bottom:38%;
+}
+
+.hs-estop{
+  left:30%;
+  top:35%;
+}
+
+.hs-worker{
+  right:32%;
+  bottom:40%;
+}
+
+/* =====================================================
+   ACTIVITY STATUS
+   ===================================================== */
+
+.activity-status{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+
+  margin-top:16px;
+  padding:14px 16px;
+
+  border-radius:12px;
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   SCENARIO OPTIONS
+   ===================================================== */
+
+.scenario-option{
+  display:block;
+  width:100%;
+
+  margin:10px 0;
+  padding:14px 16px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  color:var(--text);
+
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.scenario-option.selected:hover,
+.scenario-option.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  color:var(--text);
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* =====================================================
+   PROGRESS
+   ===================================================== */
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .machine-hotspot{
+    width:43px;
+    height:43px;
+    font-size:.95rem;
+  }
+
+  .hs-guard{
+    left:51%;
+    top:27%;
+  }
+
+  .hs-conveyor{
+    left:14%;
+    bottom:36%;
+  }
+
+  .hs-estop{
+    left:27%;
+    top:33%;
+  }
+
+  .hs-worker{
+    right:29%;
+    bottom:38%;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 6: Ασφάλεια Μηχανών
+  </h1>
+
+  <p>
+    Οι μηχανές υποστηρίζουν την παραγωγή,
+    αλλά τα κινούμενα μέρη,
+    τα σημεία κοπής,
+    παγίδευσης και συμπίεσης
+    μπορούν να προκαλέσουν σοβαρούς τραυματισμούς.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Στόχοι Μάθησης</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">⚙️</span>
+      Αναγνωρίζει βασικούς κινδύνους μηχανών.
+    </div>
+
+    <div class="card">
+      <span class="icon">🛡️</span>
+      Κατανοεί τον ρόλο
+      των προστατευτικών μηχανών.
+    </div>
+
+    <div class="card">
+      <span class="icon">🛑</span>
+      Γνωρίζει τη σημασία
+      του emergency stop.
+    </div>
+
+    <div class="card">
+      <span class="icon">✅</span>
+      Δεν παρακάμπτει
+      προστατευτικά ή διαδικασίες ασφαλείας.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     WHY MACHINE SAFETY MATTERS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Γιατί είναι Σημαντική η Ασφάλεια Μηχανών;
+  </h2>
+
+  <p>
+    Μια βιομηχανική μηχανή μπορεί να περιλαμβάνει
+    περιστρεφόμενα μέρη,
+    λεπίδες,
+    άξονες,
+    ράουλα,
+    σημεία κοπής,
+    συμπίεσης ή παγίδευσης,
+    καθώς και ηλεκτρική,
+    μηχανική,
+    υδραυλική ή πνευματική ενέργεια.
+  </p>
+
+  <div class="danger">
+
+    <strong>Γιατί έχει σημασία:</strong>
+
+    Η επαφή με κινούμενο ή κοπτικό μέρος
+    μπορεί να οδηγήσει σε σοβαρό τραυματισμό
+    μέσα σε ελάχιστο χρόνο.
+
+    Δεν πλησιάζουμε,
+    δεν καθαρίζουμε,
+    δεν ρυθμίζουμε
+    και δεν ξεμπλοκάρουμε μηχανή
+    χωρίς την προβλεπόμενη ασφαλή διαδικασία.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MAIN MACHINE HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>Βασικοί Κίνδυνοι Μηχανών</h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🔄</span>
+
+      <h3>Περιστρεφόμενα Μέρη</h3>
+
+      <p>
+        Άξονες,
+        τσοκ,
+        ράουλα,
+        ιμάντες και άλλα περιστρεφόμενα μέρη
+        μπορούν να παρασύρουν ρούχα,
+        μαλλιά ή άλλα αντικείμενα.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">✂️</span>
+
+      <h3>Σημεία Κοπής</h3>
+
+      <p>
+        Πριόνια,
+        λεπίδες,
+        κοπτικά εργαλεία
+        και πρέσες
+        μπορούν να προκαλέσουν σοβαρό τραυματισμό.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🧲</span>
+
+      <h3>Σημεία Παγίδευσης</h3>
+
+      <p>
+        Δύο κινούμενα μέρη
+        ή ένα κινούμενο και ένα σταθερό μέρος
+        μπορούν να παγιδεύσουν χέρια,
+        δάχτυλα ή άλλα μέρη του σώματος.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔥</span>
+
+      <h3>Θερμές Επιφάνειες</h3>
+
+      <p>
+        Μηχανές και υλικά
+        μπορεί να αναπτύξουν θερμοκρασίες
+        που μπορούν να προκαλέσουν εγκαύματα.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⚡</span>
+
+      <h3>Αποθηκευμένη Ενέργεια</h3>
+
+      <p>
+        Ηλεκτρική,
+        μηχανική,
+        υδραυλική ή πνευματική ενέργεια
+        μπορεί να παραμένει στη μηχανή
+        ακόμη και μετά τη διακοπή της.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚫</span>
+
+      <h3>Παράκαμψη Προστατευτικών</h3>
+
+      <p>
+        Η αφαίρεση,
+        απενεργοποίηση ή παράκαμψη προστατευτικών
+        αυξάνει άμεσα τον κίνδυνο.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     GUARDING
+     ===================================================== -->
+
+<section>
+
+  <h2>Προστατευτικά Μηχανών</h2>
+
+  <p>
+    Τα προστατευτικά εμποδίζουν ή περιορίζουν
+    την πρόσβαση του εργαζομένου
+    σε επικίνδυνα κινούμενα ή κοπτικά σημεία.
+  </p>
+
+  <div class="highlight">
+
+    <strong>Κανόνας:</strong>
+
+    Αν ένα προστατευτικό λείπει,
+    είναι κατεστραμμένο,
+    έχει μετακινηθεί
+    ή έχει παρακαμφθεί,
+    η μηχανή δεν πρέπει να χρησιμοποιείται
+    μέχρι να αποκατασταθεί η ασφαλής κατάσταση.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     EMERGENCY STOP
+     ===================================================== -->
+
+<section>
+
+  <h2>Emergency Stop</h2>
+
+  <p>
+    Το emergency stop χρησιμοποιείται
+    για γρήγορη διακοπή της μηχανής
+    σε κατάσταση έκτακτης ανάγκης.
+  </p>
+
+  <div class="success">
+
+    <strong>Θυμήσου:</strong>
+
+    Το emergency stop πρέπει να είναι
+    γνωστό και προσβάσιμο,
+    αλλά δεν αντικαθιστά
+    την προβλεπόμενη διαδικασία ασφαλούς διακοπής
+    και απομόνωσης ενέργειας
+    πριν από επέμβαση στη μηχανή.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE MACHINE PHOTO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική Δραστηριότητα: Εντόπισε τους Κινδύνους της Μηχανής
+  </h2>
+
+  <p>
+    Πάτησε στους τέσσερις κόκκινους δείκτες
+    για να αναγνωρίσεις βασικούς κινδύνους
+    στη μηχανή τελικής κοπής.
+  </p>
+
+  <div class="machine-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/machine.png"
+      alt="Βιομηχανικό πριόνι τελικής κοπής με μεταφορικό σύστημα, πίνακα ελέγχου και εργαζόμενο με κράνος ασφαλείας"
+      class="machine-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+    <!-- EXPOSED BLADE / GUARD -->
+
+    <button
+      type="button"
+      class="machine-hotspot hs-guard"
+      data-original="!"
+      data-message="<strong>Ανεπαρκής προστασία της λεπίδας:</strong> Το κοπτικό μέρος είναι υπερβολικά εκτεθειμένο. Η πρόσβαση στη λεπίδα πρέπει να περιορίζεται με κατάλληλο προστατευτικό και η μηχανή να χρησιμοποιείται μόνο όπως προβλέπεται από τον κατασκευαστή."
+      onclick="findMachineHazard(this)">
+      !
+    </button>
+
+    <!-- CONVEYOR / ROLLER -->
+
+    <button
+      type="button"
+      class="machine-hotspot hs-conveyor"
+      data-original="!"
+      data-message="<strong>Σημείο παγίδευσης:</strong> Τα ράουλα και τα κινούμενα μέρη του συστήματος τροφοδοσίας μπορούν να δημιουργήσουν σημεία σύνθλιψης ή παγίδευσης. Χέρια, ρούχα και αντικείμενα πρέπει να παραμένουν μακριά."
+      onclick="findMachineHazard(this)">
+      !
+    </button>
+
+    <!-- E-STOP -->
+
+    <button
+      type="button"
+      class="machine-hotspot hs-estop"
+      data-original="!"
+      data-message="<strong>Emergency stop:</strong> Το κουμπί έκτακτης ανάγκης πρέπει να είναι σαφώς αναγνωρίσιμο, προσβάσιμο και χωρίς εμπόδια ώστε να μπορεί να ενεργοποιηθεί άμεσα όταν απαιτείται."
+      onclick="findMachineHazard(this)">
+      !
+    </button>
+
+    <!-- WORKER POSITION -->
+
+    <button
+      type="button"
+      class="machine-hotspot hs-worker"
+      data-original="!"
+      data-message="<strong>Εργαζόμενος πολύ κοντά στο σημείο κοπής:</strong> Τα χέρια βρίσκονται κοντά στην επικίνδυνη ζώνη. Η τροφοδοσία και συγκράτηση του υλικού πρέπει να γίνεται με την προβλεπόμενη ασφαλή μέθοδο και χωρίς έκθεση του σώματος στο σημείο λειτουργίας."
+      onclick="findMachineHazard(this)">
+      !
+    </button>
+
+  </div>
+
+  <div class="activity-status">
+
+    <strong>
+      Εντοπίστηκαν:
+      <span id="machineScore">0</span>/4
+    </strong>
+
+    <span id="machineInstruction">
+      Επίλεξε και τους τέσσερις δείκτες.
+    </span>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetMachineActivity()">
+    Επανεκκίνηση Δραστηριότητας
+  </button>
+
+  <div
+    id="machineFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>Σενάριο Απόφασης</h2>
+
+  <p>
+    Η μηχανή σταματά
+    λόγω εμπλοκής υλικού.
+    Ένας συνάδελφος προτείνει
+    να ανοίξετε το προστατευτικό
+    και να αφαιρέσετε γρήγορα το υλικό
+    χωρίς απομόνωση της ενέργειας.
+  </p>
+
+  <p>
+    <strong>Τι κάνεις;</strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Συμφωνώ,
+    γιατί η μηχανή έχει ήδη σταματήσει.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Ανοίγω το προστατευτικό,
+    αλλά προσέχω να μην αγγίξω
+    τα κινούμενα μέρη.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Σταματώ την εργασία
+    και ακολουθώ την εγκεκριμένη διαδικασία
+    ασφαλούς διακοπής και απομόνωσης
+    πριν από οποιαδήποτε παρέμβαση.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <!-- QUESTION 1 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Ποιος είναι βασικός κίνδυνος από περιστρεφόμενα μέρη;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Μπορούν να παρασύρουν
+        ρούχα, μαλλιά ή άλλα αντικείμενα.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Μειώνουν πάντα τον θόρυβο.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Δεν είναι επικίνδυνα
+        όταν κινούνται αργά.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 2 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Αν ένα προστατευτικό μηχανής λείπει:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Η εργασία δεν πρέπει να συνεχιστεί
+        μέχρι να αποκατασταθεί η ασφαλής κατάσταση.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Συνεχίζω
+        αν έχω αρκετή εμπειρία.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Συνεχίζω πιο αργά
+        και προσέχω περισσότερο.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 3 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Το emergency stop:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Χρησιμοποιείται
+        σε κατάσταση έκτακτης ανάγκης.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Αντικαθιστά
+        όλες τις διαδικασίες απομόνωσης ενέργειας.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Χρησιμοποιείται
+        ως κανονικό κουμπί εκκίνησης.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 4 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Πριν από καθαρισμό ή ξεμπλοκάρισμα μηχανής:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Ακολουθώ την εγκεκριμένη διαδικασία
+        ασφαλούς διακοπής και απομόνωσης.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Επεμβαίνω γρήγορα
+        αν η μηχανή φαίνεται σταματημένη.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Ζητώ από συνάδελφο
+        να παρακολουθεί το κουμπί εκκίνησης.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Βασικά Σημεία</h2>
+
+  <div class="takeaway">
+    <span>⚙️</span>
+    <div>
+      Τα κινούμενα και κοπτικά μέρη
+      μπορούν να προκαλέσουν σοβαρό τραυματισμό
+      σε πολύ μικρό χρόνο.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛡️</span>
+    <div>
+      Δεν αφαιρούμε,
+      δεν μετακινούμε
+      και δεν παρακάμπτουμε προστατευτικά.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛑</span>
+    <div>
+      Το emergency stop
+      είναι για έκτακτη ανάγκη
+      και δεν αντικαθιστά την απομόνωση ενέργειας.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🔒</span>
+    <div>
+      Πριν από καθαρισμό,
+      ρύθμιση ή ξεμπλοκάρισμα
+      ακολουθούμε την εγκεκριμένη διαδικασία.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 6
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   MACHINE HAZARD ACTIVITY
+   ===================================================== */
+
+let machineHazardsFound = 0;
+const totalMachineHazards = 4;
+
+function findMachineHazard(button){
+
+  const feedback =
+    document.getElementById("machineFeedback");
+
+  const score =
+    document.getElementById("machineScore");
+
+  const instruction =
+    document.getElementById("machineInstruction");
+
+  if(!button.classList.contains("found")){
+
+    button.classList.add("found");
+
+    button.textContent = "✓";
+
+    machineHazardsFound++;
+
+    score.textContent =
+      machineHazardsFound;
+  }
+
+  feedback.style.display = "block";
+  feedback.className = "feedback success";
+  feedback.innerHTML = button.dataset.message;
+
+  if(machineHazardsFound === totalMachineHazards){
+
+    instruction.textContent =
+      "Η δραστηριότητα ολοκληρώθηκε.";
+
+    feedback.innerHTML +=
+      "<br><br><strong>Μπράβο!</strong> " +
+      "Εντόπισες και τους τέσσερις βασικούς κινδύνους της μηχανής.";
+  }
+}
+
+function resetMachineActivity(){
+
+  machineHazardsFound = 0;
+
+  document
+    .querySelectorAll(".machine-hotspot")
+    .forEach(function(button){
+
+      button.classList.remove("found");
+
+      button.textContent =
+        button.dataset.original;
+
+    });
+
+  document.getElementById(
+    "machineScore"
+  ).textContent = "0";
+
+  document.getElementById(
+    "machineInstruction"
+  ).textContent =
+    "Επίλεξε και τους τέσσερις δείκτες.";
+
+  const feedback =
+    document.getElementById("machineFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Μια μηχανή που έχει σταματήσει δεν είναι απαραίτητα ασφαλής. " +
+      "Πριν από οποιαδήποτε παρέμβαση πρέπει να εφαρμοστεί η εγκεκριμένη διαδικασία " +
+      "ασφαλούς διακοπής και απομόνωσης της επικίνδυνης ενέργειας.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "<strong>Δεν είναι ασφαλές.</strong> " +
+      "Η προσοχή από μόνη της δεν προστατεύει από απρόβλεπτη εκκίνηση " +
+      "ή απελευθέρωση αποθηκευμένης ενέργειας.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Το ότι η μηχανή έχει σταματήσει δεν σημαίνει ότι έχει απομονωθεί " +
+      "ή ότι είναι ασφαλής για παρέμβαση.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Άριστα!</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Κατανοείς τις βασικές αρχές της ασφάλειας μηχανών.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Καλή προσπάθεια.</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Ξαναδές τα προστατευτικά, " +
+      "τα σημεία παγίδευσης, το emergency stop " +
+      "και την ασφαλή απομόνωση πριν από παρέμβαση.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score + "/" + total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

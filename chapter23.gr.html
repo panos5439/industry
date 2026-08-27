@@ -1,0 +1,2503 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ενότητα 23 | Αντίδραση σε Ατυχήματα & Πρώτες Βοήθειες στη Βιομηχανία</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:920px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   RESPONSE FLOW
+   ===================================================== */
+
+.response-flow{
+  display:grid;
+
+  grid-template-columns:
+    repeat(5,1fr);
+
+  gap:12px;
+
+  margin-top:22px;
+}
+
+.response-step{
+  position:relative;
+
+  min-height:165px;
+
+  padding:18px 14px;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  background:#f8fafc;
+
+  text-align:center;
+}
+
+.response-number{
+  width:44px;
+  height:44px;
+
+  display:grid;
+  place-items:center;
+
+  margin:0 auto 12px;
+
+  border-radius:50%;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+  font-size:1.05rem;
+}
+
+.response-step strong{
+  display:block;
+
+  margin-bottom:6px;
+
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   FIRST AID CARDS
+   ===================================================== */
+
+.first-aid-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.first-aid-card::before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:5px;
+
+  background:var(--primary);
+}
+
+/* =====================================================
+   INDUSTRIAL INCIDENT CARDS
+   ===================================================== */
+
+.incident-card{
+  position:relative;
+
+  padding-top:24px;
+}
+
+.incident-tag{
+  display:inline-block;
+
+  margin-bottom:10px;
+  padding:5px 10px;
+
+  border-radius:999px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-size:.85rem;
+  font-weight:bold;
+}
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+.activity-options{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(240px,1fr));
+
+  gap:14px;
+
+  margin-top:20px;
+}
+
+.activity-choice{
+  width:100%;
+  min-height:165px;
+
+  padding:18px;
+
+  border:2px solid var(--border);
+  border-radius:14px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.activity-choice:hover,
+.activity-choice:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.activity-choice.selected{
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:3px solid var(--primary);
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.activity-letter{
+  width:38px;
+  height:38px;
+
+  display:grid;
+  place-items:center;
+
+  margin-bottom:10px;
+
+  border-radius:50%;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+}
+
+/* =====================================================
+   SCENARIO OPTIONS
+   ===================================================== */
+
+.scenario-option{
+  display:block;
+
+  width:100%;
+
+  margin:10px 0;
+  padding:14px 16px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* =====================================================
+   PROGRESS
+   ===================================================== */
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:850px){
+
+  .response-flow{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .response-flow{
+    grid-template-columns:1fr;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 23: Αντίδραση σε Ατυχήματα & Πρώτες Βοήθειες στη Βιομηχανία
+  </h1>
+
+  <p>
+    Όταν συμβεί ένα ατύχημα,
+    οι πρώτες ενέργειες πρέπει να είναι
+    γρήγορες αλλά και ασφαλείς.
+
+    Στόχος είναι να προστατεύσουμε τον εαυτό μας,
+    να ενεργοποιήσουμε έγκαιρα τη βοήθεια,
+    να υποστηρίξουμε τον τραυματία
+    και να αποτρέψουμε έναν δεύτερο τραυματισμό.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Στόχοι Μάθησης</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🛑</span>
+      Εφαρμόζει σωστή σειρά ενεργειών
+      όταν συμβεί ατύχημα.
+    </div>
+
+    <div class="card">
+      <span class="icon">📞</span>
+      Αναγνωρίζει
+      πότε απαιτείται άμεση
+      ενεργοποίηση επείγουσας βοήθειας.
+    </div>
+
+    <div class="card">
+      <span class="icon">🩹</span>
+      Γνωρίζει βασικές ενέργειες
+      για συνηθισμένους
+      βιομηχανικούς τραυματισμούς.
+    </div>
+
+    <div class="card">
+      <span class="icon">❤️</span>
+      Κατανοεί τον ρόλο
+      της CPR και του AED
+      σε επείγον περιστατικό.
+    </div>
+
+    <div class="card">
+      <span class="icon">📋</span>
+      Κατανοεί τη σημασία
+      της αναφοράς,
+      διερεύνησης και μάθησης
+      μετά το περιστατικό.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.1 CENTRAL MODEL
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.1 Η Λογική Αντίδρασης:
+    Προστάτευσε → Ειδοποίησε → Αξιολόγησε → Βοήθησε → Ανάφερε
+  </h2>
+
+  <p>
+    Σε ένα ατύχημα,
+    το πρώτο ένστικτο μπορεί να είναι
+    να τρέξουμε αμέσως προς τον τραυματία.
+
+    Στη βιομηχανία όμως
+    μπορεί να εξακολουθεί να υπάρχει
+    ενεργός κίνδυνος.
+  </p>
+
+  <div class="response-flow">
+
+    <div class="response-step">
+
+      <div class="response-number">1</div>
+
+      <strong>ΠΡΟΣΤΑΤΕΥΣΕ</strong>
+
+      Έλεγξε πρώτα
+      αν μπορείς να πλησιάσεις
+      χωρίς να κινδυνεύσεις.
+
+    </div>
+
+    <div class="response-step">
+
+      <div class="response-number">2</div>
+
+      <strong>ΕΙΔΟΠΟΙΗΣΕ</strong>
+
+      Κάλεσε βοήθεια
+      και ενεργοποίησε
+      τη διαδικασία έκτακτης ανάγκης.
+
+    </div>
+
+    <div class="response-step">
+
+      <div class="response-number">3</div>
+
+      <strong>ΑΞΙΟΛΟΓΗΣΕ</strong>
+
+      Έλεγξε την κατάσταση
+      του τραυματία
+      και αναζήτησε άμεσα
+      απειλητικές καταστάσεις.
+
+    </div>
+
+    <div class="response-step">
+
+      <div class="response-number">4</div>
+
+      <strong>ΒΟΗΘΗΣΕ</strong>
+
+      Παρείχε τις κατάλληλες
+      πρώτες βοήθειες
+      σύμφωνα με την εκπαίδευσή σου.
+
+    </div>
+
+    <div class="response-step">
+
+      <div class="response-number">5</div>
+
+      <strong>ΑΝΑΦΕΡΕ</strong>
+
+      Μετά το συμβάν,
+      ακολουθεί η αναφορά
+      και η διερεύνηση.
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Κεντρικός κανόνας:</strong>
+
+    Μην γίνεις δεύτερο θύμα.
+
+    Η βοήθεια αρχίζει
+    μόνο όταν η προσέγγιση
+    μπορεί να γίνει με ασφάλεια.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.2 ACTIVE HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.2 Πριν Πλησιάσεις: Υπάρχει Ακόμη Κίνδυνος;
+  </h2>
+
+  <p>
+    Στον βιομηχανικό χώρο
+    το ατύχημα μπορεί να έχει σταματήσει,
+    αλλά η πηγή του κινδύνου
+    να παραμένει ενεργή.
+  </p>
+
+  <div class="grid">
+
+    <div class="card incident-card">
+
+      <span class="incident-tag">
+        Ηλεκτρική Ενέργεια
+      </span>
+
+      <span class="icon">⚡</span>
+
+      <h3>Ηλεκτρικό Συμβάν</h3>
+
+      <p>
+        Μην αγγίζεις τον τραυματία
+        μέχρι να επιβεβαιωθεί
+        ότι δεν βρίσκεται πλέον
+        σε επαφή με ενεργή ηλεκτρική πηγή.
+      </p>
+
+    </div>
+
+    <div class="card incident-card">
+
+      <span class="incident-tag">
+        Μηχανική Ενέργεια
+      </span>
+
+      <span class="icon">⚙️</span>
+
+      <h3>Μηχάνημα</h3>
+
+      <p>
+        Έλεγξε αν υπάρχουν
+        κινούμενα μέρη,
+        αποθηκευμένη ενέργεια
+        ή κίνδυνος νέας κίνησης.
+      </p>
+
+    </div>
+
+    <div class="card incident-card">
+
+      <span class="incident-tag">
+        Χημική Έκθεση
+      </span>
+
+      <span class="icon">🧪</span>
+
+      <h3>Διαρροή ή Ατμός</h3>
+
+      <p>
+        Μην εισέρχεσαι
+        σε περιοχή άγνωστης χημικής έκθεσης
+        χωρίς ασφαλή έλεγχο
+        και κατάλληλη απόκριση.
+      </p>
+
+    </div>
+
+    <div class="card incident-card">
+
+      <span class="incident-tag">
+        Πυρκαγιά
+      </span>
+
+      <span class="icon">🔥</span>
+
+      <h3>Θερμότητα / Καπνός</h3>
+
+      <p>
+        Μην εισέρχεσαι
+        σε περιοχή φωτιάς,
+        πυκνού καπνού
+        ή άλλου μη ελεγχόμενου κινδύνου.
+      </p>
+
+    </div>
+
+    <div class="card incident-card">
+
+      <span class="incident-tag">
+        Κυκλοφορία
+      </span>
+
+      <span class="icon">🚜</span>
+
+      <h3>Οχήματα & Κινούμενος Εξοπλισμός</h3>
+
+      <p>
+        Βεβαιώσου
+        ότι η περιοχή προστατεύεται
+        από οχήματα,
+        forklift
+        ή άλλο κινούμενο εξοπλισμό.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.3 INITIAL ASSESSMENT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.3 Αρχική Αξιολόγηση του Τραυματία
+  </h2>
+
+  <div class="grid">
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🗣️</span>
+
+      <h3>Ανταπόκριση</h3>
+
+      <p>
+        Έλεγξε αν το άτομο
+        ανταποκρίνεται
+        και κάλεσε άμεσα βοήθεια
+        όταν απαιτείται.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🫁</span>
+
+      <h3>Αναπνοή</h3>
+
+      <p>
+        Αν το άτομο
+        δεν ανταποκρίνεται
+        και δεν αναπνέει φυσιολογικά,
+        πρόκειται για κατάσταση
+        που απαιτεί άμεση επείγουσα αντίδραση.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🩸</span>
+
+      <h3>Σοβαρή Αιμορραγία</h3>
+
+      <p>
+        Αναζήτησε
+        έντονη ή ανεξέλεγκτη αιμορραγία
+        που απαιτεί
+        άμεση αντιμετώπιση.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Προτεραιότητα:</strong>
+
+    Σε σοβαρό περιστατικό
+    δεν καθυστερούμε
+    την ενεργοποίηση
+    της επείγουσας βοήθειας.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.4 BLEEDING
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.4 Σοβαρή Αιμορραγία
+  </h2>
+
+  <p>
+    Η σοβαρή εξωτερική αιμορραγία
+    μπορεί να εξελιχθεί γρήγορα
+    σε απειλητική για τη ζωή κατάσταση.
+  </p>
+
+  <div class="grid">
+
+    <div class="card first-aid-card">
+
+      <span class="icon">📞</span>
+
+      <h3>Κάλεσε Βοήθεια</h3>
+
+      <p>
+        Ενεργοποίησε άμεσα
+        την προβλεπόμενη
+        επείγουσα απόκριση.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🧤</span>
+
+      <h3>Προστάτευσε τον Εαυτό σου</h3>
+
+      <p>
+        Χρησιμοποίησε,
+        όταν είναι διαθέσιμο,
+        κατάλληλο προστατευτικό φραγμό
+        για να περιορίσεις την επαφή
+        με αίμα.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🩹</span>
+
+      <h3>Άμεση Πίεση</h3>
+
+      <p>
+        Εφάρμοσε σταθερή,
+        άμεση πίεση
+        πάνω στο σημείο της αιμορραγίας
+        με κατάλληλο επίδεσμο ή υλικό,
+        σύμφωνα με την εκπαίδευσή σου.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Σοβαρή ή ανεξέλεγκτη αιμορραγία = επείγον περιστατικό.</strong>
+
+    Παρακολούθησε τον τραυματία
+    μέχρι να αναλάβει
+    κατάλληλο προσωπικό.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.5 BURNS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.5 Εγκαύματα
+  </h2>
+
+  <div class="grid">
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🔥</span>
+
+      <h3>Σταμάτησε την Έκθεση</h3>
+
+      <p>
+        Απομάκρυνε το άτομο
+        από την πηγή του εγκαύματος
+        μόνο όταν αυτό
+        μπορεί να γίνει με ασφάλεια.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">💧</span>
+
+      <h3>Ψύξη Θερμικού Εγκαύματος</h3>
+
+      <p>
+        Για θερμικό έγκαυμα,
+        ψύξε την περιοχή
+        με δροσερό τρεχούμενο νερό
+        σύμφωνα με την εκπαίδευση
+        και τη διαδικασία πρώτων βοηθειών.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🚫</span>
+
+      <h3>Μην Αυτοσχεδιάζεις</h3>
+
+      <p>
+        Μην χρησιμοποιείς
+        πάγο,
+        κρέμες,
+        λάδι
+        ή άλλες μη προβλεπόμενες ουσίες
+        πάνω στο έγκαυμα.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="info">
+
+    <strong>Σημείωση:</strong>
+
+    Η αντιμετώπιση
+    χημικών και ηλεκτρικών εγκαυμάτων
+    απαιτεί πρόσθετες προφυλάξεις.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.6 CHEMICAL EXPOSURE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.6 Χημική Έκθεση ως Περιστατικό Πρώτων Βοηθειών
+  </h2>
+
+  <p>
+    Η χημική ασφάλεια
+    έχει ήδη καλυφθεί
+    σε προηγούμενο κεφάλαιο.
+
+    Εδώ επικεντρωνόμαστε μόνο
+    στην αντίδραση
+    όταν έχει ήδη συμβεί έκθεση.
+  </p>
+
+  <div class="grid">
+
+    <div class="card first-aid-card">
+
+      <span class="icon">👁️</span>
+
+      <h3>Χημικό στα Μάτια</h3>
+
+      <p>
+        Ξεκίνησε άμεσα έκπλυση
+        χρησιμοποιώντας
+        τον προβλεπόμενο
+        σταθμό πλύσης ματιών
+        και ακολούθησε
+        τις ειδικές οδηγίες του προϊόντος
+        και της εγκατάστασης.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">✋</span>
+
+      <h3>Χημικό στο Δέρμα</h3>
+
+      <p>
+        Διακόπτεται η έκθεση
+        και εφαρμόζεται
+        η προβλεπόμενη διαδικασία
+        απομάκρυνσης του προϊόντος
+        και μολυσμένου ρουχισμού.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🫁</span>
+
+      <h3>Εισπνοή</h3>
+
+      <p>
+        Μην εισέρχεσαι
+        σε επικίνδυνη ατμόσφαιρα
+        χωρίς την απαιτούμενη προστασία.
+
+        Ενεργοποίησε άμεσα
+        την κατάλληλη βοήθεια.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">👄</span>
+
+      <h3>Κατάποση</h3>
+
+      <p>
+        Μην προκαλείς εμετό
+        εκτός εάν υπάρχει
+        συγκεκριμένη σχετική οδηγία
+        από κατάλληλη ιατρική πηγή
+        ή τις οδηγίες του προϊόντος.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Δεν υπάρχει μία ενιαία πρώτη βοήθεια για όλα τα χημικά.</strong>
+
+    Χρησιμοποίησε
+    τις πληροφορίες πρώτων βοηθειών
+    του συγκεκριμένου προϊόντος
+    και τη διαδικασία έκτακτης ανάγκης
+    της εγκατάστασης.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.7 ELECTRICAL
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.7 Ηλεκτρικό Ατύχημα
+  </h2>
+
+  <div class="grid">
+
+    <div class="card first-aid-card">
+
+      <span class="icon">⚡</span>
+
+      <h3>Μην Αγγίξεις τον Τραυματία</h3>
+
+      <p>
+        Αν μπορεί να βρίσκεται ακόμη
+        σε επαφή με ηλεκτρικό ρεύμα,
+        μην τον αγγίξεις.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🔌</span>
+
+      <h3>Απομόνωση του Κινδύνου</h3>
+
+      <p>
+        Η ηλεκτρική πηγή
+        πρέπει να τεθεί
+        σε ασφαλή κατάσταση
+        πριν από την προσέγγιση.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">❤️</span>
+
+      <h3>Παρακολούθηση</h3>
+
+      <p>
+        Η ηλεκτρική κάκωση
+        μπορεί να επηρεάσει
+        την καρδιά και την αναπνοή.
+
+        Ενεργοποίησε επείγουσα βοήθεια
+        και παρακολούθησε
+        την κατάσταση του ατόμου.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.8 EYE / FRACTURE / FALL
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.8 Άλλοι Συνηθισμένοι Βιομηχανικοί Τραυματισμοί
+  </h2>
+
+  <div class="grid">
+
+    <div class="card first-aid-card">
+
+      <span class="icon">👁️</span>
+
+      <h3>Τραυματισμός Ματιού</h3>
+
+      <p>
+        Μην τρίβεις το μάτι.
+
+        Αν υπάρχει αντικείμενο
+        που έχει εισχωρήσει,
+        μην επιχειρείς
+        να το αφαιρέσεις.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">🦴</span>
+
+      <h3>Πιθανό Κάταγμα</h3>
+
+      <p>
+        Μην επιχειρείς
+        να ισιώσεις
+        ή να επαναφέρεις
+        ένα τραυματισμένο άκρο.
+      </p>
+
+    </div>
+
+    <div class="card first-aid-card">
+
+      <span class="icon">⬇️</span>
+
+      <h3>Σοβαρή Πτώση</h3>
+
+      <p>
+        Απόφυγε την άσκοπη μετακίνηση
+        σοβαρά τραυματισμένου ατόμου,
+        εκτός εάν παραμένει
+        άμεσος κίνδυνος
+        στο σημείο.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.9 CPR AED
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.9 Μη Ανταπόκριση, CPR & AED
+  </h2>
+
+  <div class="process-grid">
+
+    <div class="process-card">
+
+      <div class="process-number">1</div>
+
+      <h3>Έλεγξε Ανταπόκριση</h3>
+
+      <p>
+        Αν το άτομο
+        δεν ανταποκρίνεται,
+        κάλεσε άμεσα βοήθεια.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">2</div>
+
+      <h3>Έλεγξε Αναπνοή</h3>
+
+      <p>
+        Αν δεν αναπνέει φυσιολογικά,
+        ενεργοποίησε
+        την επείγουσα απόκριση
+        χωρίς καθυστέρηση.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">3</div>
+
+      <h3>CPR</h3>
+
+      <p>
+        Ξεκίνησε CPR
+        σύμφωνα με την εκπαίδευσή σου
+        ή τις οδηγίες
+        της υπηρεσίας έκτακτης ανάγκης.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">4</div>
+
+      <h3>AED</h3>
+
+      <p>
+        Ζήτησε να φέρουν AED,
+        ενεργοποίησέ το
+        και ακολούθησε
+        τις φωνητικές και οπτικές οδηγίες
+        της συσκευής.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="success">
+
+    <strong>Χρόνος = κρίσιμος παράγοντας.</strong>
+
+    Η γρήγορη αναγνώριση,
+    η κλήση βοήθειας,
+    η CPR
+    και η έγκαιρη χρήση AED
+    αποτελούν βασικά στοιχεία
+    της επείγουσας αντίδρασης.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική Δραστηριότητα:
+    Ποια είναι η Πρώτη Σωστή Ενέργεια;
+  </h2>
+
+  <p>
+    Ακούς έναν δυνατό θόρυβο
+    σε χώρο παραγωγής.
+
+    Βλέπεις έναν εργαζόμενο
+    πεσμένο στο δάπεδο
+    δίπλα σε μηχάνημα
+    που φαίνεται να βρίσκεται ακόμη σε λειτουργία.
+  </p>
+
+  <p>
+    <strong>
+      Τι κάνεις πρώτο;
+    </strong>
+  </p>
+
+  <div class="activity-options">
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">A</span>
+
+      Μπαίνω αμέσως
+      στη ζώνη του μηχανήματος
+      και τραβάω τον εργαζόμενο.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="correct"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">B</span>
+
+      Ελέγχω πρώτα
+      τον ενεργό κίνδυνο,
+      ενεργοποιώ βοήθεια
+      και δεν εισέρχομαι
+      σε επικίνδυνη ζώνη
+      μέχρι να είναι ασφαλής.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">C</span>
+
+      Περιμένω
+      να δω αν ο εργαζόμενος
+      θα σηκωθεί μόνος του.
+
+    </button>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitActivity()">
+    Έλεγχος Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetActivity()">
+    Επανεκκίνηση Δραστηριότητας
+  </button>
+
+  <div
+    id="activityFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>Σενάριο Απόφασης</h2>
+
+  <p>
+    Κατά τη διάρκεια εργασίας,
+    ένας συνάδελφος
+    κόβεται σοβαρά
+    από μεταλλικό εξάρτημα.
+
+    Υπάρχει έντονη αιμορραγία.
+  </p>
+
+  <p>
+    <strong>
+      Ποια είναι η πιο κατάλληλη αντίδραση;
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Του λέω να περιμένει λίγο
+    για να δούμε
+    αν η αιμορραγία σταματήσει μόνη της.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Του δίνω ένα πανί
+    και συνεχίζω
+    τη δική μου εργασία.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Ενεργοποιώ άμεσα βοήθεια,
+    προστατεύομαι από επαφή με αίμα
+    και εφαρμόζω σταθερή άμεση πίεση
+    στο σημείο της αιμορραγίας,
+    σύμφωνα με την εκπαίδευσή μου,
+    μέχρι να αναλάβει κατάλληλο προσωπικό.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     23.10 REPORTING
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    23.10 Μετά την Άμεση Αντίδραση
+  </h2>
+
+  <p>
+    Η αντιμετώπιση
+    δεν ολοκληρώνεται
+    όταν φύγει ο τραυματίας
+    ή αποκατασταθεί η περιοχή.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">📢</span>
+
+      <h3>Αναφορά Περιστατικού</h3>
+
+      <p>
+        Το συμβάν
+        αναφέρεται
+        σύμφωνα με τη διαδικασία
+        του οργανισμού.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔍</span>
+
+      <h3>Διερεύνηση</h3>
+
+      <p>
+        Εξετάζονται
+        τα γεγονότα,
+        οι συνθήκες
+        και οι παράγοντες
+        που συνέβαλαν.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🛠️</span>
+
+      <h3>Διορθωτικές Ενέργειες</h3>
+
+      <p>
+        Τα ευρήματα
+        μετατρέπονται σε μέτρα
+        που μειώνουν
+        την πιθανότητα επανάληψης.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">📚</span>
+
+      <h3>Οργανωτική Μάθηση</h3>
+
+      <p>
+        Ατυχήματα
+        και near misses
+        χρησιμοποιούνται
+        για βελτίωση
+        της πρόληψης και της ετοιμότητας.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="success">
+
+    <strong>Σκοπός:</strong>
+
+    Να μάθουμε
+    από το περιστατικό
+    και να μειώσουμε
+    την πιθανότητα να επαναληφθεί.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <!-- Q1 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Ποια είναι η πρώτη προτεραιότητα όταν συμβεί ατύχημα;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Να ελέγξω
+        αν μπορώ να προσεγγίσω
+        χωρίς να εκτεθώ
+        σε ενεργό κίνδυνο.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Να μετακινήσω αμέσως
+        τον τραυματία.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Να φωτογραφίσω
+        το σημείο.
+      </label>
+
+    </div>
+
+    <!-- Q2 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Σε σοβαρή εξωτερική αιμορραγία:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Ενεργοποιώ βοήθεια
+        και εφαρμόζω σταθερή άμεση πίεση,
+        σύμφωνα με την εκπαίδευσή μου.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Περιμένω
+        να σταματήσει μόνη της.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Ζητώ από τον τραυματία
+        να επιστρέψει στην εργασία του.
+      </label>
+
+    </div>
+
+    <!-- Q3 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Σε πιθανό ηλεκτρικό ατύχημα:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Δεν αγγίζω τον τραυματία
+        μέχρι να ελεγχθεί
+        ο ηλεκτρικός κίνδυνος.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Τον τραβάω αμέσως
+        με τα χέρια.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Ρίχνω νερό
+        στο σημείο.
+      </label>
+
+    </div>
+
+    <!-- Q4 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Σε χημικό πιτσίλισμα στα μάτια:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Ξεκινώ άμεσα
+        την προβλεπόμενη έκπλυση
+        και ακολουθώ
+        τις ειδικές οδηγίες
+        του προϊόντος και της εγκατάστασης.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Τρίβω το μάτι
+        ώστε να απομακρυνθεί το χημικό.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Περιμένω
+        μέχρι να εμφανιστεί πόνος.
+      </label>
+
+    </div>
+
+    <!-- Q5 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          5. Αν ένα άτομο δεν ανταποκρίνεται και δεν αναπνέει φυσιολογικά:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q5"
+          value="1">
+
+        Ενεργοποιώ άμεσα
+        την επείγουσα απόκριση,
+        ξεκινώ CPR
+        σύμφωνα με την εκπαίδευση ή τις οδηγίες
+        και χρησιμοποιώ AED όταν είναι διαθέσιμο.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q5"
+          value="0">
+
+        Περιμένω μερικά λεπτά
+        για να δω αν θα συνέλθει.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q5"
+          value="0">
+
+        Τον βάζω να καθίσει.
+      </label>
+
+    </div>
+
+    <!-- Q6 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          6. Γιατί διερευνούμε ένα ατύχημα ή near miss;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q6"
+          value="1">
+
+        Για να κατανοήσουμε
+        τις αιτίες
+        και να εφαρμόσουμε μέτρα
+        που μειώνουν
+        την πιθανότητα επανάληψης.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q6"
+          value="0">
+
+        Μόνο για να βρούμε
+        ποιος έκανε λάθος.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q6"
+          value="0">
+
+        Δεν χρειάζεται
+        αν δεν υπήρξε τραυματισμός.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Βασικά Σημεία</h2>
+
+  <div class="takeaway">
+
+    <span>🛑</span>
+
+    <div>
+      ΠΡΟΣΤΑΤΕΥΣΕ:
+      πρώτα έλεγξε
+      την ασφάλεια του χώρου.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>📞</span>
+
+    <div>
+      ΕΙΔΟΠΟΙΗΣΕ:
+      σε σοβαρό περιστατικό
+      ενεργοποίησε άμεσα βοήθεια.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>👀</span>
+
+    <div>
+      ΑΞΙΟΛΟΓΗΣΕ:
+      έλεγξε ανταπόκριση,
+      αναπνοή
+      και σοβαρή αιμορραγία.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🩹</span>
+
+    <div>
+      ΒΟΗΘΗΣΕ:
+      εφάρμοσε
+      τις κατάλληλες πρώτες βοήθειες
+      σύμφωνα με την εκπαίδευσή σου.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>📋</span>
+
+    <div>
+      ΑΝΑΦΕΡΕ:
+      το περιστατικό
+      πρέπει να οδηγεί
+      σε διερεύνηση,
+      μάθηση και πρόληψη.
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 23
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+let selectedActivity = null;
+
+function selectActivity(button){
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedActivity =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitActivity(){
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedActivity){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από τον έλεγχο.";
+
+    return;
+  }
+
+  if(selectedActivity === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Πριν πλησιάσουμε τον τραυματία πρέπει να ελέγξουμε αν το μηχάνημα ή άλλη πηγή κινδύνου παραμένει ενεργή. " +
+      "Η ασφάλεια του διασώστη είναι η πρώτη προτεραιότητα.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Η είσοδος σε ενεργή επικίνδυνη ζώνη μπορεί να προκαλέσει δεύτερο ατύχημα. " +
+      "Πρώτα ελέγχουμε τον κίνδυνο και ενεργοποιούμε βοήθεια.";
+  }
+}
+
+function resetActivity(){
+
+  selectedActivity = null;
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   DECISION SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Η σοβαρή αιμορραγία απαιτεί άμεση αντίδραση. " +
+      "Ενεργοποιούμε βοήθεια, προστατευόμαστε από έκθεση σε αίμα και εφαρμόζουμε σταθερή άμεση πίεση σύμφωνα με την εκπαίδευσή μας.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Δεν είναι αρκετό.</strong> " +
+      "Η σοβαρή αιμορραγία απαιτεί συνεχή άμεση αντιμετώπιση και επείγουσα βοήθεια.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Σε έντονη αιμορραγία δεν περιμένουμε να σταματήσει μόνη της.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 6;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις έξι ερωτήσεις πριν από την υποβολή.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Άριστα!</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Κατανοείς τη σωστή λογική αντίδρασης σε βιομηχανικό ατύχημα και τις βασικές αρχές πρώτων βοηθειών.";
+
+  }else if(score >= 4){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Καλή προσπάθεια.</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Ξαναδές τη σειρά Προστάτευσε → Ειδοποίησε → Αξιολόγησε → Βοήθησε → Ανάφερε.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score + "/" + total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

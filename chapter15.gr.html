@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Ενότητα 15 | Ηλεκτρική Ασφάλεια</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:white;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  color:var(--primary);
+  margin-top:0;
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  background:white;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  font-size:2rem;
+  display:block;
+  margin-bottom:10px;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  padding:18px;
+  border-radius:12px;
+  margin-top:16px;
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.step-card{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+/* =====================================================
+   GENERAL BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  margin-top:12px;
+  font-weight:bold;
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   SAFETY IMAGE
+   ===================================================== */
+
+.safety-image-container{
+  width:100%;
+  margin-top:18px;
+  margin-bottom:16px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:#eef4fb;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
+}
+
+.safety-image{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:cover;
+}
+
+/* =====================================================
+   ACTIVITY / SCENARIO OPTIONS
+   ===================================================== */
+
+.action-option,
+.scenario-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#eef4fb;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:15px 17px;
+  border-radius:12px;
+  margin:10px 0;
+  font-weight:500;
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+/* Light hover for readability */
+
+.action-option:hover,
+.action-option:focus,
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  color:#1f2933;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.6);
+  outline-offset:2px;
+}
+
+/* Selected option remains visible and readable */
+
+.action-option.selected,
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.action-option.selected:hover,
+.action-option.selected:focus,
+.scenario-option.selected:hover,
+.scenario-option.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+  border-color:var(--primary);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  background:#ffffff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  cursor:pointer;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  background:#e8eef5;
+  border-radius:999px;
+  height:18px;
+  overflow:hidden;
+  margin-top:18px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+  transition:width .4s ease;
+}
+
+.takeaway{
+  font-size:1.15rem;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 20px;
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 15: Ηλεκτρική Ασφάλεια
+  </h1>
+
+  <p>
+    Ο ηλεκτρισμός είναι απαραίτητος στη βιομηχανία,
+    αλλά μπορεί να προκαλέσει ηλεκτροπληξία,
+    εγκαύματα, πυρκαγιά ή σοβαρό ατύχημα
+    μέσα σε λίγα δευτερόλεπτα.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Στόχοι μάθησης
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">⚡</span>
+      Αναγνωρίζει βασικούς ηλεκτρικούς κινδύνους.
+    </div>
+
+    <div class="card">
+      <span class="icon">🔥</span>
+      Κατανοεί τις συνέπειες ηλεκτροπληξίας,
+      εγκαυμάτων και arc flash.
+    </div>
+
+    <div class="card">
+      <span class="icon">🔌</span>
+      Ελέγχει καλώδια, πρίζες και φορητό
+      ηλεκτρικό εξοπλισμό πριν τη χρήση.
+    </div>
+
+    <div class="card">
+      <span class="icon">🚨</span>
+      Γνωρίζει τι κάνει και τι δεν κάνει
+      σε ηλεκτρικό συμβάν.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     IMPORTANCE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Γιατί είναι σημαντική η ηλεκτρική ασφάλεια;
+  </h2>
+
+  <p>
+    Ο ηλεκτρισμός δεν φαίνεται πάντα,
+    αλλά οι συνέπειές του μπορεί να είναι άμεσες και σοβαρές.
+    Μικρή φθορά σε καλώδιο, λάθος επέμβαση σε πίνακα
+    ή χρήση εξοπλισμού σε υγρό χώρο
+    μπορεί να οδηγήσει σε σοβαρό ατύχημα.
+  </p>
+
+  <div class="danger">
+
+    <strong>
+      Κρίσιμο μήνυμα:
+    </strong>
+
+    Μόνο εξουσιοδοτημένα και κατάλληλα εκπαιδευμένα άτομα
+    πρέπει να επεμβαίνουν σε ηλεκτρικούς πίνακες
+    ή ηλεκτρικές εγκαταστάσεις.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     ELECTRICAL HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Βασικοί ηλεκτρικοί κίνδυνοι
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">⚡</span>
+
+      <h3>
+        Ηλεκτροπληξία
+      </h3>
+
+      <p>
+        Το ηλεκτρικό ρεύμα μπορεί να περάσει μέσα από το σώμα
+        και να προκαλέσει σοβαρό τραυματισμό ή θάνατο.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔥</span>
+
+      <h3>
+        Εγκαύματα
+      </h3>
+
+      <p>
+        Ηλεκτρικό τόξο, θερμότητα ή επαφή
+        με ηλεκτρικό εξοπλισμό μπορεί να προκαλέσουν εγκαύματα.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">💥</span>
+
+      <h3>
+        Arc Flash
+      </h3>
+
+      <p>
+        Ξαφνική απελευθέρωση ενέργειας
+        με έντονη θερμότητα, φως, πίεση και θραύσματα.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔌</span>
+
+      <h3>
+        Φθαρμένα καλώδια
+      </h3>
+
+      <p>
+        Κομμένα, γυμνά ή πατημένα καλώδια
+        αυξάνουν τον κίνδυνο ηλεκτροπληξίας
+        και βραχυκυκλώματος.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">💧</span>
+
+      <h3>
+        Υγρασία
+      </h3>
+
+      <p>
+        Το νερό και η υγρασία αυξάνουν σημαντικά
+        τον κίνδυνο ηλεκτροπληξίας.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚫</span>
+
+      <h3>
+        Μη εξουσιοδοτημένη επέμβαση
+      </h3>
+
+      <p>
+        Άνοιγμα πινάκων, πρόχειρες επισκευές
+        ή παράκαμψη προστασιών είναι επικίνδυνες πρακτικές.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PRE-USE CHECK
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Έλεγχος πριν από τη χρήση
+  </h2>
+
+  <div class="grid">
+
+    <div class="card step-card">
+
+      <h3>
+        1. Καλώδιο
+      </h3>
+
+      <p>
+        Έλεγξε για κοψίματα, γυμνά σημεία,
+        τσακίσματα ή σημάδια υπερθέρμανσης.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        2. Φις και πρίζα
+      </h3>
+
+      <p>
+        Έλεγξε για σπασμένα μέρη,
+        χαλαρή σύνδεση ή μαυρισμένα σημεία.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        3. Εξοπλισμός
+      </h3>
+
+      <p>
+        Μη χρησιμοποιείς εργαλείο που μυρίζει καμένο,
+        κάνει ασυνήθιστο θόρυβο ή λειτουργεί ασταθώς.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        4. Περιβάλλον
+      </h3>
+
+      <p>
+        Μην χρησιμοποιείς ηλεκτρικό εξοπλισμό
+        κοντά σε νερά ή υγρασία
+        χωρίς κατάλληλη προστασία.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>
+      Αν έχεις αμφιβολία, μη χρησιμοποιείς τον εξοπλισμό.
+    </strong>
+
+    Σήμανέ τον ως εκτός χρήσης
+    και ενημέρωσε τον υπεύθυνο.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DANGEROUS CONDITION IMAGE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Επικίνδυνη κατάσταση
+  </h2>
+
+  <p>
+    Η παρακάτω εικόνα δείχνει έναν χαρακτηριστικό
+    συνδυασμό ηλεκτρικών κινδύνων:
+    φθαρμένο καλώδιο, εκτεθειμένους αγωγούς
+    και παρουσία νερού.
+  </p>
+
+  <div class="safety-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/voltage.png"
+      alt="Ηλεκτρικός πίνακας και φθαρμένο ηλεκτρικό καλώδιο με εκτεθειμένους αγωγούς κοντά σε νερό σε βιομηχανικό χώρο"
+      class="safety-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+  </div>
+
+  <div class="danger">
+
+    <strong>
+      Προσοχή:
+    </strong>
+
+    Φθαρμένο καλώδιο κοντά σε υγρασία ή νερό
+    αποτελεί άμεσο ηλεκτρικό κίνδυνο.
+    Μην αγγίζεις τον εξοπλισμό ή το νερό.
+    Η περιοχή πρέπει να απομονωθεί
+    και να ενημερωθεί άμεσα ο αρμόδιος υπεύθυνος.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DO / DO NOT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Τι κάνω / Τι δεν κάνω
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">✅</span>
+
+      <h3>
+        Κάνω
+      </h3>
+
+      <p>
+        Αναφέρω φθορές, κρατώ τους άλλους μακριά από τον κίνδυνο
+        και χρησιμοποιώ μόνο εξοπλισμό σε καλή κατάσταση.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">✅</span>
+
+      <h3>
+        Κάνω
+      </h3>
+
+      <p>
+        Ακολουθώ τις προβλεπόμενες διαδικασίες
+        απομόνωσης ενέργειας όπου απαιτείται.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">❌</span>
+
+      <h3>
+        Δεν κάνω
+      </h3>
+
+      <p>
+        Δεν ανοίγω ηλεκτρικούς πίνακες
+        αν δεν είμαι εξουσιοδοτημένος.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">❌</span>
+
+      <h3>
+        Δεν κάνω
+      </h3>
+
+      <p>
+        Δεν αγγίζω άτομο που μπορεί να βρίσκεται
+        ακόμη σε επαφή με ηλεκτρικό ρεύμα.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική άσκηση: Ποια είναι η σωστή ενέργεια;
+  </h2>
+
+  <p>
+    Επίλεξε τη σωστή αντίδραση για το περιστατικό.
+  </p>
+
+  <div class="highlight">
+
+    <strong>
+      Περιστατικό:
+    </strong>
+
+    Βλέπεις φορητό ηλεκτρικό εργαλείο
+    με φθαρμένο καλώδιο και εκτεθειμένο αγωγό.
+
+  </div>
+
+  <button
+    type="button"
+    class="action-option"
+    data-type="wrong"
+    onclick="selectAction(this)">
+
+    Το χρησιμοποιώ προσεκτικά,
+    γιατί η εργασία θα κρατήσει λίγο.
+
+  </button>
+
+  <button
+    type="button"
+    class="action-option"
+    data-type="partial"
+    onclick="selectAction(this)">
+
+    Τυλίγω πρόχειρα το καλώδιο με μονωτική ταινία
+    και συνεχίζω την εργασία.
+
+  </button>
+
+  <button
+    type="button"
+    class="action-option"
+    data-type="correct"
+    onclick="selectAction(this)">
+
+    Δεν το χρησιμοποιώ.
+    Το αποσύρω από χρήση εφόσον αυτό μπορεί να γίνει με ασφάλεια,
+    το επισημαίνω και ενημερώνω τον υπεύθυνο.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitAction()">
+
+    Έλεγχος απάντησης
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetAction()">
+
+    Επαναφορά άσκησης
+
+  </button>
+
+  <div
+    id="actionFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Σενάριο Απόφασης
+  </h2>
+
+  <p>
+    Συνάδελφος παθαίνει ηλεκτροπληξία
+    και φαίνεται να βρίσκεται ακόμη
+    σε επαφή με ηλεκτρικό εξοπλισμό.
+  </p>
+
+  <p>
+    <strong>
+      Τι κάνεις;
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Τον τραβάω αμέσως με γυμνά χέρια.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Ρίχνω νερό για να σταματήσει το ρεύμα.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Δεν τον αγγίζω.
+    Ειδοποιώ άμεσα, απομονώνω την ηλεκτρική παροχή
+    μόνο εφόσον αυτό μπορεί να γίνει με ασφάλεια
+    και σύμφωνα με τη διαδικασία,
+    και καλώ την προβλεπόμενη βοήθεια.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+
+    Οριστική απάντηση
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+
+    Επαναφορά σεναρίου
+
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Mini Quiz
+  </h2>
+
+  <form id="quizForm">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Ποιος πρέπει να επεμβαίνει σε ηλεκτρικούς πίνακες;
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Μόνο εξουσιοδοτημένο
+        και κατάλληλα εκπαιδευμένο άτομο.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Οποιοσδήποτε έχει εμπειρία στην παραγωγή.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Όποιος βρίσκεται πιο κοντά.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Αν εντοπίσω φθαρμένο ηλεκτρικό καλώδιο:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Δεν χρησιμοποιώ τον εξοπλισμό
+        και αναφέρω άμεσα τη φθορά.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Το χρησιμοποιώ αν η εργασία είναι σύντομη.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Αγγίζω το καλώδιο για να ελέγξω αν έχει ρεύμα.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Νερό και ηλεκτρισμός:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Αυξάνουν σημαντικά τον κίνδυνο ηλεκτροπληξίας.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Δεν έχουν σχέση μεταξύ τους.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Κάνουν τον ηλεκτρικό εξοπλισμό πιο ασφαλή.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Αν άτομο βρίσκεται ακόμη
+          σε επαφή με ηλεκτρικό ρεύμα:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Δεν το αγγίζω μέχρι να απομονωθεί
+        η πηγή ή να επιβεβαιωθεί ότι είναι ασφαλές.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Το τραβάω αμέσως με γυμνά χέρια.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Ρίχνω νερό στον εξοπλισμό.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+
+        Υποβολή Quiz
+
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+
+        Επαναφορά Quiz
+
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Βασικά σημεία
+  </h2>
+
+  <p class="takeaway">
+    Ο ηλεκτρισμός μπορεί να είναι θανατηφόρος
+    ακόμη και όταν ο κίνδυνος δεν είναι ορατός.
+  </p>
+
+  <p class="takeaway">
+    Μη χρησιμοποιείς φθαρμένα καλώδια,
+    πρίζες ή ηλεκτρικά εργαλεία.
+  </p>
+
+  <p class="takeaway">
+    Μόνο εξουσιοδοτημένα άτομα επεμβαίνουν
+    σε ηλεκτρικούς πίνακες και εγκαταστάσεις.
+  </p>
+
+  <p class="takeaway">
+    Νερό και ηλεκτρισμός είναι επικίνδυνος συνδυασμός.
+  </p>
+
+  <p class="takeaway">
+    Σε περιστατικό ηλεκτροπληξίας,
+    μην αγγίζεις το άτομο μέχρι να έχει απομονωθεί
+    η ηλεκτρική πηγή και να είναι ασφαλές.
+  </p>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 15
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+let selectedAction = null;
+
+function selectAction(button){
+
+  document
+    .querySelectorAll(".action-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedAction =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById(
+      "actionFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.innerHTML =
+    "";
+}
+
+function submitAction(){
+
+  const feedback =
+    document.getElementById(
+      "actionFeedback"
+    );
+
+  if(!selectedAction){
+
+    feedback.style.display =
+      "block";
+
+    feedback.className =
+      "feedback highlight";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν κάνεις έλεγχο.";
+
+    return;
+  }
+
+  feedback.style.display =
+    "block";
+
+  if(selectedAction === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Φθαρμένος ηλεκτρικός εξοπλισμός δεν πρέπει να χρησιμοποιείται. Πρέπει να αποσύρεται από χρήση με ασφαλή τρόπο και να αναφέρεται.";
+
+  }else if(selectedAction === "partial"){
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Η πρόχειρη χρήση μονωτικής ταινίας δεν αποτελεί εγκεκριμένη επισκευή ηλεκτρικού καλωδίου.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Η σύντομη διάρκεια της εργασίας δεν μειώνει τον κίνδυνο ηλεκτροπληξίας.";
+  }
+}
+
+function resetAction(){
+
+  selectedAction =
+    null;
+
+  document
+    .querySelectorAll(".action-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "actionFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.className =
+    "feedback";
+
+  feedback.innerHTML =
+    "";
+}
+
+/* =====================================================
+   DECISION SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.innerHTML =
+    "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  if(!selectedScenario){
+
+    feedback.style.display =
+      "block";
+
+    feedback.className =
+      "feedback highlight";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν πατήσεις οριστική απάντηση.";
+
+    return;
+  }
+
+  feedback.style.display =
+    "block";
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Δεν αγγίζουμε άτομο που μπορεί να βρίσκεται ακόμη υπό τάση. Πρώτα απαιτείται ειδοποίηση, ασφαλής απομόνωση της ηλεκτρικής πηγής και ενεργοποίηση της προβλεπόμενης βοήθειας.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Δεν χρησιμοποιούμε ποτέ νερό σε ηλεκτρικό συμβάν. Μπορεί να αυξήσει τον κίνδυνο ηλεκτροπληξίας.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Αν αγγίξεις άτομο που βρίσκεται ακόμη υπό τάση, μπορεί να εκτεθείς και εσύ σε ηλεκτροπληξία.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario =
+    null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.className =
+    "feedback";
+
+  feedback.innerHTML =
+    "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById(
+      "quizForm"
+    );
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  const progressBar =
+    document.getElementById(
+      "progressBar"
+    );
+
+  const progressBox =
+    document.getElementById(
+      "quizProgress"
+    );
+
+  let score = 0;
+  let answered = 0;
+
+  const total = 4;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  /* Require all questions to be answered */
+
+  if(answered < total){
+
+    result.style.display =
+      "block";
+
+    result.className =
+      "feedback highlight";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  result.style.display =
+    "block";
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "Άριστα! Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Κατανοείς τις βασικές αρχές ηλεκτρικής ασφάλειας.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback highlight";
+
+    result.innerHTML =
+      "Καλή προσπάθεια. Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Ξαναδές τους βασικούς ηλεκτρικούς κινδύνους, τον έλεγχο εξοπλισμού και τη σωστή αντίδραση σε ηλεκτρικό συμβάν.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById(
+      "quizForm"
+    );
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  const progressBar =
+    document.getElementById(
+      "progressBar"
+    );
+
+  const progressBox =
+    document.getElementById(
+      "quizProgress"
+    );
+
+  form.reset();
+
+  progressBar.style.width =
+    "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display =
+    "none";
+
+  result.className =
+    "feedback";
+
+  result.innerHTML =
+    "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+</script>
+
+</body>
+</html>

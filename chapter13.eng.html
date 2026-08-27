@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Module 13 | Working at Height</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:white;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  color:var(--primary);
+  margin-top:0;
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  background:white;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  font-size:2rem;
+  display:block;
+  margin-bottom:10px;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  padding:18px;
+  border-radius:12px;
+  margin-top:16px;
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.step-card{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+/* =====================================================
+   GENERAL BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  margin-top:12px;
+  font-weight:bold;
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   SAFETY IMAGE
+   ===================================================== */
+
+.safety-image-container{
+  width:100%;
+  margin-top:18px;
+  margin-bottom:16px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:#eef4fb;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
+}
+
+.safety-image{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:cover;
+}
+
+/* =====================================================
+   PRACTICE / SCENARIO OPTIONS
+   ===================================================== */
+
+.practice-option,
+.scenario-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#eef4fb;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:15px 17px;
+  border-radius:12px;
+  margin:10px 0;
+  font-weight:500;
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+/* Light hover for readability */
+.practice-option:hover,
+.practice-option:focus,
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  color:#1f2933;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.6);
+  outline-offset:2px;
+}
+
+/* Clear selected state */
+.practice-option.selected,
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.practice-option.selected:hover,
+.practice-option.selected:focus,
+.scenario-option.selected:hover,
+.scenario-option.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+  border-color:var(--primary);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  background:#ffffff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  cursor:pointer;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  background:#e8eef5;
+  border-radius:999px;
+  height:18px;
+  overflow:hidden;
+  margin-top:18px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+  transition:width .4s ease;
+}
+
+.takeaway{
+  font-size:1.15rem;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 20px;
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Module 13: Working at Height
+  </h1>
+
+  <p>
+    Working at height can result in serious or fatal injuries.
+    Fall prevention must be planned before the work begins.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Learning Objectives
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🧗</span>
+      Understand what is considered working at height.
+    </div>
+
+    <div class="card">
+      <span class="icon">⬇️</span>
+      Recognise the risks of people and objects falling.
+    </div>
+
+    <div class="card">
+      <span class="icon">🪜</span>
+      Use ladders and work platforms safely.
+    </div>
+
+    <div class="card">
+      <span class="icon">🛡️</span>
+      Inspect and use suitable fall protection equipment.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DEFINITION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    What is Working at Height?
+  </h2>
+
+  <p>
+    Working at height is any work where there is a possibility
+    of falling from one level to another, even when the height
+    appears relatively small. It may include work on ladders,
+    platforms, scaffolds, roofs, tanks, vehicles or machinery.
+  </p>
+
+  <div class="highlight">
+
+    <strong>
+      Key message:
+    </strong>
+
+    Height alone does not determine the level of risk.
+    The work surface, duration, access method, tools,
+    weather conditions and the possibility of falling objects
+    must also be considered.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MAIN HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Main Hazards
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">⬇️</span>
+
+      <h3>
+        Worker Falling
+      </h3>
+
+      <p>
+        Falls from ladders, platforms, floor edges,
+        openings or scaffolds.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">📦</span>
+
+      <h3>
+        Falling Objects
+      </h3>
+
+      <p>
+        Tools or materials can fall and injure
+        people working below.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🪜</span>
+
+      <h3>
+        Unsuitable Ladder
+      </h3>
+
+      <p>
+        Damaged, incorrectly positioned or used
+        for the wrong type of task.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🌧️</span>
+
+      <h3>
+        Environmental Conditions
+      </h3>
+
+      <p>
+        Wind, rain, slippery surfaces
+        or poor lighting.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔧</span>
+
+      <h3>
+        Unsafe Tool Handling
+      </h3>
+
+      <p>
+        Carrying tools by hand instead of using
+        a suitable tool pouch or tether.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚫</span>
+
+      <h3>
+        Missing Protection
+      </h3>
+
+      <p>
+        Missing guardrails, covers,
+        harnesses or suitable anchor points.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     HIERARCHY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Hierarchy of Control for Working at Height
+  </h2>
+
+  <div class="grid">
+
+    <div class="card step-card">
+
+      <h3>
+        1. Avoid Working at Height
+      </h3>
+
+      <p>
+        If the task can be completed from ground level,
+        this is usually the safest option.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        2. Prevent the Fall
+      </h3>
+
+      <p>
+        Use suitable platforms, guardrails,
+        scaffolding or other safe access systems.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        3. Minimise the Consequences
+      </h3>
+
+      <p>
+        Where the risk cannot be avoided,
+        use a suitable work-restraint or
+        fall-arrest system.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>
+      Important:
+    </strong>
+
+    A safety harness is not enough on its own.
+    A suitable anchor point, compatible lanyard,
+    equipment inspection and a rescue plan are also required.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     LADDER SAFETY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Safe Use of Ladders
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🔍</span>
+
+      <h3>
+        Inspect Before Use
+      </h3>
+
+      <p>
+        Check the rungs, feet, stability,
+        condition and cleanliness.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">📐</span>
+
+      <h3>
+        Correct Positioning
+      </h3>
+
+      <p>
+        The ladder must stand on a stable surface
+        and be positioned correctly.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🤲</span>
+
+      <h3>
+        Maintain Three Points of Contact
+      </h3>
+
+      <p>
+        Keep two hands and one foot,
+        or two feet and one hand,
+        in contact with the ladder.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚫</span>
+
+      <h3>
+        Do Not Overreach
+      </h3>
+
+      <p>
+        If you cannot reach the work area,
+        climb down and reposition the ladder.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     FALLING OBJECTS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Falling Objects
+  </h2>
+
+  <p>
+    Working at height does not only create risk for the person
+    working above. People at lower levels may also be exposed
+    to serious injury from falling tools or materials.
+  </p>
+
+  <div class="safety-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/higheng.png"
+      alt="Worker at height with a clearly controlled exclusion zone below the elevated work area"
+      class="safety-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+  </div>
+
+  <div class="success">
+
+    <strong>
+      Safe practice:
+    </strong>
+
+    Use suitable tool pouches, tool tethers
+    and a clearly defined exclusion zone
+    beneath the work area.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PRACTICE ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Interactive Activity: Which Practice is Safe?
+  </h2>
+
+  <p>
+    Select the correct practice before starting work at height.
+  </p>
+
+  <button
+    type="button"
+    class="practice-option"
+    data-type="wrong"
+    onclick="selectPractice(this)">
+
+    I use any available ladder as long as it allows me
+    to reach the work area.
+
+  </button>
+
+  <button
+    type="button"
+    class="practice-option"
+    data-type="wrong"
+    onclick="selectPractice(this)">
+
+    I wear a safety harness without checking
+    the anchor point.
+
+  </button>
+
+  <button
+    type="button"
+    class="practice-option"
+    data-type="correct"
+    onclick="selectPractice(this)">
+
+    I inspect the equipment, select safe access,
+    protect the area below the work and use suitable
+    fall protection.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitPractice()">
+
+    Check Answer
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetPractice()">
+
+    Reset Activity
+
+  </button>
+
+  <div
+    id="practiceFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Decision Scenario
+  </h2>
+
+  <p>
+    You need to replace a sensor at height.
+    The task should only take two minutes and someone
+    suggests that you stand on a pallet raised by a forklift.
+  </p>
+
+  <p>
+    <strong>
+      What do you do?
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    I agree because the task will only take a very short time.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    I climb onto the pallet carefully and ask the forklift
+    operator not to move the truck.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    I do not use the pallet. I request suitable access equipment,
+    such as an approved work platform or another safe system of work.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+
+    Submit Final Answer
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+
+    Reset Scenario
+
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Mini Quiz
+  </h2>
+
+  <form id="quizForm">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. What is considered working at height?
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Any work where there is a possibility
+        of falling from one level to another.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Only work above 10 metres.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Only work performed on roofs.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. What is the preferred option in the hierarchy of control?
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Avoid working at height when the task can be completed
+        from ground level.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Use a harness without checking the anchor point.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Work quickly so that exposure time is reduced.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. When using a ladder, I should maintain:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Three points of contact.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Only one hand free.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Maximum reach from the ladder.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. To control the risk of falling objects:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Use tool pouches or tool tethers
+        and establish an exclusion zone.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Leave tools near the edge of the platform.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Report the issue only if something actually falls.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+
+        Submit Quiz
+
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+
+        Reset Quiz
+
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Key Takeaways
+  </h2>
+
+  <p class="takeaway">
+    Work at height must be planned before it begins.
+  </p>
+
+  <p class="takeaway">
+    First consider whether working at height can be avoided.
+  </p>
+
+  <p class="takeaway">
+    A ladder is not always the correct solution.
+  </p>
+
+  <p class="takeaway">
+    Fall protection requires suitable equipment,
+    anchorage and a rescue plan.
+  </p>
+
+  <p class="takeaway">
+    Protect people working below the elevated work area.
+  </p>
+
+</section>
+
+</main>
+
+<footer>
+  Industrial Health & Safety Training | Module 13
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   PRACTICE ACTIVITY
+   ===================================================== */
+
+let selectedPractice = null;
+
+function selectPractice(button){
+
+  document
+    .querySelectorAll(".practice-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedPractice =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById(
+      "practiceFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.innerHTML =
+    "";
+}
+
+function submitPractice(){
+
+  const feedback =
+    document.getElementById(
+      "practiceFeedback"
+    );
+
+  if(!selectedPractice){
+
+    feedback.style.display =
+      "block";
+
+    feedback.className =
+      "feedback highlight";
+
+    feedback.innerHTML =
+      "Please select an answer before checking your response.";
+
+    return;
+  }
+
+  feedback.style.display =
+    "block";
+
+  if(selectedPractice === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Correct. Working at height requires equipment inspection, safe access, suitable fall protection and protection of the area below the work.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Incorrect. Working at height must not rely on improvised access or on fall protection equipment that has not been properly checked.";
+  }
+}
+
+function resetPractice(){
+
+  selectedPractice =
+    null;
+
+  document
+    .querySelectorAll(".practice-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "practiceFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.className =
+    "feedback";
+
+  feedback.innerHTML =
+    "";
+}
+
+/* =====================================================
+   DECISION SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.innerHTML =
+    "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  if(!selectedScenario){
+
+    feedback.style.display =
+      "block";
+
+    feedback.className =
+      "feedback highlight";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting your final response.";
+
+    return;
+  }
+
+  feedback.style.display =
+    "block";
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Correct. A short task does not justify unsafe access. Suitable and approved access equipment must be used.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Incorrect. A pallet on a forklift is not a safe means of access. Personnel may only be elevated using suitable and approved equipment in accordance with site procedures.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Incorrect. The short duration of the task does not reduce the severity of a potential fall.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario =
+    null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.className =
+    "feedback";
+
+  feedback.innerHTML =
+    "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById(
+      "quizForm"
+    );
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  const progressBar =
+    document.getElementById(
+      "progressBar"
+    );
+
+  const progressBox =
+    document.getElementById(
+      "quizProgress"
+    );
+
+  let score = 0;
+  let answered = 0;
+
+  const total = 4;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  /*
+    Require every question
+    to be answered.
+  */
+
+  if(answered < total){
+
+    result.style.display =
+      "block";
+
+    result.className =
+      "feedback highlight";
+
+    result.innerHTML =
+      "Please answer all four questions before submitting the quiz.";
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  result.style.display =
+    "block";
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "Excellent! You scored " +
+      score +
+      "/" +
+      total +
+      ". You understand the key principles of safe working at height.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback highlight";
+
+    result.innerHTML =
+      "Good effort. You scored " +
+      score +
+      "/" +
+      total +
+      ". Review the hierarchy of control, safe access and falling-object prevention.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score +
+      "/" +
+      total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById(
+      "quizForm"
+    );
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  const progressBar =
+    document.getElementById(
+      "progressBar"
+    );
+
+  const progressBox =
+    document.getElementById(
+      "quizProgress"
+    );
+
+  form.reset();
+
+  progressBar.style.width =
+    "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display =
+    "none";
+
+  result.className =
+    "feedback";
+
+  result.innerHTML =
+    "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ενότητα 19 | Ασφάλεια Γερανογέφυρας & Αποθήκευσης Παλετών</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.danger,
+.success,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+.step-card{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+/* =====================================================
+   TAGS
+   ===================================================== */
+
+.tag{
+  display:inline-block;
+  padding:5px 10px;
+  margin-bottom:8px;
+  border-radius:999px;
+  font-size:.85rem;
+  font-weight:bold;
+}
+
+.tag-danger{
+  background:#ffe2e2;
+  color:#a31515;
+}
+
+.tag-warning{
+  background:#fff1b8;
+  color:#795800;
+}
+
+.tag-info{
+  background:#dcecff;
+  color:#123c69;
+}
+
+/* =====================================================
+   CHECKLIST
+   ===================================================== */
+
+.checklist{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.checklist li{
+  position:relative;
+  padding:10px 0 10px 34px;
+  border-bottom:1px solid #edf1f5;
+}
+
+.checklist li:last-child{
+  border-bottom:none;
+}
+
+.checklist li::before{
+  content:"✓";
+  position:absolute;
+  left:0;
+  top:10px;
+  width:23px;
+  height:23px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--success);
+  color:#fff;
+  font-size:.85rem;
+  font-weight:bold;
+}
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.table-wrapper{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  min-width:760px;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:14px;
+  border:1px solid var(--border);
+  text-align:left;
+  vertical-align:top;
+}
+
+th{
+  background:var(--primary);
+  color:#fff;
+}
+
+tbody tr:nth-child(even){
+  background:#f8fafc;
+}
+
+/* =====================================================
+   PHOTO ACTIVITY
+   ===================================================== */
+
+.safety-image-container{
+  position:relative;
+  width:100%;
+  margin-top:18px;
+  margin-bottom:16px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:#eef4fb;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
+}
+
+.safety-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   HOTSPOTS
+   ===================================================== */
+
+.hotspot{
+  position:absolute;
+  z-index:10;
+
+  width:52px;
+  height:52px;
+
+  display:grid;
+  place-items:center;
+
+  border:4px solid #fff;
+  border-radius:50%;
+
+  background:var(--accent);
+  color:#fff;
+
+  font-size:1.1rem;
+  font-weight:bold;
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.38),
+    0 0 0 2px rgba(214,40,40,.20);
+
+  transition:
+    transform .2s ease,
+    background-color .2s ease;
+}
+
+.hotspot:hover,
+.hotspot:focus{
+  transform:scale(1.09);
+  outline:4px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.hotspot.found{
+  background:var(--success);
+}
+
+/*
+  1 = Hoist / hook / lifting equipment
+  2 = Slings and load attachment
+  3 = Suspended load
+  4 = Person below / near load
+  5 = Storage racking
+  6 = Pallet stability
+*/
+
+.hs-hoist{
+  left:46%;
+  top:23%;
+}
+
+.hs-sling{
+  left:43%;
+  top:38%;
+}
+
+.hs-load{
+  left:49%;
+  top:49%;
+}
+
+.hs-person{
+  left:48%;
+  bottom:14%;
+}
+
+.hs-racking{
+  right:13%;
+  top:41%;
+}
+
+.hs-pallet{
+  right:10%;
+  bottom:22%;
+}
+
+.activity-status{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+
+  margin-top:16px;
+  padding:14px 16px;
+
+  border-radius:12px;
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   OPTION BUTTONS
+   ===================================================== */
+
+.option-button{
+  display:block;
+  width:100%;
+
+  margin:10px 0;
+  padding:15px 17px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+  font-weight:500;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.option-button:hover,
+.option-button:focus{
+  background:#dcecff;
+  color:#1f2933;
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.6);
+  outline-offset:2px;
+}
+
+.option-button.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.option-button.selected:hover,
+.option-button.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .hotspot{
+    width:43px;
+    height:43px;
+    font-size:.9rem;
+  }
+
+  .hs-hoist{
+    left:45%;
+    top:21%;
+  }
+
+  .hs-sling{
+    left:41%;
+    top:37%;
+  }
+
+  .hs-load{
+    left:47%;
+    top:48%;
+  }
+
+  .hs-person{
+    left:46%;
+    bottom:12%;
+  }
+
+  .hs-racking{
+    right:10%;
+    top:40%;
+  }
+
+  .hs-pallet{
+    right:7%;
+    bottom:20%;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 19: Ασφάλεια Γερανογέφυρας & Αποθήκευσης Παλετών
+  </h1>
+
+  <p>
+    Η ασφαλής ανύψωση φορτίων και η σωστή αποθήκευση παλετών
+    απαιτούν κατάλληλο εξοπλισμό, σωστή πρόσδεση,
+    αποκλεισμό της επικίνδυνης περιοχής
+    και συνεχή έλεγχο της σταθερότητας των φορτίων.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Μαθησιακοί Στόχοι
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🏗️</span>
+
+      <h3>
+        Ασφαλής Χρήση Γερανογέφυρας
+      </h3>
+
+      <p>
+        Να αναγνωρίζετε τους βασικούς ελέγχους
+        πριν και κατά τη διάρκεια μιας ανύψωσης.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⛓️</span>
+
+      <h3>
+        Πρόσδεση Φορτίου
+      </h3>
+
+      <p>
+        Να αναγνωρίζετε τη σημασία
+        κατάλληλων ιμάντων,
+        σημείων ανάρτησης
+        και σωστής κατανομής του φορτίου.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚧</span>
+
+      <h3>
+        Ζώνη Αποκλεισμού
+      </h3>
+
+      <p>
+        Να κατανοείτε γιατί κανείς
+        δεν πρέπει να βρίσκεται κάτω
+        ή πολύ κοντά σε αιωρούμενο φορτίο.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+
+      <h3>
+        Ασφαλής Αποθήκευση
+      </h3>
+
+      <p>
+        Να αναγνωρίζετε ασφαλή
+        και μη ασφαλή αποθήκευση παλετών
+        σε βιομηχανικά ράφια.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     WHY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Γιατί είναι σημαντική η ασφάλεια στις ανυψώσεις;
+  </h2>
+
+  <p>
+    Ένα ανυψωμένο φορτίο μπορεί να περιέχει
+    μεγάλη ποσότητα δυνητικής ενέργειας.
+    Αστοχία ενός εξαρτήματος,
+    λανθασμένη πρόσδεση
+    ή παρουσία εργαζομένου στην επικίνδυνη περιοχή
+    μπορεί να οδηγήσει σε σοβαρό ή θανατηφόρο τραυματισμό.
+  </p>
+
+  <div class="danger">
+
+    <strong>
+      Πρώτα το γιατί:
+    </strong>
+
+    Κανένας εργαζόμενος δεν πρέπει
+    να βρίσκεται κάτω από αιωρούμενο φορτίο.
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>
+      Σημαντικό:
+    </strong>
+
+    Η ικανότητα της γερανογέφυρας
+    δεν είναι το μόνο κριτήριο.
+    Πρέπει να λαμβάνονται υπόψη
+    το βάρος του φορτίου,
+    τα εξαρτήματα ανύψωσης,
+    τα σημεία πρόσδεσης
+    και η πραγματική διαδρομή του φορτίου.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MAIN HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Βασικοί Κίνδυνοι
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">⬇️</span>
+      <span class="tag tag-danger">
+        Πτώση Φορτίου
+      </span>
+
+      <h3>
+        Αστοχία Πρόσδεσης
+      </h3>
+
+      <p>
+        Ακατάλληλοι ή φθαρμένοι ιμάντες,
+        άγκιστρα ή σημεία ανάρτησης
+        μπορεί να οδηγήσουν σε πτώση του φορτίου.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⚖️</span>
+      <span class="tag tag-warning">
+        Αστάθεια
+      </span>
+
+      <h3>
+        Μη Ισορροπημένο Φορτίο
+      </h3>
+
+      <p>
+        Λανθασμένο κέντρο βάρους
+        μπορεί να προκαλέσει κλίση,
+        μετατόπιση ή απώλεια ελέγχου.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👷</span>
+      <span class="tag tag-danger">
+        Άνθρωποι
+      </span>
+
+      <h3>
+        Παρουσία στην Επικίνδυνη Ζώνη
+      </h3>
+
+      <p>
+        Η παρουσία εργαζομένου κάτω
+        ή πολύ κοντά σε κινούμενο φορτίο
+        δημιουργεί κίνδυνο σύνθλιψης ή πρόσκρουσης.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🏗️</span>
+      <span class="tag tag-warning">
+        Εξοπλισμός
+      </span>
+
+      <h3>
+        Υπέρβαση Ικανότητας
+      </h3>
+
+      <p>
+        Η ανύψωση φορτίου
+        πάνω από την επιτρεπόμενη ικανότητα
+        μπορεί να προκαλέσει σοβαρή αστοχία.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+      <span class="tag tag-warning">
+        Αποθήκευση
+      </span>
+
+      <h3>
+        Ασταθείς Παλέτες
+      </h3>
+
+      <p>
+        Παλέτες που προεξέχουν,
+        έχουν κλίση
+        ή είναι κατεστραμμένες
+        μπορεί να πέσουν.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🗄️</span>
+      <span class="tag tag-info">
+        Ράφια
+      </span>
+
+      <h3>
+        Υπερφόρτωση Ραφιών
+      </h3>
+
+      <p>
+        Η υπέρβαση των επιτρεπόμενων φορτίων
+        ή η λανθασμένη τοποθέτηση
+        μπορεί να προκαλέσει αστοχία του συστήματος αποθήκευσης.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PRE-USE CHECK
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Έλεγχος πριν από την Ανύψωση
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <h3>
+        Γερανογέφυρα
+      </h3>
+
+      <ul class="checklist">
+        <li>Ο εξοπλισμός είναι κατάλληλος για την εργασία.</li>
+        <li>Η επιτρεπόμενη ικανότητα είναι γνωστή.</li>
+        <li>Άγκιστρο και μηχανισμός ανύψωσης ελέγχονται οπτικά.</li>
+        <li>Τα χειριστήρια λειτουργούν σωστά.</li>
+        <li>Δεν υπάρχουν εμφανείς ζημιές ή ασυνήθιστοι θόρυβοι.</li>
+        <li>Η διαδρομή του φορτίου είναι ελεύθερη.</li>
+      </ul>
+
+    </div>
+
+    <div class="card">
+
+      <h3>
+        Εξαρτήματα Ανύψωσης
+      </h3>
+
+      <ul class="checklist">
+        <li>Οι ιμάντες είναι κατάλληλοι για το φορτίο.</li>
+        <li>Δεν υπάρχουν κοψίματα ή εμφανής φθορά.</li>
+        <li>Η ικανότητα των εξαρτημάτων είναι κατάλληλη.</li>
+        <li>Τα σημεία σύνδεσης είναι ασφαλή.</li>
+        <li>Το φορτίο μπορεί να ανυψωθεί σε ισορροπία.</li>
+        <li>Δεν υπάρχουν αιχμηρές ακμές που μπορεί να καταστρέψουν τους ιμάντες.</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SAFE LIFT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Ασφαλής Διαδικασία Ανύψωσης
+  </h2>
+
+  <div class="grid">
+
+    <div class="card step-card">
+      <h3>
+        1. Προγραμματισμός
+      </h3>
+
+      <p>
+        Καθορίστε βάρος,
+        διαστάσεις,
+        κέντρο βάρους
+        και διαδρομή.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>
+        2. Επιλογή Εξοπλισμού
+      </h3>
+
+      <p>
+        Επιλέξτε κατάλληλη γερανογέφυρα,
+        άγκιστρο και εξαρτήματα.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>
+        3. Πρόσδεση
+      </h3>
+
+      <p>
+        Τοποθετήστε τους ιμάντες
+        στα σωστά σημεία
+        και επιβεβαιώστε την ισορροπία.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>
+        4. Δοκιμαστική Ανύψωση
+      </h3>
+
+      <p>
+        Ανυψώστε ελαφρά
+        και ελέγξτε
+        ότι το φορτίο παραμένει σταθερό.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>
+        5. Μετακίνηση
+      </h3>
+
+      <p>
+        Μετακινήστε το φορτίο
+        αργά και ομαλά,
+        χωρίς απότομες κινήσεις.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>
+        6. Απόθεση
+      </h3>
+
+      <p>
+        Τοποθετήστε το φορτίο
+        σε σταθερή,
+        κατάλληλη επιφάνεια.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     EXCLUSION ZONE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Ζώνη Αποκλεισμού
+  </h2>
+
+  <div class="danger">
+
+    <strong>
+      Κανείς κάτω από το φορτίο.
+    </strong>
+
+    Ο χειριστής πρέπει να διατηρεί
+    ασφαλή απόσταση
+    και να ελέγχει ότι κανένα άτομο
+    δεν εισέρχεται στη διαδρομή του φορτίου.
+
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🚧</span>
+      <h3>
+        Οριοθέτηση
+      </h3>
+      <p>
+        Χρησιμοποιήστε κατάλληλα εμπόδια
+        ή άλλα μέσα ελέγχου πρόσβασης όπου απαιτείται.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👀</span>
+      <h3>
+        Ορατότητα
+      </h3>
+      <p>
+        Ο χειριστής πρέπει
+        να έχει επαρκή ορατότητα
+        ή κατάλληλη καθοδήγηση.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🗣️</span>
+      <h3>
+        Επικοινωνία
+      </h3>
+      <p>
+        Χρησιμοποιήστε σαφή
+        και προσυμφωνημένα σήματα
+        όταν εμπλέκεται καθοδηγητής.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🛑</span>
+      <h3>
+        Stop Work
+      </h3>
+      <p>
+        Διακόψτε αμέσως
+        όταν κάποιος εισέλθει
+        στην επικίνδυνη περιοχή.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PALLET STORAGE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Ασφαλής Αποθήκευση Παλετών
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">📐</span>
+
+      <h3>
+        Σωστή Τοποθέτηση
+      </h3>
+
+      <p>
+        Η παλέτα πρέπει να εδράζεται
+        σωστά στα προβλεπόμενα σημεία
+        και να μην προεξέχει επικίνδυνα.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+
+      <h3>
+        Σταθερό Φορτίο
+      </h3>
+
+      <p>
+        Τα προϊόντα πρέπει
+        να είναι σταθερά
+        και κατάλληλα ασφαλισμένα πάνω στην παλέτα.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⚖️</span>
+
+      <h3>
+        Βάρος
+      </h3>
+
+      <p>
+        Δεν πρέπει να υπερβαίνονται
+        τα επιτρεπόμενα φορτία
+        της παλέτας ή του ραφιού.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔍</span>
+
+      <h3>
+        Επιθεώρηση
+      </h3>
+
+      <p>
+        Κατεστραμμένες παλέτες
+        και εμφανώς παραμορφωμένα ράφια
+        πρέπει να αναφέρονται και να αξιολογούνται.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE PHOTO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική Δραστηριότητα: Εντοπίστε τα Κρίσιμα Σημεία
+  </h2>
+
+  <p>
+    Επιλέξτε τους έξι κόκκινους δείκτες
+    για να αναγνωρίσετε βασικά σημεία ελέγχου
+    σχετικά με την ανύψωση και την αποθήκευση.
+  </p>
+
+  <div class="safety-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/transfer.png"
+      alt="Βιομηχανική αποθήκη με γερανογέφυρα, αιωρούμενο φορτίο, εργαζόμενο και αποθηκευμένες παλέτες"
+      class="safety-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+    <button
+      type="button"
+      class="hotspot hs-hoist"
+      data-original="1"
+      data-message="<strong>Μηχανισμός ανύψωσης:</strong> Πριν από τη χρήση πρέπει να επιβεβαιώνεται ότι η γερανογέφυρα, το άγκιστρο και ο μηχανισμός ανύψωσης είναι κατάλληλα για το φορτίο και χωρίς εμφανείς βλάβες."
+      onclick="findTransferPoint(this)">
+      1
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-sling"
+      data-original="2"
+      data-message="<strong>Ιμάντες και πρόσδεση:</strong> Τα εξαρτήματα ανύψωσης πρέπει να είναι κατάλληλα για το φορτίο, σε καλή κατάσταση και σωστά τοποθετημένα ώστε να εξασφαλίζεται σταθερή ανύψωση."
+      onclick="findTransferPoint(this)">
+      2
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-load"
+      data-original="3"
+      data-message="<strong>Αιωρούμενο φορτίο:</strong> Το φορτίο πρέπει να παραμένει σταθερό και ελεγχόμενο. Αποφεύγονται απότομες κινήσεις, ταλαντώσεις και ανεξέλεγκτη περιστροφή."
+      onclick="findTransferPoint(this)">
+      3
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-person"
+      data-original="4"
+      data-message="<strong>Επικίνδυνη περιοχή:</strong> Κανένας εργαζόμενος δεν πρέπει να βρίσκεται κάτω από ή μέσα στην πιθανή διαδρομή πτώσης ενός αιωρούμενου φορτίου."
+      onclick="findTransferPoint(this)">
+      4
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-racking"
+      data-original="5"
+      data-message="<strong>Σύστημα αποθήκευσης:</strong> Τα ράφια πρέπει να είναι κατάλληλα, χωρίς εμφανείς ζημιές και να χρησιμοποιούνται σύμφωνα με τα επιτρεπόμενα φορτία τους."
+      onclick="findTransferPoint(this)">
+      5
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-pallet"
+      data-original="6"
+      data-message="<strong>Σταθερότητα παλέτας:</strong> Οι παλέτες πρέπει να είναι σωστά τοποθετημένες, χωρίς επικίνδυνη προεξοχή, κλίση ή ασταθές φορτίο που μπορεί να πέσει."
+      onclick="findTransferPoint(this)">
+      6
+    </button>
+
+  </div>
+
+  <div class="activity-status">
+
+    <strong>
+      Σημεία που εντοπίστηκαν:
+      <span id="transferScore">0</span>/6
+    </strong>
+
+    <span id="transferInstruction">
+      Επίλεξε και τους έξι δείκτες.
+    </span>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetTransferActivity()">
+    Επανεκκίνηση Δραστηριότητας
+  </button>
+
+  <div
+    id="transferFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SCENARIO 1
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Πρακτικό Σενάριο: Άτομο κοντά στο Αιωρούμενο Φορτίο
+  </h2>
+
+  <p>
+    Κατά τη μεταφορά μιας βαριάς παλέτας
+    με γερανογέφυρα,
+    ένας εργαζόμενος περνά κάτω από το φορτίο
+    για να φτάσει γρηγορότερα
+    στην άλλη πλευρά της αποθήκης.
+  </p>
+
+  <p>
+    <strong>
+      Τι πρέπει να κάνει ο χειριστής;
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="option-button lifting-option"
+    data-value="wrong"
+    onclick="selectLiftingOption(this)">
+    Να συνεχίσει αργά,
+    επειδή ο εργαζόμενος χρειάζεται μόνο λίγα δευτερόλεπτα.
+  </button>
+
+  <button
+    type="button"
+    class="option-button lifting-option"
+    data-value="partial"
+    onclick="selectLiftingOption(this)">
+    Να προειδοποιήσει τον εργαζόμενο
+    αλλά να συνεχίσει τη μετακίνηση.
+  </button>
+
+  <button
+    type="button"
+    class="option-button lifting-option"
+    data-value="correct"
+    onclick="selectLiftingOption(this)">
+    Να σταματήσει άμεσα τη μετακίνηση
+    και να συνεχίσει μόνο όταν
+    η επικίνδυνη περιοχή είναι ελεύθερη.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitLiftingScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetLiftingScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="liftingFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SCENARIO 2
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Πρακτικό Σενάριο: Ασταθής Παλέτα στο Ράφι
+  </h2>
+
+  <p>
+    Κατά την επιθεώρηση της αποθήκης,
+    διαπιστώνεται ότι μια παλέτα
+    βρίσκεται λοξά στο ράφι
+    και μέρος του φορτίου προεξέχει.
+  </p>
+
+  <p>
+    <strong>
+      Ποια είναι η σωστή ενέργεια;
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="option-button pallet-option"
+    data-value="wrong"
+    onclick="selectPalletOption(this)">
+    Να παραμείνει στη θέση της,
+    εφόσον δεν έχει πέσει ακόμα.
+  </button>
+
+  <button
+    type="button"
+    class="option-button pallet-option"
+    data-value="partial"
+    onclick="selectPalletOption(this)">
+    Να τοποθετηθεί προειδοποιητική πινακίδα
+    και να συνεχιστεί κανονικά η εργασία δίπλα της.
+  </button>
+
+  <button
+    type="button"
+    class="option-button pallet-option"
+    data-value="correct"
+    onclick="selectPalletOption(this)">
+    Να απομονωθεί η περιοχή
+    και η παλέτα να διορθωθεί ή να απομακρυνθεί
+    με κατάλληλο εξοπλισμό και ασφαλή διαδικασία.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitPalletScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetPalletScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="palletFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     STOP WORK
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Πότε πρέπει να σταματά η εργασία;
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">⛓️</span>
+      <h3>
+        Φθαρμένος Ιμάντας
+      </h3>
+      <p>
+        Όταν εντοπιστεί
+        εμφανής φθορά ή ζημιά
+        σε εξάρτημα ανύψωσης.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⚖️</span>
+      <h3>
+        Αστάθεια Φορτίου
+      </h3>
+      <p>
+        Όταν το φορτίο
+        γέρνει ή συμπεριφέρεται
+        μη προβλέψιμα.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👷</span>
+      <h3>
+        Είσοδος Ατόμου
+      </h3>
+      <p>
+        Όταν οποιοδήποτε άτομο
+        εισέρχεται στην επικίνδυνη περιοχή.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">❓</span>
+      <h3>
+        Άγνωστο Βάρος
+      </h3>
+      <p>
+        Όταν δεν είναι γνωστό
+        το βάρος ή η καταλληλότητα
+        του εξοπλισμού.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+      <h3>
+        Ασταθής Παλέτα
+      </h3>
+      <p>
+        Όταν υπάρχει κίνδυνος
+        πτώσης παλέτας
+        ή του περιεχομένου της.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔧</span>
+      <h3>
+        Βλάβη Εξοπλισμού
+      </h3>
+      <p>
+        Όταν εμφανίζεται
+        ασυνήθιστη λειτουργία,
+        θόρυβος ή τεχνική βλάβη.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Mini Quiz
+  </h2>
+
+  <form id="quizForm">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Ποιος μπορεί να βρίσκεται κάτω από αιωρούμενο φορτίο;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Ο χειριστής, εφόσον φορά κράνος.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        Κανείς.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Ένας εκπαιδευμένος εργαζόμενος για λίγα δευτερόλεπτα.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Τι πρέπει να γίνεται πριν από την πλήρη ανύψωση;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Το φορτίο ανυψώνεται απευθείας στο μέγιστο ύψος.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Πραγματοποιείται ελεγχόμενη δοκιμαστική ανύψωση
+        για επιβεβαίωση της σταθερότητας.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Αυξάνεται η ταχύτητα
+        για να περιοριστεί ο χρόνος ανύψωσης.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Τι πρέπει να γίνει με ασταθή παλέτα σε ράφι;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Να παραμείνει μέχρι το τέλος της βάρδιας.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Να σπρωχτεί χειροκίνητα από το έδαφος.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        Να ελεγχθεί η περιοχή
+        και η παλέτα να διορθωθεί
+        με κατάλληλη ασφαλή διαδικασία.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Πότε επιτρέπεται να συνεχιστεί ανύψωση με άγνωστο βάρος φορτίου;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Όταν το φορτίο φαίνεται ελαφρύ.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Όταν ο χειριστής έχει μεγάλη εμπειρία.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        Μόνο αφού επιβεβαιωθούν
+        το βάρος και η καταλληλότητα
+        του εξοπλισμού ανύψωσης.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Βασικά Σημεία
+  </h2>
+
+  <div class="takeaway">
+    <span>🏗️</span>
+
+    <div>
+      Κάθε ανύψωση πρέπει
+      να σχεδιάζεται πριν ξεκινήσει.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>⛓️</span>
+
+    <div>
+      Χρησιμοποιούμε μόνο
+      κατάλληλα και ελεγμένα
+      εξαρτήματα ανύψωσης.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🚧</span>
+
+    <div>
+      Κανένας εργαζόμενος
+      δεν πρέπει να βρίσκεται
+      κάτω από αιωρούμενο φορτίο.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>📦</span>
+
+    <div>
+      Οι παλέτες πρέπει
+      να είναι σταθερές,
+      σωστά τοποθετημένες
+      και εντός των ορίων των ραφιών.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛑</span>
+
+    <div>
+      Όταν υπάρχει αμφιβολία,
+      αστάθεια ή αλλαγή συνθηκών,
+      σταματάμε και επανεκτιμούμε.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 19
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   PHOTO HOTSPOTS
+   ===================================================== */
+
+let transferPointsFound = 0;
+const totalTransferPoints = 6;
+
+function findTransferPoint(button){
+
+  const score =
+    document.getElementById("transferScore");
+
+  const feedback =
+    document.getElementById("transferFeedback");
+
+  const instruction =
+    document.getElementById("transferInstruction");
+
+  if(!button.classList.contains("found")){
+
+    button.classList.add("found");
+
+    button.textContent = "✓";
+
+    transferPointsFound++;
+
+    score.textContent =
+      transferPointsFound;
+  }
+
+  feedback.style.display = "block";
+
+  feedback.className =
+    "feedback success";
+
+  feedback.innerHTML =
+    button.dataset.message;
+
+  if(transferPointsFound === totalTransferPoints){
+
+    instruction.textContent =
+      "Η δραστηριότητα ολοκληρώθηκε.";
+
+    feedback.innerHTML +=
+      "<br><br><strong>Εξαιρετικά!</strong> " +
+      "Εντόπισες και τα έξι κρίσιμα σημεία ελέγχου.";
+  }
+}
+
+function resetTransferActivity(){
+
+  transferPointsFound = 0;
+
+  document
+    .querySelectorAll(".hotspot")
+    .forEach(function(button){
+
+      button.classList.remove("found");
+
+      button.textContent =
+        button.dataset.original;
+
+    });
+
+  document.getElementById(
+    "transferScore"
+  ).textContent = "0";
+
+  document.getElementById(
+    "transferInstruction"
+  ).textContent =
+    "Επίλεξε και τους έξι δείκτες.";
+
+  const feedback =
+    document.getElementById(
+      "transferFeedback"
+    );
+
+  feedback.style.display = "none";
+
+  feedback.className =
+    "feedback";
+
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   LIFTING SCENARIO
+   ===================================================== */
+
+let selectedLiftingDecision = null;
+
+function selectLiftingOption(button){
+
+  document
+    .querySelectorAll(".lifting-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedLiftingDecision =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById(
+      "liftingFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitLiftingScenario(){
+
+  const feedback =
+    document.getElementById(
+      "liftingFeedback"
+    );
+
+  feedback.style.display = "block";
+
+  if(!selectedLiftingDecision){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedLiftingDecision === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Η μετακίνηση πρέπει να σταματήσει άμεσα. " +
+      "Η ανύψωση συνεχίζεται μόνο όταν η περιοχή κάτω και γύρω από το φορτίο είναι ελεύθερη.";
+
+  }else if(selectedLiftingDecision === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Η προειδοποίηση από μόνη της δεν είναι επαρκής. " +
+      "Η κίνηση του φορτίου πρέπει να σταματήσει μέχρι να απομακρυνθεί το άτομο.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Ακόμη και λίγα δευτερόλεπτα κάτω από αιωρούμενο φορτίο " +
+      "μπορούν να οδηγήσουν σε θανατηφόρο τραυματισμό.";
+  }
+}
+
+function resetLiftingScenario(){
+
+  selectedLiftingDecision = null;
+
+  document
+    .querySelectorAll(".lifting-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "liftingFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   PALLET SCENARIO
+   ===================================================== */
+
+let selectedPalletDecision = null;
+
+function selectPalletOption(button){
+
+  document
+    .querySelectorAll(".pallet-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedPalletDecision =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById(
+      "palletFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitPalletScenario(){
+
+  const feedback =
+    document.getElementById(
+      "palletFeedback"
+    );
+
+  feedback.style.display = "block";
+
+  if(!selectedPalletDecision){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedPalletDecision === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Μια ασταθής παλέτα μπορεί να πέσει χωρίς προειδοποίηση. " +
+      "Η περιοχή πρέπει να ελεγχθεί και η παλέτα να επανατοποθετηθεί " +
+      "με κατάλληλο εξοπλισμό και ασφαλή διαδικασία.";
+
+  }else if(selectedPalletDecision === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Η προειδοποιητική σήμανση από μόνη της δεν εξαλείφει " +
+      "τον κίνδυνο πτώσης της παλέτας.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Το ότι η παλέτα δεν έχει ακόμη πέσει " +
+      "δεν σημαίνει ότι είναι ασφαλής.";
+  }
+}
+
+function resetPalletScenario(){
+
+  selectedPalletDecision = null;
+
+  document
+    .querySelectorAll(".pallet-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "palletFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "Άριστα! Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Κατανοείς τις βασικές αρχές ασφαλούς ανύψωσης και αποθήκευσης.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Καλή προσπάθεια. Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Ξαναδές τη ζώνη αποκλεισμού, " +
+      "την πρόσδεση φορτίου και τη σταθερότητα των παλετών.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  document.getElementById(
+    "progressBar"
+  ).style.width = "0%";
+
+  document.getElementById(
+    "quizProgress"
+  ).setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  const result =
+    document.getElementById("quizResult");
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector('input[name="q1"]');
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

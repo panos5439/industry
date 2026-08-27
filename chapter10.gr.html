@@ -1,0 +1,2435 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ενότητα 10 | Χημικές Ουσίες & Ασφαλής Διαχείριση</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   INDUSTRIAL CHEMICAL PROCESS
+   ===================================================== */
+
+.process-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(210px,1fr));
+  gap:16px;
+
+  margin-top:20px;
+}
+
+.process-card{
+  position:relative;
+
+  padding:22px 18px 18px;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  background:#f8fafc;
+}
+
+.process-number{
+  width:38px;
+  height:38px;
+
+  display:grid;
+  place-items:center;
+
+  margin-bottom:12px;
+
+  border-radius:50%;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+}
+
+/* =====================================================
+   GHS GRID
+   ===================================================== */
+
+.ghs-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+
+  gap:18px;
+
+  margin-top:20px;
+}
+
+.ghs-item{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+
+  min-height:175px;
+
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  background:#fff;
+
+  box-shadow:
+    0 4px 12px rgba(15,23,42,.05);
+}
+
+.ghs-icon{
+  flex:0 0 82px;
+
+  width:82px;
+  height:82px;
+
+  display:grid;
+  place-items:center;
+
+  padding:4px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#fff;
+}
+
+.ghs-icon img{
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+}
+
+.ghs-content{
+  flex:1;
+  min-width:0;
+}
+
+.ghs-title{
+  margin:0 0 5px;
+
+  color:var(--primary-dark);
+
+  font-weight:bold;
+  font-size:1.05rem;
+}
+
+.ghs-sub{
+  margin:0 0 7px;
+
+  color:var(--muted);
+}
+
+.ghs-content ul{
+  margin:7px 0 0;
+  padding-left:20px;
+}
+
+/* =====================================================
+   INTERACTIVE RISK ACTIVITY
+   ===================================================== */
+
+.risk-options{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(240px,1fr));
+
+  gap:14px;
+
+  margin-top:20px;
+}
+
+.risk-choice{
+  width:100%;
+
+  min-height:160px;
+
+  padding:18px;
+
+  border:2px solid var(--border);
+  border-radius:14px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease,
+    box-shadow .2s ease;
+}
+
+.risk-choice:hover,
+.risk-choice:focus{
+  background:#dcecff;
+  color:var(--text);
+
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.risk-choice.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:3px solid var(--primary);
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.risk-letter{
+  width:38px;
+  height:38px;
+
+  display:grid;
+  place-items:center;
+
+  margin-bottom:10px;
+
+  border-radius:50%;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+}
+
+/* =====================================================
+   SCENARIO OPTIONS
+   ===================================================== */
+
+.scenario-option{
+  display:block;
+
+  width:100%;
+
+  margin:10px 0;
+  padding:14px 16px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* =====================================================
+   QUIZ PROGRESS
+   ===================================================== */
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .ghs-item{
+    flex-direction:column;
+  }
+
+  .ghs-icon{
+    width:72px;
+    height:72px;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 10: Χημικές Ουσίες & Ασφαλής Διαχείριση
+  </h1>
+
+  <p>
+    Οι χημικές ουσίες χρησιμοποιούνται
+    σε πολλές βιομηχανικές διεργασίες,
+    εργασίες συντήρησης,
+    καθαρισμού και παραγωγής.
+
+    Η ασφαλής χρήση ξεκινά
+    από τη σωστή αναγνώριση του προϊόντος
+    και του κινδύνου.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Στόχοι Μάθησης</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🧪</span>
+      Αναγνωρίζει βασικούς
+      χημικούς κινδύνους στον βιομηχανικό χώρο.
+    </div>
+
+    <div class="card">
+      <span class="icon">🏷️</span>
+      Κατανοεί τη σημασία
+      της ετικέτας και του SDS.
+    </div>
+
+    <div class="card">
+      <span class="icon">🦺</span>
+      Επιλέγει τα προβλεπόμενα
+      μέτρα προστασίας και ΜΑΠ.
+    </div>
+
+    <div class="card">
+      <span class="icon">🚨</span>
+      Αντιδρά σωστά
+      σε διαρροή, έκθεση ή άλλη χημική κατάσταση.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     10.1 INDUSTRIAL CHEMICALS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    10.1 Πού Συναντάμε Χημικές Ουσίες στη Βιομηχανία;
+  </h2>
+
+  <p>
+    Οι χημικές ουσίες μπορεί να χρησιμοποιούνται
+    σε πολλές διαφορετικές δραστηριότητες
+    μέσα σε μια βιομηχανική εγκατάσταση.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🧽</span>
+
+      <h3>Καθαρισμός & Απολίπανση</h3>
+
+      <p>
+        Καθαριστικά,
+        απολιπαντικά,
+        απολυμαντικά
+        και διαλύτες.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🛢️</span>
+
+      <h3>Λάδια & Λιπαντικά</h3>
+
+      <p>
+        Λιπαντικά μηχανών,
+        υδραυλικά υγρά
+        και βιομηχανικά έλαια.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🎨</span>
+
+      <h3>Βαφές & Διαλύτες</h3>
+
+      <p>
+        Χρώματα,
+        αραιωτικά,
+        κόλλες
+        και άλλα υλικά επικάλυψης.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🧯</span>
+
+      <h3>Αέρια & Φιάλες</h3>
+
+      <p>
+        Οξυγόνο,
+        άζωτο,
+        προπάνιο
+        και άλλα αέρια υπό πίεση.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🧪</span>
+
+      <h3>Οξέα & Αλκάλια</h3>
+
+      <p>
+        Διαβρωτικά προϊόντα
+        που χρησιμοποιούνται
+        σε καθαρισμό ή παραγωγικές διεργασίες.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔧</span>
+
+      <h3>Συντήρηση</h3>
+
+      <p>
+        Σπρέι,
+        καθαριστικά,
+        κόλλες,
+        λιπαντικά και ειδικά χημικά συντήρησης.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Βασικό μήνυμα:</strong>
+
+    Μια ουσία δεν θεωρείται ασφαλής
+    επειδή χρησιμοποιείται καθημερινά
+    ή επειδή βρίσκεται σε μικρή ποσότητα.
+
+    Πρώτα αναγνωρίζουμε το προϊόν
+    και διαβάζουμε τις πληροφορίες κινδύνου.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     10.2 RISKS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    10.2 Βασικοί Κίνδυνοι από Χημικές Ουσίες
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">👁️</span>
+
+      <h3>Επαφή με Μάτια ή Δέρμα</h3>
+
+      <p>
+        Μπορεί να προκαλέσει
+        ερεθισμό,
+        εγκαύματα
+        ή σοβαρή βλάβη.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🫁</span>
+
+      <h3>Εισπνοή</h3>
+
+      <p>
+        Ατμοί,
+        αέρια,
+        νέφη ή σκόνες
+        μπορεί να επηρεάσουν το αναπνευστικό.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔥</span>
+
+      <h3>Πυρκαγιά / Έκρηξη</h3>
+
+      <p>
+        Ορισμένες ουσίες
+        μπορεί να αναφλεγούν
+        από θερμότητα,
+        σπινθήρα ή φλόγα.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⚗️</span>
+
+      <h3>Ασύμβατες Ουσίες</h3>
+
+      <p>
+        Η ανάμειξη
+        μη συμβατών προϊόντων
+        μπορεί να προκαλέσει
+        επικίνδυνη αντίδραση.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🧴</span>
+
+      <h3>Λανθασμένη Μετάγγιση</h3>
+
+      <p>
+        Χημικό χωρίς σωστή ετικέτα
+        μπορεί να οδηγήσει
+        σε λάθος χρήση
+        ή σοβαρή έκθεση.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🌊</span>
+
+      <h3>Περιβαλλοντική Ρύπανση</h3>
+
+      <p>
+        Διαρροές ή ακατάλληλη διάθεση
+        μπορούν να επηρεάσουν
+        αποχετεύσεις,
+        έδαφος και υδάτινο περιβάλλον.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     10.3 BEFORE USING
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    10.3 Πριν Χρησιμοποιήσεις ένα Χημικό
+  </h2>
+
+  <div class="process-grid">
+
+    <div class="process-card">
+
+      <div class="process-number">1</div>
+
+      <h3>Αναγνώρισε το Προϊόν</h3>
+
+      <p>
+        Έλεγξε ότι γνωρίζεις
+        ακριβώς ποιο προϊόν χρησιμοποιείς
+        και για ποια εργασία.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">2</div>
+
+      <h3>Διάβασε την Ετικέτα</h3>
+
+      <p>
+        Δες τα εικονογράμματα,
+        τις προειδοποιήσεις
+        και τις βασικές οδηγίες.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">3</div>
+
+      <h3>Έλεγξε το SDS</h3>
+
+      <p>
+        Χρησιμοποίησε το Δελτίο Δεδομένων Ασφαλείας
+        για πληροφορίες σχετικά με κινδύνους,
+        προστασία,
+        αποθήκευση και έκτακτη ανάγκη.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">4</div>
+
+      <h3>Έλεγξε τα Μέτρα Προστασίας</h3>
+
+      <p>
+        Εξασφάλισε
+        ότι υπάρχουν τα κατάλληλα ΜΑΠ,
+        αερισμός
+        και ασφαλείς συνθήκες εργασίας.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Ποτέ μην χρησιμοποιείς άγνωστο προϊόν.</strong>
+
+    Αν ένα δοχείο δεν έχει ετικέτα
+    ή δεν μπορείς να επιβεβαιώσεις
+    τι περιέχει,
+    μην το χρησιμοποιήσεις.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     GHS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    10.4 Εικονογράμματα Χημικού Κινδύνου (GHS)
+  </h2>
+
+  <p>
+    Τα παρακάτω είναι τα ίδια εικονογράμματα
+    που χρησιμοποιούνται στο αρχικό εκπαιδευτικό υλικό.
+
+    Το εικονόγραμμα αποτελεί προειδοποίηση,
+    αλλά η πλήρης αξιολόγηση
+    πρέπει να βασίζεται στην ετικέτα
+    και στο SDS του συγκεκριμένου προϊόντος.
+  </p>
+
+  <div class="ghs-grid">
+
+    <!-- SKULL -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/5/58/GHS-pictogram-skull.svg"
+          alt="Εικονόγραμμα GHS νεκροκεφαλής"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Οξεία Τοξικότητα
+        </div>
+
+        <p class="ghs-sub">
+          Παραδείγματα:
+          τοξικά φυτοφάρμακα,
+          υδρόθειο,
+          ορισμένοι ισχυροί διαλύτες.
+        </p>
+
+        <ul>
+          <li>
+            Κίνδυνος σοβαρής δηλητηρίασης
+            από εισπνοή,
+            κατάποση ή επαφή.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- FLAMMABLE -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6d/GHS-pictogram-flamme.svg"
+          alt="Εικονόγραμμα GHS εύφλεκτης ουσίας"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Εύφλεκτο
+        </div>
+
+        <p class="ghs-sub">
+          Παραδείγματα:
+          αλκοόλες,
+          βενζίνη,
+          αεροζόλ,
+          διαλύτες.
+        </p>
+
+        <ul>
+          <li>
+            Μπορεί να αναφλεγεί
+            από θερμότητα,
+            φλόγα ή σπινθήρα.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- OXIDISING -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/e/e5/GHS-pictogram-rondflam.svg"
+          alt="Εικονόγραμμα GHS οξειδωτικής ουσίας"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Οξειδωτικό
+        </div>
+
+        <p class="ghs-sub">
+          Παραδείγματα:
+          υπεροξείδιο του υδρογόνου,
+          νιτρικά,
+          ορισμένα λευκαντικά.
+        </p>
+
+        <ul>
+          <li>
+            Μπορεί να ενισχύσει
+            την καύση
+            ή να προκαλέσει
+            έντονη αντίδραση.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- EXPLOSIVE -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://panos5439.github.io/sotaoffice/ghs01.jpeg"
+          alt="Εικονόγραμμα GHS εκρηκτικής ουσίας"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Εκρηκτικές Ουσίες
+        </div>
+
+        <p class="ghs-sub">
+          Παραδείγματα:
+          εκρηκτικά μείγματα,
+          πυροτεχνικά υλικά,
+          ασταθή οργανικά υπεροξείδια.
+        </p>
+
+        <ul>
+          <li>
+            Κίνδυνος έκρηξης
+            από θερμότητα,
+            κρούση,
+            τριβή ή φλόγα.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- CORROSIVE -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/a/a1/GHS-pictogram-acid.svg"
+          alt="Εικονόγραμμα GHS διαβρωτικής ουσίας"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Διαβρωτικό
+        </div>
+
+        <p class="ghs-sub">
+          Παραδείγματα:
+          υδροχλωρικό οξύ,
+          θειικό οξύ,
+          ισχυρά καθαριστικά.
+        </p>
+
+        <ul>
+          <li>
+            Μπορεί να προκαλέσει
+            σοβαρά εγκαύματα,
+            βλάβη στα μάτια
+            και διάβρωση μετάλλων.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- EXCLAMATION -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/c/c3/GHS-pictogram-exclam.svg"
+          alt="Εικονόγραμμα GHS θαυμαστικού"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Ερεθιστικό / Επιβλαβές
+        </div>
+
+        <p class="ghs-sub">
+          Παραδείγματα:
+          απορρυπαντικά,
+          κόλλες,
+          ήπια καθαριστικά.
+        </p>
+
+        <ul>
+          <li>
+            Μπορεί να προκαλέσει
+            ερεθισμό δέρματος,
+            ματιών ή αναπνευστικού.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- HEALTH -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://panos5439.github.io/sotaoffice/ghs08.jpeg"
+          alt="Εικονόγραμμα GHS σοβαρού κινδύνου για την υγεία"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Σοβαρές Επιπτώσεις στην Υγεία
+        </div>
+
+        <p class="ghs-sub">
+          Παραδείγματα:
+          καρκινογόνες
+          ή μεταλλαξιογόνες ουσίες.
+        </p>
+
+        <ul>
+          <li>
+            Μπορεί να συνδέονται
+            με σοβαρές μακροχρόνιες
+            επιπτώσεις στην υγεία.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- ENVIRONMENT -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/b/b9/GHS-pictogram-pollu.svg"
+          alt="Εικονόγραμμα GHS περιβαλλοντικού κινδύνου"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Επικίνδυνο για το Περιβάλλον
+        </div>
+
+        <p class="ghs-sub">
+          Παραδείγματα:
+          φυτοφάρμακα,
+          λάδια
+          και βιομηχανικά χημικά.
+        </p>
+
+        <ul>
+          <li>
+            Μπορεί να προκαλέσει
+            ρύπανση νερού
+            και βλάβη σε οργανισμούς.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- GAS -->
+
+    <div class="ghs-item">
+
+      <div class="ghs-icon">
+
+        <img
+          src="https://panos5439.github.io/sotaoffice/ghs04.png"
+          alt="Εικονόγραμμα GHS αερίου υπό πίεση"
+          loading="lazy">
+
+      </div>
+
+      <div class="ghs-content">
+
+        <div class="ghs-title">
+          Αέριο υπό Πίεση
+        </div>
+
+        <p class="ghs-sub">
+          Παραδείγματα:
+          οξυγόνο,
+          προπάνιο
+          και πεπιεσμένο άζωτο.
+        </p>
+
+        <ul>
+          <li>
+            Κίνδυνος από υψηλή πίεση,
+            θέρμανση
+            ή βίαιη εκτόνωση.
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Μην αφαιρείς ποτέ τις ετικέτες κινδύνου.</strong>
+
+    Τα εικονογράμματα,
+    οι δηλώσεις κινδύνου
+    και οι οδηγίες της ετικέτας
+    είναι βασικές πληροφορίες ασφαλείας.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     10.5 STORAGE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    10.5 Ασφαλής Αποθήκευση και Μετάγγιση
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🏷️</span>
+
+      <h3>Διατήρησε την Ετικέτα</h3>
+
+      <p>
+        Το προϊόν πρέπει
+        να παραμένει αναγνωρίσιμο
+        σε όλη τη διάρκεια χρήσης του.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🧴</span>
+
+      <h3>Κατάλληλο Δοχείο</h3>
+
+      <p>
+        Μη μεταγγίζεις χημικά
+        σε μπουκάλια νερού,
+        αναψυκτικού
+        ή άλλα άσχετα δοχεία.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⚗️</span>
+
+      <h3>Χώρισε Ασύμβατα Υλικά</h3>
+
+      <p>
+        Προϊόντα που μπορεί
+        να αντιδράσουν μεταξύ τους
+        πρέπει να αποθηκεύονται
+        σύμφωνα με τις απαιτήσεις τους.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🌡️</span>
+
+      <h3>Κατάλληλες Συνθήκες</h3>
+
+      <p>
+        Ακολούθησε τις οδηγίες
+        για θερμοκρασία,
+        αερισμό
+        και πηγές ανάφλεξης.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Πρακτικός κανόνας:</strong>
+
+    Αν δεν μπορείς να αναγνωρίσεις
+    με βεβαιότητα το περιεχόμενο ενός δοχείου,
+    μην το χρησιμοποιήσεις.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE RISK ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική Δραστηριότητα:
+    Ποια Πρακτική είναι πιο Επικίνδυνη;
+  </h2>
+
+  <p>
+    Επίλεξε το σενάριο
+    που παρουσιάζει
+    τον σοβαρότερο άμεσο κίνδυνο.
+  </p>
+
+  <div class="risk-options">
+
+    <button
+      type="button"
+      class="risk-choice"
+      data-type="safe"
+      onclick="selectRisk(this)">
+
+      <span class="risk-letter">A</span>
+
+      <strong>
+        Σωστά επισημασμένο καθαριστικό
+      </strong>
+
+      <br><br>
+
+      Χρησιμοποιείται
+      σύμφωνα με την ετικέτα,
+      με τον προβλεπόμενο αερισμό
+      και τα απαιτούμενα ΜΑΠ.
+
+    </button>
+
+    <button
+      type="button"
+      class="risk-choice"
+      data-type="medium"
+      onclick="selectRisk(this)">
+
+      <span class="risk-letter">B</span>
+
+      <strong>
+        Δύο διαφορετικά προϊόντα
+      </strong>
+
+      <br><br>
+
+      Χρησιμοποιούνται διαδοχικά
+      χωρίς προηγουμένως
+      να διαβαστούν οι οδηγίες
+      ή οι πληροφορίες συμβατότητας.
+
+    </button>
+
+    <button
+      type="button"
+      class="risk-choice"
+      data-type="danger"
+      onclick="selectRisk(this)">
+
+      <span class="risk-letter">C</span>
+
+      <strong>
+        Χημικό σε μπουκάλι νερού
+      </strong>
+
+      <br><br>
+
+      Ένα χημικό προϊόν
+      έχει μεταγγιστεί
+      σε άδειο μπουκάλι νερού
+      χωρίς ετικέτα.
+
+    </button>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitRisk()">
+    Έλεγχος Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetRisk()">
+    Επανεκκίνηση Δραστηριότητας
+  </button>
+
+  <div
+    id="riskFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SPILL
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    10.6 Σε Περίπτωση Διαρροής ή Έκθεσης
+  </h2>
+
+  <div class="process-grid">
+
+    <div class="process-card">
+
+      <div class="process-number">1</div>
+
+      <h3>Σταμάτησε και Αξιολόγησε</h3>
+
+      <p>
+        Μην πλησιάζεις
+        ή καθαρίζεις μια άγνωστη διαρροή
+        χωρίς να γνωρίζεις τον κίνδυνο.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">2</div>
+
+      <h3>Προειδοποίησε</h3>
+
+      <p>
+        Προστάτευσε τους γύρω εργαζομένους
+        και περιόρισε την πρόσβαση
+        όπου αυτό μπορεί να γίνει με ασφάλεια.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">3</div>
+
+      <h3>Ακολούθησε το SDS</h3>
+
+      <p>
+        Χρησιμοποίησε τις οδηγίες
+        για διαρροή,
+        έκθεση,
+        ΜΑΠ
+        και πρώτες ενέργειες.
+      </p>
+
+    </div>
+
+    <div class="process-card">
+
+      <div class="process-number">4</div>
+
+      <h3>Ενημέρωσε τον Αρμόδιο</h3>
+
+      <p>
+        Εφάρμοσε τη διαδικασία
+        έκτακτης ανάγκης
+        ή αναφοράς
+        της εγκατάστασης.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Σημαντικό:</strong>
+
+    Δεν αντιμετωπίζουμε όλες τις διαρροές
+    με τον ίδιο τρόπο.
+
+    Η κατάλληλη ενέργεια εξαρτάται
+    από το συγκεκριμένο προϊόν,
+    τον κίνδυνο,
+    την ποσότητα
+    και τις οδηγίες του SDS
+    και της εγκατάστασης.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>Σενάριο Απόφασης</h2>
+
+  <p>
+    Κατά τη συντήρηση μιας γραμμής παραγωγής
+    βρίσκεις ένα πλαστικό δοχείο
+    που περιέχει διαφανές υγρό.
+
+    Δεν υπάρχει ετικέτα
+    και κανείς στην περιοχή
+    δεν γνωρίζει τι περιέχει.
+  </p>
+
+  <p>
+    <strong>Τι κάνεις;</strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Ανοίγω το δοχείο
+    και μυρίζω προσεκτικά το περιεχόμενο
+    για να καταλάβω τι είναι.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Το μεταφέρω σε άλλο σημείο
+    ώστε να μην εμποδίζει
+    και συνεχίζω την εργασία.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Δεν το χρησιμοποιώ
+    και δεν το ανοίγω.
+
+    Σταματώ την ενέργεια
+    και ενημερώνω τον αρμόδιο
+    ώστε να αναγνωριστεί
+    και να αντιμετωπιστεί σύμφωνα
+    με τη διαδικασία του χώρου.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <!-- Q1 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Ποιο είναι βασικό βήμα πριν χρησιμοποιήσεις ένα χημικό προϊόν;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Διαβάζω την ετικέτα
+        και τις διαθέσιμες οδηγίες ασφαλείας.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Το δοκιμάζω πρώτα
+        σε μικρή ποσότητα.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Βασίζομαι μόνο
+        στο χρώμα και την οσμή.
+      </label>
+
+    </div>
+
+    <!-- Q2 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Είναι αποδεκτό να μεταγγίσεις χημικό σε μπουκάλι νερού χωρίς ετικέτα;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Ναι,
+        αν πρόκειται να χρησιμοποιηθεί άμεσα.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Όχι.
+        Δημιουργεί σοβαρό κίνδυνο
+        λανθασμένης αναγνώρισης και έκθεσης.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Ναι,
+        αν το γνωρίζουν οι συνάδελφοι.
+      </label>
+
+    </div>
+
+    <!-- Q3 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Τι πληροφορίες μπορεί να βρεις στο SDS;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Πληροφορίες για κινδύνους,
+        προστασία,
+        αποθήκευση
+        και ενέργειες έκτακτης ανάγκης.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Μόνο την εμπορική τιμή του προϊόντος.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Μόνο το χρώμα του προϊόντος.
+      </label>
+
+    </div>
+
+    <!-- Q4 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Τι κάνουμε με ασύμβατα χημικά προϊόντα;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Ακολουθούμε τις απαιτήσεις
+        αποθήκευσης και συμβατότητας
+        του προϊόντος.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Τα αποθηκεύουμε μαζί
+        ώστε να βρίσκονται εύκολα.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Τα αναμειγνύουμε
+        για να μειώσουμε τον αριθμό των δοχείων.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Βασικά Σημεία</h2>
+
+  <div class="takeaway">
+
+    <span>🏷️</span>
+
+    <div>
+      Αναγνώρισε το προϊόν
+      και διάβασε την ετικέτα
+      πριν το χρησιμοποιήσεις.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>📄</span>
+
+    <div>
+      Το SDS παρέχει
+      κρίσιμες πληροφορίες
+      για τον κίνδυνο
+      και τα μέτρα προστασίας.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🧴</span>
+
+    <div>
+      Ποτέ χημικά
+      σε μπουκάλια νερού
+      ή άλλα μη κατάλληλα,
+      μη επισημασμένα δοχεία.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>⚗️</span>
+
+    <div>
+      Μην αναμειγνύεις
+      ή αποθηκεύεις ασύμβατα προϊόντα
+      χωρίς να γνωρίζεις τις απαιτήσεις τους.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🚨</span>
+
+    <div>
+      Σε διαρροή ή έκθεση,
+      μην αυτοσχεδιάζεις:
+      ακολούθησε το SDS
+      και τη διαδικασία της εγκατάστασης.
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 10
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   RISK ACTIVITY
+   ===================================================== */
+
+let selectedRisk = null;
+
+function selectRisk(button){
+
+  document
+    .querySelectorAll(".risk-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedRisk =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("riskFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitRisk(){
+
+  const feedback =
+    document.getElementById("riskFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedRisk){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε ένα σενάριο πριν από τον έλεγχο.";
+
+    return;
+  }
+
+  if(selectedRisk === "danger"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Η μετάγγιση χημικού σε μπουκάλι νερού χωρίς ετικέτα δημιουργεί σοβαρό κίνδυνο λανθασμένης αναγνώρισης, χρήσης ή κατάποσης.";
+
+  }else if(selectedRisk === "medium"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "<strong>Υπάρχει κίνδυνος, αλλά δεν είναι η πιο επικίνδυνη επιλογή.</strong> " +
+      "Η χρήση διαφορετικών προϊόντων χωρίς ανάγνωση οδηγιών μπορεί να οδηγήσει σε επικίνδυνη ασυμβατότητα.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Όχι.</strong> " +
+      "Το Σενάριο Α περιγράφει ελεγχόμενη χρήση με ετικέτα, αερισμό και προβλεπόμενα μέτρα προστασίας.";
+  }
+}
+
+function resetRisk(){
+
+  selectedRisk = null;
+
+  document
+    .querySelectorAll(".risk-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("riskFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Ένα άγνωστο και μη επισημασμένο χημικό δεν πρέπει να χρησιμοποιείται ή να ανοίγεται αυθαίρετα. " +
+      "Πρέπει να αναγνωριστεί και να αντιμετωπιστεί σύμφωνα με τη διαδικασία της εγκατάστασης.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "<strong>Δεν είναι ασφαλές.</strong> " +
+      "Η μετακίνηση ενός άγνωστου δοχείου χωρίς αναγνώριση μπορεί να δημιουργήσει πρόσθετη έκθεση ή διαρροή.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Δεν χρησιμοποιούμε την όσφρηση για να αναγνωρίσουμε άγνωστο χημικό. " +
+      "Η εισπνοή μπορεί να αποτελέσει οδό έκθεσης.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Άριστα!</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Κατανοείς τις βασικές αρχές ασφαλούς διαχείρισης χημικών.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Καλή προσπάθεια.</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Ξαναδές τις ετικέτες, το SDS, τις μεταγγίσεις και την αποθήκευση ασύμβατων χημικών.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score + "/" + total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Ενότητα 17 | Ασφάλεια Εργολάβων</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:white;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  color:var(--primary);
+  margin-top:0;
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  background:white;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  font-size:2rem;
+  display:block;
+  margin-bottom:10px;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  padding:18px;
+  border-radius:12px;
+  margin-top:16px;
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.step-card{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+/* =====================================================
+   TAGS
+   ===================================================== */
+
+.tag{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:.85rem;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.tag-danger{
+  background:#ffe2e2;
+  color:#a31515;
+}
+
+.tag-warning{
+  background:#fff1b8;
+  color:#795800;
+}
+
+.tag-info{
+  background:#dcecff;
+  color:#123c69;
+}
+
+/* =====================================================
+   CHECKLIST
+   ===================================================== */
+
+.checklist{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.checklist li{
+  position:relative;
+  padding:10px 0 10px 34px;
+  border-bottom:1px solid #edf1f5;
+}
+
+.checklist li:last-child{
+  border-bottom:none;
+}
+
+.checklist li::before{
+  content:"✓";
+  position:absolute;
+  left:0;
+  top:10px;
+  width:23px;
+  height:23px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--success);
+  color:white;
+  font-size:.85rem;
+  font-weight:bold;
+}
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.table-wrapper{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:760px;
+}
+
+th,
+td{
+  padding:14px;
+  border:1px solid var(--border);
+  text-align:left;
+  vertical-align:top;
+}
+
+th{
+  background:var(--primary);
+  color:white;
+}
+
+tbody tr:nth-child(even){
+  background:#f8fafc;
+}
+
+/* =====================================================
+   SAFETY IMAGE
+   ===================================================== */
+
+.safety-image-container{
+  position:relative;
+  width:100%;
+  margin-top:18px;
+  margin-bottom:16px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:#eef4fb;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
+}
+
+.safety-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   HOTSPOTS
+   ===================================================== */
+
+.hotspot{
+  position:absolute;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  border:4px solid white;
+  background:var(--accent);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:1.1rem;
+  font-weight:bold;
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.35),
+    0 0 0 2px rgba(214,40,40,.2);
+  z-index:10;
+
+  transition:
+    transform .2s ease,
+    background-color .2s ease;
+}
+
+.hotspot:hover,
+.hotspot:focus{
+  transform:scale(1.08);
+  outline:4px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.hotspot.found{
+  background:var(--success);
+}
+
+/*
+  1 = Equipment isolation
+  2 = Contractor competence
+  3 = Ladder / work at height
+  4 = Work authorisation
+  5 = Exclusion zone
+*/
+
+.hs-machine{
+  left:22%;
+  top:61%;
+}
+
+.hs-contractor{
+  left:48%;
+  top:50%;
+}
+
+.hs-ladder{
+  left:74%;
+  top:29%;
+}
+
+.hs-permit{
+  right:9%;
+  top:31%;
+}
+
+.hs-barrier{
+  right:15%;
+  bottom:14%;
+}
+
+.activity-status{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+  margin-top:16px;
+  padding:14px 16px;
+  border-radius:12px;
+  background:#eef4fb;
+}
+
+/* =====================================================
+   OPTION BUTTONS
+   ===================================================== */
+
+.option-button{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#eef4fb;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:15px 17px;
+  border-radius:12px;
+  margin:10px 0;
+  font-weight:500;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.option-button:hover,
+.option-button:focus{
+  background:#dcecff;
+  color:#1f2933;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.6);
+  outline-offset:2px;
+}
+
+.option-button.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.option-button.selected:hover,
+.option-button.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+  border-color:var(--primary);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  margin-top:12px;
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:10px;
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  background:#e8eef5;
+  border-radius:999px;
+  height:18px;
+  overflow:hidden;
+  margin-top:18px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+  transition:width .4s ease;
+}
+
+.takeaway{
+  font-size:1.15rem;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 20px;
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .hotspot{
+    width:44px;
+    height:44px;
+    font-size:.95rem;
+  }
+
+  .hs-machine{
+    left:20%;
+    top:60%;
+  }
+
+  .hs-contractor{
+    left:46%;
+    top:49%;
+  }
+
+  .hs-ladder{
+    left:72%;
+    top:27%;
+  }
+
+  .hs-permit{
+    right:6%;
+    top:30%;
+  }
+
+  .hs-barrier{
+    right:12%;
+    bottom:12%;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 17: Ασφάλεια Εργολάβων
+  </h1>
+
+  <p>
+    Η ασφαλής διαχείριση εργολάβων απαιτεί σαφή επικοινωνία,
+    κατάλληλο σχεδιασμό, συντονισμό, επαρκή επίβλεψη
+    και συνεχή έλεγχο των πραγματικών συνθηκών εργασίας.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Στόχοι μάθησης
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">👷</span>
+      <h3>Κατανόηση της ασφάλειας εργολάβων</h3>
+      <p>
+        Κατανόηση του γιατί οι εργολαβικές εργασίες
+        χρειάζονται σχεδιασμό, επικοινωνία και επίβλεψη.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⚠️</span>
+      <h3>Αναγνώριση κινδύνων</h3>
+      <p>
+        Αναγνώριση κινδύνων που προκύπτουν
+        από άγνωστο περιβάλλον,
+        παράλληλες εργασίες και αλλαγές συνθηκών.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🤝</span>
+      <h3>Κοινές αρμοδιότητες</h3>
+      <p>
+        Κατανόηση των ευθυνών
+        της επιχείρησης υποδοχής και του εργολάβου.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">✅</span>
+      <h3>Ασφαλής διαδικασία</h3>
+      <p>
+        Εφαρμογή της σωστής διαδικασίας
+        από την επιλογή έως την ασφαλή ολοκλήρωση.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     WHY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Γιατί είναι σημαντική η Ασφάλεια Εργολάβων;
+  </h2>
+
+  <p>
+    Οι εργολάβοι εκτελούν συχνά εξειδικευμένες,
+    προσωρινές ή υψηλού κινδύνου εργασίες.
+    Μπορεί να βρίσκονται σε άγνωστους χώρους,
+    κοντά σε εξοπλισμό που βρίσκεται σε λειτουργία
+    ή σε άλλες ταυτόχρονες δραστηριότητες.
+  </p>
+
+  <div class="danger">
+
+    <strong>
+      Πρώτα το γιατί:
+    </strong>
+
+    Πολλά περιστατικά προκύπτουν όταν
+    οι κίνδυνοι, οι αρμοδιότητες,
+    τα όρια της εργασίας ή οι αλλαγές
+    δεν επικοινωνούνται με σαφήνεια.
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>
+      Σημαντικό:
+    </strong>
+
+    Η ανάθεση μιας εργασίας σε εργολάβο
+    δεν καταργεί την ανάγκη διαχείρισης της ασφάλειας.
+    Η επιχείρηση υποδοχής και ο εργολάβος
+    πρέπει να συνεργάζονται σε όλη τη διάρκεια της εργασίας.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     CONTRACTORS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Ποιοι μπορεί να θεωρούνται Εργολάβοι;
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔧</span>
+      <h3>Συντήρηση</h3>
+      <p>
+        Μηχανολογικές, ηλεκτρολογικές,
+        επισκευαστικές και τεχνικές εργασίες.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🏗️</span>
+      <h3>Κατασκευές</h3>
+      <p>
+        Κατασκευές, εγκαταστάσεις,
+        εκσκαφές, κατεδαφίσεις και δομικές παρεμβάσεις.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧹</span>
+      <h3>Υπηρεσίες</h3>
+      <p>
+        Καθαρισμός, φύλαξη,
+        διαχείριση αποβλήτων και άλλες υπηρεσίες.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚚</span>
+      <h3>Μεταφορές</h3>
+      <p>
+        Οδηγοί, logistics,
+        μεταφορές, φορτώσεις και παραδόσεις.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Συνηθισμένοι Κίνδυνοι Εργολαβικών Εργασιών
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🧭</span>
+      <span class="tag tag-warning">Άγνωστο Περιβάλλον</span>
+      <h3>Έλλειψη Εξοικείωσης</h3>
+      <p>
+        Οι εργολάβοι μπορεί να μη γνωρίζουν
+        τους τοπικούς κινδύνους,
+        τις διαδρομές και τις περιοχές πρόσβασης.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔄</span>
+      <span class="tag tag-danger">Αλληλεπίδραση</span>
+      <h3>Ταυτόχρονες Εργασίες</h3>
+      <p>
+        Η εργασία μπορεί να αλληλεπιδρά
+        με παραγωγή, συντήρηση,
+        κυκλοφορία ή άλλα συνεργεία.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔥</span>
+      <span class="tag tag-danger">Υψηλός Κίνδυνος</span>
+      <h3>Εργασίες Υψηλού Κινδύνου</h3>
+      <p>
+        Θερμές εργασίες,
+        ηλεκτρικά, ύψος,
+        περιορισμένοι χώροι και ανυψώσεις.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🗣️</span>
+      <span class="tag tag-warning">Επικοινωνία</span>
+      <h3>Εμπόδια Επικοινωνίας</h3>
+      <p>
+        Γλωσσικές διαφορές,
+        ασαφείς οδηγίες
+        ή λανθασμένες υποθέσεις.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧰</span>
+      <span class="tag tag-info">Εξοπλισμός</span>
+      <h3>Ακατάλληλος Εξοπλισμός</h3>
+      <p>
+        Φθαρμένα, μη ελεγμένα
+        ή ακατάλληλα εργαλεία
+        μπορεί να εισαχθούν στον χώρο.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📋</span>
+      <span class="tag tag-warning">Αντικείμενο</span>
+      <h3>Μη Ελεγχόμενες Αλλαγές</h3>
+      <p>
+        Πρόσθετη εργασία χωρίς
+        νέα αξιολόγηση κινδύνου
+        ή επίσημη έγκριση.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     RESPONSIBILITIES
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Κοινές Αρμοδιότητες
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🏭</span>
+      <h3>Επιχείρηση Υποδοχής</h3>
+      <p>
+        Ενημερώνει για τους κινδύνους,
+        συντονίζει τις δραστηριότητες
+        και ελέγχει ότι εφαρμόζονται τα μέτρα.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧑‍💼</span>
+      <h3>Διοίκηση Εργολάβου</h3>
+      <p>
+        Παρέχει επαρκές προσωπικό,
+        κατάλληλο εξοπλισμό,
+        εκτιμήσεις κινδύνου και επίβλεψη.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👷</span>
+      <h3>Επιβλέπων Εργολάβου</h3>
+      <p>
+        Ενημερώνει την ομάδα,
+        παρακολουθεί τη συμμόρφωση
+        και διακόπτει μη ασφαλή εργασία.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👥</span>
+      <h3>Εργαζόμενοι Εργολάβου</h3>
+      <p>
+        Ακολουθούν τους κανόνες,
+        τις άδειες, τα μέτρα
+        και αναφέρουν κινδύνους και αλλαγές.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PROCESS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδικασία Διαχείρισης Ασφάλειας Εργολάβων
+  </h2>
+
+  <div class="grid">
+
+    <div class="card step-card">
+      <h3>1. Καθορισμός εργασίας</h3>
+      <p>
+        Σαφές αντικείμενο,
+        τοποθεσία, διάρκεια και απαιτήσεις.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>2. Επιλογή εργολάβου</h3>
+      <p>
+        Έλεγχος εμπειρίας,
+        επάρκειας, πόρων και επίδοσης ασφάλειας.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>3. Εκτίμηση κινδύνων</h3>
+      <p>
+        Αναγνώριση κινδύνων
+        και αλληλεπιδράσεων με τον χώρο.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>4. Συμφωνία μέτρων</h3>
+      <p>
+        Άδειες, απομονώσεις,
+        εμπόδια, ΜΑΠ και διαδικασίες.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>5. Εισαγωγική ενημέρωση</h3>
+      <p>
+        Τοπικοί κανόνες,
+        κίνδυνοι και έκτακτη ανάγκη.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>6. Έγκριση εργασίας</h3>
+      <p>
+        Έλεγχος εγγράφων,
+        αδειών και προϋποθέσεων.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>7. Παρακολούθηση</h3>
+      <p>
+        Συνεχής έλεγχος
+        της πραγματικής εργασίας και των αλλαγών.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>8. Ολοκλήρωση</h3>
+      <p>
+        Ασφαλής παράδοση,
+        αποκατάσταση και ανασκόπηση.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     CONTRACTOR INFORMATION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Πληροφορίες που χρειάζεται ο Εργολάβος
+  </h2>
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Πληροφορία</th>
+          <th>Τι πρέπει να περιλαμβάνει</th>
+          <th>Γιατί είναι σημαντική</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>Αντικείμενο εργασίας</td>
+          <td>Εργασία, τοποθεσία, εξοπλισμός και όρια</td>
+          <td>Αποτρέπει μη εγκεκριμένη εργασία</td>
+        </tr>
+
+        <tr>
+          <td>Κίνδυνοι χώρου</td>
+          <td>Κυκλοφορία, χημικά, ενέργεια και διεργασίες</td>
+          <td>Βοηθά στην κατανόηση των τοπικών κινδύνων</td>
+        </tr>
+
+        <tr>
+          <td>Έκτακτη ανάγκη</td>
+          <td>Συναγερμοί, έξοδοι και σημεία συγκέντρωσης</td>
+          <td>Υποστηρίζει ασφαλή αντίδραση</td>
+        </tr>
+
+        <tr>
+          <td>Άδειες εργασίας</td>
+          <td>Hot Work, Confined Space, Electrical κ.λπ.</td>
+          <td>Ελέγχει τις εργασίες υψηλού κινδύνου</td>
+        </tr>
+
+        <tr>
+          <td>Κανόνες χώρου</td>
+          <td>ΜΑΠ, πρόσβαση, κυκλοφορία και συμπεριφορά</td>
+          <td>Δημιουργεί κοινό πλαίσιο ασφαλούς εργασίας</td>
+        </tr>
+
+        <tr>
+          <td>Συντονισμός</td>
+          <td>Επαφές, συναντήσεις και παράλληλες εργασίες</td>
+          <td>Αποτρέπει συγκρούσεις δραστηριοτήτων</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INDUCTION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Εισαγωγική Εκπαίδευση Εργολάβου
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <h3>Πληροφορίες Χώρου</h3>
+
+      <ul class="checklist">
+        <li>Κίνδυνοι και περιοχές περιορισμένης πρόσβασης.</li>
+        <li>Συναγερμοί και οδοί εκκένωσης.</li>
+        <li>Πρώτες βοήθειες και επαφές ανάγκης.</li>
+        <li>Κυκλοφοριακές διαδρομές.</li>
+        <li>Απαιτούμενα ΜΑΠ.</li>
+        <li>Αναφορά κινδύνων και περιστατικών.</li>
+      </ul>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Πληροφορίες Εργασίας</h3>
+
+      <ul class="checklist">
+        <li>Εγκεκριμένο αντικείμενο και όρια.</li>
+        <li>Εκτίμηση κινδύνου.</li>
+        <li>Ασφαλής μέθοδος εργασίας.</li>
+        <li>Άδεια Εργασίας.</li>
+        <li>LOTO και απομονώσεις.</li>
+        <li>Ενέργειες όταν αλλάζουν οι συνθήκες.</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>
+      Σημαντικό:
+    </strong>
+
+    Η εισαγωγική ενημέρωση δεν αντικαθιστά
+    την ειδική εκπαίδευση,
+    την εκτίμηση κινδύνου,
+    την επίβλεψη ή την Άδεια Εργασίας.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PRE-WORK
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Πριν από την Έναρξη της Εργασίας
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <h3>Έλεγχος Εγγράφων</h3>
+
+      <ul class="checklist">
+        <li>Το αντικείμενο είναι σαφές.</li>
+        <li>Η εκτίμηση κινδύνου έχει ελεγχθεί.</li>
+        <li>Η μέθοδος εργασίας έχει εγκριθεί.</li>
+        <li>Οι απαιτούμενες άδειες είναι σε ισχύ.</li>
+        <li>Η επάρκεια έχει επαληθευτεί.</li>
+        <li>Η έκτακτη ανάγκη έχει οργανωθεί.</li>
+      </ul>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Έλεγχος Χώρου</h3>
+
+      <ul class="checklist">
+        <li>Έχει αναγνωριστεί ο σωστός εξοπλισμός.</li>
+        <li>Οι απομονώσεις έχουν εφαρμοστεί.</li>
+        <li>Υπάρχουν εμπόδια και σήμανση.</li>
+        <li>Τα εργαλεία είναι κατάλληλα.</li>
+        <li>Οι οδοί διαφυγής είναι ελεύθερες.</li>
+        <li>Οι παράλληλες εργασίες έχουν συντονιστεί.</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>
+      Μην ξεκινάς την εργασία
+    </strong>
+
+    όταν οι άδειες,
+    οι απομονώσεις,
+    η επάρκεια,
+    τα μέτρα ή οι αρμοδιότητες
+    είναι ασαφή ή ελλιπή.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PHOTO HOTSPOT ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική Δραστηριότητα: Επιθεώρηση Εργολαβικού Χώρου
+  </h2>
+
+  <p>
+    Εντόπισε τα πέντε κρίσιμα σημεία ασφάλειας
+    στη φωτογραφία.
+  </p>
+
+  <div class="safety-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/contractor.png"
+      alt="Βιομηχανικός χώρος εργολαβικής εργασίας με εξοπλισμό σε απομόνωση, εργολάβους, σκάλα, Work Authorisation και ζώνη αποκλεισμού"
+      class="safety-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+    <button
+      type="button"
+      class="hotspot hs-machine"
+      data-original="1"
+      data-message="<strong>Απομόνωση εξοπλισμού:</strong> Ο σωστός εξοπλισμός πρέπει να έχει αναγνωριστεί και οι απαιτούμενες απομονώσεις να έχουν εφαρμοστεί και επαληθευτεί."
+      onclick="findContractorHazard(this)">
+      1
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-contractor"
+      data-original="2"
+      data-message="<strong>Επάρκεια εργολάβου:</strong> Ο εργαζόμενος πρέπει να είναι κατάλληλα εκπαιδευμένος, εξουσιοδοτημένος και ενημερωμένος για τη συγκεκριμένη εργασία."
+      onclick="findContractorHazard(this)">
+      2
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-ladder"
+      data-original="3"
+      data-message="<strong>Εργασία σε ύψος:</strong> Η σκάλα ή άλλο μέσο πρόσβασης πρέπει να είναι κατάλληλο, επιθεωρημένο και να χρησιμοποιείται σύμφωνα με την εγκεκριμένη μέθοδο εργασίας."
+      onclick="findContractorHazard(this)">
+      3
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-permit"
+      data-original="4"
+      data-message="<strong>Work Authorisation:</strong> Οι απαιτούμενες άδειες, οι εκτιμήσεις κινδύνου και η μέθοδος εργασίας πρέπει να είναι πλήρεις, έγκυρες και κατανοητές πριν από την έναρξη."
+      onclick="findContractorHazard(this)">
+      4
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-barrier"
+      data-original="5"
+      data-message="<strong>Ζώνη αποκλεισμού:</strong> Τα εμπόδια και η σήμανση πρέπει να αποτρέπουν μη εξουσιοδοτημένη πρόσβαση και να προστατεύουν εργαζομένους και άλλους χρήστες του χώρου."
+      onclick="findContractorHazard(this)">
+      5
+    </button>
+
+  </div>
+
+  <div class="activity-status">
+
+    <strong>
+      Σημεία που εντοπίστηκαν:
+      <span id="hazardScore">0</span>/5
+    </strong>
+
+    <span id="activityInstruction">
+      Επίλεξε και τους πέντε δείκτες.
+    </span>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetContractorActivity()">
+    Επανεκκίνηση δραστηριότητας
+  </button>
+
+  <div
+    id="hazardFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MONITORING
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Παρακολούθηση Εργολαβικών Εργασιών
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔍</span>
+      <h3>Επιθεωρήσεις</h3>
+      <p>
+        Επιβεβαίωση ότι η πραγματική εργασία
+        συμφωνεί με την εγκεκριμένη μέθοδο.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🗣️</span>
+      <h3>Επικοινωνία</h3>
+      <p>
+        Συζήτηση αλλαγών,
+        νέων κινδύνων και προόδου.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📊</span>
+      <h3>Αξιολόγηση</h3>
+      <p>
+        Παρακολούθηση συμμόρφωσης,
+        παρατηρήσεων και διορθωτικών ενεργειών.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🛑</span>
+      <h3>Stop Work</h3>
+      <p>
+        Άμεση διακοπή όταν υπάρχουν
+        μη ασφαλείς συνθήκες ή μη εγκεκριμένες αλλαγές.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Σενάριο Απόφασης
+  </h2>
+
+  <p>
+    Ένας εργολάβος έχει εγκριθεί
+    να επισκευάσει μια αντλία.
+    Κατά τη διάρκεια της εργασίας αποφασίζει
+    ότι η αφαίρεση ενός κοντινού προφυλακτήρα
+    θα διευκολύνει την πρόσβαση.
+    Η αλλαγή δεν περιλαμβάνεται
+    στην εγκεκριμένη μέθοδο εργασίας.
+  </p>
+
+  <p>
+    <strong>
+      Τι πρέπει να γίνει;
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="option-button scenario-option"
+    data-value="wrong"
+    onclick="selectScenarioOption(this)">
+    Να αφαιρεθεί ο προφυλακτήρας,
+    επειδή η αλλαγή είναι προσωρινή.
+  </button>
+
+  <button
+    type="button"
+    class="option-button scenario-option"
+    data-value="partial"
+    onclick="selectScenarioOption(this)">
+    Να ζητηθεί η γνώμη άλλου εργολάβου
+    για το αν η αλλαγή φαίνεται ασφαλής.
+  </button>
+
+  <button
+    type="button"
+    class="option-button scenario-option"
+    data-value="correct"
+    onclick="selectScenarioOption(this)">
+    Να σταματήσει η εργασία
+    και η νέα μέθοδος να αξιολογηθεί
+    και να εγκριθεί επίσημα.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SIMULTANEOUS WORK
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Απόφαση για Ταυτόχρονες Εργασίες
+  </h2>
+
+  <p>
+    Ένας εργολάβος ξεκινά εργασία λείανσης
+    κοντά σε περιοχή όπου άλλη ομάδα
+    χειρίζεται εύφλεκτο υλικό.
+    Οι δύο εργασίες σχεδιάστηκαν χωριστά,
+    αλλά η αλληλεπίδρασή τους δεν αξιολογήθηκε.
+  </p>
+
+  <button
+    type="button"
+    class="option-button simultaneous-option"
+    data-value="wrong"
+    onclick="selectSimultaneousOption(this)">
+    Να συνεχίσουν και οι δύο εργασίες
+    επειδή κάθε ομάδα έχει δικό της επιβλέποντα.
+  </button>
+
+  <button
+    type="button"
+    class="option-button simultaneous-option"
+    data-value="partial"
+    onclick="selectSimultaneousOption(this)">
+    Να ζητηθεί από τον εργολάβο
+    της λείανσης να ολοκληρώσει γρηγορότερα.
+  </button>
+
+  <button
+    type="button"
+    class="option-button simultaneous-option"
+    data-value="correct"
+    onclick="selectSimultaneousOption(this)">
+    Να διακοπούν οι ασύμβατες εργασίες,
+    να επανεκτιμηθεί η αλληλεπίδραση
+    και να συμφωνηθούν ασφαλή μέτρα.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitSimultaneousDecision()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetSimultaneousDecision()">
+    Επαναφορά Άσκησης
+  </button>
+
+  <div
+    id="simultaneousFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     STOP WORK
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Πότε πρέπει να Σταματά η Εργασία;
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔄</span>
+      <h3>Αλλαγή Συνθηκών</h3>
+      <p>
+        Όταν αλλάζουν ο εξοπλισμός,
+        ο χώρος ή η διεργασία.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📋</span>
+      <h3>Αλλαγή Αντικειμένου</h3>
+      <p>
+        Όταν απαιτείται εργασία
+        εκτός του εγκεκριμένου αντικειμένου.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⌛</span>
+      <h3>Λήξη Άδειας</h3>
+      <p>
+        Όταν μια απαιτούμενη άδεια
+        ανασταλεί, ακυρωθεί ή λήξει.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚧</span>
+      <h3>Αποτυχία Μέτρων</h3>
+      <p>
+        Όταν απομονώσεις,
+        εμπόδια ή άλλα μέτρα
+        δεν είναι αποτελεσματικά.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚨</span>
+      <h3>Έκτακτη Ανάγκη</h3>
+      <p>
+        Όταν ενεργοποιείται
+        συναγερμός ή emergency response.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">❓</span>
+      <h3>Ασαφείς Οδηγίες</h3>
+      <p>
+        Όταν οι αρμοδιότητες,
+        οι κίνδυνοι ή τα όρια
+        δεν είναι ξεκάθαρα.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     COMPLETION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Ολοκλήρωση και Παράδοση Εργασίας
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔍</span>
+      <h3>Επιθεώρηση</h3>
+      <p>
+        Επιβεβαίωση ότι η εργασία ολοκληρώθηκε
+        και δεν παραμένουν κίνδυνοι.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧰</span>
+      <h3>Εργαλεία και Υλικά</h3>
+      <p>
+        Απομάκρυνση εργαλείων,
+        αποβλήτων και προσωρινού εξοπλισμού.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚧</span>
+      <h3>Προσωρινά Μέτρα</h3>
+      <p>
+        Αφαίρεση εμποδίων
+        μόνο όταν είναι ασφαλές.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📄</span>
+      <h3>Κλείσιμο Εγγράφων</h3>
+      <p>
+        Κλείσιμο αδειών,
+        καταγραφή αλλαγών και επίσημη παράδοση.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="success">
+
+    <strong>
+      Καλή πρακτική:
+    </strong>
+
+    Η τελική ανασκόπηση πρέπει να καταγράφει
+    τα διδάγματα και τις ευκαιρίες βελτίωσης
+    για μελλοντικές εργολαβικές εργασίες.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Mini Quiz
+  </h2>
+
+  <form id="quizForm">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Γιατί απαιτείται εισαγωγική ενημέρωση εργολάβου;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        Για να εξηγηθούν οι ειδικοί κίνδυνοι,
+        οι κανόνες και οι διαδικασίες έκτακτης ανάγκης.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Για να αντικαταστήσει την εκπαίδευση και την επίβλεψη.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Για να επιτρέψει εργασία οπουδήποτε στον χώρο.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Τι πρέπει να γίνει όταν αλλάζει το αντικείμενο εργασίας;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Η εργασία συνεχίζεται αν η αλλαγή φαίνεται μικρή.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Η εργασία σταματά,
+        επανεκτιμάται και η αλλαγή εγκρίνεται επίσημα.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Η αλλαγή καταγράφεται μόνο μετά την ολοκλήρωση.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Ποιος είναι υπεύθυνος για την ασφάλεια των εργολάβων;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Μόνο ο εργολάβος.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Μόνο η επιχείρηση υποδοχής.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        Η επιχείρηση και ο εργολάβος
+        πρέπει να συνεργάζονται και να εκπληρώνουν τις αρμοδιότητές τους.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Πότε πρέπει να διακόπτεται η εργολαβική εργασία;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Μόνο μετά από ατύχημα.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        Όταν οι συνθήκες,
+        το αντικείμενο ή τα μέτρα αλλάζουν ή γίνονται μη ασφαλή.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Μόνο όταν το ζητήσει ο επιβλέπων του εργολάβου.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Βασικά σημεία
+  </h2>
+
+  <p class="takeaway">
+    Η ασφάλεια εργολάβων απαιτεί συνεργασία
+    μεταξύ επιχείρησης υποδοχής και εργολάβου.
+  </p>
+
+  <p class="takeaway">
+    Το αντικείμενο,
+    οι κίνδυνοι, τα μέτρα και οι αρμοδιότητες
+    πρέπει να είναι σαφή πριν την έναρξη.
+  </p>
+
+  <p class="takeaway">
+    Οι εργολάβοι πρέπει να είναι
+    επαρκείς, ενημερωμένοι και εξουσιοδοτημένοι.
+  </p>
+
+  <p class="takeaway">
+    Η εργασία πρέπει να σταματά
+    όταν αλλάζουν οι συνθήκες,
+    το αντικείμενο ή τα μέτρα.
+  </p>
+
+  <p class="takeaway">
+    Η εργασία παραδίδεται
+    μόνο όταν ο χώρος έχει επιβεβαιωθεί ως ασφαλής.
+  </p>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 17
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   CONTRACTOR HOTSPOTS
+   ===================================================== */
+
+let contractorHazardsFound = 0;
+const totalContractorHazards = 5;
+
+function findContractorHazard(button){
+
+  const score =
+    document.getElementById("hazardScore");
+
+  const feedback =
+    document.getElementById("hazardFeedback");
+
+  const instruction =
+    document.getElementById("activityInstruction");
+
+  if(!button.classList.contains("found")){
+
+    button.classList.add("found");
+
+    button.textContent = "✓";
+
+    contractorHazardsFound++;
+
+    score.textContent =
+      contractorHazardsFound;
+  }
+
+  feedback.style.display = "block";
+
+  feedback.className =
+    "feedback success";
+
+  feedback.innerHTML =
+    button.dataset.message;
+
+  if(contractorHazardsFound === totalContractorHazards){
+
+    instruction.textContent =
+      "Η δραστηριότητα ολοκληρώθηκε.";
+
+    feedback.innerHTML +=
+      "<br><br><strong>Εξαιρετικά!</strong> " +
+      "Εντόπισες και τα πέντε κρίσιμα σημεία ασφάλειας.";
+  }
+}
+
+function resetContractorActivity(){
+
+  contractorHazardsFound = 0;
+
+  document
+    .querySelectorAll(".hotspot")
+    .forEach(function(button){
+
+      button.classList.remove("found");
+
+      button.textContent =
+        button.dataset.original;
+
+    });
+
+  document.getElementById(
+    "hazardScore"
+  ).textContent = "0";
+
+  document.getElementById(
+    "activityInstruction"
+  ).textContent =
+    "Επίλεξε και τους πέντε δείκτες.";
+
+  const feedback =
+    document.getElementById(
+      "hazardFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenarioOption(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Η αφαίρεση του προφυλακτήρα αλλάζει την εγκεκριμένη μέθοδο " +
+      "και μπορεί να δημιουργήσει νέους κινδύνους. " +
+      "Η εργασία πρέπει να σταματήσει μέχρι να αξιολογηθεί και να εγκριθεί η αλλαγή.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Η γνώμη άλλου εργολάβου δεν αποτελεί επίσημη έγκριση αλλαγής της μεθόδου εργασίας.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Ακόμη και μια προσωρινή μη εγκεκριμένη αλλαγή " +
+      "μπορεί να εκθέσει εργαζομένους σε κινούμενα μέρη ή επικίνδυνη ενέργεια.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SIMULTANEOUS WORK
+   ===================================================== */
+
+let selectedSimultaneousDecision = null;
+
+function selectSimultaneousOption(button){
+
+  document
+    .querySelectorAll(".simultaneous-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedSimultaneousDecision =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById(
+      "simultaneousFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitSimultaneousDecision(){
+
+  const feedback =
+    document.getElementById(
+      "simultaneousFeedback"
+    );
+
+  feedback.style.display = "block";
+
+  if(!selectedSimultaneousDecision){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedSimultaneousDecision === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Η λείανση μπορεί να δημιουργήσει σπινθήρες " +
+      "και να αναφλέξει το εύφλεκτο υλικό. " +
+      "Οι εργασίες πρέπει να σταματήσουν και να επανεκτιμηθούν πριν συνεχιστούν.";
+
+  }else if(selectedSimultaneousDecision === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Η γρηγορότερη ολοκλήρωση δεν εξαλείφει τον κίνδυνο ανάφλεξης.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Η ύπαρξη διαφορετικών επιβλεπόντων " +
+      "δεν εξαλείφει την επικίνδυνη αλληλεπίδραση των δύο εργασιών.";
+  }
+}
+
+function resetSimultaneousDecision(){
+
+  selectedSimultaneousDecision = null;
+
+  document
+    .querySelectorAll(".simultaneous-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "simultaneousFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  let score = 0;
+  let answered = 0;
+
+  const total = 4;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "Άριστα! Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Κατανοείς τις βασικές αρχές Ασφάλειας Εργολάβων.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Καλή προσπάθεια. Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Ξαναδές την εισαγωγική ενημέρωση, " +
+      "τις κοινές αρμοδιότητες και τις απαιτήσεις διακοπής εργασίας.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  document.getElementById(
+    "progressBar"
+  ).style.width = "0%";
+
+  document.getElementById(
+    "quizProgress"
+  ).setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

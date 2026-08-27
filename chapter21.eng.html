@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Module 21 | Working with a Computer</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   ERGONOMICS IMAGE
+   ===================================================== */
+
+.ergonomics-image-wrapper{
+  margin-top:20px;
+  overflow:hidden;
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  background:#fff;
+
+  box-shadow:
+    0 6px 18px rgba(15,23,42,.08);
+}
+
+.ergonomics-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   EYE LEVEL ACTIVITY
+   ===================================================== */
+
+.eye-game{
+  margin-top:20px;
+  padding:20px;
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  background:#f8fafc;
+}
+
+.eye-scene{
+  position:relative;
+
+  width:100%;
+  max-width:700px;
+  height:300px;
+
+  margin:18px auto;
+
+  overflow:hidden;
+
+  border:2px solid var(--border);
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #eef4fb 0 72%,
+      #d9e2ec 72% 100%
+    );
+}
+
+.desk{
+  position:absolute;
+  left:18%;
+  right:18%;
+  bottom:47px;
+
+  height:18px;
+
+  background:#9a6b3c;
+  border-radius:5px;
+}
+
+.monitor{
+  position:absolute;
+
+  left:50%;
+  top:92px;
+
+  width:170px;
+  height:105px;
+
+  transform:translateX(-50%);
+
+  border:9px solid #263746;
+  border-radius:10px;
+
+  background:linear-gradient(
+    135deg,
+    #b8e3ff,
+    #eaf6ff
+  );
+}
+
+.monitor::after{
+  content:"";
+
+  position:absolute;
+  left:50%;
+  bottom:-43px;
+
+  width:12px;
+  height:35px;
+
+  transform:translateX(-50%);
+
+  background:#263746;
+}
+
+.monitor-stand{
+  position:absolute;
+
+  left:50%;
+  top:229px;
+
+  width:85px;
+  height:10px;
+
+  transform:translateX(-50%);
+
+  border-radius:999px;
+
+  background:#263746;
+}
+
+.eye-line{
+  position:absolute;
+
+  left:8%;
+  right:8%;
+
+  top:205px;
+
+  border-top:3px dashed var(--accent);
+
+  transition:
+    top .18s ease,
+    border-color .18s ease;
+}
+
+.eye-line span{
+  position:absolute;
+
+  right:0;
+  top:-32px;
+
+  padding:3px 8px;
+
+  border-radius:8px;
+
+  background:#fff;
+  color:var(--primary-dark);
+
+  font-size:.85rem;
+  font-weight:bold;
+
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+
+.eye-scene.correct{
+  border-color:var(--success);
+
+  box-shadow:
+    0 0 0 4px rgba(42,157,143,.12);
+}
+
+.eye-scene.correct .eye-line{
+  border-color:var(--success);
+}
+
+.eye-controls{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.activity-status{
+  margin-top:16px;
+  padding:14px 16px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+
+  text-align:center;
+  font-weight:bold;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  color:var(--text);
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.match-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+
+  margin:10px 0;
+  align-items:center;
+}
+
+.match-row select{
+  width:100%;
+
+  padding:10px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+  color:var(--text);
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .eye-scene{
+    height:260px;
+  }
+
+  .monitor{
+    width:135px;
+    height:88px;
+  }
+
+  .match-row{
+    grid-template-columns:1fr;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Module 21: Working with a Computer
+  </h1>
+
+  <p>
+    Good workstation ergonomics
+    helps reduce musculoskeletal strain,
+    eye fatigue
+    and overall physical discomfort.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Learning Objectives</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🖥️</span>
+      Recognise basic ergonomic hazards
+      when working with a computer.
+    </div>
+
+    <div class="card">
+      <span class="icon">🪑</span>
+      Adjust the chair,
+      screen and equipment correctly.
+    </div>
+
+    <div class="card">
+      <span class="icon">👁️</span>
+      Apply good practices
+      to reduce eye fatigue.
+    </div>
+
+    <div class="card">
+      <span class="icon">⏱️</span>
+      Include short breaks
+      and changes of posture during the working day.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     21.1 RISKS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    21.1 Risks from Prolonged Computer Work
+  </h2>
+
+  <p>
+    Prolonged screen work,
+    particularly when the workstation
+    is not properly adjusted,
+    can lead to physical and visual strain.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🦴</span>
+      <h3>Musculoskeletal Strain</h3>
+      <p>
+        Discomfort in the neck,
+        shoulders, lower back, wrists and hands.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👀</span>
+      <h3>Eye Fatigue</h3>
+      <p>
+        Dry eyes,
+        blurred vision,
+        discomfort or headaches.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧠</span>
+      <h3>Mental Fatigue</h3>
+      <p>
+        Reduced concentration,
+        tiredness and increased stress.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🖐️</span>
+      <h3>Repetitive Movements</h3>
+      <p>
+        Continuous use of a keyboard
+        and mouse may increase
+        strain on the hands and wrists.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Key message:</strong>
+
+    Ergonomics is not only about posture.
+    It involves adapting the entire workstation
+    to the needs of the user.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     21.2 WORKSTATION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    21.2 Workstation Setup
+  </h2>
+
+  <p>
+    Observe the image
+    and use the following principles
+    to organise your workstation correctly.
+  </p>
+
+  <div class="ergonomics-image-wrapper">
+
+    <img
+      src="https://panos5439.github.io/sotaoffice/deskpos.png"
+      alt="Correct and incorrect ergonomic posture when working at a computer"
+      class="ergonomics-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+  </div>
+
+  <div class="grid" style="margin-top:20px;">
+
+    <div class="card">
+
+      <span class="icon">🖥️</span>
+
+      <h3>Screen Position</h3>
+
+      <p>
+        The screen should be positioned directly in front of the user
+        and allow a comfortable head and neck position.
+      </p>
+
+      <p>
+        Viewing distance is generally
+        around an arm's length,
+        depending on screen size
+        and the individual user's needs.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🪑</span>
+
+      <h3>Chair & Body Position</h3>
+
+      <p>
+        The back should be supported,
+        the shoulders should remain relaxed
+        and the feet should be firmly supported
+        on the floor or on a footrest.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⌨️</span>
+
+      <h3>Keyboard & Mouse</h3>
+
+      <p>
+        Keep them close to the body
+        so that the elbows remain
+        in a comfortable position
+        and the wrists remain as neutral as possible.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Interactive Activity: Adjust the Eye Level
+  </h2>
+
+  <p>
+    Use the buttons
+    to move the eye-level line
+    until it is approximately
+    aligned with the upper part of the screen.
+  </p>
+
+  <div class="eye-game">
+
+    <div
+      class="eye-scene"
+      id="eyeScene">
+
+      <div class="monitor"></div>
+      <div class="monitor-stand"></div>
+      <div class="desk"></div>
+
+      <div
+        class="eye-line"
+        id="eyeLine">
+
+        <span>
+          Eye Level Line
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="eye-controls">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="moveEyeLine(-8)">
+        ↑ Up
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="moveEyeLine(8)">
+        ↓ Down
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetEyeGame()">
+        Restart
+      </button>
+
+    </div>
+
+    <div
+      id="eyeStatus"
+      class="activity-status"
+      aria-live="polite">
+
+      Move the line
+      until you find the correct position.
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     21.3 BREAKS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    21.3 Working Time and Breaks
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">👁️</span>
+
+      <h3>20-20-20 Rule</h3>
+
+      <p>
+        Periodically look away from the screen.
+        A commonly used practice is the 20-20-20 rule:
+        about every 20 minutes,
+        look for approximately 20 seconds
+        at something around 6 metres away.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚶</span>
+
+      <h3>Short Breaks</h3>
+
+      <p>
+        Change position,
+        stand up,
+        walk a little
+        and perform gentle movements
+        when the task allows.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔄</span>
+
+      <h3>Change of Activity</h3>
+
+      <p>
+        Where possible,
+        alternate tasks
+        to avoid prolonged static posture.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     21.4 ENVIRONMENT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    21.4 Lighting and Work Environment
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">💡</span>
+
+      <h3>Lighting</h3>
+
+      <p>
+        Lighting should be adequate,
+        without excessive glare
+        or distracting reflections on the screen.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🪟</span>
+
+      <h3>Natural Light</h3>
+
+      <p>
+        The workstation should be positioned
+        to reduce reflections
+        and strong differences in brightness.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🌬️</span>
+
+      <h3>Comfortable Environment</h3>
+
+      <p>
+        Temperature,
+        ventilation and air quality
+        should support comfortable work.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     21.5 PRACTICAL TIPS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    21.5 Practical Tips
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔆</span>
+      Adjust screen brightness
+      to a comfortable level for your eyes.
+    </div>
+
+    <div class="card">
+      <span class="icon">🧍</span>
+      Avoid prolonged hunched
+      or twisted postures.
+    </div>
+
+    <div class="card">
+      <span class="icon">🎧</span>
+      Use an appropriate headset
+      when frequent telephone use is required.
+    </div>
+
+    <div class="card">
+      <span class="icon">↕️</span>
+      Change your working posture
+      where this is reasonably practicable.
+    </div>
+
+  </div>
+
+  <div class="success">
+
+    <strong>Remember:</strong>
+
+    There is no single posture
+    that should remain exactly the same all day.
+
+    Correct adjustment,
+    comfortable posture
+    and regular changes of position
+    work together.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <!-- Q1 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. What is an appropriate viewing distance from the screen?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        About 20 cm.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Approximately an arm's length,
+        adjusted to the screen size
+        and the user's needs.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        As close as possible.
+      </label>
+
+    </div>
+
+    <!-- Q2 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Which is a good practice for screen positioning?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Adjust the screen so that it can be viewed
+        without excessive bending
+        or extension of the neck.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Position it as high as possible.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Position it very low
+        so that you constantly look down.
+      </label>
+
+    </div>
+
+    <!-- Q3 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. If I experience eye strain:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Take regular visual breaks
+        and check lighting,
+        reflections and screen settings.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Move closer to the screen.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Always increase brightness to maximum.
+      </label>
+
+    </div>
+
+    <!-- Q4 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Which practice helps reduce musculoskeletal strain?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Adjust the workstation
+        and change posture periodically.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Remain in the same posture
+        for the entire working day.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Keep the mouse
+        as far away from the body as possible.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Submit Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Reset Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Key Takeaways</h2>
+
+  <div class="takeaway">
+    <span>🖥️</span>
+    <div>
+      Adjust the screen
+      so that you can work with a comfortable head and neck position.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🪑</span>
+    <div>
+      Use appropriate support
+      and keep your feet stable.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>⌨️</span>
+    <div>
+      The keyboard and mouse
+      should be within easy reach
+      without excessive stretching.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>👁️</span>
+    <div>
+      Take regular visual breaks
+      and reduce reflections and glare.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🚶</span>
+    <div>
+      Avoid remaining still for long periods.
+      Change posture and move when practicable.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Occupational Health & Safety Training | Module 21
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   EYE LEVEL ACTIVITY
+   ===================================================== */
+
+let eyeLinePosition = 205;
+
+const targetMin = 85;
+const targetMax = 110;
+
+function updateEyeGame(){
+
+  const line =
+    document.getElementById("eyeLine");
+
+  const scene =
+    document.getElementById("eyeScene");
+
+  const status =
+    document.getElementById("eyeStatus");
+
+  if(eyeLinePosition < 45){
+    eyeLinePosition = 45;
+  }
+
+  if(eyeLinePosition > 230){
+    eyeLinePosition = 230;
+  }
+
+  line.style.top =
+    eyeLinePosition + "px";
+
+  if(
+    eyeLinePosition >= targetMin &&
+    eyeLinePosition <= targetMax
+  ){
+
+    scene.classList.add("correct");
+
+    status.innerHTML =
+      "✓ Correct! The eye-level line is approximately at the appropriate level relative to the upper part of the screen.";
+
+    status.style.background =
+      "var(--success-bg)";
+
+    status.style.color =
+      "#145c4c";
+
+  }else{
+
+    scene.classList.remove("correct");
+
+    if(eyeLinePosition < targetMin){
+
+      status.innerHTML =
+        "The line is too high. Move it slightly lower.";
+
+    }else{
+
+      status.innerHTML =
+        "The line is too low. Move it upwards.";
+
+    }
+
+    status.style.background =
+      "var(--info-bg)";
+
+    status.style.color =
+      "var(--primary-dark)";
+  }
+}
+
+function moveEyeLine(amount){
+
+  eyeLinePosition += amount;
+
+  updateEyeGame();
+}
+
+function resetEyeGame(){
+
+  eyeLinePosition = 205;
+
+  updateEyeGame();
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Please answer all four questions before submitting the quiz.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Excellent!</strong> You scored " +
+      score + "/" + total +
+      ". You understand the key ergonomic principles for working with a computer.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Good effort.</strong> You scored " +
+      score + "/" + total +
+      ". Review screen position, posture, visual breaks and the position of the keyboard and mouse.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score + "/" + total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+/* =====================================================
+   INITIALISE
+   ===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    updateEyeGame();
+
+  }
+);
+
+</script>
+
+</body>
+</html>

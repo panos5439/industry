@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ενότητα 21 | Εργασία με Υπολογιστή</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   ERGONOMICS IMAGE
+   ===================================================== */
+
+.ergonomics-image-wrapper{
+  margin-top:20px;
+  overflow:hidden;
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  background:#fff;
+
+  box-shadow:
+    0 6px 18px rgba(15,23,42,.08);
+}
+
+.ergonomics-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   EYE LEVEL ACTIVITY
+   ===================================================== */
+
+.eye-game{
+  margin-top:20px;
+  padding:20px;
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  background:#f8fafc;
+}
+
+.eye-scene{
+  position:relative;
+
+  width:100%;
+  max-width:700px;
+  height:300px;
+
+  margin:18px auto;
+
+  overflow:hidden;
+
+  border:2px solid var(--border);
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #eef4fb 0 72%,
+      #d9e2ec 72% 100%
+    );
+}
+
+.desk{
+  position:absolute;
+  left:18%;
+  right:18%;
+  bottom:47px;
+
+  height:18px;
+
+  background:#9a6b3c;
+  border-radius:5px;
+}
+
+.monitor{
+  position:absolute;
+
+  left:50%;
+  top:92px;
+
+  width:170px;
+  height:105px;
+
+  transform:translateX(-50%);
+
+  border:9px solid #263746;
+  border-radius:10px;
+
+  background:linear-gradient(
+    135deg,
+    #b8e3ff,
+    #eaf6ff
+  );
+}
+
+.monitor::after{
+  content:"";
+
+  position:absolute;
+  left:50%;
+  bottom:-43px;
+
+  width:12px;
+  height:35px;
+
+  transform:translateX(-50%);
+
+  background:#263746;
+}
+
+.monitor-stand{
+  position:absolute;
+
+  left:50%;
+  top:229px;
+
+  width:85px;
+  height:10px;
+
+  transform:translateX(-50%);
+
+  border-radius:999px;
+
+  background:#263746;
+}
+
+.eye-line{
+  position:absolute;
+
+  left:8%;
+  right:8%;
+
+  top:205px;
+
+  border-top:3px dashed var(--accent);
+
+  transition:
+    top .18s ease,
+    border-color .18s ease;
+}
+
+.eye-line span{
+  position:absolute;
+
+  right:0;
+  top:-32px;
+
+  padding:3px 8px;
+
+  border-radius:8px;
+
+  background:#fff;
+  color:var(--primary-dark);
+
+  font-size:.85rem;
+  font-weight:bold;
+
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+
+.eye-scene.correct{
+  border-color:var(--success);
+
+  box-shadow:
+    0 0 0 4px rgba(42,157,143,.12);
+}
+
+.eye-scene.correct .eye-line{
+  border-color:var(--success);
+}
+
+.eye-controls{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.activity-status{
+  margin-top:16px;
+  padding:14px 16px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+
+  text-align:center;
+  font-weight:bold;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  color:var(--text);
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.match-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+
+  margin:10px 0;
+  align-items:center;
+}
+
+.match-row select{
+  width:100%;
+
+  padding:10px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+  color:var(--text);
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .eye-scene{
+    height:260px;
+  }
+
+  .monitor{
+    width:135px;
+    height:88px;
+  }
+
+  .match-row{
+    grid-template-columns:1fr;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 21: Εργασία με Υπολογιστή
+  </h1>
+
+  <p>
+    Η σωστή εργονομία στον σταθμό εργασίας
+    βοηθά στη μείωση της μυοσκελετικής καταπόνησης,
+    της κόπωσης των ματιών
+    και της συνολικής σωματικής επιβάρυνσης.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Στόχοι Μάθησης</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🖥️</span>
+      Αναγνωρίζει βασικούς εργονομικούς κινδύνους
+      κατά την εργασία με υπολογιστή.
+    </div>
+
+    <div class="card">
+      <span class="icon">🪑</span>
+      Ρυθμίζει σωστά
+      καρέκλα, οθόνη και εξοπλισμό.
+    </div>
+
+    <div class="card">
+      <span class="icon">👁️</span>
+      Εφαρμόζει πρακτικές
+      για τη μείωση της κόπωσης των ματιών.
+    </div>
+
+    <div class="card">
+      <span class="icon">⏱️</span>
+      Ενσωματώνει μικρές παύσεις
+      και αλλαγές στάσης μέσα στην εργασία.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     21.1 RISKS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    21.1 Κίνδυνοι από Παρατεταμένη Εργασία με Υπολογιστή
+  </h2>
+
+  <p>
+    Η παρατεταμένη εργασία σε οθόνη,
+    ιδιαίτερα όταν ο σταθμός εργασίας
+    δεν είναι κατάλληλα ρυθμισμένος,
+    μπορεί να οδηγήσει σε σωματική και οπτική καταπόνηση.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🦴</span>
+      <h3>Μυοσκελετική Καταπόνηση</h3>
+      <p>
+        Ενοχλήσεις σε αυχένα,
+        ώμους, μέση, καρπούς και χέρια.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👀</span>
+      <h3>Κόπωση Ματιών</h3>
+      <p>
+        Ξηροφθαλμία,
+        θολή όραση,
+        δυσφορία ή πονοκέφαλος.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧠</span>
+      <h3>Πνευματική Κόπωση</h3>
+      <p>
+        Μείωση συγκέντρωσης,
+        κόπωση και αυξημένο στρες.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🖐️</span>
+      <h3>Επαναλαμβανόμενες Κινήσεις</h3>
+      <p>
+        Συνεχής χρήση πληκτρολογίου
+        και ποντικιού μπορεί να αυξήσει
+        την καταπόνηση χεριών και καρπών.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Βασικό μήνυμα:</strong>
+
+    Η εργονομία δεν αφορά μόνο τη στάση σώματος.
+    Αφορά την προσαρμογή ολόκληρου του σταθμού εργασίας
+    στις ανάγκες του εργαζομένου.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     21.2 WORKSTATION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    21.2 Οργάνωση του Σταθμού Εργασίας
+  </h2>
+
+  <p>
+    Παρατήρησε την εικόνα
+    και χρησιμοποίησε τις παρακάτω αρχές
+    για να οργανώσεις σωστά τον σταθμό σου.
+  </p>
+
+  <div class="ergonomics-image-wrapper">
+
+    <img
+      src="https://panos5439.github.io/sotaoffice/deskpos.png"
+      alt="Σωστή και λανθασμένη εργονομική στάση μπροστά σε υπολογιστή"
+      class="ergonomics-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+  </div>
+
+  <div class="grid" style="margin-top:20px;">
+
+    <div class="card">
+
+      <span class="icon">🖥️</span>
+
+      <h3>Θέση Οθόνης</h3>
+
+      <p>
+        Η οθόνη πρέπει να βρίσκεται μπροστά από τον χρήστη
+        και να επιτρέπει άνετη θέση κεφαλής και αυχένα.
+      </p>
+
+      <p>
+        Η απόσταση θέασης είναι συνήθως
+        περίπου ένα μήκος χεριού,
+        ανάλογα με το μέγεθος της οθόνης
+        και τις ανάγκες του χρήστη.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🪑</span>
+
+      <h3>Καρέκλα & Σώμα</h3>
+
+      <p>
+        Η πλάτη πρέπει να υποστηρίζεται,
+        οι ώμοι να παραμένουν χαλαροί
+        και τα πόδια να στηρίζονται σταθερά
+        στο δάπεδο ή σε υποπόδιο.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⌨️</span>
+
+      <h3>Πληκτρολόγιο & Ποντίκι</h3>
+
+      <p>
+        Τοποθέτησέ τα κοντά στο σώμα,
+        ώστε οι αγκώνες να παραμένουν
+        σε άνετη θέση
+        και οι καρποί όσο γίνεται ουδέτεροι.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική Δραστηριότητα: Ρύθμισε το Ύψος Ματιών
+  </h2>
+
+  <p>
+    Χρησιμοποίησε τα κουμπιά
+    για να μετακινήσεις τη γραμμή ύψους ματιών
+    μέχρι να βρίσκεται περίπου
+    στο επίπεδο του άνω μέρους της οθόνης.
+  </p>
+
+  <div class="eye-game">
+
+    <div
+      class="eye-scene"
+      id="eyeScene">
+
+      <div class="monitor"></div>
+      <div class="monitor-stand"></div>
+      <div class="desk"></div>
+
+      <div
+        class="eye-line"
+        id="eyeLine">
+
+        <span>
+          Γραμμή ύψους ματιών
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="eye-controls">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="moveEyeLine(-8)">
+        ↑ Πάνω
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="moveEyeLine(8)">
+        ↓ Κάτω
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetEyeGame()">
+        Επανεκκίνηση
+      </button>
+
+    </div>
+
+    <div
+      id="eyeStatus"
+      class="activity-status"
+      aria-live="polite">
+
+      Μετακίνησε τη γραμμή
+      μέχρι να βρεις τη σωστή θέση.
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     21.3 BREAKS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    21.3 Χρόνος Εργασίας και Διαλείμματα
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">👁️</span>
+
+      <h3>Κανόνας 20-20-20</h3>
+
+      <p>
+        Περιοδικά απομάκρυνε το βλέμμα από την οθόνη.
+        Μια γνωστή πρακτική είναι ο κανόνας 20-20-20:
+        περίπου κάθε 20 λεπτά,
+        κοίτα για περίπου 20 δευτερόλεπτα
+        ένα σημείο περίπου 6 μέτρα μακριά.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚶</span>
+
+      <h3>Μικρές Παύσεις</h3>
+
+      <p>
+        Άλλαζε θέση,
+        σήκω,
+        περπάτησε λίγο
+        και κάνε ήπιες κινήσεις
+        όταν η εργασία το επιτρέπει.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔄</span>
+
+      <h3>Αλλαγή Δραστηριότητας</h3>
+
+      <p>
+        Όπου είναι δυνατό,
+        εναλλάσσουμε εργασίες
+        ώστε να αποφεύγεται η συνεχής στατική στάση.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     21.4 ENVIRONMENT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    21.4 Φωτισμός και Περιβάλλον Εργασίας
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">💡</span>
+
+      <h3>Φωτισμός</h3>
+
+      <p>
+        Ο φωτισμός πρέπει να είναι επαρκής,
+        χωρίς έντονη θάμβωση
+        ή ενοχλητικές αντανακλάσεις στην οθόνη.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🪟</span>
+
+      <h3>Φυσικό Φως</h3>
+
+      <p>
+        Η θέση του σταθμού εργασίας
+        πρέπει να μειώνει τις αντανακλάσεις
+        και τις έντονες αντιθέσεις φωτεινότητας.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🌬️</span>
+
+      <h3>Άνετο Περιβάλλον</h3>
+
+      <p>
+        Θερμοκρασία,
+        αερισμός και ποιότητα αέρα
+        πρέπει να υποστηρίζουν άνετη εργασία.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     21.5 PRACTICAL TIPS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    21.5 Πρακτικές Συμβουλές
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔆</span>
+      Ρύθμισε τη φωτεινότητα της οθόνης
+      ώστε να είναι άνετη για τα μάτια.
+    </div>
+
+    <div class="card">
+      <span class="icon">🧍</span>
+      Απόφυγε παρατεταμένη σκυφτή
+      ή στριμμένη στάση.
+    </div>
+
+    <div class="card">
+      <span class="icon">🎧</span>
+      Χρησιμοποίησε κατάλληλο headset
+      όταν απαιτείται συχνή χρήση τηλεφώνου.
+    </div>
+
+    <div class="card">
+      <span class="icon">↕️</span>
+      Εναλλάσσεις τη στάση σου
+      όπου αυτό είναι πρακτικά εφικτό.
+    </div>
+
+  </div>
+
+  <div class="success">
+
+    <strong>Θυμήσου:</strong>
+
+    Δεν υπάρχει μία στάση
+    που πρέπει να παραμένει ακριβώς ίδια όλη την ημέρα.
+
+    Η σωστή ρύθμιση,
+    η άνετη στάση
+    και η τακτική αλλαγή θέσης
+    λειτουργούν μαζί.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <!-- Q1 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Ποια είναι κατάλληλη απόσταση θέασης από την οθόνη;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Περίπου 20 cm.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Περίπου ένα μήκος χεριού,
+        προσαρμοσμένο στο μέγεθος της οθόνης
+        και στις ανάγκες του χρήστη.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Όσο πιο κοντά γίνεται.
+      </label>
+
+    </div>
+
+    <!-- Q2 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Ποια είναι σωστή πρακτική για την οθόνη;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Τη ρυθμίζω ώστε να μπορώ
+        να κοιτάζω την οθόνη
+        χωρίς έντονη κάμψη ή έκταση του αυχένα.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Την τοποθετώ όσο πιο ψηλά γίνεται.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Την τοποθετώ πολύ χαμηλά
+        ώστε να κοιτάζω συνεχώς προς τα κάτω.
+      </label>
+
+    </div>
+
+    <!-- Q3 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Αν αισθάνομαι καταπόνηση στα μάτια:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Κάνω τακτικές οπτικές παύσεις
+        και ελέγχω φωτισμό,
+        αντανακλάσεις και ρυθμίσεις της οθόνης.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Πλησιάζω περισσότερο στην οθόνη.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Αυξάνω πάντα τη φωτεινότητα στο μέγιστο.
+      </label>
+
+    </div>
+
+    <!-- Q4 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Ποια πρακτική βοηθά στη μείωση της μυοσκελετικής καταπόνησης;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Ρυθμίζω τον σταθμό εργασίας
+        και αλλάζω περιοδικά στάση.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Παραμένω στην ίδια στάση
+        για όλη την εργάσιμη ημέρα.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Κρατώ το ποντίκι
+        όσο πιο μακριά από το σώμα γίνεται.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Βασικά Σημεία</h2>
+
+  <div class="takeaway">
+    <span>🖥️</span>
+    <div>
+      Ρύθμισε την οθόνη
+      ώστε να εργάζεσαι με άνετη θέση κεφαλής και αυχένα.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🪑</span>
+    <div>
+      Χρησιμοποίησε σωστή στήριξη
+      και κράτησε τα πόδια σταθερά.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>⌨️</span>
+    <div>
+      Πληκτρολόγιο και ποντίκι
+      πρέπει να είναι εύκολα προσβάσιμα
+      χωρίς υπερβολικό τέντωμα.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>👁️</span>
+    <div>
+      Κάνε τακτικές οπτικές παύσεις
+      και μείωσε αντανακλάσεις και θάμβωση.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🚶</span>
+    <div>
+      Μην παραμένεις ακίνητος για μεγάλα χρονικά διαστήματα.
+      Άλλαζε στάση και κίνηση όταν είναι εφικτό.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στην Εργασία | Ενότητα 21
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   EYE LEVEL ACTIVITY
+   ===================================================== */
+
+let eyeLinePosition = 205;
+
+const targetMin = 85;
+const targetMax = 110;
+
+function updateEyeGame(){
+
+  const line =
+    document.getElementById("eyeLine");
+
+  const scene =
+    document.getElementById("eyeScene");
+
+  const status =
+    document.getElementById("eyeStatus");
+
+  if(eyeLinePosition < 45){
+    eyeLinePosition = 45;
+  }
+
+  if(eyeLinePosition > 230){
+    eyeLinePosition = 230;
+  }
+
+  line.style.top =
+    eyeLinePosition + "px";
+
+  if(
+    eyeLinePosition >= targetMin &&
+    eyeLinePosition <= targetMax
+  ){
+
+    scene.classList.add("correct");
+
+    status.innerHTML =
+      "✓ Σωστά! Η γραμμή ύψους ματιών βρίσκεται περίπου στο κατάλληλο επίπεδο σε σχέση με το πάνω μέρος της οθόνης.";
+
+    status.style.background =
+      "var(--success-bg)";
+
+    status.style.color =
+      "#145c4c";
+
+  }else{
+
+    scene.classList.remove("correct");
+
+    if(eyeLinePosition < targetMin){
+
+      status.innerHTML =
+        "Η γραμμή είναι πολύ ψηλά. Μετακίνησέ την λίγο χαμηλότερα.";
+
+    }else{
+
+      status.innerHTML =
+        "Η γραμμή είναι πολύ χαμηλά. Μετακίνησέ την προς τα πάνω.";
+
+    }
+
+    status.style.background =
+      "var(--info-bg)";
+
+    status.style.color =
+      "var(--primary-dark)";
+  }
+}
+
+function moveEyeLine(amount){
+
+  eyeLinePosition += amount;
+
+  updateEyeGame();
+}
+
+function resetEyeGame(){
+
+  eyeLinePosition = 205;
+
+  updateEyeGame();
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Άριστα!</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Κατανοείς τις βασικές αρχές εργονομίας κατά την εργασία με υπολογιστή.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Καλή προσπάθεια.</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Ξαναδές τη θέση της οθόνης, τη στάση σώματος, τις οπτικές παύσεις και τη θέση πληκτρολογίου και ποντικιού.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score + "/" + total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+/* =====================================================
+   INITIALISE
+   ===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    updateEyeGame();
+
+  }
+);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Module 19 | Overhead Crane & Pallet Storage Safety</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.danger,
+.success,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+.step-card{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+/* =====================================================
+   TAGS
+   ===================================================== */
+
+.tag{
+  display:inline-block;
+  padding:5px 10px;
+  margin-bottom:8px;
+  border-radius:999px;
+  font-size:.85rem;
+  font-weight:bold;
+}
+
+.tag-danger{
+  background:#ffe2e2;
+  color:#a31515;
+}
+
+.tag-warning{
+  background:#fff1b8;
+  color:#795800;
+}
+
+.tag-info{
+  background:#dcecff;
+  color:#123c69;
+}
+
+/* =====================================================
+   CHECKLIST
+   ===================================================== */
+
+.checklist{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.checklist li{
+  position:relative;
+  padding:10px 0 10px 34px;
+  border-bottom:1px solid #edf1f5;
+}
+
+.checklist li:last-child{
+  border-bottom:none;
+}
+
+.checklist li::before{
+  content:"✓";
+  position:absolute;
+  left:0;
+  top:10px;
+  width:23px;
+  height:23px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--success);
+  color:#fff;
+  font-size:.85rem;
+  font-weight:bold;
+}
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.table-wrapper{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  min-width:760px;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:14px;
+  border:1px solid var(--border);
+  text-align:left;
+  vertical-align:top;
+}
+
+th{
+  background:var(--primary);
+  color:#fff;
+}
+
+tbody tr:nth-child(even){
+  background:#f8fafc;
+}
+
+/* =====================================================
+   PHOTO ACTIVITY
+   ===================================================== */
+
+.safety-image-container{
+  position:relative;
+  width:100%;
+  margin-top:18px;
+  margin-bottom:16px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:#eef4fb;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
+}
+
+.safety-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   HOTSPOTS
+   ===================================================== */
+
+.hotspot{
+  position:absolute;
+  z-index:10;
+
+  width:52px;
+  height:52px;
+
+  display:grid;
+  place-items:center;
+
+  border:4px solid #fff;
+  border-radius:50%;
+
+  background:var(--accent);
+  color:#fff;
+
+  font-size:1.1rem;
+  font-weight:bold;
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.38),
+    0 0 0 2px rgba(214,40,40,.20);
+
+  transition:
+    transform .2s ease,
+    background-color .2s ease;
+}
+
+.hotspot:hover,
+.hotspot:focus{
+  transform:scale(1.09);
+  outline:4px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.hotspot.found{
+  background:var(--success);
+}
+
+/*
+  1 = Hoist / hook / lifting equipment
+  2 = Slings and load attachment
+  3 = Suspended load
+  4 = Person below / near load
+  5 = Storage racking
+  6 = Pallet stability
+*/
+
+.hs-hoist{
+  left:46%;
+  top:23%;
+}
+
+.hs-sling{
+  left:43%;
+  top:38%;
+}
+
+.hs-load{
+  left:49%;
+  top:49%;
+}
+
+.hs-person{
+  left:48%;
+  bottom:14%;
+}
+
+.hs-racking{
+  right:13%;
+  top:41%;
+}
+
+.hs-pallet{
+  right:10%;
+  bottom:22%;
+}
+
+.activity-status{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+
+  margin-top:16px;
+  padding:14px 16px;
+
+  border-radius:12px;
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   OPTION BUTTONS
+   ===================================================== */
+
+.option-button{
+  display:block;
+  width:100%;
+
+  margin:10px 0;
+  padding:15px 17px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+  font-weight:500;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.option-button:hover,
+.option-button:focus{
+  background:#dcecff;
+  color:#1f2933;
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.6);
+  outline-offset:2px;
+}
+
+.option-button.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.option-button.selected:hover,
+.option-button.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .hotspot{
+    width:43px;
+    height:43px;
+    font-size:.9rem;
+  }
+
+  .hs-hoist{
+    left:45%;
+    top:21%;
+  }
+
+  .hs-sling{
+    left:41%;
+    top:37%;
+  }
+
+  .hs-load{
+    left:47%;
+    top:48%;
+  }
+
+  .hs-person{
+    left:46%;
+    bottom:12%;
+  }
+
+  .hs-racking{
+    right:10%;
+    top:40%;
+  }
+
+  .hs-pallet{
+    right:7%;
+    bottom:20%;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Module 19: Overhead Crane & Pallet Storage Safety
+  </h1>
+
+  <p>
+    Safe lifting operations and correct pallet storage require suitable equipment,
+    correct load attachment, effective control of the danger zone
+    and continuous monitoring of load stability.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Learning Objectives
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🏗️</span>
+
+      <h3>
+        Safe Overhead Crane Operation
+      </h3>
+
+      <p>
+        Recognise the key checks required
+        before and during a lifting operation.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⛓️</span>
+
+      <h3>
+        Load Attachment
+      </h3>
+
+      <p>
+        Understand the importance of suitable slings,
+        secure lifting points
+        and correct load distribution.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚧</span>
+
+      <h3>
+        Exclusion Zone
+      </h3>
+
+      <p>
+        Understand why no person
+        should stand beneath or too close
+        to a suspended load.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+
+      <h3>
+        Safe Pallet Storage
+      </h3>
+
+      <p>
+        Recognise safe and unsafe pallet storage
+        in industrial racking systems.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     WHY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Why is Lifting Safety Important?
+  </h2>
+
+  <p>
+    A suspended load can contain a large amount of potential energy.
+    Failure of lifting equipment, incorrect attachment
+    or the presence of a worker in the danger zone
+    can result in serious or fatal injury.
+  </p>
+
+  <div class="danger">
+
+    <strong>
+      Why it matters:
+    </strong>
+
+    No person should ever stand beneath a suspended load.
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>
+      Important:
+    </strong>
+
+    The capacity of the overhead crane is not the only consideration.
+    The weight of the load, lifting accessories,
+    attachment points, centre of gravity
+    and the actual travel path of the load must also be considered.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MAIN HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Main Hazards
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">⬇️</span>
+      <span class="tag tag-danger">
+        Falling Load
+      </span>
+
+      <h3>
+        Attachment Failure
+      </h3>
+
+      <p>
+        Unsuitable or damaged slings,
+        hooks or lifting points
+        may result in the load falling.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⚖️</span>
+      <span class="tag tag-warning">
+        Instability
+      </span>
+
+      <h3>
+        Unbalanced Load
+      </h3>
+
+      <p>
+        An incorrect centre of gravity
+        can cause the load to tilt,
+        shift or become uncontrolled.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👷</span>
+      <span class="tag tag-danger">
+        People
+      </span>
+
+      <h3>
+        Presence in the Danger Zone
+      </h3>
+
+      <p>
+        Standing below or too close to a moving load
+        creates a serious risk of crushing or impact.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🏗️</span>
+      <span class="tag tag-warning">
+        Equipment
+      </span>
+
+      <h3>
+        Exceeding Rated Capacity
+      </h3>
+
+      <p>
+        Lifting a load above the permitted capacity
+        can cause serious equipment failure.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+      <span class="tag tag-warning">
+        Storage
+      </span>
+
+      <h3>
+        Unstable Pallets
+      </h3>
+
+      <p>
+        Pallets that overhang,
+        lean or are damaged
+        may fall from the storage system.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🗄️</span>
+      <span class="tag tag-info">
+        Racking
+      </span>
+
+      <h3>
+        Racking Overload
+      </h3>
+
+      <p>
+        Exceeding permitted loads
+        or incorrect pallet placement
+        may cause failure of the storage system.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PRE-USE CHECK
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Checks Before Lifting
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <h3>
+        Overhead Crane
+      </h3>
+
+      <ul class="checklist">
+        <li>The equipment is suitable for the task.</li>
+        <li>The rated capacity is known.</li>
+        <li>The hook and hoisting mechanism are visually checked.</li>
+        <li>The controls operate correctly.</li>
+        <li>There is no visible damage or unusual noise.</li>
+        <li>The load travel path is clear.</li>
+      </ul>
+
+    </div>
+
+    <div class="card">
+
+      <h3>
+        Lifting Accessories
+      </h3>
+
+      <ul class="checklist">
+        <li>Slings are suitable for the load.</li>
+        <li>There are no cuts or visible signs of damage.</li>
+        <li>The lifting capacity of accessories is suitable.</li>
+        <li>Connection points are secure.</li>
+        <li>The load can be lifted in balance.</li>
+        <li>Sharp edges will not damage the slings.</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SAFE LIFT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Safe Lifting Process
+  </h2>
+
+  <div class="grid">
+
+    <div class="card step-card">
+      <h3>
+        1. Plan
+      </h3>
+
+      <p>
+        Determine the load weight,
+        dimensions, centre of gravity
+        and planned travel path.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>
+        2. Select Equipment
+      </h3>
+
+      <p>
+        Select a suitable overhead crane,
+        hook and lifting accessories.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>
+        3. Attach the Load
+      </h3>
+
+      <p>
+        Position slings at suitable points
+        and confirm that the load is balanced.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>
+        4. Test Lift
+      </h3>
+
+      <p>
+        Raise the load slightly
+        and confirm that it remains stable.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>
+        5. Move the Load
+      </h3>
+
+      <p>
+        Move the load slowly and smoothly,
+        avoiding sudden movements.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>
+        6. Set Down
+      </h3>
+
+      <p>
+        Place the load on a stable
+        and suitable surface.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     EXCLUSION ZONE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Exclusion Zone
+  </h2>
+
+  <div class="danger">
+
+    <strong>
+      No one beneath the load.
+    </strong>
+
+    The operator must maintain safe separation
+    and ensure that no person enters
+    the path or drop zone of the suspended load.
+
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🚧</span>
+      <h3>
+        Area Control
+      </h3>
+      <p>
+        Use suitable barriers
+        or other access-control measures where required.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👀</span>
+      <h3>
+        Visibility
+      </h3>
+      <p>
+        The operator must have adequate visibility
+        or receive suitable guidance.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🗣️</span>
+      <h3>
+        Communication
+      </h3>
+      <p>
+        Use clear and agreed signals
+        when a signaller or banksman is involved.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🛑</span>
+      <h3>
+        Stop Work
+      </h3>
+      <p>
+        Stop immediately
+        if any person enters the danger zone.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PALLET STORAGE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Safe Pallet Storage
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">📐</span>
+
+      <h3>
+        Correct Positioning
+      </h3>
+
+      <p>
+        The pallet should be correctly supported
+        at the intended points
+        and should not overhang dangerously.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+
+      <h3>
+        Stable Load
+      </h3>
+
+      <p>
+        Products should be stable
+        and suitably secured on the pallet.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⚖️</span>
+
+      <h3>
+        Weight
+      </h3>
+
+      <p>
+        Permitted pallet
+        and racking loads
+        must not be exceeded.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔍</span>
+
+      <h3>
+        Inspection
+      </h3>
+
+      <p>
+        Damaged pallets
+        and visibly deformed racking
+        should be reported and assessed.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE PHOTO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Interactive Activity: Identify the Critical Points
+  </h2>
+
+  <p>
+    Select the six red markers
+    to identify key control points
+    relating to lifting operations and pallet storage.
+  </p>
+
+  <div class="safety-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/transfer.png"
+      alt="Industrial warehouse with overhead crane, suspended load, worker and stored pallets"
+      class="safety-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+    <button
+      type="button"
+      class="hotspot hs-hoist"
+      data-original="1"
+      data-message="<strong>Hoisting equipment:</strong> Before use, confirm that the overhead crane, hook and hoisting mechanism are suitable for the load and show no obvious defects."
+      onclick="findTransferPoint(this)">
+      1
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-sling"
+      data-original="2"
+      data-message="<strong>Slings and load attachment:</strong> Lifting accessories must be suitable for the load, in good condition and correctly positioned to provide a stable lift."
+      onclick="findTransferPoint(this)">
+      2
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-load"
+      data-original="3"
+      data-message="<strong>Suspended load:</strong> The load must remain stable and controlled. Sudden movements, swinging and uncontrolled rotation should be avoided."
+      onclick="findTransferPoint(this)">
+      3
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-person"
+      data-original="4"
+      data-message="<strong>Danger zone:</strong> No worker should stand beneath a suspended load or within its possible drop or travel path."
+      onclick="findTransferPoint(this)">
+      4
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-racking"
+      data-original="5"
+      data-message="<strong>Storage racking:</strong> Racking must be suitable, free from obvious damage and used within its permitted load limits."
+      onclick="findTransferPoint(this)">
+      5
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-pallet"
+      data-original="6"
+      data-message="<strong>Pallet stability:</strong> Pallets must be correctly positioned without dangerous overhang, leaning or unstable loads that could fall."
+      onclick="findTransferPoint(this)">
+      6
+    </button>
+
+  </div>
+
+  <div class="activity-status">
+
+    <strong>
+      Points identified:
+      <span id="transferScore">0</span>/6
+    </strong>
+
+    <span id="transferInstruction">
+      Select all six markers.
+    </span>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetTransferActivity()">
+    Restart Activity
+  </button>
+
+  <div
+    id="transferFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SCENARIO 1
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Practical Scenario: Person Near a Suspended Load
+  </h2>
+
+  <p>
+    While a heavy pallet is being moved
+    using an overhead crane,
+    a worker walks beneath the suspended load
+    to reach the other side of the warehouse more quickly.
+  </p>
+
+  <p>
+    <strong>
+      What should the operator do?
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="option-button lifting-option"
+    data-value="wrong"
+    onclick="selectLiftingOption(this)">
+    Continue slowly because the worker
+    will only be beneath the load for a few seconds.
+  </button>
+
+  <button
+    type="button"
+    class="option-button lifting-option"
+    data-value="partial"
+    onclick="selectLiftingOption(this)">
+    Warn the worker but continue moving the load.
+  </button>
+
+  <button
+    type="button"
+    class="option-button lifting-option"
+    data-value="correct"
+    onclick="selectLiftingOption(this)">
+    Stop the movement immediately
+    and continue only when the danger zone is completely clear.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitLiftingScenario()">
+    Submit Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetLiftingScenario()">
+    Reset Scenario
+  </button>
+
+  <div
+    id="liftingFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SCENARIO 2
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Practical Scenario: Unstable Pallet in Racking
+  </h2>
+
+  <p>
+    During a warehouse inspection,
+    a pallet is found sitting at an angle
+    in the racking system,
+    with part of the load overhanging the pallet.
+  </p>
+
+  <p>
+    <strong>
+      What is the correct action?
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="option-button pallet-option"
+    data-value="wrong"
+    onclick="selectPalletOption(this)">
+    Leave it in place because it has not fallen yet.
+  </button>
+
+  <button
+    type="button"
+    class="option-button pallet-option"
+    data-value="partial"
+    onclick="selectPalletOption(this)">
+    Place a warning sign nearby
+    and continue normal work around the pallet.
+  </button>
+
+  <button
+    type="button"
+    class="option-button pallet-option"
+    data-value="correct"
+    onclick="selectPalletOption(this)">
+    Isolate the area
+    and correct or remove the pallet
+    using suitable equipment and a safe procedure.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitPalletScenario()">
+    Submit Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetPalletScenario()">
+    Reset Scenario
+  </button>
+
+  <div
+    id="palletFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     STOP WORK
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    When Should Work Stop?
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">⛓️</span>
+      <h3>
+        Damaged Sling
+      </h3>
+      <p>
+        When visible wear or damage
+        is found on lifting accessories.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⚖️</span>
+      <h3>
+        Load Instability
+      </h3>
+      <p>
+        When the load tilts,
+        shifts or behaves unpredictably.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👷</span>
+      <h3>
+        Person Enters the Area
+      </h3>
+      <p>
+        When any person enters
+        the danger zone.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">❓</span>
+      <h3>
+        Unknown Load Weight
+      </h3>
+      <p>
+        When the weight of the load
+        or the suitability of the lifting equipment
+        has not been confirmed.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+      <h3>
+        Unstable Pallet
+      </h3>
+      <p>
+        When there is a risk
+        that a pallet or its contents may fall.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔧</span>
+      <h3>
+        Equipment Fault
+      </h3>
+      <p>
+        When abnormal operation,
+        unusual noise or a technical defect is identified.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Mini Quiz
+  </h2>
+
+  <form id="quizForm">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Who may stand beneath a suspended load?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        The operator, provided they are wearing a safety helmet.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        No one.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        A trained worker for a few seconds.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. What should be done before the load is fully lifted?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Lift the load directly to maximum height.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Carry out a controlled test lift
+        to confirm that the load is stable.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Increase lifting speed
+        to reduce the time the load is suspended.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. What should be done with an unstable pallet in racking?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Leave it until the end of the shift.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Push it manually from ground level.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        Control the area
+        and correct the pallet
+        using a suitable safe procedure.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. When may lifting continue if the load weight is unknown?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        When the load appears light.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        When the operator is highly experienced.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        Only after the load weight
+        and suitability of the lifting equipment
+        have been confirmed.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Submit Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Reset Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Key Takeaways
+  </h2>
+
+  <div class="takeaway">
+    <span>🏗️</span>
+
+    <div>
+      Every lifting operation should be planned before it begins.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>⛓️</span>
+
+    <div>
+      Use only suitable and inspected lifting accessories.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🚧</span>
+
+    <div>
+      No person should ever stand beneath a suspended load.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>📦</span>
+
+    <div>
+      Pallets must be stable,
+      correctly positioned
+      and stored within the limits of the racking system.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛑</span>
+
+    <div>
+      If there is uncertainty,
+      instability or a change in conditions,
+      stop and reassess before continuing.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Industrial Health & Safety Training | Module 19
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   PHOTO HOTSPOTS
+   ===================================================== */
+
+let transferPointsFound = 0;
+const totalTransferPoints = 6;
+
+function findTransferPoint(button){
+
+  const score =
+    document.getElementById("transferScore");
+
+  const feedback =
+    document.getElementById("transferFeedback");
+
+  const instruction =
+    document.getElementById("transferInstruction");
+
+  if(!button.classList.contains("found")){
+
+    button.classList.add("found");
+
+    button.textContent = "✓";
+
+    transferPointsFound++;
+
+    score.textContent =
+      transferPointsFound;
+  }
+
+  feedback.style.display = "block";
+
+  feedback.className =
+    "feedback success";
+
+  feedback.innerHTML =
+    button.dataset.message;
+
+  if(transferPointsFound === totalTransferPoints){
+
+    instruction.textContent =
+      "Activity completed.";
+
+    feedback.innerHTML +=
+      "<br><br><strong>Excellent!</strong> " +
+      "You identified all six critical control points.";
+  }
+}
+
+function resetTransferActivity(){
+
+  transferPointsFound = 0;
+
+  document
+    .querySelectorAll(".hotspot")
+    .forEach(function(button){
+
+      button.classList.remove("found");
+
+      button.textContent =
+        button.dataset.original;
+
+    });
+
+  document.getElementById(
+    "transferScore"
+  ).textContent = "0";
+
+  document.getElementById(
+    "transferInstruction"
+  ).textContent =
+    "Select all six markers.";
+
+  const feedback =
+    document.getElementById(
+      "transferFeedback"
+    );
+
+  feedback.style.display = "none";
+
+  feedback.className =
+    "feedback";
+
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   LIFTING SCENARIO
+   ===================================================== */
+
+let selectedLiftingDecision = null;
+
+function selectLiftingOption(button){
+
+  document
+    .querySelectorAll(".lifting-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedLiftingDecision =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById(
+      "liftingFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitLiftingScenario(){
+
+  const feedback =
+    document.getElementById(
+      "liftingFeedback"
+    );
+
+  feedback.style.display = "block";
+
+  if(!selectedLiftingDecision){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting.";
+
+    return;
+  }
+
+  if(selectedLiftingDecision === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Correct. The load movement must stop immediately. " +
+      "The lift may continue only when the area beneath and around the load is completely clear.";
+
+  }else if(selectedLiftingDecision === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "A warning alone is not sufficient. " +
+      "The load movement must stop until the person has left the danger zone.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Incorrect. Even a few seconds beneath a suspended load " +
+      "can result in fatal injury.";
+  }
+}
+
+function resetLiftingScenario(){
+
+  selectedLiftingDecision = null;
+
+  document
+    .querySelectorAll(".lifting-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "liftingFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   PALLET SCENARIO
+   ===================================================== */
+
+let selectedPalletDecision = null;
+
+function selectPalletOption(button){
+
+  document
+    .querySelectorAll(".pallet-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedPalletDecision =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById(
+      "palletFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitPalletScenario(){
+
+  const feedback =
+    document.getElementById(
+      "palletFeedback"
+    );
+
+  feedback.style.display = "block";
+
+  if(!selectedPalletDecision){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting.";
+
+    return;
+  }
+
+  if(selectedPalletDecision === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Correct. An unstable pallet may fall without warning. " +
+      "The area should be controlled and the pallet repositioned or removed " +
+      "using suitable equipment and a safe procedure.";
+
+  }else if(selectedPalletDecision === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Warning signage alone does not eliminate " +
+      "the risk of the pallet falling.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Incorrect. The fact that the pallet has not yet fallen " +
+      "does not mean that it is safe.";
+  }
+}
+
+function resetPalletScenario(){
+
+  selectedPalletDecision = null;
+
+  document
+    .querySelectorAll(".pallet-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "palletFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Please answer all four questions before submitting the quiz.";
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "Excellent! You scored " +
+      score +
+      "/" +
+      total +
+      ". You understand the key principles of safe lifting and pallet storage.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Good effort. You scored " +
+      score +
+      "/" +
+      total +
+      ". Review the exclusion zone, load attachment and pallet stability.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score +
+      "/" +
+      total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  document.getElementById(
+    "progressBar"
+  ).style.width = "0%";
+
+  document.getElementById(
+    "quizProgress"
+  ).setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  const result =
+    document.getElementById("quizResult");
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector('input[name="q1"]');
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

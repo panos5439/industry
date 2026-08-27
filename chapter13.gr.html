@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Ενότητα 13 | Εργασία σε Ύψος</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:white;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  color:var(--primary);
+  margin-top:0;
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  background:white;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  font-size:2rem;
+  display:block;
+  margin-bottom:10px;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  padding:18px;
+  border-radius:12px;
+  margin-top:16px;
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  padding:18px;
+  border-radius:12px;
+}
+
+.step-card{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+/* =====================================================
+   GENERAL BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  margin-top:12px;
+  font-weight:bold;
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   SAFETY IMAGE
+   ===================================================== */
+
+.safety-image-container{
+  width:100%;
+  margin-top:18px;
+  margin-bottom:16px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:#eef4fb;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
+}
+
+.safety-image{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:cover;
+}
+
+/* =====================================================
+   PRACTICE / SCENARIO OPTIONS
+   ===================================================== */
+
+.practice-option,
+.scenario-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#eef4fb;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:15px 17px;
+  border-radius:12px;
+  margin:10px 0;
+  font-weight:500;
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+/* Light hover for readability */
+.practice-option:hover,
+.practice-option:focus,
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  color:#1f2933;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.6);
+  outline-offset:2px;
+}
+
+/* Clear selected state */
+.practice-option.selected,
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.practice-option.selected:hover,
+.practice-option.selected:focus,
+.scenario-option.selected:hover,
+.scenario-option.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+  border-color:var(--primary);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  background:#ffffff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  cursor:pointer;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  background:#e8eef5;
+  border-radius:999px;
+  height:18px;
+  overflow:hidden;
+  margin-top:18px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+  transition:width .4s ease;
+}
+
+.takeaway{
+  font-size:1.15rem;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 20px;
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 13: Εργασία σε Ύψος
+  </h1>
+
+  <p>
+    Η εργασία σε ύψος μπορεί να οδηγήσει σε σοβαρούς
+    ή θανατηφόρους τραυματισμούς. Η πρόληψη πτώσης
+    πρέπει να σχεδιάζεται πριν ξεκινήσει η εργασία.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Στόχοι μάθησης
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🧗</span>
+      Κατανοεί τι θεωρείται εργασία σε ύψος.
+    </div>
+
+    <div class="card">
+      <span class="icon">⬇️</span>
+      Αναγνωρίζει κινδύνους πτώσης εργαζομένων και αντικειμένων.
+    </div>
+
+    <div class="card">
+      <span class="icon">🪜</span>
+      Χρησιμοποιεί σκάλες και πλατφόρμες με ασφαλή τρόπο.
+    </div>
+
+    <div class="card">
+      <span class="icon">🛡️</span>
+      Ελέγχει και χρησιμοποιεί κατάλληλα μέσα προστασίας από πτώση.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DEFINITION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Τι είναι εργασία σε ύψος;
+  </h2>
+
+  <p>
+    Εργασία σε ύψος είναι κάθε εργασία όπου υπάρχει πιθανότητα
+    πτώσης από ένα επίπεδο σε άλλο, ακόμα και αν το ύψος φαίνεται
+    μικρό. Μπορεί να περιλαμβάνει σκάλες, πλατφόρμες, ικριώματα,
+    οροφές, δεξαμενές, φορτηγά ή μηχανήματα.
+  </p>
+
+  <div class="highlight">
+
+    <strong>
+      Βασικό μήνυμα:
+    </strong>
+
+    Δεν είναι μόνο το ύψος που δημιουργεί κίνδυνο.
+    Σημασία έχουν η επιφάνεια εργασίας, η διάρκεια,
+    η πρόσβαση, τα εργαλεία, ο καιρός και η πιθανότητα
+    πτώσης αντικειμένων.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MAIN HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Κύριοι κίνδυνοι
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">⬇️</span>
+
+      <h3>
+        Πτώση εργαζομένου
+      </h3>
+
+      <p>
+        Από σκάλα, πλατφόρμα, άκρο δαπέδου,
+        άνοιγμα ή ικρίωμα.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">📦</span>
+
+      <h3>
+        Πτώση αντικειμένων
+      </h3>
+
+      <p>
+        Εργαλεία ή υλικά μπορεί να πέσουν και να
+        τραυματίσουν άτομα από κάτω.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🪜</span>
+
+      <h3>
+        Ακατάλληλη σκάλα
+      </h3>
+
+      <p>
+        Φθαρμένη, λάθος τοποθετημένη ή χρησιμοποιημένη
+        για λάθος εργασία.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🌧️</span>
+
+      <h3>
+        Περιβαλλοντικές συνθήκες
+      </h3>
+
+      <p>
+        Άνεμος, βροχή, ολισθηρές επιφάνειες
+        ή κακός φωτισμός.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔧</span>
+
+      <h3>
+        Κακή χρήση εργαλείων
+      </h3>
+
+      <p>
+        Μεταφορά εργαλείων στο χέρι αντί για
+        κατάλληλη θήκη ή ιμάντα.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚫</span>
+
+      <h3>
+        Απουσία προστασίας
+      </h3>
+
+      <p>
+        Έλλειψη κιγκλιδωμάτων, καλυμμάτων,
+        ζώνης ή σημείου αγκύρωσης.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     HIERARCHY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Ιεράρχηση ελέγχου στην εργασία σε ύψος
+  </h2>
+
+  <div class="grid">
+
+    <div class="card step-card">
+
+      <h3>
+        1. Απόφυγε την εργασία σε ύψος
+      </h3>
+
+      <p>
+        Αν μπορείς να κάνεις την εργασία από το έδαφος,
+        αυτή είναι η ασφαλέστερη λύση.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        2. Πρόλαβε την πτώση
+      </h3>
+
+      <p>
+        Χρησιμοποίησε πλατφόρμες, κιγκλιδώματα,
+        ικριώματα ή ασφαλή πρόσβαση.
+      </p>
+
+    </div>
+
+    <div class="card step-card">
+
+      <h3>
+        3. Μείωσε τις συνέπειες
+      </h3>
+
+      <p>
+        Όταν δεν μπορεί να αποφευχθεί ο κίνδυνος,
+        χρησιμοποίησε κατάλληλο σύστημα συγκράτησης
+        ή ανακοπής πτώσης.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>
+      Σημαντικό:
+    </strong>
+
+    Η ζώνη ασφαλείας δεν αρκεί από μόνη της.
+    Χρειάζεται σωστό σημείο αγκύρωσης,
+    κατάλληλος ιμάντας, έλεγχος εξοπλισμού
+    και σχέδιο διάσωσης.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     LADDER SAFETY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Ασφαλής χρήση σκάλας
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🔍</span>
+
+      <h3>
+        Έλεγξε πριν τη χρήση
+      </h3>
+
+      <p>
+        Έλεγξε σκαλοπάτια, πέλματα, σταθερότητα,
+        φθορές και καθαρότητα.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">📐</span>
+
+      <h3>
+        Σωστή τοποθέτηση
+      </h3>
+
+      <p>
+        Η σκάλα πρέπει να πατά σε σταθερή επιφάνεια
+        και να έχει σωστή γωνία.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🤲</span>
+
+      <h3>
+        Τρία σημεία επαφής
+      </h3>
+
+      <p>
+        Διατήρησε πάντα δύο χέρια και ένα πόδι
+        ή δύο πόδια και ένα χέρι σε επαφή.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚫</span>
+
+      <h3>
+        Μην υπερεκτείνεσαι
+      </h3>
+
+      <p>
+        Αν δεν φτάνεις, κατέβα και μετακίνησε τη σκάλα.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     FALLING OBJECTS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Πτώση αντικειμένων
+  </h2>
+
+  <p>
+    Η εργασία σε ύψος δεν είναι επικίνδυνη μόνο για αυτόν
+    που εργάζεται επάνω. Κίνδυνο διατρέχουν και όσοι
+    βρίσκονται χαμηλότερα.
+  </p>
+
+  <div class="safety-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/highgr.png"
+      alt="Εργασία σε ύψος με οριοθετημένη ζώνη αποκλεισμού κάτω από την περιοχή εργασίας"
+      class="safety-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+  </div>
+
+  <div class="success">
+
+    <strong>
+      Σωστή πρακτική:
+    </strong>
+
+    Χρησιμοποίησε θήκες εργαλείων,
+    ιμάντες συγκράτησης εργαλείων
+    και σαφώς οριοθετημένη ζώνη αποκλεισμού
+    κάτω από την εργασία.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PRACTICE ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική άσκηση: Ποια πρακτική είναι ασφαλής;
+  </h2>
+
+  <p>
+    Επίλεξε τη σωστή πρακτική πριν ξεκινήσει εργασία σε ύψος.
+  </p>
+
+  <button
+    type="button"
+    class="practice-option"
+    data-type="wrong"
+    onclick="selectPractice(this)">
+
+    Χρησιμοποιώ οποιαδήποτε σκάλα είναι διαθέσιμη,
+    αρκεί να φτάνω στο σημείο εργασίας.
+
+  </button>
+
+  <button
+    type="button"
+    class="practice-option"
+    data-type="wrong"
+    onclick="selectPractice(this)">
+
+    Φοράω ζώνη ασφαλείας χωρίς να ελέγξω
+    το σημείο αγκύρωσης.
+
+  </button>
+
+  <button
+    type="button"
+    class="practice-option"
+    data-type="correct"
+    onclick="selectPractice(this)">
+
+    Ελέγχω τον εξοπλισμό, επιλέγω ασφαλή πρόσβαση,
+    προστατεύω την περιοχή κάτω από την εργασία
+    και χρησιμοποιώ κατάλληλη προστασία από πτώση.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitPractice()">
+
+    Έλεγχος απάντησης
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetPractice()">
+
+    Επαναφορά άσκησης
+
+  </button>
+
+  <div
+    id="practiceFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Σενάριο Απόφασης
+  </h2>
+
+  <p>
+    Πρέπει να αλλάξεις έναν αισθητήρα σε ύψος.
+    Η εργασία θα κρατήσει μόνο δύο λεπτά και κάποιος
+    προτείνει να ανέβεις πάνω σε παλέτα με περονοφόρο.
+  </p>
+
+  <p>
+    <strong>
+      Τι κάνεις;
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Συμφωνώ, αφού η εργασία είναι πολύ σύντομη.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Ανεβαίνω προσεκτικά και ζητώ από τον χειριστή
+    να μη μετακινήσει το περονοφόρο.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Δεν το κάνω. Ζητώ κατάλληλο μέσο πρόσβασης,
+    όπως εγκεκριμένη πλατφόρμα ή άλλο ασφαλές
+    σύστημα εργασίας.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+
+    Οριστική απάντηση
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+
+    Επαναφορά σεναρίου
+
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Mini Quiz
+  </h2>
+
+  <form id="quizForm">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Τι θεωρείται εργασία σε ύψος;
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Κάθε εργασία όπου υπάρχει πιθανότητα
+        πτώσης από ένα επίπεδο σε άλλο.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Μόνο εργασία πάνω από 10 μέτρα.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Μόνο εργασία σε στέγες.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Ποια είναι η καλύτερη επιλογή στην ιεράρχηση ελέγχου;
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Να αποφύγω την εργασία σε ύψος αν μπορεί
+        να γίνει από το έδαφος.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Να χρησιμοποιήσω ζώνη χωρίς έλεγχο αγκύρωσης.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Να ανέβω γρήγορα για να τελειώσω.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Στη σκάλα πρέπει να διατηρώ:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Τρία σημεία επαφής.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Μόνο ένα χέρι ελεύθερο.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Όσο μεγαλύτερη έκταση γίνεται.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Για πτώση αντικειμένων από ύψος:
+        </strong>
+      </p>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Χρησιμοποιώ θήκες/ιμάντες εργαλείων
+        και ζώνη αποκλεισμού.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Αφήνω εργαλεία στην άκρη της πλατφόρμας.
+
+      </label>
+
+      <label>
+
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Ενημερώνω μόνο αν πέσει κάτι.
+
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+
+        Υποβολή Quiz
+
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+
+        Επαναφορά Quiz
+
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Βασικά σημεία
+  </h2>
+
+  <p class="takeaway">
+    Η εργασία σε ύψος πρέπει να σχεδιάζεται πριν ξεκινήσει.
+  </p>
+
+  <p class="takeaway">
+    Πρώτα εξετάζουμε αν μπορούμε να αποφύγουμε
+    την εργασία σε ύψος.
+  </p>
+
+  <p class="takeaway">
+    Η σκάλα δεν είναι πάντα η σωστή λύση.
+  </p>
+
+  <p class="takeaway">
+    Η προστασία από πτώση χρειάζεται σωστό εξοπλισμό,
+    αγκύρωση και σχέδιο διάσωσης.
+  </p>
+
+  <p class="takeaway">
+    Προστάτευσε και όσους εργάζονται κάτω
+    από την περιοχή εργασίας.
+  </p>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 13
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   PRACTICE ACTIVITY
+   ===================================================== */
+
+let selectedPractice = null;
+
+function selectPractice(button){
+
+  document
+    .querySelectorAll(".practice-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedPractice =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById(
+      "practiceFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.innerHTML =
+    "";
+}
+
+function submitPractice(){
+
+  const feedback =
+    document.getElementById(
+      "practiceFeedback"
+    );
+
+  if(!selectedPractice){
+
+    feedback.style.display =
+      "block";
+
+    feedback.className =
+      "feedback highlight";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν κάνεις έλεγχο.";
+
+    return;
+  }
+
+  feedback.style.display =
+    "block";
+
+  if(selectedPractice === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Η εργασία σε ύψος απαιτεί έλεγχο εξοπλισμού, ασφαλή πρόσβαση, προστασία από πτώση και προστασία της περιοχής κάτω από την εργασία.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Η εργασία σε ύψος δεν γίνεται με πρόχειρες λύσεις ή χωρίς έλεγχο του εξοπλισμού και του σημείου αγκύρωσης.";
+  }
+}
+
+function resetPractice(){
+
+  selectedPractice =
+    null;
+
+  document
+    .querySelectorAll(".practice-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "practiceFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.className =
+    "feedback";
+
+  feedback.innerHTML =
+    "";
+}
+
+/* =====================================================
+   DECISION SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.innerHTML =
+    "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  if(!selectedScenario){
+
+    feedback.style.display =
+      "block";
+
+    feedback.className =
+      "feedback highlight";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν πατήσεις οριστική απάντηση.";
+
+    return;
+  }
+
+  feedback.style.display =
+    "block";
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Η σύντομη διάρκεια δεν δικαιολογεί μη ασφαλή πρόσβαση. Χρειάζεται κατάλληλο και εγκεκριμένο μέσο εργασίας.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Η χρήση παλέτας σε περονοφόρο δεν αποτελεί ασφαλές μέσο πρόσβασης. Για ανύψωση προσώπων απαιτείται κατάλληλος και εγκεκριμένος εξοπλισμός σύμφωνα με τις διαδικασίες του χώρου.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Το ότι η εργασία είναι σύντομη δεν μειώνει τη σοβαρότητα μιας πιθανής πτώσης.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario =
+    null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById(
+      "scenarioFeedback"
+    );
+
+  feedback.style.display =
+    "none";
+
+  feedback.className =
+    "feedback";
+
+  feedback.innerHTML =
+    "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById(
+      "quizForm"
+    );
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  const progressBar =
+    document.getElementById(
+      "progressBar"
+    );
+
+  const progressBox =
+    document.getElementById(
+      "quizProgress"
+    );
+
+  let score = 0;
+  let answered = 0;
+
+  const total = 4;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  /* Require every question to be answered */
+
+  if(answered < total){
+
+    result.style.display =
+      "block";
+
+    result.className =
+      "feedback highlight";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  result.style.display =
+    "block";
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "Άριστα! Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Κατανοείς τις βασικές αρχές ασφαλούς εργασίας σε ύψος.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback highlight";
+
+    result.innerHTML =
+      "Καλή προσπάθεια. Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Ξαναδές την ιεράρχηση ελέγχου, την ασφαλή πρόσβαση και την προστασία από πτώση αντικειμένων.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById(
+      "quizForm"
+    );
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  const progressBar =
+    document.getElementById(
+      "progressBar"
+    );
+
+  const progressBox =
+    document.getElementById(
+      "quizProgress"
+    );
+
+  form.reset();
+
+  progressBar.style.width =
+    "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display =
+    "none";
+
+  result.className =
+    "feedback";
+
+  result.innerHTML =
+    "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+</script>
+
+</body>
+</html>

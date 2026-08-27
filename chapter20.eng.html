@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Module 20 | Industrial Hygiene</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.danger,
+.success,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+.step-card{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+/* =====================================================
+   TAGS
+   ===================================================== */
+
+.tag{
+  display:inline-block;
+  padding:5px 10px;
+  margin-bottom:8px;
+  border-radius:999px;
+  font-size:.85rem;
+  font-weight:bold;
+}
+
+.tag-danger{
+  background:#ffe2e2;
+  color:#a31515;
+}
+
+.tag-warning{
+  background:#fff1b8;
+  color:#795800;
+}
+
+.tag-info{
+  background:#dcecff;
+  color:#123c69;
+}
+
+/* =====================================================
+   CHECKLIST
+   ===================================================== */
+
+.checklist{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.checklist li{
+  position:relative;
+  padding:10px 0 10px 34px;
+  border-bottom:1px solid #edf1f5;
+}
+
+.checklist li:last-child{
+  border-bottom:none;
+}
+
+.checklist li::before{
+  content:"✓";
+  position:absolute;
+  left:0;
+  top:10px;
+  width:23px;
+  height:23px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--success);
+  color:#fff;
+  font-size:.85rem;
+  font-weight:bold;
+}
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.table-wrapper{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  min-width:760px;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:14px;
+  border:1px solid var(--border);
+  text-align:left;
+  vertical-align:top;
+}
+
+th{
+  background:var(--primary);
+  color:#fff;
+}
+
+tbody tr:nth-child(even){
+  background:#f8fafc;
+}
+
+/* =====================================================
+   PHOTO ACTIVITY
+   ===================================================== */
+
+.safety-image-container{
+  position:relative;
+  width:100%;
+  margin-top:18px;
+  margin-bottom:16px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:#eef4fb;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
+}
+
+.safety-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   HOTSPOTS
+   ===================================================== */
+
+.hotspot{
+  position:absolute;
+  z-index:10;
+
+  width:52px;
+  height:52px;
+
+  display:grid;
+  place-items:center;
+
+  border:4px solid #fff;
+  border-radius:50%;
+
+  background:var(--accent);
+  color:#fff;
+
+  font-size:1.1rem;
+  font-weight:bold;
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.38),
+    0 0 0 2px rgba(214,40,40,.20);
+
+  transition:
+    transform .2s ease,
+    background-color .2s ease;
+}
+
+.hotspot:hover,
+.hotspot:focus{
+  transform:scale(1.09);
+  outline:4px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.hotspot.found{
+  background:var(--success);
+}
+
+/*
+  1 = Noise / machine
+  2 = Dust / airborne particles
+  3 = Vibration / equipment
+  4 = Heat stress / hot environment
+*/
+
+.hs-noise{
+  left:22%;
+  top:51%;
+}
+
+.hs-dust{
+  left:42%;
+  top:20%;
+}
+
+.hs-vibration{
+  right:22%;
+  bottom:20%;
+}
+
+.hs-heat{
+  right:12%;
+  top:45%;
+}
+
+.activity-status{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+
+  margin-top:16px;
+  padding:14px 16px;
+
+  border-radius:12px;
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   OPTIONS
+   ===================================================== */
+
+.option-button{
+  display:block;
+  width:100%;
+
+  margin:10px 0;
+  padding:15px 17px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+  font-weight:500;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.option-button:hover,
+.option-button:focus{
+  background:#dcecff;
+  color:#1f2933;
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.6);
+  outline-offset:2px;
+}
+
+.option-button.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.option-button.selected:hover,
+.option-button.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+  margin-top:18px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .hotspot{
+    width:43px;
+    height:43px;
+    font-size:.9rem;
+  }
+
+  .hs-noise{
+    left:19%;
+    top:50%;
+  }
+
+  .hs-dust{
+    left:40%;
+    top:18%;
+  }
+
+  .hs-vibration{
+    right:19%;
+    bottom:18%;
+  }
+
+  .hs-heat{
+    right:9%;
+    top:43%;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Module 20: Industrial Hygiene
+  </h1>
+
+  <p>
+    Industrial Hygiene focuses on identifying,
+    assessing and preventing worker exposure
+    to physical and chemical agents such as noise,
+    dust, vibration and heat stress.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Learning Objectives
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔊</span>
+      <h3>Noise</h3>
+      <p>
+        Identify sources of high noise
+        and understand the main measures used to prevent harmful exposure.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌫️</span>
+      <h3>Dust & Airborne Particles</h3>
+      <p>
+        Understand how airborne contaminants are generated
+        and how they may enter the body.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🫨</span>
+      <h3>Vibration</h3>
+      <p>
+        Recognise hazards associated with
+        hand tools and mechanical equipment.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌡️</span>
+      <h3>Heat Stress</h3>
+      <p>
+        Recognise warning signs
+        and effective preventive measures.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     WHY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Why is Industrial Hygiene Important?
+  </h2>
+
+  <p>
+    Occupational exposure does not always result in an immediate injury.
+    Health effects may develop gradually
+    after repeated or long-term exposure.
+  </p>
+
+  <div class="danger">
+
+    <strong>
+      Why first:
+    </strong>
+
+    Hearing loss,
+    respiratory problems,
+    musculoskeletal disorders
+    and heat-related illness
+    can develop without an obvious accident.
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>
+      Key principle:
+    </strong>
+
+    We do not rely only on Personal Protective Equipment.
+    Priority should be given to elimination,
+    substitution and engineering controls at the source of exposure.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MAIN HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Main Industrial Hygiene Hazards
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔊</span>
+      <span class="tag tag-danger">Noise</span>
+
+      <h3>
+        High Noise Levels
+      </h3>
+
+      <p>
+        Presses, machinery,
+        tools and production equipment
+        can generate harmful levels of noise.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌫️</span>
+      <span class="tag tag-warning">Particles</span>
+
+      <h3>
+        Dust and Fumes
+      </h3>
+
+      <p>
+        Grinding, cutting,
+        material handling and casting operations
+        can generate airborne contaminants.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🫨</span>
+      <span class="tag tag-warning">Vibration</span>
+
+      <h3>
+        Hand-Arm or Whole-Body Vibration
+      </h3>
+
+      <p>
+        Tools,
+        machinery or vehicles
+        can transfer vibration to the worker.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌡️</span>
+      <span class="tag tag-danger">Heat</span>
+
+      <h3>
+        Heat Stress
+      </h3>
+
+      <p>
+        Furnaces,
+        foundries,
+        hot processes
+        and high ambient temperatures
+        increase the worker's thermal load.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     HIERARCHY OF CONTROL
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Hierarchy of Controls
+  </h2>
+
+  <div class="grid">
+
+    <div class="card step-card">
+      <h3>1. Elimination</h3>
+      <p>
+        Remove the hazard source where reasonably practicable.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>2. Substitution</h3>
+      <p>
+        Use a safer process or a less hazardous material.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>3. Engineering Controls</h3>
+      <p>
+        Use enclosure,
+        extraction,
+        ventilation and isolation of the hazard source.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>4. Administrative Controls</h3>
+      <p>
+        Limit exposure time,
+        organise work appropriately
+        and rotate tasks where suitable.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>5. PPE</h3>
+      <p>
+        Use suitable personal protective equipment
+        where the risk cannot be adequately controlled by other means.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     NOISE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Noise
+  </h2>
+
+  <p>
+    Prolonged exposure to high noise levels
+    can cause permanent hearing loss.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔧</span>
+      <h3>Control at Source</h3>
+      <p>
+        Maintain equipment,
+        replace noisy processes where possible
+        and use suitable acoustic enclosures.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚪</span>
+      <h3>Isolation</h3>
+      <p>
+        Restrict access
+        or physically separate high-noise areas.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⏱️</span>
+      <h3>Exposure Time</h3>
+      <p>
+        Limit the duration of exposure
+        in high-noise areas.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🎧</span>
+      <h3>Hearing Protection</h3>
+      <p>
+        Use suitable earmuffs
+        or earplugs where required.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DUST
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Dust and Airborne Particles
+  </h2>
+
+  <p>
+    Visible dust is only part of the problem.
+    Very small particles may remain suspended in the air
+    and enter the respiratory system.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🌬️</span>
+      <h3>Local Exhaust Ventilation</h3>
+      <p>
+        Capture dust and contaminants
+        as close to the source as possible.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">💧</span>
+      <h3>Wet Methods</h3>
+      <p>
+        Where suitable,
+        wet methods can help reduce
+        the re-suspension of particles.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧹</span>
+      <h3>Housekeeping</h3>
+      <p>
+        Prevent the accumulation
+        and re-suspension of dust in work areas.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">😷</span>
+      <h3>Respiratory Protection</h3>
+      <p>
+        Use only suitable respiratory protective equipment
+        in accordance with the risk assessment.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     VIBRATION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Vibration
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🛠️</span>
+      <h3>Suitable Tools</h3>
+      <p>
+        Select equipment
+        with lower vibration levels where reasonably practicable.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔧</span>
+      <h3>Maintenance</h3>
+      <p>
+        Worn components
+        can significantly increase vibration levels.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⏳</span>
+      <h3>Limit Exposure</h3>
+      <p>
+        Control the duration of continuous use
+        of high-vibration tools.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">✋</span>
+      <h3>Report Symptoms</h3>
+      <p>
+        Numbness,
+        tingling or pain
+        should be reported at an early stage.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     HEAT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Heat Stress
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">💧</span>
+      <h3>Hydration</h3>
+      <p>
+        Drink water regularly
+        before severe thirst develops.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🕶️</span>
+      <h3>Rest Breaks</h3>
+      <p>
+        Take planned breaks
+        in a cooler area where required.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌬️</span>
+      <h3>Ventilation</h3>
+      <p>
+        Use engineering controls
+        to reduce the thermal load.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👀</span>
+      <h3>Monitor Symptoms</h3>
+      <p>
+        Dizziness,
+        weakness,
+        headache or confusion
+        require immediate action.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>
+      Serious warning:
+    </strong>
+
+    Confusion,
+    disorientation
+    or loss of consciousness
+    in a hot environment
+    must be treated as an emergency.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE IMAGE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Interactive Activity: Identify Industrial Hygiene Hazards
+  </h2>
+
+  <p>
+    Select the four red markers
+    to identify the main exposure hazards
+    within the industrial workplace.
+  </p>
+
+  <div class="safety-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/noise.png"
+      alt="Industrial foundry with mechanical equipment, a large press, worker, airborne particles and hot processes"
+      class="safety-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+    <button
+      type="button"
+      class="hotspot hs-noise"
+      data-original="1"
+      data-message="<strong>Noise:</strong> Large machinery, presses and industrial equipment can generate harmful levels of noise. Priority should be given to reducing noise at source, with suitable hearing protection used where required."
+      onclick="findHygieneHazard(this)">
+      1
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-dust"
+      data-original="2"
+      data-message="<strong>Dust and airborne particles:</strong> Particles generated by industrial processes may be inhaled. Effective ventilation, good housekeeping and appropriate control at source are required."
+      onclick="findHygieneHazard(this)">
+      2
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-vibration"
+      data-original="3"
+      data-message="<strong>Vibration:</strong> Tools and equipment can transfer vibration to the hands or whole body. Suitable equipment selection, maintenance and control of exposure time are important preventive measures."
+      onclick="findHygieneHazard(this)">
+      3
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-heat"
+      data-original="4"
+      data-message="<strong>Heat stress:</strong> Foundries, furnaces and hot processes can significantly increase the worker's thermal load. Hydration, rest breaks and engineering controls are essential."
+      onclick="findHygieneHazard(this)">
+      4
+    </button>
+
+  </div>
+
+  <div class="activity-status">
+
+    <strong>
+      Hazards identified:
+      <span id="hygieneScore">0</span>/4
+    </strong>
+
+    <span id="hygieneInstruction">
+      Select all four markers.
+    </span>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetHygieneActivity()">
+    Restart Activity
+  </button>
+
+  <div
+    id="hygieneFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SCENARIO 1
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Practical Scenario: Increased Dust Levels
+  </h2>
+
+  <p>
+    During a production task,
+    the worker notices a much greater
+    amount of dust in the air than usual.
+    The local exhaust ventilation system
+    appears not to be operating correctly.
+  </p>
+
+  <p>
+    <strong>
+      What should be done?
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="option-button dust-option"
+    data-value="wrong"
+    onclick="selectDustOption(this)">
+    Continue working because the worker is already wearing a mask.
+  </button>
+
+  <button
+    type="button"
+    class="option-button dust-option"
+    data-value="partial"
+    onclick="selectDustOption(this)">
+    Open a nearby door and continue production.
+  </button>
+
+  <button
+    type="button"
+    class="option-button dust-option"
+    data-value="correct"
+    onclick="selectDustOption(this)">
+    Stop the work,
+    report the ventilation fault
+    and restore effective exposure control
+    before restarting the process.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitDustScenario()">
+    Submit Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetDustScenario()">
+    Reset Scenario
+  </button>
+
+  <div
+    id="dustFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SCENARIO 2
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Practical Scenario: Heat Stress
+  </h2>
+
+  <p>
+    A worker in a hot work area
+    begins to experience severe weakness,
+    dizziness and headache.
+  </p>
+
+  <p>
+    <strong>
+      What is the correct response?
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="option-button heat-option"
+    data-value="wrong"
+    onclick="selectHeatOption(this)">
+    Continue working until the next scheduled break.
+  </button>
+
+  <button
+    type="button"
+    class="option-button heat-option"
+    data-value="partial"
+    onclick="selectHeatOption(this)">
+    Drink some water and immediately continue working.
+  </button>
+
+  <button
+    type="button"
+    class="option-button heat-option"
+    data-value="correct"
+    onclick="selectHeatOption(this)">
+    Stop work,
+    move to a safer and cooler area
+    and follow the established response procedure.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitHeatScenario()">
+    Submit Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetHeatScenario()">
+    Reset Scenario
+  </button>
+
+  <div
+    id="heatFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     STOP WORK
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    When Should Work Stop?
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🌫️</span>
+      <h3>Increased Dust</h3>
+      <p>
+        When dust levels increase unusually
+        or ventilation is not operating correctly.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔊</span>
+      <h3>Noise Control Failure</h3>
+      <p>
+        When an enclosure,
+        barrier or other control measure
+        has been removed or has failed.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🫨</span>
+      <h3>Abnormal Vibration</h3>
+      <p>
+        When a tool or machine
+        develops unusually high vibration.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌡️</span>
+      <h3>Heat Stress Symptoms</h3>
+      <p>
+        When dizziness,
+        weakness,
+        confusion or other symptoms develop.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Mini Quiz
+  </h2>
+
+  <form id="quizForm">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. What is the preferred approach to controlling dust exposure?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Use respiratory protection only.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        Control the source,
+        use suitable ventilation
+        and use PPE as an additional measure where required.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Open doors and windows in every situation.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. What can long-term exposure to high noise levels cause?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Temporary discomfort only.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Permanent hearing loss.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Increased thirst only.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. What should be done if a tool develops unusually high vibration?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Continue using it until the end of the shift.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        Stop using the tool and have the equipment checked.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Hold the tool more tightly.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Which symptoms may indicate heat stress?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        Dizziness,
+        weakness,
+        headache or confusion.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Knee pain only.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Improved concentration.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Submit Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Reset Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Key Takeaways
+  </h2>
+
+  <div class="takeaway">
+    <span>🔊</span>
+    <div>
+      Noise should be controlled
+      as far as possible at the source.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🌫️</span>
+    <div>
+      Dust that cannot be seen
+      can still present a significant health hazard.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🫨</span>
+    <div>
+      Vibration exposure should be reduced
+      through suitable equipment,
+      maintenance and control of exposure time.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🌡️</span>
+    <div>
+      Symptoms of heat stress
+      must be recognised and addressed early.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛡️</span>
+    <div>
+      Priority should be given to engineering controls
+      rather than relying only on Personal Protective Equipment.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Industrial Health & Safety Training | Module 20
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   HOTSPOT ACTIVITY
+   ===================================================== */
+
+let hygieneHazardsFound = 0;
+const totalHygieneHazards = 4;
+
+function findHygieneHazard(button){
+
+  const score =
+    document.getElementById("hygieneScore");
+
+  const feedback =
+    document.getElementById("hygieneFeedback");
+
+  const instruction =
+    document.getElementById("hygieneInstruction");
+
+  if(!button.classList.contains("found")){
+
+    button.classList.add("found");
+    button.textContent = "✓";
+
+    hygieneHazardsFound++;
+
+    score.textContent =
+      hygieneHazardsFound;
+  }
+
+  feedback.style.display = "block";
+  feedback.className = "feedback success";
+  feedback.innerHTML = button.dataset.message;
+
+  if(hygieneHazardsFound === totalHygieneHazards){
+
+    instruction.textContent =
+      "Activity completed.";
+
+    feedback.innerHTML +=
+      "<br><br><strong>Excellent!</strong> " +
+      "You identified all four key Industrial Hygiene hazards.";
+  }
+}
+
+function resetHygieneActivity(){
+
+  hygieneHazardsFound = 0;
+
+  document
+    .querySelectorAll(".hotspot")
+    .forEach(function(button){
+
+      button.classList.remove("found");
+
+      button.textContent =
+        button.dataset.original;
+
+    });
+
+  document.getElementById(
+    "hygieneScore"
+  ).textContent = "0";
+
+  document.getElementById(
+    "hygieneInstruction"
+  ).textContent =
+    "Select all four markers.";
+
+  const feedback =
+    document.getElementById(
+      "hygieneFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   DUST SCENARIO
+   ===================================================== */
+
+let selectedDustDecision = null;
+
+function selectDustOption(button){
+
+  document
+    .querySelectorAll(".dust-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedDustDecision =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById("dustFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitDustScenario(){
+
+  const feedback =
+    document.getElementById("dustFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedDustDecision){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting.";
+
+    return;
+  }
+
+  if(selectedDustDecision === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Correct. Increased dust and a ventilation fault indicate that an important control measure is not working. " +
+      "The task should stop until effective exposure control has been restored.";
+
+  }else if(selectedDustDecision === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Opening a door is not a controlled engineering measure " +
+      "and may spread dust into other areas.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Incorrect. Respiratory protection should not be used as justification " +
+      "for continuing work when a primary exposure control has failed.";
+  }
+}
+
+function resetDustScenario(){
+
+  selectedDustDecision = null;
+
+  document
+    .querySelectorAll(".dust-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("dustFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   HEAT SCENARIO
+   ===================================================== */
+
+let selectedHeatDecision = null;
+
+function selectHeatOption(button){
+
+  document
+    .querySelectorAll(".heat-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedHeatDecision =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById("heatFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitHeatScenario(){
+
+  const feedback =
+    document.getElementById("heatFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedHeatDecision){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting.";
+
+    return;
+  }
+
+  if(selectedHeatDecision === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Correct. Dizziness, weakness and headache may indicate heat stress. " +
+      "Work should stop and the established response procedure should be followed.";
+
+  }else if(selectedHeatDecision === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Hydration is important, but once symptoms have developed " +
+      "it is not safe to immediately continue working.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Incorrect. Continued exposure may significantly worsen the worker's condition.";
+  }
+}
+
+function resetHeatScenario(){
+
+  selectedHeatDecision = null;
+
+  document
+    .querySelectorAll(".heat-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("heatFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Please answer all four questions before submitting.";
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "Excellent! You scored " +
+      score +
+      "/" +
+      total +
+      ". You understand the key principles of Industrial Hygiene.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Good effort. You scored " +
+      score +
+      "/" +
+      total +
+      ". Review dust, noise, vibration and heat-stress control.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score +
+      "/" +
+      total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  document.getElementById(
+    "progressBar"
+  ).style.width = "0%";
+
+  document.getElementById(
+    "quizProgress"
+  ).setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  const result =
+    document.getElementById("quizResult");
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector('input[name="q1"]');
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

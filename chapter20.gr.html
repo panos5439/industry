@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ενότητα 20 | Βιομηχανική Υγιεινή</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.danger,
+.success,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+.step-card{
+  border-left:8px solid var(--primary);
+  background:#f8fafc;
+}
+
+/* =====================================================
+   TAGS
+   ===================================================== */
+
+.tag{
+  display:inline-block;
+  padding:5px 10px;
+  margin-bottom:8px;
+  border-radius:999px;
+  font-size:.85rem;
+  font-weight:bold;
+}
+
+.tag-danger{
+  background:#ffe2e2;
+  color:#a31515;
+}
+
+.tag-warning{
+  background:#fff1b8;
+  color:#795800;
+}
+
+.tag-info{
+  background:#dcecff;
+  color:#123c69;
+}
+
+/* =====================================================
+   CHECKLIST
+   ===================================================== */
+
+.checklist{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.checklist li{
+  position:relative;
+  padding:10px 0 10px 34px;
+  border-bottom:1px solid #edf1f5;
+}
+
+.checklist li:last-child{
+  border-bottom:none;
+}
+
+.checklist li::before{
+  content:"✓";
+  position:absolute;
+  left:0;
+  top:10px;
+  width:23px;
+  height:23px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--success);
+  color:#fff;
+  font-size:.85rem;
+  font-weight:bold;
+}
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.table-wrapper{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  min-width:760px;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:14px;
+  border:1px solid var(--border);
+  text-align:left;
+  vertical-align:top;
+}
+
+th{
+  background:var(--primary);
+  color:#fff;
+}
+
+tbody tr:nth-child(even){
+  background:#f8fafc;
+}
+
+/* =====================================================
+   PHOTO ACTIVITY
+   ===================================================== */
+
+.safety-image-container{
+  position:relative;
+  width:100%;
+  margin-top:18px;
+  margin-bottom:16px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:#eef4fb;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
+}
+
+.safety-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   HOTSPOTS
+   ===================================================== */
+
+.hotspot{
+  position:absolute;
+  z-index:10;
+
+  width:52px;
+  height:52px;
+
+  display:grid;
+  place-items:center;
+
+  border:4px solid #fff;
+  border-radius:50%;
+
+  background:var(--accent);
+  color:#fff;
+
+  font-size:1.1rem;
+  font-weight:bold;
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.38),
+    0 0 0 2px rgba(214,40,40,.20);
+
+  transition:
+    transform .2s ease,
+    background-color .2s ease;
+}
+
+.hotspot:hover,
+.hotspot:focus{
+  transform:scale(1.09);
+  outline:4px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.hotspot.found{
+  background:var(--success);
+}
+
+/*
+  1 = Noise / machine
+  2 = Dust / airborne particles
+  3 = Vibration / equipment
+  4 = Heat stress / hot environment
+*/
+
+.hs-noise{
+  left:22%;
+  top:51%;
+}
+
+.hs-dust{
+  left:42%;
+  top:20%;
+}
+
+.hs-vibration{
+  right:22%;
+  bottom:20%;
+}
+
+.hs-heat{
+  right:12%;
+  top:45%;
+}
+
+.activity-status{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+
+  margin-top:16px;
+  padding:14px 16px;
+
+  border-radius:12px;
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   OPTIONS
+   ===================================================== */
+
+.option-button{
+  display:block;
+  width:100%;
+
+  margin:10px 0;
+  padding:15px 17px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+  font-weight:500;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.option-button:hover,
+.option-button:focus{
+  background:#dcecff;
+  color:#1f2933;
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.6);
+  outline-offset:2px;
+}
+
+.option-button.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.option-button.selected:hover,
+.option-button.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+  margin-top:18px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .hotspot{
+    width:43px;
+    height:43px;
+    font-size:.9rem;
+  }
+
+  .hs-noise{
+    left:19%;
+    top:50%;
+  }
+
+  .hs-dust{
+    left:40%;
+    top:18%;
+  }
+
+  .hs-vibration{
+    right:19%;
+    bottom:18%;
+  }
+
+  .hs-heat{
+    right:9%;
+    top:43%;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 20: Βιομηχανική Υγιεινή
+  </h1>
+
+  <p>
+    Η Βιομηχανική Υγιεινή επικεντρώνεται στην αναγνώριση,
+    αξιολόγηση και πρόληψη της έκθεσης των εργαζομένων
+    σε φυσικούς και χημικούς παράγοντες όπως ο θόρυβος,
+    η σκόνη, οι δονήσεις και η θερμική καταπόνηση.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Μαθησιακοί Στόχοι
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔊</span>
+      <h3>Θόρυβος</h3>
+      <p>
+        Να αναγνωρίζετε πηγές υψηλού θορύβου
+        και τα βασικά μέτρα πρόληψης της έκθεσης.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌫️</span>
+      <h3>Σκόνη & Σωματίδια</h3>
+      <p>
+        Να κατανοείτε πώς δημιουργούνται
+        και πώς μπορούν να εισέλθουν στον οργανισμό.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🫨</span>
+      <h3>Δονήσεις</h3>
+      <p>
+        Να αναγνωρίζετε κινδύνους
+        από εργαλεία χειρός και μηχανικό εξοπλισμό.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌡️</span>
+      <h3>Θερμική Καταπόνηση</h3>
+      <p>
+        Να αναγνωρίζετε προειδοποιητικές ενδείξεις
+        και αποτελεσματικά μέτρα πρόληψης.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     WHY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Γιατί είναι σημαντική η Βιομηχανική Υγιεινή;
+  </h2>
+
+  <p>
+    Οι επαγγελματικές εκθέσεις
+    δεν προκαλούν πάντα άμεσο τραυματισμό.
+    Οι συνέπειες μπορεί να εμφανιστούν σταδιακά,
+    μετά από επαναλαμβανόμενη ή μακροχρόνια έκθεση.
+  </p>
+
+  <div class="danger">
+
+    <strong>
+      Πρώτα το γιατί:
+    </strong>
+
+    Απώλεια ακοής,
+    αναπνευστικά προβλήματα,
+    μυοσκελετικές βλάβες
+    και θερμική εξάντληση
+    μπορεί να αναπτυχθούν χωρίς εμφανές ατύχημα.
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>
+      Βασική αρχή:
+    </strong>
+
+    Δεν βασιζόμαστε μόνο στα Μέσα Ατομικής Προστασίας.
+    Προτεραιότητα δίνεται στην απομάκρυνση,
+    υποκατάσταση ή τεχνικό έλεγχο της πηγής έκθεσης.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MAIN HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Βασικοί Κίνδυνοι Βιομηχανικής Υγιεινής
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔊</span>
+      <span class="tag tag-danger">Θόρυβος</span>
+
+      <h3>
+        Υψηλά Επίπεδα Θορύβου
+      </h3>
+
+      <p>
+        Πρέσες, μηχανές,
+        εργαλεία και παραγωγικός εξοπλισμός
+        μπορούν να δημιουργούν επιβλαβή επίπεδα θορύβου.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌫️</span>
+      <span class="tag tag-warning">Σωματίδια</span>
+
+      <h3>
+        Σκόνη και Καπνοί
+      </h3>
+
+      <p>
+        Λείανση, κοπή,
+        μεταφορά υλικών και χύτευση
+        μπορεί να παράγουν εισπνεόμενα σωματίδια.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🫨</span>
+      <span class="tag tag-warning">Δονήσεις</span>
+
+      <h3>
+        Δονήσεις Χεριού ή Σώματος
+      </h3>
+
+      <p>
+        Εργαλεία,
+        μηχανές ή οχήματα
+        μπορούν να μεταφέρουν δονήσεις στον εργαζόμενο.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌡️</span>
+      <span class="tag tag-danger">Θερμότητα</span>
+
+      <h3>
+        Θερμική Καταπόνηση
+      </h3>
+
+      <p>
+        Φούρνοι,
+        χυτήρια,
+        θερμές διεργασίες
+        και υψηλή θερμοκρασία περιβάλλοντος
+        αυξάνουν το θερμικό φορτίο.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     HIERARCHY OF CONTROL
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Ιεράρχηση Μέτρων Ελέγχου
+  </h2>
+
+  <div class="grid">
+
+    <div class="card step-card">
+      <h3>1. Εξάλειψη</h3>
+      <p>
+        Απομάκρυνση της πηγής κινδύνου όπου είναι εφικτό.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>2. Υποκατάσταση</h3>
+      <p>
+        Χρήση ασφαλέστερης διαδικασίας ή λιγότερο επικίνδυνου υλικού.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>3. Τεχνικά Μέτρα</h3>
+      <p>
+        Εγκλεισμός,
+        απορρόφηση,
+        εξαερισμός και απομόνωση της πηγής.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>4. Οργανωτικά Μέτρα</h3>
+      <p>
+        Περιορισμός χρόνου έκθεσης,
+        κατάλληλη οργάνωση και εναλλαγή εργασιών.
+      </p>
+    </div>
+
+    <div class="card step-card">
+      <h3>5. ΜΑΠ</h3>
+      <p>
+        Κατάλληλα μέσα προστασίας
+        όταν ο κίνδυνος δεν μπορεί να ελεγχθεί επαρκώς αλλιώς.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     NOISE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Θόρυβος
+  </h2>
+
+  <p>
+    Η παρατεταμένη έκθεση σε υψηλά επίπεδα θορύβου
+    μπορεί να προκαλέσει μόνιμη απώλεια ακοής.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔧</span>
+      <h3>Έλεγχος στην Πηγή</h3>
+      <p>
+        Συντήρηση εξοπλισμού,
+        αντικατάσταση θορυβωδών διεργασιών
+        και χρήση ηχομονωτικών καλυμμάτων.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚪</span>
+      <h3>Απομόνωση</h3>
+      <p>
+        Περιορισμός πρόσβασης
+        ή φυσικός διαχωρισμός θορυβωδών περιοχών.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⏱️</span>
+      <h3>Χρόνος Έκθεσης</h3>
+      <p>
+        Περιορισμός της διάρκειας
+        παραμονής σε περιοχές υψηλού θορύβου.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🎧</span>
+      <h3>Προστασία Ακοής</h3>
+      <p>
+        Χρήση κατάλληλων ωτοασπίδων
+        ή ωτοβυσμάτων όπου απαιτείται.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DUST
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Σκόνη και Αιωρούμενα Σωματίδια
+  </h2>
+
+  <p>
+    Η ορατή σκόνη είναι μόνο ένα μέρος του προβλήματος.
+    Πολύ μικρά σωματίδια μπορεί να παραμένουν στον αέρα
+    και να εισέρχονται στο αναπνευστικό σύστημα.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🌬️</span>
+      <h3>Τοπικός Εξαερισμός</h3>
+      <p>
+        Συλλογή της σκόνης
+        όσο το δυνατόν πιο κοντά στην πηγή.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">💧</span>
+      <h3>Υγρές Μέθοδοι</h3>
+      <p>
+        Όπου είναι κατάλληλο,
+        μπορούν να μειώσουν την επαναιώρηση σωματιδίων.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧹</span>
+      <h3>Καθαριότητα</h3>
+      <p>
+        Αποφεύγεται η συσσώρευση
+        και η επαναιώρηση σκόνης στους χώρους.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">😷</span>
+      <h3>Αναπνευστική Προστασία</h3>
+      <p>
+        Χρησιμοποιείται μόνο κατάλληλος εξοπλισμός
+        σύμφωνα με την εκτίμηση κινδύνου.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     VIBRATION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Δονήσεις
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🛠️</span>
+      <h3>Κατάλληλα Εργαλεία</h3>
+      <p>
+        Επιλογή εξοπλισμού
+        με χαμηλότερα επίπεδα δόνησης όπου είναι εφικτό.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔧</span>
+      <h3>Συντήρηση</h3>
+      <p>
+        Φθαρμένα εξαρτήματα
+        μπορεί να αυξήσουν σημαντικά τις δονήσεις.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⏳</span>
+      <h3>Περιορισμός Έκθεσης</h3>
+      <p>
+        Ο χρόνος συνεχούς χρήσης
+        εργαλείων υψηλής δόνησης πρέπει να ελέγχεται.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">✋</span>
+      <h3>Αναφορά Συμπτωμάτων</h3>
+      <p>
+        Μούδιασμα,
+        μυρμήγκιασμα ή πόνος
+        πρέπει να αναφέρονται έγκαιρα.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     HEAT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Θερμική Καταπόνηση
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">💧</span>
+      <h3>Ενυδάτωση</h3>
+      <p>
+        Τακτική πρόσληψη νερού
+        πριν εμφανιστεί έντονη δίψα.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🕶️</span>
+      <h3>Διαλείμματα</h3>
+      <p>
+        Προγραμματισμένα διαλείμματα
+        σε δροσερότερο χώρο όπου απαιτείται.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌬️</span>
+      <h3>Αερισμός</h3>
+      <p>
+        Χρήση τεχνικών μέτρων
+        για μείωση του θερμικού φορτίου.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👀</span>
+      <h3>Παρακολούθηση Συμπτωμάτων</h3>
+      <p>
+        Ζάλη,
+        αδυναμία,
+        πονοκέφαλος ή σύγχυση
+        απαιτούν άμεση αντίδραση.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>
+      Σοβαρή προειδοποίηση:
+    </strong>
+
+    Σύγχυση,
+    αποπροσανατολισμός
+    ή απώλεια συνείδησης
+    σε θερμό περιβάλλον
+    απαιτούν άμεση αντιμετώπιση ως επείγον περιστατικό.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE IMAGE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική Δραστηριότητα: Εντοπίστε τους Κινδύνους Βιομηχανικής Υγιεινής
+  </h2>
+
+  <p>
+    Επιλέξτε τους τέσσερις κόκκινους δείκτες
+    για να αναγνωρίσετε βασικούς κινδύνους έκθεσης
+    στον βιομηχανικό χώρο.
+  </p>
+
+  <div class="safety-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/noise.png"
+      alt="Βιομηχανικό χυτήριο με μηχανικό εξοπλισμό, πρέσα, εργαζόμενο, σωματίδια στον αέρα και θερμές διεργασίες"
+      class="safety-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+    <button
+      type="button"
+      class="hotspot hs-noise"
+      data-original="1"
+      data-message="<strong>Θόρυβος:</strong> Μεγάλα μηχανήματα, πρέσες και βιομηχανικός εξοπλισμός μπορούν να παράγουν υψηλά επίπεδα θορύβου. Η προτεραιότητα είναι η μείωση του θορύβου στην πηγή και η κατάλληλη προστασία ακοής όπου απαιτείται."
+      onclick="findHygieneHazard(this)">
+      1
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-dust"
+      data-original="2"
+      data-message="<strong>Σκόνη και αιωρούμενα σωματίδια:</strong> Τα σωματίδια που δημιουργούνται από βιομηχανικές διεργασίες μπορεί να εισπνευστούν. Χρειάζεται αποτελεσματικός εξαερισμός, καθαριότητα και κατάλληλος έλεγχος της πηγής."
+      onclick="findHygieneHazard(this)">
+      2
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-vibration"
+      data-original="3"
+      data-message="<strong>Δονήσεις:</strong> Εργαλεία και εξοπλισμός μπορούν να μεταφέρουν δονήσεις στα χέρια ή σε ολόκληρο το σώμα. Η επιλογή κατάλληλου εξοπλισμού, η συντήρηση και ο περιορισμός του χρόνου έκθεσης είναι βασικά μέτρα."
+      onclick="findHygieneHazard(this)">
+      3
+    </button>
+
+    <button
+      type="button"
+      class="hotspot hs-heat"
+      data-original="4"
+      data-message="<strong>Θερμική καταπόνηση:</strong> Χυτήρια, φούρνοι και θερμές διεργασίες μπορούν να αυξήσουν σημαντικά το θερμικό φορτίο του εργαζομένου. Απαιτούνται ενυδάτωση, διαλείμματα και τεχνικά μέτρα ελέγχου."
+      onclick="findHygieneHazard(this)">
+      4
+    </button>
+
+  </div>
+
+  <div class="activity-status">
+
+    <strong>
+      Κίνδυνοι που εντοπίστηκαν:
+      <span id="hygieneScore">0</span>/4
+    </strong>
+
+    <span id="hygieneInstruction">
+      Επίλεξε και τους τέσσερις δείκτες.
+    </span>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetHygieneActivity()">
+    Επανεκκίνηση Δραστηριότητας
+  </button>
+
+  <div
+    id="hygieneFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SCENARIO 1
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Πρακτικό Σενάριο: Αυξημένη Σκόνη
+  </h2>
+
+  <p>
+    Κατά τη διάρκεια μιας παραγωγικής εργασίας,
+    ο εργαζόμενος παρατηρεί ότι υπάρχει πολύ μεγαλύτερη
+    ποσότητα σκόνης στον αέρα από ό,τι συνήθως.
+    Το σύστημα τοπικού εξαερισμού φαίνεται να μην λειτουργεί σωστά.
+  </p>
+
+  <p>
+    <strong>
+      Τι πρέπει να γίνει;
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="option-button dust-option"
+    data-value="wrong"
+    onclick="selectDustOption(this)">
+    Να συνεχιστεί η εργασία,
+    επειδή ο εργαζόμενος φορά ήδη μάσκα.
+  </button>
+
+  <button
+    type="button"
+    class="option-button dust-option"
+    data-value="partial"
+    onclick="selectDustOption(this)">
+    Να ανοιχτεί μια κοντινή πόρτα
+    και να συνεχιστεί η παραγωγή.
+  </button>
+
+  <button
+    type="button"
+    class="option-button dust-option"
+    data-value="correct"
+    onclick="selectDustOption(this)">
+    Να διακοπεί η εργασία,
+    να αναφερθεί η δυσλειτουργία
+    και να αποκατασταθεί ο έλεγχος της έκθεσης
+    πριν συνεχιστεί η διαδικασία.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitDustScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetDustScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="dustFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SCENARIO 2
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Πρακτικό Σενάριο: Θερμική Καταπόνηση
+  </h2>
+
+  <p>
+    Εργαζόμενος σε θερμή περιοχή
+    αρχίζει να αισθάνεται έντονη αδυναμία,
+    ζάλη και πονοκέφαλο.
+  </p>
+
+  <p>
+    <strong>
+      Ποια είναι η σωστή αντίδραση;
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="option-button heat-option"
+    data-value="wrong"
+    onclick="selectHeatOption(this)">
+    Να συνεχίσει μέχρι το επόμενο προγραμματισμένο διάλειμμα.
+  </button>
+
+  <button
+    type="button"
+    class="option-button heat-option"
+    data-value="partial"
+    onclick="selectHeatOption(this)">
+    Να πιει λίγο νερό και να συνεχίσει αμέσως την εργασία.
+  </button>
+
+  <button
+    type="button"
+    class="option-button heat-option"
+    data-value="correct"
+    onclick="selectHeatOption(this)">
+    Να σταματήσει την εργασία,
+    να μετακινηθεί σε ασφαλέστερο και δροσερότερο χώρο
+    και να ακολουθηθεί η προβλεπόμενη διαδικασία αντιμετώπισης.
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitHeatScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetHeatScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="heatFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     STOP WORK
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Πότε πρέπει να σταματά η εργασία;
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🌫️</span>
+      <h3>Αυξημένη Σκόνη</h3>
+      <p>
+        Όταν η συγκέντρωση σκόνης
+        αυξάνεται ασυνήθιστα
+        ή ο εξαερισμός δεν λειτουργεί.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔊</span>
+      <h3>Βλάβη Ηχομόνωσης</h3>
+      <p>
+        Όταν ένα κάλυμμα,
+        φράγμα ή άλλο μέτρο ελέγχου
+        έχει αφαιρεθεί ή αστοχήσει.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🫨</span>
+      <h3>Αυξημένες Δονήσεις</h3>
+      <p>
+        Όταν ένα εργαλείο
+        παρουσιάζει ασυνήθιστα υψηλές δονήσεις.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🌡️</span>
+      <h3>Συμπτώματα Θερμικής Καταπόνησης</h3>
+      <p>
+        Όταν εμφανίζονται ζάλη,
+        αδυναμία,
+        σύγχυση ή άλλα συμπτώματα.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Mini Quiz
+  </h2>
+
+  <form id="quizForm">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Ποια είναι η προτιμώμενη προσέγγιση για τον έλεγχο της σκόνης;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Μόνο χρήση αναπνευστικής προστασίας.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        Έλεγχος της πηγής,
+        κατάλληλος εξαερισμός
+        και συμπληρωματικά ΜΑΠ όπου απαιτείται.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Άνοιγμα θυρών και παραθύρων σε κάθε περίπτωση.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Τι μπορεί να προκαλέσει η μακροχρόνια έκθεση σε υψηλό θόρυβο;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Μόνο προσωρινή ενόχληση.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Μόνιμη απώλεια ακοής.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Μόνο αυξημένη δίψα.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Τι πρέπει να γίνει όταν ένα εργαλείο παρουσιάζει ασυνήθιστα υψηλές δονήσεις;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Να συνεχιστεί η χρήση μέχρι το τέλος της βάρδιας.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        Να διακοπεί η χρήση
+        και να ελεγχθεί ο εξοπλισμός.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Να κρατηθεί το εργαλείο πιο δυνατά.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Ποια συμπτώματα μπορεί να υποδηλώνουν θερμική καταπόνηση;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        Ζάλη,
+        αδυναμία,
+        πονοκέφαλος ή σύγχυση.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Μόνο πόνος στο γόνατο.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Βελτιωμένη συγκέντρωση.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Βασικά Σημεία
+  </h2>
+
+  <div class="takeaway">
+    <span>🔊</span>
+    <div>
+      Ο θόρυβος πρέπει να ελέγχεται
+      όσο το δυνατόν περισσότερο στην πηγή.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🌫️</span>
+    <div>
+      Η σκόνη που δεν φαίνεται
+      μπορεί επίσης να αποτελεί σημαντικό κίνδυνο.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🫨</span>
+    <div>
+      Οι δονήσεις πρέπει να περιορίζονται
+      μέσω κατάλληλου εξοπλισμού,
+      συντήρησης και ελέγχου του χρόνου έκθεσης.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🌡️</span>
+    <div>
+      Τα συμπτώματα θερμικής καταπόνησης
+      πρέπει να αντιμετωπίζονται έγκαιρα.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛡️</span>
+    <div>
+      Προτεραιότητα δίνεται στα τεχνικά μέτρα ελέγχου
+      και όχι μόνο στα Μέσα Ατομικής Προστασίας.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 20
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   HOTSPOT ACTIVITY
+   ===================================================== */
+
+let hygieneHazardsFound = 0;
+const totalHygieneHazards = 4;
+
+function findHygieneHazard(button){
+
+  const score =
+    document.getElementById("hygieneScore");
+
+  const feedback =
+    document.getElementById("hygieneFeedback");
+
+  const instruction =
+    document.getElementById("hygieneInstruction");
+
+  if(!button.classList.contains("found")){
+
+    button.classList.add("found");
+    button.textContent = "✓";
+
+    hygieneHazardsFound++;
+
+    score.textContent =
+      hygieneHazardsFound;
+  }
+
+  feedback.style.display = "block";
+  feedback.className = "feedback success";
+  feedback.innerHTML = button.dataset.message;
+
+  if(hygieneHazardsFound === totalHygieneHazards){
+
+    instruction.textContent =
+      "Η δραστηριότητα ολοκληρώθηκε.";
+
+    feedback.innerHTML +=
+      "<br><br><strong>Εξαιρετικά!</strong> " +
+      "Εντόπισες και τους τέσσερις βασικούς κινδύνους Βιομηχανικής Υγιεινής.";
+  }
+}
+
+function resetHygieneActivity(){
+
+  hygieneHazardsFound = 0;
+
+  document
+    .querySelectorAll(".hotspot")
+    .forEach(function(button){
+
+      button.classList.remove("found");
+
+      button.textContent =
+        button.dataset.original;
+
+    });
+
+  document.getElementById(
+    "hygieneScore"
+  ).textContent = "0";
+
+  document.getElementById(
+    "hygieneInstruction"
+  ).textContent =
+    "Επίλεξε και τους τέσσερις δείκτες.";
+
+  const feedback =
+    document.getElementById(
+      "hygieneFeedback"
+    );
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   DUST SCENARIO
+   ===================================================== */
+
+let selectedDustDecision = null;
+
+function selectDustOption(button){
+
+  document
+    .querySelectorAll(".dust-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedDustDecision =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById("dustFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitDustScenario(){
+
+  const feedback =
+    document.getElementById("dustFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedDustDecision){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedDustDecision === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Η αύξηση της σκόνης και η δυσλειτουργία του εξαερισμού " +
+      "δείχνουν ότι ένα βασικό μέτρο ελέγχου δεν λειτουργεί. " +
+      "Η εργασία πρέπει να σταματήσει μέχρι να αποκατασταθεί ασφαλής έλεγχος της έκθεσης.";
+
+  }else if(selectedDustDecision === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Το άνοιγμα μιας πόρτας δεν αποτελεί ελεγχόμενο τεχνικό μέτρο " +
+      "και μπορεί να διασπείρει τη σκόνη σε άλλες περιοχές.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Η αναπνευστική προστασία δεν πρέπει να χρησιμοποιείται " +
+      "ως δικαιολογία για συνέχιση μιας εργασίας όταν έχει αστοχήσει το βασικό μέτρο ελέγχου.";
+  }
+}
+
+function resetDustScenario(){
+
+  selectedDustDecision = null;
+
+  document
+    .querySelectorAll(".dust-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("dustFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   HEAT SCENARIO
+   ===================================================== */
+
+let selectedHeatDecision = null;
+
+function selectHeatOption(button){
+
+  document
+    .querySelectorAll(".heat-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedHeatDecision =
+    button.dataset.value;
+
+  const feedback =
+    document.getElementById("heatFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitHeatScenario(){
+
+  const feedback =
+    document.getElementById("heatFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedHeatDecision){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedHeatDecision === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "Σωστά. Η ζάλη, η αδυναμία και ο πονοκέφαλος μπορεί να υποδηλώνουν " +
+      "θερμική καταπόνηση. Η εργασία πρέπει να σταματήσει και να εφαρμοστεί " +
+      "η προβλεπόμενη διαδικασία αντιμετώπισης.";
+
+  }else if(selectedHeatDecision === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Η ενυδάτωση είναι σημαντική, αλλά όταν έχουν ήδη εμφανιστεί συμπτώματα " +
+      "δεν είναι ασφαλές να συνεχιστεί αμέσως η εργασία.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "Λάθος. Η συνέχιση της έκθεσης μπορεί να επιδεινώσει σημαντικά " +
+      "τη θερμική καταπόνηση.";
+  }
+}
+
+function resetHeatScenario(){
+
+  selectedHeatDecision = null;
+
+  document
+    .querySelectorAll(".heat-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("heatFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        `input[name="q${i}"]:checked`
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "Άριστα! Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Κατανοείς τις βασικές αρχές της Βιομηχανικής Υγιεινής.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Καλή προσπάθεια. Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Ξαναδές τον έλεγχο σκόνης, θορύβου, δονήσεων και θερμικής καταπόνησης.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score +
+      "/" +
+      total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  document.getElementById(
+    "progressBar"
+  ).style.width = "0%";
+
+  document.getElementById(
+    "quizProgress"
+  ).setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  const result =
+    document.getElementById("quizResult");
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector('input[name="q1"]');
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

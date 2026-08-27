@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Module 6 | Machine Safety</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   REALISTIC MACHINE PHOTO
+   ===================================================== */
+
+.machine-image-container{
+  position:relative;
+  width:100%;
+
+  margin-top:18px;
+  margin-bottom:16px;
+
+  overflow:hidden;
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  background:#eef4fb;
+
+  box-shadow:
+    0 6px 18px rgba(15,23,42,.08);
+}
+
+.machine-image{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* =====================================================
+   MACHINE HOTSPOTS
+   ===================================================== */
+
+.machine-hotspot{
+  position:absolute;
+  z-index:10;
+
+  width:52px;
+  height:52px;
+
+  display:grid;
+  place-items:center;
+
+  border:4px solid #fff;
+  border-radius:50%;
+
+  background:var(--accent);
+  color:#fff;
+
+  font-size:1.15rem;
+  font-weight:bold;
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.38),
+    0 0 0 2px rgba(214,40,40,.20);
+
+  transition:
+    transform .2s ease,
+    background-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.machine-hotspot:hover,
+.machine-hotspot:focus{
+  transform:scale(1.09);
+
+  outline:4px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.machine-hotspot.found{
+  background:var(--success);
+}
+
+/*
+  HOTSPOT POSITIONS ON machine.png
+
+  1 = Exposed / insufficiently guarded saw blade
+  2 = Conveyor / roller trapping point
+  3 = Emergency stop / control panel
+  4 = Worker hands too close to cutting area
+*/
+
+.hs-guard{
+  left:52%;
+  top:28%;
+}
+
+.hs-conveyor{
+  left:17%;
+  bottom:38%;
+}
+
+.hs-estop{
+  left:30%;
+  top:35%;
+}
+
+.hs-worker{
+  right:32%;
+  bottom:40%;
+}
+
+/* =====================================================
+   ACTIVITY STATUS
+   ===================================================== */
+
+.activity-status{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+
+  margin-top:16px;
+  padding:14px 16px;
+
+  border-radius:12px;
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   SCENARIO OPTIONS
+   ===================================================== */
+
+.scenario-option{
+  display:block;
+  width:100%;
+
+  margin:10px 0;
+  padding:14px 16px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  color:var(--text);
+
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.scenario-option.selected:hover,
+.scenario-option.selected:focus{
+  background:#cfe2f5;
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  color:var(--text);
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* =====================================================
+   PROGRESS
+   ===================================================== */
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .machine-hotspot{
+    width:43px;
+    height:43px;
+    font-size:.95rem;
+  }
+
+  .hs-guard{
+    left:51%;
+    top:27%;
+  }
+
+  .hs-conveyor{
+    left:14%;
+    bottom:36%;
+  }
+
+  .hs-estop{
+    left:27%;
+    top:33%;
+  }
+
+  .hs-worker{
+    right:29%;
+    bottom:38%;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Module 6: Machine Safety
+  </h1>
+
+  <p>
+    Machines support production,
+    but moving parts,
+    cutting points,
+    trapping points and crushing zones
+    can cause serious injuries.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Learning Objectives</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">⚙️</span>
+      Recognise basic machine hazards.
+    </div>
+
+    <div class="card">
+      <span class="icon">🛡️</span>
+      Understand the purpose
+      of machine guards.
+    </div>
+
+    <div class="card">
+      <span class="icon">🛑</span>
+      Understand the importance
+      of the emergency stop.
+    </div>
+
+    <div class="card">
+      <span class="icon">✅</span>
+      Never bypass
+      guards or safety procedures.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     WHY MACHINE SAFETY MATTERS
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Why is Machine Safety Important?
+  </h2>
+
+  <p>
+    Industrial machinery may include
+    rotating parts,
+    blades,
+    shafts,
+    rollers,
+    cutting points,
+    crushing points and trapping zones,
+    as well as electrical,
+    mechanical,
+    hydraulic or pneumatic energy.
+  </p>
+
+  <div class="danger">
+
+    <strong>Why it matters:</strong>
+
+    Contact with a moving or cutting part
+    can cause serious injury
+    in a fraction of a second.
+
+    Never reach into,
+    clean,
+    adjust
+    or clear a machine
+    without following the required safe procedure.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MAIN MACHINE HAZARDS
+     ===================================================== -->
+
+<section>
+
+  <h2>Main Machine Hazards</h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🔄</span>
+
+      <h3>Rotating Parts</h3>
+
+      <p>
+        Shafts,
+        chucks,
+        rollers,
+        belts and other rotating components
+        can catch clothing,
+        hair or other loose items.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">✂️</span>
+
+      <h3>Cutting Points</h3>
+
+      <p>
+        Saws,
+        blades,
+        cutting tools
+        and presses
+        can cause severe injuries.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🧲</span>
+
+      <h3>Trapping Points</h3>
+
+      <p>
+        Two moving parts,
+        or one moving part and one fixed part,
+        can trap hands,
+        fingers or other parts of the body.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🔥</span>
+
+      <h3>Hot Surfaces</h3>
+
+      <p>
+        Machines and materials
+        may reach temperatures
+        capable of causing burns.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⚡</span>
+
+      <h3>Stored Energy</h3>
+
+      <p>
+        Electrical,
+        mechanical,
+        hydraulic or pneumatic energy
+        may remain in the machine
+        even after it has stopped.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚫</span>
+
+      <h3>Bypassing Guards</h3>
+
+      <p>
+        Removing,
+        disabling or bypassing guards
+        immediately increases the risk.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     GUARDING
+     ===================================================== -->
+
+<section>
+
+  <h2>Machine Guards</h2>
+
+  <p>
+    Machine guards prevent or limit worker access
+    to dangerous moving or cutting parts.
+  </p>
+
+  <div class="highlight">
+
+    <strong>Rule:</strong>
+
+    If a guard is missing,
+    damaged,
+    displaced
+    or bypassed,
+    the machine should not be used
+    until a safe condition has been restored.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     EMERGENCY STOP
+     ===================================================== -->
+
+<section>
+
+  <h2>Emergency Stop</h2>
+
+  <p>
+    The emergency stop is used
+    to stop a machine quickly
+    during an emergency situation.
+  </p>
+
+  <div class="success">
+
+    <strong>Remember:</strong>
+
+    The emergency stop should be
+    known and accessible,
+    but it does not replace
+    the approved safe shutdown
+    and energy-isolation procedure
+    required before intervention.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE MACHINE PHOTO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Interactive Activity: Spot the Machine Hazards
+  </h2>
+
+  <p>
+    Select the four red markers
+    to identify key hazards
+    around the cut-off saw.
+  </p>
+
+  <div class="machine-image-container">
+
+    <img
+      src="https://panos5439.github.io/industry/machine.png"
+      alt="Industrial cut-off saw with conveyor, control panel and worker wearing a safety helmet"
+      class="machine-image"
+      loading="lazy"
+      decoding="async"
+    >
+
+    <!-- EXPOSED BLADE / GUARD -->
+
+    <button
+      type="button"
+      class="machine-hotspot hs-guard"
+      data-original="!"
+      data-message="<strong>Insufficient blade guarding:</strong> The cutting part is excessively exposed. Access to the blade should be restricted by suitable guarding, and the machine should only be used as intended by the manufacturer."
+      onclick="findMachineHazard(this)">
+      !
+    </button>
+
+    <!-- CONVEYOR / ROLLER -->
+
+    <button
+      type="button"
+      class="machine-hotspot hs-conveyor"
+      data-original="!"
+      data-message="<strong>Trapping point:</strong> Rollers and moving parts of the feed system can create crushing or trapping points. Hands, clothing and loose objects must be kept away."
+      onclick="findMachineHazard(this)">
+      !
+    </button>
+
+    <!-- E-STOP -->
+
+    <button
+      type="button"
+      class="machine-hotspot hs-estop"
+      data-original="!"
+      data-message="<strong>Emergency stop:</strong> The emergency stop must be clearly identifiable, accessible and free from obstruction so it can be activated immediately when required."
+      onclick="findMachineHazard(this)">
+      !
+    </button>
+
+    <!-- WORKER POSITION -->
+
+    <button
+      type="button"
+      class="machine-hotspot hs-worker"
+      data-original="!"
+      data-message="<strong>Worker too close to the cutting zone:</strong> The worker's hands are close to the hazardous area. Material feeding and holding must be carried out using the intended safe method without exposing the body to the point of operation."
+      onclick="findMachineHazard(this)">
+      !
+    </button>
+
+  </div>
+
+  <div class="activity-status">
+
+    <strong>
+      Hazards identified:
+      <span id="machineScore">0</span>/4
+    </strong>
+
+    <span id="machineInstruction">
+      Select all four markers.
+    </span>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetMachineActivity()">
+    Restart Activity
+  </button>
+
+  <div
+    id="machineFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>Decision Scenario</h2>
+
+  <p>
+    The machine stops
+    because material becomes jammed.
+    A colleague suggests
+    opening the guard
+    and removing the material quickly
+    without isolating the energy.
+  </p>
+
+  <p>
+    <strong>What should you do?</strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Agree,
+    because the machine has already stopped.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Open the guard,
+    but be careful not to touch
+    the moving parts.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Stop the task
+    and follow the approved
+    safe shutdown and isolation procedure
+    before any intervention.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Submit Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Reset Scenario
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <!-- QUESTION 1 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. What is a key hazard from rotating parts?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        They can catch clothing,
+        hair or loose items.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        They always reduce noise.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        They are not dangerous
+        when moving slowly.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 2 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. If a machine guard is missing:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Work should not continue
+        until a safe condition is restored.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Continue if you are experienced.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Continue more slowly
+        and be more careful.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 3 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. The emergency stop:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Is used in an emergency situation.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Replaces all energy-isolation procedures.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Is used as the normal start control.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 4 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Before cleaning or clearing a machine jam:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Follow the approved
+        safe shutdown and isolation procedure.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Intervene quickly
+        if the machine appears to have stopped.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Ask a colleague
+        to watch the start button.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Submit Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Reset Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Key Takeaways</h2>
+
+  <div class="takeaway">
+    <span>⚙️</span>
+    <div>
+      Moving and cutting parts
+      can cause serious injury
+      in a very short time.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛡️</span>
+    <div>
+      Never remove,
+      move
+      or bypass machine guards.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛑</span>
+    <div>
+      The emergency stop
+      is for emergencies
+      and does not replace energy isolation.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🔒</span>
+    <div>
+      Before cleaning,
+      adjustment or clearing a jam,
+      follow the approved safe procedure.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Industrial Health & Safety Training | Module 6
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   MACHINE HAZARD ACTIVITY
+   ===================================================== */
+
+let machineHazardsFound = 0;
+const totalMachineHazards = 4;
+
+function findMachineHazard(button){
+
+  const feedback =
+    document.getElementById("machineFeedback");
+
+  const score =
+    document.getElementById("machineScore");
+
+  const instruction =
+    document.getElementById("machineInstruction");
+
+  if(!button.classList.contains("found")){
+
+    button.classList.add("found");
+
+    button.textContent = "✓";
+
+    machineHazardsFound++;
+
+    score.textContent =
+      machineHazardsFound;
+  }
+
+  feedback.style.display = "block";
+  feedback.className = "feedback success";
+  feedback.innerHTML = button.dataset.message;
+
+  if(machineHazardsFound === totalMachineHazards){
+
+    instruction.textContent =
+      "Activity completed.";
+
+    feedback.innerHTML +=
+      "<br><br><strong>Well done!</strong> " +
+      "You identified all four key machine hazards.";
+  }
+}
+
+function resetMachineActivity(){
+
+  machineHazardsFound = 0;
+
+  document
+    .querySelectorAll(".machine-hotspot")
+    .forEach(function(button){
+
+      button.classList.remove("found");
+
+      button.textContent =
+        button.dataset.original;
+
+    });
+
+  document.getElementById(
+    "machineScore"
+  ).textContent = "0";
+
+  document.getElementById(
+    "machineInstruction"
+  ).textContent =
+    "Select all four markers.";
+
+  const feedback =
+    document.getElementById("machineFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "A machine that has stopped is not necessarily safe. " +
+      "Before any intervention, the approved safe shutdown and isolation procedure " +
+      "for hazardous energy must be applied.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "<strong>This is not safe.</strong> " +
+      "Being careful does not protect against unexpected start-up " +
+      "or the release of stored energy.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "The fact that the machine has stopped does not mean it has been isolated " +
+      "or that it is safe to intervene.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Please answer all four questions before submitting.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Excellent!</strong> You scored " +
+      score + "/" + total +
+      ". You understand the key principles of machine safety.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Good effort.</strong> You scored " +
+      score + "/" + total +
+      ". Review machine guarding, trapping points, emergency stops " +
+      "and safe isolation before intervention.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score + "/" + total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

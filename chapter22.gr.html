@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ενότητα 22 | Σήμανση Ασφαλείας</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+
+  --yellow:#facc15;
+  --red:#dc2626;
+  --blue:#2f55d4;
+  --green:#00a95c;
+
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+
+  color:white;
+
+  padding:52px 20px;
+
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+
+  font-size:
+    clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:900px;
+
+  margin:auto;
+
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+
+  margin:auto;
+
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+
+  margin-bottom:24px;
+
+  padding:28px;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+
+  border:1px solid var(--border);
+
+  border-radius:16px;
+
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+
+  margin-bottom:10px;
+
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+
+  margin-top:16px;
+
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:
+    6px solid var(--secondary);
+
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:
+    6px solid var(--success);
+
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:
+    6px solid var(--accent);
+
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:
+    6px solid var(--primary);
+
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+
+  padding:12px 18px;
+
+  border:none;
+
+  border-radius:10px;
+
+  background:var(--primary);
+
+  color:white;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:
+    3px solid var(--secondary);
+
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   ORIGINAL SIGN VISUALS
+   ===================================================== */
+
+.sign-list{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:12px;
+
+  margin-top:20px;
+}
+
+.sign-row{
+  display:flex;
+
+  align-items:center;
+
+  gap:18px;
+
+  padding:16px;
+
+  border:1px solid var(--border);
+
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.sign-box{
+  flex:0 0 74px;
+
+  width:74px;
+
+  height:74px;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:12px;
+
+  background:#edf2f7;
+}
+
+.sign-copy{
+  flex:1;
+}
+
+.sign-copy h3{
+  margin:0 0 4px;
+}
+
+.sign-copy p{
+  margin:0;
+}
+
+/* =====================================================
+   1. WARNING
+   EXACT ORIGINAL LOGIC:
+   YELLOW TRIANGLE
+   ===================================================== */
+
+.symbol-warning{
+  width:0;
+  height:0;
+
+  border-left:
+    24px solid transparent;
+
+  border-right:
+    24px solid transparent;
+
+  border-bottom:
+    44px solid var(--yellow);
+}
+
+/* =====================================================
+   2. PROHIBITION
+   EXACT ORIGINAL LOGIC:
+   RED CIRCLE + RED DIAGONAL
+   ===================================================== */
+
+.symbol-prohibition{
+  position:relative;
+
+  width:48px;
+  height:48px;
+
+  border-radius:50%;
+
+  border:6px solid var(--red);
+
+  background:white;
+}
+
+.symbol-prohibition::after{
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:6px;
+  height:52px;
+
+  background:var(--red);
+
+  transform:
+    translate(-50%,-50%)
+    rotate(-45deg);
+}
+
+/* =====================================================
+   3. MANDATORY
+   EXACT ORIGINAL LOGIC:
+   BLUE CIRCLE
+   NO EXTRA SYMBOL
+   ===================================================== */
+
+.symbol-mandatory{
+  width:46px;
+  height:46px;
+
+  border-radius:50%;
+
+  background:var(--blue);
+}
+
+/* =====================================================
+   4. ESCAPE / FIRST AID
+   EXACT ORIGINAL LOGIC:
+   GREEN RECTANGLE
+   NO EXTRA SYMBOL
+   ===================================================== */
+
+.symbol-escape{
+  width:52px;
+  height:30px;
+
+  border-radius:2px;
+
+  background:var(--green);
+}
+
+/* =====================================================
+   5. FIRE EQUIPMENT
+   EXACT ORIGINAL LOGIC:
+   RED SQUARE
+   NO EXTRA SYMBOL
+   ===================================================== */
+
+.symbol-fire{
+  width:44px;
+  height:44px;
+
+  background:var(--red);
+}
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+.activity-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(190px,1fr));
+
+  gap:14px;
+
+  margin-top:20px;
+}
+
+.sign-choice{
+  width:100%;
+
+  min-height:150px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:14px;
+
+  padding:16px;
+
+  border:
+    2px solid var(--border);
+
+  border-radius:14px;
+
+  background:#eef4fb;
+
+  color:var(--text);
+
+  text-align:center;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.sign-choice:hover,
+.sign-choice:focus{
+  background:#dcecff;
+
+  border-color:var(--primary);
+
+  outline:
+    3px solid rgba(244,180,0,.65);
+
+  outline-offset:2px;
+}
+
+.sign-choice.selected{
+  background:#d9e9f8;
+
+  border:
+    3px solid var(--primary);
+
+  color:var(--primary-dark);
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.activity-symbol-box{
+  width:70px;
+
+  height:70px;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:12px;
+
+  background:white;
+
+  border:1px solid var(--border);
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+
+  padding:18px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+
+  padding:11px 13px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:10px;
+
+  background:white;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:
+    2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:10px;
+}
+
+/* =====================================================
+   PROGRESS
+   ===================================================== */
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--success),
+      #52b788
+    );
+
+  transition:
+    width .4s ease;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:
+    6px solid var(--success);
+
+  background:var(--success-bg);
+
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:
+    6px solid var(--accent);
+
+  background:var(--danger-bg);
+
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:
+    6px solid var(--secondary);
+
+  background:var(--warning-bg);
+
+  color:#6f5100;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+
+  gap:12px;
+
+  align-items:flex-start;
+
+  margin:14px 0;
+
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .sign-row{
+    align-items:flex-start;
+  }
+
+  .sign-box{
+    flex-basis:62px;
+
+    width:62px;
+
+    height:62px;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Ενότητα 22: Σήμανση Ασφαλείας
+  </h1>
+
+  <p>
+    Η σήμανση ασφαλείας χρησιμοποιεί
+    χρώματα, σχήματα και σύμβολα
+    ώστε να μας βοηθά να αναγνωρίζουμε
+    κινδύνους, απαγορεύσεις,
+    υποχρεώσεις και ασφαλείς διαδρομές.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Στόχοι Μάθησης</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">⚠️</span>
+      Αναγνωρίζει τις βασικές
+      κατηγορίες σημάτων ασφαλείας.
+    </div>
+
+    <div class="card">
+      <span class="icon">🎨</span>
+      Συνδέει σωστά
+      το χρώμα και το σχήμα
+      με το μήνυμα του σήματος.
+    </div>
+
+    <div class="card">
+      <span class="icon">🚪</span>
+      Αναγνωρίζει σήματα
+      διάσωσης και εξόδου.
+    </div>
+
+    <div class="card">
+      <span class="icon">📢</span>
+      Αναφέρει σήματα
+      που λείπουν,
+      έχουν φθαρεί
+      ή δεν είναι ορατά.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     22.1
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    22.1 Τι είναι η Σήμανση Ασφαλείας;
+  </h2>
+
+  <p>
+    Η σήμανση ασφαλείας
+    είναι ένα σύστημα από σύμβολα,
+    χρώματα και σχήματα
+    που μας βοηθά να κατανοούμε γρήγορα
+    ποιος κίνδυνος υπάρχει
+    και τι πρέπει να κάνουμε.
+  </p>
+
+  <div class="highlight">
+
+    <strong>Βασικό μήνυμα:</strong>
+
+    Η σήμανση παρέχει
+    ένα άμεσο οπτικό μήνυμα,
+    αλλά δεν αντικαθιστά
+    την εκπαίδευση,
+    τις ασφαλείς διαδικασίες
+    ή τα μέτρα προστασίας.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     22.2
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    22.2 Γενικοί Κανόνες
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">👀</span>
+
+      <h3>Γνώρισε τα Σήματα</h3>
+
+      <p>
+        Γνώριζε τα σήματα
+        που υπάρχουν
+        στον χώρο εργασίας σου.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">✅</span>
+
+      <h3>Ακολούθησε τις Οδηγίες</h3>
+
+      <p>
+        Εφάρμοσε την οδηγία,
+        απαγόρευση ή υποχρέωση
+        που δηλώνεται.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">📢</span>
+
+      <h3>Ανάφερε Προβλήματα</h3>
+
+      <p>
+        Αν κάποιο σήμα
+        λείπει,
+        έχει φθαρεί
+        ή δεν είναι ορατό,
+        ενημέρωσε τον αρμόδιο.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚫</span>
+
+      <h3>Μην Αφαιρείς Σήμανση</h3>
+
+      <p>
+        Μην καλύπτεις,
+        μετακινείς
+        ή αφαιρείς
+        σήματα και ετικέτες ασφαλείας.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     22.3
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    22.3 Κατηγορίες Σημάτων Ασφαλείας
+  </h2>
+
+  <p>
+    Το σχήμα και το χρώμα
+    βοηθούν στην άμεση αναγνώριση
+    του τύπου του μηνύματος.
+  </p>
+
+  <div class="sign-list">
+
+    <!-- WARNING -->
+
+    <div class="sign-row">
+
+      <div class="sign-box">
+
+        <div
+          class="symbol-warning"
+          aria-hidden="true">
+        </div>
+
+      </div>
+
+      <div class="sign-copy">
+
+        <h3>
+          Προειδοποιητικά σήματα
+        </h3>
+
+        <p>
+          Κίτρινο τρίγωνο –
+          ειδοποιούν για κίνδυνο
+          (π.χ. κίνδυνος ηλεκτροπληξίας).
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- PROHIBITION -->
+
+    <div class="sign-row">
+
+      <div class="sign-box">
+
+        <div
+          class="symbol-prohibition"
+          aria-hidden="true">
+        </div>
+
+      </div>
+
+      <div class="sign-copy">
+
+        <h3>
+          Απαγορευτικά σήματα
+        </h3>
+
+        <p>
+          Κόκκινος κύκλος
+          με διαγώνια γραμμή –
+          κάτι απαγορεύεται
+          (π.χ. κάπνισμα).
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- MANDATORY -->
+
+    <div class="sign-row">
+
+      <div class="sign-box">
+
+        <div
+          class="symbol-mandatory"
+          aria-hidden="true">
+        </div>
+
+      </div>
+
+      <div class="sign-copy">
+
+        <h3>
+          Υποχρεωτικά σήματα
+        </h3>
+
+        <p>
+          Μπλε κύκλος –
+          πρέπει να γίνει κάτι
+          (π.χ. χρήση γαντιών).
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ESCAPE -->
+
+    <div class="sign-row">
+
+      <div class="sign-box">
+
+        <div
+          class="symbol-escape"
+          aria-hidden="true">
+        </div>
+
+      </div>
+
+      <div class="sign-copy">
+
+        <h3>
+          Σήματα διάσωσης / εξόδου
+        </h3>
+
+        <p>
+          Πράσινο ορθογώνιο –
+          δείχνουν έξοδο κινδύνου
+          ή πρώτες βοήθειες.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- FIRE -->
+
+    <div class="sign-row">
+
+      <div class="sign-box">
+
+        <div
+          class="symbol-fire"
+          aria-hidden="true">
+        </div>
+
+      </div>
+
+      <div class="sign-copy">
+
+        <h3>
+          Σήματα πυροσβεστικού εξοπλισμού
+        </h3>
+
+        <p>
+          Κόκκινο τετράγωνο –
+          υποδεικνύουν πυροσβεστήρα,
+          φωλιά κ.λπ.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Σημαντικό:</strong>
+
+    Γνώρισε τα σήματα
+    που υπάρχουν στον χώρο εργασίας σου
+    και ακολούθησε πάντα
+    την οδηγία ή τον περιορισμό
+    που δηλώνουν.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική Δραστηριότητα:
+    Αναγνώρισε το Σήμα
+  </h2>
+
+  <p>
+    Ποια κατηγορία σήματος
+    δηλώνει ότι πρέπει
+    να γίνει μια συγκεκριμένη ενέργεια;
+  </p>
+
+  <div class="activity-grid">
+
+    <!-- WARNING -->
+
+    <button
+      type="button"
+      class="sign-choice"
+      data-type="wrong"
+      onclick="selectSign(this)">
+
+      <span class="activity-symbol-box">
+
+        <span class="symbol-warning"></span>
+
+      </span>
+
+      Προειδοποιητικό
+
+    </button>
+
+    <!-- PROHIBITION -->
+
+    <button
+      type="button"
+      class="sign-choice"
+      data-type="wrong"
+      onclick="selectSign(this)">
+
+      <span class="activity-symbol-box">
+
+        <span class="symbol-prohibition"></span>
+
+      </span>
+
+      Απαγορευτικό
+
+    </button>
+
+    <!-- MANDATORY -->
+
+    <button
+      type="button"
+      class="sign-choice"
+      data-type="correct"
+      onclick="selectSign(this)">
+
+      <span class="activity-symbol-box">
+
+        <span class="symbol-mandatory"></span>
+
+      </span>
+
+      Υποχρεωτικό
+
+    </button>
+
+    <!-- ESCAPE -->
+
+    <button
+      type="button"
+      class="sign-choice"
+      data-type="wrong"
+      onclick="selectSign(this)">
+
+      <span class="activity-symbol-box">
+
+        <span class="symbol-escape"></span>
+
+      </span>
+
+      Διάσωσης / Εξόδου
+
+    </button>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitSignActivity()">
+
+    Έλεγχος Απάντησης
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetSignActivity()">
+
+    Επανεκκίνηση Δραστηριότητας
+
+  </button>
+
+  <div
+    id="signFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     22.4
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    22.4 Ειδικές Ετικέτες και Σημάνσεις
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🧪</span>
+
+      <h3>Χημικές Ουσίες</h3>
+
+      <p>
+        Κάθε δοχείο
+        πρέπει να διατηρεί
+        την προβλεπόμενη ετικέτα του.
+      </p>
+
+      <p>
+        Δεν αφαιρούμε
+        ή αλλοιώνουμε
+        ετικέτες κινδύνου.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🚪</span>
+
+      <h3>Έξοδοι και Διαφυγή</h3>
+
+      <p>
+        Η σήμανση εξόδου
+        πρέπει να παραμένει ορατή
+        και οι διαδρομές διαφυγής
+        ελεύθερες από εμπόδια.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⚡</span>
+
+      <h3>Ηλεκτρικοί Πίνακες</h3>
+
+      <p>
+        Οι ηλεκτρικές εγκαταστάσεις
+        μπορεί να φέρουν
+        ειδική προειδοποιητική σήμανση.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🦺</span>
+
+      <h3>Υποχρεωτικά ΜΑΠ</h3>
+
+      <p>
+        Η σήμανση μπορεί να δηλώνει
+        συγκεκριμένο ΜΑΠ
+        που απαιτείται
+        πριν από την είσοδο ή την εργασία.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     22.5
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    22.5 Πρακτικές Συμβουλές
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🚪</span>
+
+      <h3>Γνώριζε την Έξοδο</h3>
+
+      <p>
+        Γνώριζε πού βρίσκεται
+        η πλησιέστερη έξοδος κινδύνου.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">💧</span>
+
+      <h3>Μην Αγνοείς Προειδοποιήσεις</h3>
+
+      <p>
+        Αν υπάρχει προσωρινή σήμανση
+        για ολισθηρό δάπεδο
+        ή άλλη επικίνδυνη κατάσταση,
+        ακολούθησέ την.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🧯</span>
+
+      <h3>Διατήρησε Ορατή τη Σήμανση</h3>
+
+      <p>
+        Η σήμανση πυροσβεστικού εξοπλισμού
+        πρέπει να είναι
+        εύκολα ορατή.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">📢</span>
+
+      <h3>Ανάφερε Φθορές</h3>
+
+      <p>
+        Αν ένα σήμα
+        λείπει ή έχει φθαρεί,
+        ενημέρωσε άμεσα.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MINI QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <!-- QUESTION 1 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Τι δείχνει ένα κίτρινο τριγωνικό σήμα;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Απαγόρευση εισόδου.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Προειδοποίηση
+        για κάποιον κίνδυνο.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Θέση εξόδου κινδύνου.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 2 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Τι σημαίνει ένας κόκκινος κύκλος με διαγώνια γραμμή;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Κάτι απαγορεύεται.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Πρέπει να χρησιμοποιηθεί ΜΑΠ.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Υποδεικνύει έξοδο κινδύνου.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 3 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Αν ένα σήμα εξόδου κινδύνου έχει καλυφθεί:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Αναφέρω άμεσα το πρόβλημα
+        ώστε να αποκατασταθεί
+        η ορατότητά του.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Το αγνοώ
+        αν γνωρίζω ήδη την έξοδο.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Περιμένω μέχρι
+        την επόμενη άσκηση εκκένωσης.
+      </label>
+
+    </div>
+
+    <!-- QUESTION 4 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Ποια συμπεριφορά είναι σωστή;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Διατηρώ τα σήματα
+        και τις ετικέτες
+        καθαρά και ορατά
+        και αναφέρω φθορές.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Αφαιρώ ετικέτες
+        από δοχεία
+        αν γνωρίζω το περιεχόμενό τους.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Μετακινώ ένα σήμα
+        αν με εμποδίζει προσωρινά.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+
+        Υποβολή Quiz
+
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+
+        Επαναφορά Quiz
+
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Βασικά Σημεία</h2>
+
+  <div class="takeaway">
+
+    <span>⚠️</span>
+
+    <div>
+      Κίτρινο τρίγωνο:
+      προειδοποίηση κινδύνου.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🚫</span>
+
+    <div>
+      Κόκκινος κύκλος
+      με διαγώνια γραμμή:
+      απαγόρευση.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🔵</span>
+
+    <div>
+      Μπλε κύκλος:
+      υποχρεωτική ενέργεια.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🟩</span>
+
+    <div>
+      Πράσινο ορθογώνιο:
+      διάσωση,
+      έξοδος ή πρώτες βοήθειες.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🟥</span>
+
+    <div>
+      Κόκκινο τετράγωνο:
+      πυροσβεστικός εξοπλισμός.
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στην Εργασία | Ενότητα 22
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   SIGN ACTIVITY
+   ===================================================== */
+
+let selectedSign = null;
+
+function selectSign(button){
+
+  document
+    .querySelectorAll(".sign-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedSign =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("signFeedback");
+
+  feedback.style.display = "none";
+
+  feedback.className = "feedback";
+
+  feedback.innerHTML = "";
+}
+
+function submitSignActivity(){
+
+  const feedback =
+    document.getElementById("signFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedSign){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία κατηγορία σήματος.";
+
+    return;
+  }
+
+  if(selectedSign === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Το μπλε κυκλικό σήμα δηλώνει ότι πρέπει να πραγματοποιηθεί μια συγκεκριμένη ενέργεια.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Όχι.</strong> " +
+      "Η σωστή επιλογή είναι το μπλε κυκλικό υποχρεωτικό σήμα.";
+  }
+}
+
+function resetSignActivity(){
+
+  selectedSign = null;
+
+  document
+    .querySelectorAll(".sign-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("signFeedback");
+
+  feedback.style.display = "none";
+
+  feedback.className = "feedback";
+
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 4;
+
+  let score = 0;
+
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις τέσσερις ερωτήσεις πριν από την υποβολή.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Άριστα!</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Αναγνωρίζεις σωστά τις βασικές κατηγορίες σημάτων ασφαλείας.";
+
+  }else if(score >= 2){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Καλή προσπάθεια.</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Ξαναδές το χρώμα και το σχήμα κάθε βασικής κατηγορίας σήματος.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score + "/" + total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+
+  result.className = "feedback";
+
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>
