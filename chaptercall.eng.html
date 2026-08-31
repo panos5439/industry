@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manual Call Points | Fire Alarm Manual Activation</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,input{font:inherit;}
+button{cursor:pointer;}
+
+header{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:920px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+.highlight,.success,.danger,.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+.safety-flow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:22px;
+}
+
+.safety-step{
+  min-height:170px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#f8fafc;
+  text-align:center;
+}
+
+.step-number{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 12px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+}
+
+.safety-step strong{
+  display:block;
+  margin-bottom:8px;
+  color:var(--primary-dark);
+}
+
+.control-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.control-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:var(--success);
+}
+
+.hazard-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.hazard-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:var(--accent);
+}
+
+.image-wrap{
+  max-width:520px;
+  margin:22px auto 0;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#f8fafc;
+  text-align:center;
+}
+
+.image-wrap img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:12px;
+}
+
+.image-caption{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.activity-options{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:14px;
+  margin-top:20px;
+}
+
+.activity-choice{
+  width:100%;
+  min-height:165px;
+  padding:18px;
+  border:2px solid var(--border);
+  border-radius:14px;
+  background:#eef4fb;
+  color:var(--text);
+  text-align:left;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.activity-choice:hover,
+.activity-choice:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.activity-choice.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:3px solid var(--primary);
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.activity-letter{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  margin-bottom:10px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+}
+
+.scenario-option{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#eef4fb;
+  color:var(--text);
+  text-align:left;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+  transition:background-color .2s ease,transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fff;
+  cursor:pointer;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+  margin-top:18px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--success),#52b788);
+  transition:width .4s ease;
+}
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin:14px 0;
+  padding:15px;
+  border-radius:12px;
+  background:var(--info-bg);
+  color:var(--primary-dark);
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+footer{
+  padding:30px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+@media(max-width:850px){
+  .safety-flow{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  main{padding:14px;}
+  section{padding:20px;}
+
+  .safety-flow{
+    grid-template-columns:1fr;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>Manual Call Points</h1>
+
+  <p>
+    Manual call points allow
+    the fire alarm to be activated manually
+    when someone notices fire,
+    smoke or an immediate danger.
+  </p>
+
+</header>
+
+<main>
+
+<!-- LEARNING OBJECTIVES -->
+
+<section>
+
+  <h2>Learning Objectives</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🚨</span>
+      Understand
+      what a
+      manual call point is.
+    </div>
+
+    <div class="card">
+      <span class="icon">📍</span>
+      Recognise
+      where manual call points
+      are usually located.
+    </div>
+
+    <div class="card">
+      <span class="icon">🔥</span>
+      Know
+      when they
+      should be used.
+    </div>
+
+    <div class="card">
+      <span class="icon">👆</span>
+      Understand
+      how they are activated
+      depending on their type.
+    </div>
+
+    <div class="card">
+      <span class="icon">🚪</span>
+      Know
+      what actions should follow
+      after activation.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 1 -->
+
+<section>
+
+  <h2>1. What Is a Manual Call Point?</h2>
+
+  <p>
+    A manual call point is
+    a device used to manually activate
+    the fire alarm.
+  </p>
+
+  <div class="grid">
+
+    <div class="card control-card">
+
+      <span class="icon">👆</span>
+
+      <h3>Manual Activation</h3>
+
+      <p>
+        It allows a person
+        to activate the alarm
+        when they notice fire,
+        smoke or another immediate danger.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">📡</span>
+
+      <h3>Signal to the Panel</h3>
+
+      <p>
+        After activation,
+        it sends a signal
+        to the fire detection
+        or alarm control panel.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">🔔</span>
+
+      <h3>Alarm Activation</h3>
+
+      <p>
+        Depending on the system,
+        sirens or beacons
+        may be activated.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="info">
+
+    <strong>Basic logic:</strong>
+
+    Call Point → Inform → Evacuate.
+
+  </div>
+
+</section>
+
+<!-- 2 -->
+
+<section>
+
+  <h2>2. Example of a Manual Call Point</h2>
+
+  <div class="image-wrap">
+
+    <img
+      src="https://commons.wikimedia.org/wiki/Special:FilePath/Manual%20call%20point%201.jpg"
+      alt="Fire alarm manual call point"
+      loading="lazy">
+
+    <div class="image-caption">
+      Illustrative image
+      of a fire alarm manual call point.
+    </div>
+
+  </div>
+
+  <p>
+    It is usually red
+    and installed in a visible location,
+    so that it can be identified quickly
+    in an emergency.
+  </p>
+
+</section>
+
+<!-- 3 -->
+
+<section>
+
+  <h2>3. Where Is It Usually Located?</h2>
+
+  <div class="grid">
+
+    <div class="card control-card">
+
+      <span class="icon">🚪</span>
+
+      <h3>Near Emergency Exits</h3>
+
+      <p>
+        It is often located
+        near emergency exits
+        and escape routes.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">🪜</span>
+
+      <h3>Stairwells</h3>
+
+      <p>
+        It may be located
+        near stairwells
+        and evacuation points.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">🏢</span>
+
+      <h3>Corridors & Common Areas</h3>
+
+      <p>
+        It may be installed
+        in corridors
+        and common areas.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">👁️</span>
+
+      <h3>Visible & Accessible</h3>
+
+      <p>
+        It should not
+        be blocked
+        by objects or furniture.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 4 -->
+
+<section>
+
+  <h2>4. When Do We Use the Call Point?</h2>
+
+  <div class="grid">
+
+    <div class="card control-card">
+
+      <span class="icon">🔥</span>
+
+      <h3>When We See Fire</h3>
+
+      <p>
+        We use it
+        when we see fire
+        and people in the area
+        need to be warned immediately.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">💨</span>
+
+      <h3>When We See Smoke</h3>
+
+      <p>
+        It can be activated
+        when smoke is detected,
+        even if the automatic alarm
+        has not yet sounded.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">⚠️</span>
+
+      <h3>Immediate Danger</h3>
+
+      <p>
+        It is used
+        when there is an immediate danger
+        and the alarm
+        has not activated.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">🚶</span>
+
+      <h3>During Evacuation</h3>
+
+      <p>
+        If, during evacuation,
+        we pass a call point
+        and the alarm has not sounded,
+        it may be activated.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 5 -->
+
+<section>
+
+  <h2>5. How Do We Use It?</h2>
+
+  <div class="safety-flow">
+
+    <div class="safety-step">
+
+      <div class="step-number">1</div>
+
+      <strong>ACTIVATE</strong>
+
+      Press the call point
+      or activate its mechanism,
+      depending on the type.
+
+    </div>
+
+    <div class="safety-step">
+
+      <div class="step-number">2</div>
+
+      <strong>INFORM</strong>
+
+      Immediately warn
+      people
+      nearby.
+
+    </div>
+
+    <div class="safety-step">
+
+      <div class="step-number">3</div>
+
+      <strong>CALL 112</strong>
+
+      Call 112
+      or assign
+      another person
+      to make the call.
+
+    </div>
+
+    <div class="safety-step">
+
+      <div class="step-number">4</div>
+
+      <strong>EVACUATE</strong>
+
+      Follow
+      the green exit signs
+      and proceed
+      to the assembly point.
+
+    </div>
+
+  </div>
+
+  <div class="success">
+
+    <strong>Rule:</strong>
+
+    Call Point →
+    Inform →
+    Evacuate.
+
+  </div>
+
+</section>
+
+<!-- 6 -->
+
+<section>
+
+  <h2>6. What Do We Do After Activation?</h2>
+
+  <div class="grid">
+
+    <div class="card control-card">
+
+      <span class="icon">📢</span>
+
+      <h3>Inform Others</h3>
+
+      <p>
+        Immediately warn
+        people nearby
+        and follow
+        the alarm procedure.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">📞</span>
+
+      <h3>Emergency Call</h3>
+
+      <p>
+        The module material includes
+        calling 112
+        or assigning the call
+        to another person.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">🟢</span>
+
+      <h3>Follow the Signs</h3>
+
+      <p>
+        Proceed
+        according to the green
+        escape route signs.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">📍</span>
+
+      <h3>Assembly Point</h3>
+
+      <p>
+        Complete
+        the evacuation
+        at the designated
+        assembly point.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 7 -->
+
+<section>
+
+  <h2>7. False Activation</h2>
+
+  <div class="danger">
+
+    <strong>Use only in a real emergency.</strong>
+
+    False activation
+    may cause panic
+    and disrupt
+    the safety response.
+
+  </div>
+
+</section>
+
+<!-- INTERACTIVE ACTIVITY -->
+
+<section>
+
+  <h2>Interactive Activity: You See Smoke</h2>
+
+  <p>
+    You see smoke
+    in a workplace area.
+    The alarm has not yet activated
+    and a manual call point is nearby.
+  </p>
+
+  <p>
+    <strong>
+      What is the correct action?
+    </strong>
+  </p>
+
+  <div class="activity-options">
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">A</span>
+
+      Wait
+      until the alarm
+      activates automatically.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="correct"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">B</span>
+
+      Activate
+      the manual call point
+      and follow
+      the notification
+      and evacuation procedure.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">C</span>
+
+      Continue working
+      because no flames are visible.
+
+    </button>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitActivity()">
+    Check Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetActivity()">
+    Restart Activity
+  </button>
+
+  <div
+    id="activityFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- SCENARIO -->
+
+<section>
+
+  <h2>Decision Scenario: Fire During Evacuation</h2>
+
+  <p>
+    You have seen a fire
+    and begin moving away.
+    You pass a manual call point,
+    but you have not yet heard the alarm.
+  </p>
+
+  <p>
+    <strong>
+      What do you do according to the theory in this module?
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Activate the call point
+    and continue evacuating
+    toward the assembly point.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Do not activate it
+    because someone else
+    will probably do it later.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Return toward the fire
+    and leave the call point
+    without activating it.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Submit Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Reset Scenario
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- QUIZ -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form id="quizForm" onsubmit="return false;">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. What is a manual call point?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        A device used to manually activate
+        the fire alarm.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        An automatic fire extinguishing device.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        A lighting switch.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Where are manual call points usually located?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Near emergency exits,
+        stairwells and escape routes.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Only inside locked offices.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Behind furniture and objects.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. When do we use the call point?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        When we see fire,
+        smoke or there is an immediate danger
+        and the alarm has not activated.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Only during unauthorised tests.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        To check whether the sound works.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. What happens after activation?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        A signal is sent
+        to the fire alarm control panel
+        and sirens or beacons may activate.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        All exits are disabled.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Nothing happens.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          5. What follows after activation?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q5" value="1">
+        Inform others,
+        make the emergency call
+        and evacuate to the assembly point.
+      </label>
+
+      <label>
+        <input type="radio" name="q5" value="0">
+        Return to work.
+      </label>
+
+      <label>
+        <input type="radio" name="q5" value="0">
+        Wait next to the call point.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          6. Why should it not be activated without a real emergency?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q6" value="1">
+        Because false activation
+        may cause panic
+        and disrupt the safety response.
+      </label>
+
+      <label>
+        <input type="radio" name="q6" value="0">
+        Because it changes colour.
+      </label>
+
+      <label>
+        <input type="radio" name="q6" value="0">
+        Because it must never
+        be activated manually.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Submit Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Reset Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz Score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- KEY TAKEAWAYS -->
+
+<section>
+
+  <h2>Key Takeaways</h2>
+
+  <div class="takeaway">
+    <span>🚨</span>
+    <div>
+      A manual call point
+      allows the fire alarm
+      to be activated manually.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>📍</span>
+    <div>
+      It is usually located
+      in visible and accessible areas,
+      near escape routes.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🔥</span>
+    <div>
+      It is used
+      when fire,
+      smoke or an immediate danger is observed.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🔔</span>
+    <div>
+      Activating it
+      sends a signal
+      to the alarm system.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🚪</span>
+    <div>
+      After activation,
+      inform others and proceed
+      with evacuation to the assembly point.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>⚠️</span>
+    <div>
+      Use it only
+      in a real emergency.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Occupational Health & Safety Training |
+  Manual Call Points
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+let selectedActivity = null;
+
+function selectActivity(button){
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  selectedActivity = button.dataset.type;
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitActivity(){
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedActivity){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before checking.";
+
+    return;
+  }
+
+  if(selectedActivity === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "When smoke or fire is present and the alarm has not activated, the manual call point is used to provide immediate manual warning.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "You do not necessarily wait for automatic activation when fire or smoke has already been detected.";
+  }
+}
+
+function resetActivity(){
+
+  selectedActivity = null;
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario = button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "The module theory states that during evacuation, if you pass a manual call point and the alarm has not sounded, you may activate it and continue evacuating.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "Manual activation is intended to warn people immediately. Do not rely on the assumption that someone else will do it.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 6;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Please answer all six questions before submitting.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round((score / total) * 100);
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Excellent!</strong> You scored " +
+      score + "/" + total +
+      ". You understand the role, use and key actions that follow activation of a manual call point.";
+
+  }else if(score >= 4){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Good effort.</strong> You scored " +
+      score + "/" + total +
+      ". Review when the call point should be used and what actions follow activation.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score + "/" + total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector('input[name="q1"]');
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+</script>
+
+</body>
+</html>

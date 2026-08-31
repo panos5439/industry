@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Πυροσβεστήρας CO₂ | Ασφαλής Χρήση</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,input{font:inherit;}
+button{cursor:pointer;}
+
+header{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:920px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+.highlight,.success,.danger,.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+.safety-flow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:22px;
+}
+
+.safety-step{
+  min-height:170px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#f8fafc;
+  text-align:center;
+}
+
+.step-number{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 12px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+}
+
+.safety-step strong{
+  display:block;
+  margin-bottom:8px;
+  color:var(--primary-dark);
+}
+
+.hazard-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.hazard-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:var(--accent);
+}
+
+.control-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.control-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:var(--success);
+}
+
+.image-wrap{
+  max-width:520px;
+  margin:22px auto 0;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#f8fafc;
+  text-align:center;
+}
+
+.image-wrap img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:12px;
+}
+
+.image-caption{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.activity-options{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:14px;
+  margin-top:20px;
+}
+
+.activity-choice{
+  width:100%;
+  min-height:165px;
+  padding:18px;
+  border:2px solid var(--border);
+  border-radius:14px;
+  background:#eef4fb;
+  color:var(--text);
+  text-align:left;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.activity-choice:hover,
+.activity-choice:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.activity-choice.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:3px solid var(--primary);
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.activity-letter{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  margin-bottom:10px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+}
+
+.scenario-option{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#eef4fb;
+  color:var(--text);
+  text-align:left;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+  transition:background-color .2s ease,transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{transform:translateY(-1px);}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{margin-top:0;}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fff;
+  cursor:pointer;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+  margin-top:18px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--success),#52b788);
+  transition:width .4s ease;
+}
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin:14px 0;
+  padding:15px;
+  border-radius:12px;
+  background:var(--info-bg);
+  color:var(--primary-dark);
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+footer{
+  padding:30px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+@media(max-width:850px){
+  .safety-flow{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  main{padding:14px;}
+  section{padding:20px;}
+
+  .safety-flow{
+    grid-template-columns:1fr;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>Πυροσβεστήρας CO₂</h1>
+
+  <p>
+    Ο σωστός τύπος πυροσβεστήρα κάνει τη διαφορά σε δευτερόλεπτα.
+    Σε αυτή την ενότητα γνωρίζουμε τον πυροσβεστήρα CO₂,
+    πότε χρησιμοποιείται, πώς σβήνει τη φωτιά
+    και ποιους κινδύνους μπορεί να δημιουργήσει η λανθασμένη χρήση του.
+  </p>
+
+</header>
+
+<main>
+
+<!-- LEARNING OBJECTIVES -->
+
+<section>
+
+  <h2>Στόχοι Μάθησης</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🧯</span>
+      Κατανοεί τι είναι
+      ο πυροσβεστήρας CO₂
+      και πώς λειτουργεί.
+    </div>
+
+    <div class="card">
+      <span class="icon">🔥</span>
+      Αναγνωρίζει
+      για ποιους τύπους πυρκαγιάς
+      είναι κατάλληλος.
+    </div>
+
+    <div class="card">
+      <span class="icon">⚡</span>
+      Κατανοεί γιατί χρησιμοποιείται
+      σε ηλεκτρικό και ηλεκτρονικό εξοπλισμό.
+    </div>
+
+    <div class="card">
+      <span class="icon">⚠️</span>
+      Αναγνωρίζει τους βασικούς κινδύνους
+      από λανθασμένη χρήση.
+    </div>
+
+    <div class="card">
+      <span class="icon">🎯</span>
+      Επιλέγει τον κατάλληλο
+      τύπο πυροσβεστήρα
+      ανάλογα με την πυρκαγιά.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 1 -->
+
+<section>
+
+  <h2>1. Τι Είναι ο Πυροσβεστήρας CO₂;</h2>
+
+  <p>
+    Ο πυροσβεστήρας CO₂ περιέχει
+    διοξείδιο του άνθρακα
+    σε υγροποιημένη μορφή,
+    υπό υψηλή πίεση.
+  </p>
+
+  <p>
+    Όταν ενεργοποιηθεί,
+    το CO₂ βγαίνει ως λευκό νέφος
+    σε πολύ χαμηλή θερμοκρασία.
+  </p>
+
+  <div class="image-wrap">
+
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Fire_extinguisher_CO2_b.svg/960px-Fire_extinguisher_CO2_b.svg.png"
+      alt="Απεικόνιση πυροσβεστήρα CO₂">
+
+    <div class="image-caption">
+      Ενδεικτική απεικόνιση πυροσβεστήρα CO₂
+      και τρόπου εκτόνωσης.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 2 -->
+
+<section>
+
+  <h2>2. Για Ποιες Πυρκαγιές Είναι Κατάλληλος;</h2>
+
+  <div class="grid">
+
+    <div class="card control-card">
+
+      <span class="icon">🔥</span>
+
+      <h3>Κατηγορία Β</h3>
+
+      <p>
+        Κατάλληλος για υγρά καύσιμα,
+        όπως λάδια, βενζίνη,
+        διαλύτες και παρόμοια υλικά.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">⚡</span>
+
+      <h3>Ηλεκτρικός Εξοπλισμός</h3>
+
+      <p>
+        Χρησιμοποιείται σε πυρκαγιές
+        ηλεκτρικού εξοπλισμού,
+        όπως ηλεκτρικοί πίνακες,
+        servers και ηλεκτρονικοί υπολογιστές.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Δεν είναι κατάλληλος:</strong>
+
+    για στερεά καύσιμα Κατηγορίας Α,
+    όπως ξύλο, χαρτί και υφάσματα,
+    ούτε για πυρκαγιές μετάλλων Κατηγορίας D.
+
+  </div>
+
+  <div class="info">
+
+    <strong>Τυπικά σημεία εφαρμογής:</strong>
+
+    ηλεκτρολογικοί πίνακες,
+    computer rooms,
+    μηχανοστάσια ανελκυστήρων,
+    εργαστήρια
+    και βιομηχανικοί χώροι
+    με ηλεκτρολογικές εγκαταστάσεις.
+
+  </div>
+
+</section>
+
+<!-- 3 -->
+
+<section>
+
+  <h2>3. Πώς Σβήνει τη Φωτιά;</h2>
+
+  <div class="safety-flow">
+
+    <div class="safety-step">
+      <div class="step-number">1</div>
+      <strong>ΕΚΤΟΝΩΣΗ</strong>
+      Το CO₂ απελευθερώνεται
+      από τον πυροσβεστήρα.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">2</div>
+      <strong>ΕΚΤΟΠΙΣΗ</strong>
+      Εκτοπίζει το οξυγόνο
+      γύρω από τη φλόγα.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">3</div>
+      <strong>ΨΥΞΗ</strong>
+      Η έξοδος του αερίου
+      γίνεται σε πολύ χαμηλή θερμοκρασία.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">4</div>
+      <strong>ΚΑΤΑΣΒΕΣΗ</strong>
+      Η φωτιά «πνίγεται»
+      χωρίς να μένουν κατάλοιπα.
+    </div>
+
+  </div>
+
+  <div class="highlight">
+    Σε αντίθεση με σκόνες ή αφρούς,
+    το CO₂ δεν αφήνει υπολείμματα
+    μετά την εκτόνωση.
+  </div>
+
+</section>
+
+<!-- 4 -->
+
+<section>
+
+  <h2>4. Πλεονεκτήματα του CO₂</h2>
+
+  <div class="grid">
+
+    <div class="card control-card">
+
+      <span class="icon">✨</span>
+
+      <h3>Δεν Αφήνει Κατάλοιπα</h3>
+
+      <p>
+        Είναι ιδιαίτερα χρήσιμος
+        σε ηλεκτρονικό
+        και ηλεκτρικό εξοπλισμό.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">⚡</span>
+
+      <h3>Δεν Είναι Αγώγιμος</h3>
+
+      <p>
+        Το υλικό της ενότητας
+        τον παρουσιάζει ως κατάλληλο
+        για χρήση σε ηλεκτρικό εξοπλισμό.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">⏱️</span>
+
+      <h3>Γρήγορη Κατάσβεση</h3>
+
+      <p>
+        Μπορεί να προσφέρει
+        γρήγορη κατάσβεση
+        όταν χρησιμοποιείται σωστά.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 5 -->
+
+<section>
+
+  <h2>5. Μειονεκτήματα & Κίνδυνοι</h2>
+
+  <div class="grid">
+
+    <div class="card hazard-card">
+
+      <span class="icon">🫁</span>
+
+      <h3>Κίνδυνος Ασφυξίας</h3>
+
+      <p>
+        Σε μικρούς κλειστούς χώρους,
+        η μείωση του διαθέσιμου οξυγόνου
+        μπορεί να δημιουργήσει σοβαρό κίνδυνο.
+      </p>
+
+    </div>
+
+    <div class="card hazard-card">
+
+      <span class="icon">❄️</span>
+
+      <h3>Πολύ Χαμηλή Θερμοκρασία</h3>
+
+      <p>
+        Το ακροφύσιο
+        και η χοάνη
+        μπορούν να γίνουν πολύ κρύα,
+        δημιουργώντας κίνδυνο κρυοπαγήματος.
+      </p>
+
+    </div>
+
+    <div class="card hazard-card">
+
+      <span class="icon">⏳</span>
+
+      <h3>Μικρός Χρόνος Ρίψης</h3>
+
+      <p>
+        Ο πυροσβεστήρας
+        αδειάζει σχετικά γρήγορα,
+        επομένως ο διαθέσιμος χρόνος
+        εκτόνωσης είναι περιορισμένος.
+      </p>
+
+    </div>
+
+    <div class="card hazard-card">
+
+      <span class="icon">🪵</span>
+
+      <h3>Όχι για Στερεά Καύσιμα</h3>
+
+      <p>
+        Δεν θεωρείται αποτελεσματικός
+        για πυρκαγιές στερεών,
+        όπως χαρτί και ξύλο.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 6 -->
+
+<section>
+
+  <h2>6. Τυπικές Χωρητικότητες & Εφαρμογές</h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">2️⃣</span>
+
+      <h3>2 kg CO₂</h3>
+
+      <p>
+        Για μικρούς ηλεκτρικούς πίνακες
+        και μικρά γραφεία.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">5️⃣</span>
+
+      <h3>5 kg CO₂</h3>
+
+      <p>
+        Συχνός σε επαγγελματικούς χώρους
+        και μηχανοστάσια.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="info">
+
+    Σε μεγαλύτερες εγκαταστάσεις
+    μπορεί να υπάρχουν και σταθερά συστήματα CO₂,
+    τα οποία ενεργοποιούνται αυτόματα
+    ή χειροκίνητα για προστασία ολόκληρου χώρου.
+
+  </div>
+
+  <div class="success">
+
+    <strong>Βασικό μήνυμα:</strong>
+
+    Χρησιμοποίησε CO₂ μόνο εκεί που ταιριάζει:
+    σε υγρά καύσιμα
+    και ηλεκτρικό εξοπλισμό.
+
+  </div>
+
+</section>
+
+<!-- INTERACTIVE ACTIVITY -->
+
+<section>
+
+  <h2>Διαδραστική Δραστηριότητα: Επιλογή Πυροσβεστήρα</h2>
+
+  <p>
+    Βλέπεις μικρή πυρκαγιά
+    σε ηλεκτρικό πίνακα.
+    Υπάρχει διαθέσιμος πυροσβεστήρας CO₂.
+  </p>
+
+  <p><strong>Ποια επιλογή ταιριάζει με τη θεωρία της ενότητας;</strong></p>
+
+  <div class="activity-options">
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="correct"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">A</span>
+
+      Ο CO₂ είναι κατάλληλος
+      για πυρκαγιές ηλεκτρικού εξοπλισμού.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">B</span>
+
+      Ο CO₂ χρησιμοποιείται μόνο
+      για πυρκαγιές ξύλου και χαρτιού.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">C</span>
+
+      Ο τύπος του πυροσβεστήρα
+      δεν έχει σημασία.
+
+    </button>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitActivity()">
+    Έλεγχος Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetActivity()">
+    Επανεκκίνηση Δραστηριότητας
+  </button>
+
+  <div
+    id="activityFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- SCENARIO -->
+
+<section>
+
+  <h2>Σενάριο Απόφασης: Χρήση σε Μικρό Κλειστό Χώρο</h2>
+
+  <p>
+    Υπάρχει περιστατικό φωτιάς
+    σε μικρό κλειστό χώρο
+    και σκέφτεσαι να χρησιμοποιήσεις CO₂.
+  </p>
+
+  <p>
+    <strong>
+      Ποιον βασικό κίνδυνο πρέπει να έχεις υπόψη
+      σύμφωνα με τη θεωρία της ενότητας;
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Δεν υπάρχει κανένας ιδιαίτερος κίνδυνος
+    επειδή το CO₂ δεν αφήνει κατάλοιπα.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Υπάρχει κίνδυνος ασφυξίας,
+    επειδή σε μικρό κλειστό χώρο
+    μπορεί να μειωθεί το διαθέσιμο οξυγόνο.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Ο μοναδικός κίνδυνος
+    είναι ότι μπορεί να λερώσει
+    τον ηλεκτρικό εξοπλισμό.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- QUIZ -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form id="quizForm" onsubmit="return false;">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Τι περιέχει ένας πυροσβεστήρας CO₂;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        Διοξείδιο του άνθρακα
+        σε υγροποιημένη μορφή
+        υπό υψηλή πίεση.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Μόνο νερό.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Μεταλλική σκόνη.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Για ποιες πυρκαγιές παρουσιάζεται ως κατάλληλος;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Υγρά καύσιμα
+        και ηλεκτρικός εξοπλισμός.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Μόνο ξύλο και χαρτί.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Μέταλλα Κατηγορίας D.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Ποιο είναι βασικό πλεονέκτημα του CO₂;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        Δεν αφήνει κατάλοιπα.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Αφήνει μεγάλη ποσότητα αφρού.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Προορίζεται αποκλειστικά
+        για στερεά καύσιμα.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Ποιος κίνδυνος υπάρχει σε μικρό κλειστό χώρο;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        Κίνδυνος ασφυξίας
+        λόγω μείωσης του οξυγόνου.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Κίνδυνος από υπερβολική υγρασία.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Δεν υπάρχει κανένας κίνδυνος.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          5. Γιατί χρειάζεται προσοχή στη χοάνη και στο ακροφύσιο;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q5" value="1">
+        Επειδή μπορεί να γίνουν πολύ κρύα
+        και να προκαλέσουν κρυοπάγημα.
+      </label>
+
+      <label>
+        <input type="radio" name="q5" value="0">
+        Επειδή γεμίζουν με νερό.
+      </label>
+
+      <label>
+        <input type="radio" name="q5" value="0">
+        Επειδή αποκτούν υψηλή ηλεκτρική αγωγιμότητα.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          6. Ποια είναι η βασική αρχή επιλογής;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q6" value="1">
+        Χρησιμοποιούμε CO₂
+        μόνο εκεί όπου είναι κατάλληλος
+        για τον συγκεκριμένο τύπο πυρκαγιάς.
+      </label>
+
+      <label>
+        <input type="radio" name="q6" value="0">
+        Οποιοσδήποτε πυροσβεστήρας
+        είναι κατάλληλος για κάθε φωτιά.
+      </label>
+
+      <label>
+        <input type="radio" name="q6" value="0">
+        Η επιλογή πυροσβεστήρα
+        εξαρτάται μόνο από το μέγεθός του.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- KEY TAKEAWAYS -->
+
+<section>
+
+  <h2>Βασικά Σημεία</h2>
+
+  <div class="takeaway">
+    <span>🧯</span>
+    <div>
+      Ο πυροσβεστήρας CO₂
+      περιέχει διοξείδιο του άνθρακα
+      υπό υψηλή πίεση.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🔥</span>
+    <div>
+      Χρησιμοποιείται για υγρά καύσιμα
+      και ηλεκτρικό εξοπλισμό,
+      σύμφωνα με τη θεωρία της ενότητας.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>✨</span>
+    <div>
+      Δεν αφήνει κατάλοιπα,
+      γεγονός που τον καθιστά χρήσιμο
+      σε ηλεκτρονικό εξοπλισμό.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>❄️</span>
+    <div>
+      Η χοάνη και το ακροφύσιο
+      μπορεί να γίνουν εξαιρετικά κρύα.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🫁</span>
+    <div>
+      Σε μικρούς κλειστούς χώρους
+      υπάρχει κίνδυνος ασφυξίας
+      λόγω μείωσης του διαθέσιμου οξυγόνου.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🎯</span>
+    <div>
+      Ο σωστός τύπος πυροσβεστήρα
+      πρέπει να επιλέγεται
+      ανάλογα με τον τύπο της πυρκαγιάς.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στην Εργασία |
+  Πυροσβεστήρας CO₂
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+let selectedActivity = null;
+
+function selectActivity(button){
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  selectedActivity = button.dataset.type;
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitActivity(){
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedActivity){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από τον έλεγχο.";
+
+    return;
+  }
+
+  if(selectedActivity === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Η θεωρία της ενότητας παρουσιάζει τον CO₂ ως κατάλληλο για πυρκαγιές ηλεκτρικού εξοπλισμού.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Ο τύπος του πυροσβεστήρα πρέπει να ταιριάζει με τον τύπο της πυρκαγιάς.";
+  }
+}
+
+function resetActivity(){
+
+  selectedActivity = null;
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario = button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Η θεωρία αναφέρει κίνδυνο ασφυξίας σε μικρούς κλειστούς χώρους λόγω μείωσης του διαθέσιμου οξυγόνου.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Η απουσία καταλοίπων δεν σημαίνει ότι η χρήση CO₂ δεν παρουσιάζει άλλους κινδύνους.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 6;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις έξι ερωτήσεις πριν από την υποβολή.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round((score / total) * 100);
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Άριστα!</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Κατανοείς τις βασικές αρχές χρήσης, εφαρμογής και κινδύνων του πυροσβεστήρα CO₂.";
+
+  }else if(score >= 4){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Καλή προσπάθεια.</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Ξαναδές ιδιαίτερα τους κατάλληλους τύπους πυρκαγιάς, τους κινδύνους και τα πλεονεκτήματα του CO₂.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score + "/" + total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector('input[name="q1"]');
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+</script>
+
+</body>
+</html>

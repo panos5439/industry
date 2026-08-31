@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Portable Fire Extinguisher Maintenance & Use</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:920px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   TIMELINE / MAINTENANCE FLOW
+   ===================================================== */
+
+.maintenance-flow{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:14px;
+
+  margin-top:22px;
+}
+
+.maintenance-step{
+  min-height:185px;
+
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  background:#f8fafc;
+
+  text-align:center;
+}
+
+.maintenance-number{
+  width:52px;
+  height:52px;
+
+  display:grid;
+  place-items:center;
+
+  margin:0 auto 12px;
+
+  border-radius:50%;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+  font-size:1rem;
+}
+
+.maintenance-step strong{
+  display:block;
+
+  margin-bottom:8px;
+
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   SPECIAL CARDS
+   ===================================================== */
+
+.check-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.check-card::before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:5px;
+
+  background:var(--success);
+}
+
+.warning-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.warning-card::before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:5px;
+
+  background:var(--accent);
+}
+
+/* =====================================================
+   IMAGE
+   ===================================================== */
+
+.image-wrap{
+  max-width:520px;
+  margin:22px auto 0;
+
+  padding:12px;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  background:#f8fafc;
+
+  text-align:center;
+}
+
+.image-wrap img{
+  display:block;
+
+  width:100%;
+  height:auto;
+
+  border-radius:12px;
+}
+
+.image-caption{
+  margin-top:10px;
+
+  color:var(--muted);
+
+  font-size:.92rem;
+}
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+.activity-options{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(240px,1fr));
+
+  gap:14px;
+
+  margin-top:20px;
+}
+
+.activity-choice{
+  width:100%;
+  min-height:165px;
+
+  padding:18px;
+
+  border:2px solid var(--border);
+  border-radius:14px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.activity-choice:hover,
+.activity-choice:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.activity-choice.selected{
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:3px solid var(--primary);
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.activity-letter{
+  width:38px;
+  height:38px;
+
+  display:grid;
+  place-items:center;
+
+  margin-bottom:10px;
+
+  border-radius:50%;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+}
+
+/* =====================================================
+   SCENARIO OPTIONS
+   ===================================================== */
+
+.scenario-option{
+  display:block;
+
+  width:100%;
+
+  margin:10px 0;
+  padding:14px 16px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* =====================================================
+   PROGRESS
+   ===================================================== */
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:850px){
+
+  .maintenance-flow{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .maintenance-flow{
+    grid-template-columns:1fr;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Portable Fire Extinguisher Maintenance & Use
+  </h1>
+
+  <p>
+    A fire extinguisher is useful only when it is
+    available, in good condition and ready to operate
+    when it is actually needed.
+
+    Proper inspection and maintenance
+    are an essential part of fire safety preparedness.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Learning Objectives</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🧯</span>
+      Understand why proper maintenance
+      is critical to the reliability
+      of a portable fire extinguisher.
+    </div>
+
+    <div class="card">
+      <span class="icon">📅</span>
+      Recognise the main inspection
+      and maintenance intervals
+      described in this module.
+    </div>
+
+    <div class="card">
+      <span class="icon">🔍</span>
+      Know the main points
+      of a quarterly visual inspection.
+    </div>
+
+    <div class="card">
+      <span class="icon">⚙️</span>
+      Understand when
+      extended inspection
+      and agent replacement are required.
+    </div>
+
+    <div class="card">
+      <span class="icon">🏷️</span>
+      Understand the importance
+      of fire rating
+      when selecting an extinguisher.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTRODUCTION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    1. Why Is Maintenance Important?
+  </h2>
+
+  <p>
+    A fire extinguisher is emergency equipment.
+
+    Simply having one in the workplace is not enough.
+    It must remain in a condition that allows it
+    to operate reliably when required.
+  </p>
+
+  <div class="danger">
+
+    <strong>Key message:</strong>
+
+    A fire extinguisher is not decoration.
+    It is equipment that must remain
+    available and operational.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MAINTENANCE FLOW
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    2. The Maintenance Logic
+  </h2>
+
+  <p>
+    According to the module material,
+    monitoring a portable fire extinguisher
+    involves different levels of inspection
+    throughout its service life.
+  </p>
+
+  <div class="maintenance-flow">
+
+    <div class="maintenance-step">
+
+      <div class="maintenance-number">
+        3 months
+      </div>
+
+      <strong>VISUAL INSPECTION</strong>
+
+      The owner carries out
+      a quarterly visual inspection.
+
+    </div>
+
+    <div class="maintenance-step">
+
+      <div class="maintenance-number">
+        1 year
+      </div>
+
+      <strong>ANNUAL MAINTENANCE</strong>
+
+      Carried out by
+      a recognised and certified
+      maintenance company.
+
+    </div>
+
+    <div class="maintenance-step">
+
+      <div class="maintenance-number">
+        5 years
+      </div>
+
+      <strong>EXTINGUISHING AGENT</strong>
+
+      The extinguishing agent
+      is replaced according
+      to the module schedule.
+
+    </div>
+
+    <div class="maintenance-step">
+
+      <div class="maintenance-number">
+        10+ years
+      </div>
+
+      <strong>EXTENDED INSPECTION</strong>
+
+      An extended laboratory inspection
+      may be required
+      according to the module criteria.
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     YEARLY MAINTENANCE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    3. Annual Maintenance
+  </h2>
+
+  <div class="grid">
+
+    <div class="card check-card">
+
+      <span class="icon">📅</span>
+
+      <h3>Once a Year</h3>
+
+      <p>
+        According to the material,
+        the extinguisher must be serviced
+        once a year.
+      </p>
+
+    </div>
+
+    <div class="card check-card">
+
+      <span class="icon">🛠️</span>
+
+      <h3>By an Appropriate Company</h3>
+
+      <p>
+        Maintenance is carried out
+        by a recognised and certified
+        maintenance company.
+      </p>
+
+    </div>
+
+    <div class="card check-card">
+
+      <span class="icon">✅</span>
+
+      <h3>Objective</h3>
+
+      <p>
+        To keep the extinguisher
+        in a condition that allows reliable
+        and effective operation.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     QUARTERLY INSPECTION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    4. Quarterly Visual Inspection
+  </h2>
+
+  <p>
+    In addition to annual maintenance,
+    the material specifies a quarterly
+    visual inspection by the owner.
+  </p>
+
+  <div class="grid">
+
+    <div class="card check-card">
+
+      <span class="icon">🟢</span>
+
+      <h3>Pressure Gauge</h3>
+
+      <p>
+        Check whether the pressure gauge
+        needle is within
+        the green zone.
+      </p>
+
+    </div>
+
+    <div class="card check-card">
+
+      <span class="icon">🔎</span>
+
+      <h3>Body Condition</h3>
+
+      <p>
+        Check for
+        visible damage,
+        rust
+        or deformation.
+      </p>
+
+    </div>
+
+    <div class="card check-card">
+
+      <span class="icon">📌</span>
+
+      <h3>Safety Pin</h3>
+
+      <p>
+        Check that the safety pin
+        is in position
+        and intact.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="image-wrap">
+
+    <img
+      src="https://flamecontrol.gr/wp-content/uploads/2025/10/301-006-029.jpg"
+      alt="Portable fire extinguisher pressure gauge">
+
+    <div class="image-caption">
+      Example of a fire extinguisher pressure gauge.
+      According to the module material,
+      the needle should be within the green zone.
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>If a deviation is identified:</strong>
+
+    immediately contact
+    the maintenance company
+    for repair or replacement.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     AGENT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    5. Extinguishing Agent
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">5️⃣</span>
+
+      <h3>Every 5 Years</h3>
+
+      <p>
+        According to the original material,
+        the extinguishing agent
+        is replaced every 5 years.
+      </p>
+
+    </div>
+
+    <div class="card warning-card">
+
+      <span class="icon">🧯</span>
+
+      <h3>After Use</h3>
+
+      <p>
+        The material states
+        that replacement is also required
+        after any use
+        of the extinguisher.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Important:</strong>
+
+    An extinguisher that has been used
+    should not be treated as though it is
+    automatically ready for further use.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     EXTENDED INSPECTION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    6. Extended Laboratory Inspection
+  </h2>
+
+  <p>
+    According to the material,
+    when the extinguisher
+    is more than 10 years old
+    or when its overall condition requires it,
+    an extended inspection is carried out.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔩</span>
+      <h3>Components</h3>
+      <p>
+        Replacement
+        of worn components.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧯</span>
+      <h3>Extinguishing Agent</h3>
+      <p>
+        Replacement of the
+        extinguishing agent.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">💧</span>
+      <h3>Hydraulic Test</h3>
+      <p>
+        A hydraulic test
+        of the cylinder
+        is carried out.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⚙️</span>
+      <h3>Pressure System</h3>
+      <p>
+        A complete inspection
+        of the pressure system
+        is carried out.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SERVICE LIFE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    7. Service Life of a Powder Fire Extinguisher
+  </h2>
+
+  <p>
+    The provided material states
+    a maximum service life
+    of 20 years for powder fire extinguishers.
+  </p>
+
+  <div class="danger">
+
+    <strong>20 years:</strong>
+
+    After this period,
+    the material specifies withdrawal
+    and replacement with a new extinguisher.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     FIRE RATING
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    8. Fire Rating
+  </h2>
+
+  <p>
+    The performance of a fire extinguisher
+    is described by its
+    <strong>fire rating</strong>
+    and is shown on its label.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🏷️</span>
+
+      <h3>Read the Label</h3>
+
+      <p>
+        The fire rating
+        is important information
+        displayed on the extinguisher label.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⚖️</span>
+
+      <h3>Same Quantity ≠ Same Performance</h3>
+
+      <p>
+        Two extinguishers
+        containing the same amount of agent
+        do not necessarily
+        have the same effectiveness.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🎯</span>
+
+      <h3>Appropriate Selection</h3>
+
+      <p>
+        Fire rating
+        should be considered
+        when selecting
+        the appropriate extinguisher.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Interactive Activity:
+    Fire Extinguisher Visual Inspection
+  </h2>
+
+  <p>
+    During the quarterly visual inspection,
+    you notice that the pressure gauge needle
+    is not within the green zone.
+  </p>
+
+  <p>
+    <strong>
+      What is the correct action?
+    </strong>
+  </p>
+
+  <div class="activity-options">
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">A</span>
+
+      Do nothing,
+      because the extinguisher
+      has not been used.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="correct"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">B</span>
+
+      Immediately report the deviation
+      and contact the maintenance company
+      for inspection, repair
+      or replacement.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">C</span>
+
+      Wait until
+      the next annual
+      maintenance.
+
+    </button>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitActivity()">
+    Check Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetActivity()">
+    Restart Activity
+  </button>
+
+  <div
+    id="activityFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Decision Scenario:
+    The Fire Extinguisher Has Been Used
+  </h2>
+
+  <p>
+    A fire extinguisher has been used
+    to respond to an incident.
+
+    Externally, it appears
+    to be in good condition.
+  </p>
+
+  <p>
+    <strong>
+      What should be done according to the module material?
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Return it immediately
+    to its normal position
+    because it does not appear damaged.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Wait until
+    the next quarterly
+    visual inspection.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Treat it as requiring
+    the specified maintenance
+    and replacement of the extinguishing agent
+    after use.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Submit Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Reset Scenario
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. How often does the material state that annual maintenance is carried out?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Once a year.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Once every 10 years.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Only after use.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. What is checked during the quarterly visual inspection?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Pressure gauge, visible damage
+        and safety pin.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Only the colour
+        of the extinguisher.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Only the location
+        where it is installed.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. If the pressure gauge needle is not within the green zone:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Immediately contact
+        the maintenance company.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Ignore it
+        until the following year.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Use the extinguisher
+        to test it.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. According to the material, the extinguishing agent is replaced:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Every 5 years
+        and after any use.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Only when the colour
+        of the extinguisher changes.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Never.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          5. What may an extended laboratory inspection include?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q5"
+          value="1">
+
+        Replacement of worn components,
+        replacement of the agent,
+        hydraulic testing
+        and inspection of the pressure system.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q5"
+          value="0">
+
+        Only cleaning
+        the external surface.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q5"
+          value="0">
+
+        Only replacing
+        the label.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          6. Why is the fire rating important?
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q6"
+          value="1">
+
+        Because two extinguishers
+        containing the same amount of agent
+        do not necessarily have
+        the same effectiveness.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q6"
+          value="0">
+
+        Because it indicates
+        the weight of the cylinder.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q6"
+          value="0">
+
+        It does not affect
+        extinguisher selection.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Submit Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Reset Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz Score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Key Takeaways</h2>
+
+  <div class="takeaway">
+
+    <span>🧯</span>
+
+    <div>
+      A fire extinguisher must remain
+      available and in a condition that allows reliable operation.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🔍</span>
+
+    <div>
+      The quarterly visual inspection
+      includes the pressure gauge,
+      visible damage
+      and the safety pin.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>📅</span>
+
+    <div>
+      Annual maintenance
+      is carried out according
+      to the schedule described in the material.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>⚙️</span>
+
+    <div>
+      The age, condition
+      and use of the extinguisher
+      affect the required
+      maintenance actions.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🏷️</span>
+
+    <div>
+      Fire rating
+      is an important criterion
+      when selecting
+      the appropriate extinguisher.
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Occupational Health & Safety Training |
+  Portable Fire Extinguisher Maintenance
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+let selectedActivity = null;
+
+function selectActivity(button){
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedActivity =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitActivity(){
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedActivity){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before checking.";
+
+    return;
+  }
+
+  if(selectedActivity === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "When the pressure gauge needle is not within the specified zone, " +
+      "the material requires immediate contact with the maintenance company for inspection, repair or replacement.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "A deviation identified during the visual inspection should not be ignored or left until the next scheduled maintenance.";
+  }
+}
+
+function resetActivity(){
+
+  selectedActivity = null;
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   DECISION SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "According to the module material, the extinguishing agent is replaced after any use of the fire extinguisher.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "After use, you should not wait until the next periodic visual inspection.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "The fact that the extinguisher appears externally to be in good condition does not mean that it should immediately be returned to service after use.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 6;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Please answer all six questions before submitting.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Excellent!</strong> You scored " +
+      score + "/" + total +
+      ". You understand the key points of portable fire extinguisher inspection, maintenance and fire rating.";
+
+  }else if(score >= 4){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Good effort.</strong> You scored " +
+      score + "/" + total +
+      ". Review the inspection intervals, pressure gauge condition and actions required after use.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score + "/" + total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

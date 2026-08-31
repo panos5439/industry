@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ενότητα 24 | Περονοφόρα & Μικτή Κυκλοφορία στη Βιομηχανία</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,input{font:inherit;}
+button{cursor:pointer;}
+
+header{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:920px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{color:var(--primary-dark);}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+.highlight,.success,.danger,.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+.rule-list{
+  margin:12px 0 0;
+  padding-left:22px;
+}
+
+.rule-list li{margin:8px 0;}
+
+.safety-flow{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+  margin-top:22px;
+}
+
+.safety-step{
+  min-height:165px;
+  padding:18px 14px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#f8fafc;
+  text-align:center;
+}
+
+.step-number{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 12px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+}
+
+.safety-step strong{
+  display:block;
+  margin-bottom:6px;
+  color:var(--primary-dark);
+}
+
+.hazard-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.hazard-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:var(--accent);
+}
+
+.control-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.control-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:var(--success);
+}
+
+.activity-options{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:14px;
+  margin-top:20px;
+}
+
+.activity-choice{
+  width:100%;
+  min-height:165px;
+  padding:18px;
+  border:2px solid var(--border);
+  border-radius:14px;
+  background:#eef4fb;
+  color:var(--text);
+  text-align:left;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.activity-choice:hover,
+.activity-choice:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.activity-choice.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:3px solid var(--primary);
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.activity-letter{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  margin-bottom:10px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+}
+
+.scenario-option{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#eef4fb;
+  color:var(--text);
+  text-align:left;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+  transition:background-color .2s ease,transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{transform:translateY(-1px);}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{background:#36404a;}
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{margin-top:0;}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fff;
+  cursor:pointer;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+}
+
+.quiz-question input{margin-right:8px;}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+  margin-top:18px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--success),#52b788);
+  transition:width .4s ease;
+}
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin:14px 0;
+  padding:15px;
+  border-radius:12px;
+  background:var(--info-bg);
+  color:var(--primary-dark);
+  font-weight:bold;
+}
+
+.takeaway span{font-size:1.3rem;}
+
+footer{
+  padding:30px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+@media(max-width:850px){
+  .safety-flow{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  main{padding:14px;}
+  section{padding:20px;}
+
+  .safety-flow{
+    grid-template-columns:1fr;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>
+    Ενότητα 24: Περονοφόρα & Μικτή Κυκλοφορία στη Βιομηχανία
+  </h1>
+
+  <p>
+    Όταν πεζοί, περονοφόρα, φορτηγά και άλλος κινητός εξοπλισμός
+    χρησιμοποιούν τον ίδιο χώρο, ένα μικρό λάθος μπορεί να έχει
+    σοβαρές συνέπειες. Η ασφαλής κυκλοφορία απαιτεί διαχωρισμό,
+    ορατότητα, επικοινωνία και προβλέψιμη συμπεριφορά.
+  </p>
+</header>
+
+<main>
+
+<!-- LEARNING OBJECTIVES -->
+
+<section>
+  <h2>Στόχοι Μάθησης</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">⚠️</span>
+      Αναγνωρίζει τους βασικούς κινδύνους
+      από περονοφόρα και μικτή κυκλοφορία.
+    </div>
+
+    <div class="card">
+      <span class="icon">🚶</span>
+      Εφαρμόζει ασφαλή συμπεριφορά
+      ως πεζός σε χώρους κίνησης οχημάτων.
+    </div>
+
+    <div class="card">
+      <span class="icon">🚜</span>
+      Κατανοεί βασικές αρχές
+      ασφαλούς λειτουργίας περονοφόρου.
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+      Αναγνωρίζει πώς το φορτίο
+      επηρεάζει τη σταθερότητα και την ορατότητα.
+    </div>
+
+    <div class="card">
+      <span class="icon">👁️</span>
+      Αντιλαμβάνεται τη σημασία
+      των τυφλών σημείων, των διασταυρώσεων
+      και της οπτικής επαφής.
+    </div>
+
+  </div>
+</section>
+
+<!-- 24.1 -->
+
+<section>
+
+  <h2>24.1 Γιατί η Μικτή Κυκλοφορία Είναι Υψηλού Κινδύνου;</h2>
+
+  <p>
+    Ένα περονοφόρο δεν συμπεριφέρεται όπως ένα επιβατικό αυτοκίνητο.
+    Το βάρος, η κατανομή του φορτίου, η περιορισμένη ορατότητα,
+    η ακτίνα στροφής και το περιβάλλον εργασίας δημιουργούν
+    ιδιαίτερους κινδύνους.
+  </p>
+
+  <div class="grid">
+
+    <div class="card hazard-card">
+      <span class="icon">🚶</span>
+      <h3>Παράσυρση Πεζού</h3>
+      <p>
+        Ένας πεζός μπορεί να εισέλθει
+        στη διαδρομή ενός οχήματος
+        χωρίς να έχει γίνει αντιληπτός.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">↩️</span>
+      <h3>Στροφές & Πίσω Μέρος</h3>
+      <p>
+        Κατά τη στροφή,
+        το πίσω μέρος του περονοφόρου
+        μπορεί να κινηθεί προς πεζούς,
+        εξοπλισμό ή κατασκευές.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">👁️</span>
+      <h3>Περιορισμένη Ορατότητα</h3>
+      <p>
+        Το φορτίο, οι κολώνες,
+        τα ράφια και άλλος εξοπλισμός
+        μπορούν να δημιουργήσουν τυφλά σημεία.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">📦</span>
+      <h3>Πτώση Φορτίου</h3>
+      <p>
+        Ασταθές, κατεστραμμένο ή ακατάλληλα
+        τοποθετημένο φορτίο μπορεί να μετακινηθεί
+        ή να πέσει.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">⚖️</span>
+      <h3>Ανατροπή</h3>
+      <p>
+        Ταχύτητα, απότομες στροφές,
+        ανώμαλο έδαφος ή ακατάλληλος χειρισμός
+        του φορτίου μπορούν να επηρεάσουν
+        τη σταθερότητα του οχήματος.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="danger">
+    <strong>Κρίσιμο σημείο:</strong>
+    Μην υποθέτεις ποτέ ότι ο χειριστής σε έχει δει.
+    Η φυσική παρουσία σου κοντά στο περονοφόρο
+    δεν σημαίνει ότι βρίσκεσαι μέσα στο οπτικό του πεδίο.
+  </div>
+
+</section>
+
+<!-- 24.2 -->
+
+<section>
+
+  <h2>24.2 Η Βασική Λογική Ασφαλούς Κυκλοφορίας</h2>
+
+  <div class="safety-flow">
+
+    <div class="safety-step">
+      <div class="step-number">1</div>
+      <strong>ΔΙΑΧΩΡΙΣΕ</strong>
+      Πεζούς και οχήματα όπου είναι πρακτικά δυνατό.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">2</div>
+      <strong>ΔΕΣ</strong>
+      Έλεγξε διαδρομή, τυφλά σημεία και διασταυρώσεις.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">3</div>
+      <strong>ΕΠΙΚΟΙΝΩΝΗΣΕ</strong>
+      Βεβαιώσου ότι πεζός και χειριστής
+      έχουν αντιληφθεί ο ένας τον άλλο.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">4</div>
+      <strong>ΚΡΑΤΗΣΕ ΑΠΟΣΤΑΣΗ</strong>
+      Μην εισέρχεσαι άσκοπα
+      στη ζώνη λειτουργίας του οχήματος.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">5</div>
+      <strong>ΜΗΝ ΥΠΟΘΕΤΕΙΣ</strong>
+      Προχώρα μόνο όταν είναι σαφές
+      ότι η κίνηση μπορεί να γίνει με ασφάλεια.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 24.3 PEDESTRIANS -->
+
+<section>
+
+  <h2>24.3 Ασφαλής Συμπεριφορά Πεζών</h2>
+
+  <div class="grid">
+
+    <div class="card control-card">
+      <span class="icon">🚶</span>
+      <h3>Χρησιμοποίησε τις Προβλεπόμενες Διαδρομές</h3>
+      <p>
+        Κινήσου σε καθορισμένους πεζόδρομους,
+        διαβάσεις και προστατευμένες περιοχές
+        όπου υπάρχουν.
+      </p>
+    </div>
+
+    <div class="card control-card">
+      <span class="icon">👀</span>
+      <h3>Οπτική Επαφή</h3>
+      <p>
+        Πριν διασχίσεις διαδρομή οχήματος,
+        βεβαιώσου ότι ο χειριστής
+        έχει αντιληφθεί την παρουσία σου.
+      </p>
+    </div>
+
+    <div class="card control-card">
+      <span class="icon">🛑</span>
+      <h3>Σταμάτα στις Διασταυρώσεις</h3>
+      <p>
+        Μην εμφανίζεσαι ξαφνικά
+        πίσω από πόρτες, ράφια,
+        κολώνες ή αποθηκευμένα υλικά.
+      </p>
+    </div>
+
+    <div class="card control-card">
+      <span class="icon">↔️</span>
+      <h3>Κράτησε Απόσταση</h3>
+      <p>
+        Μην περνάς πολύ κοντά
+        από κινούμενο περονοφόρο
+        και μην στέκεσαι στη ζώνη στροφής του.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="highlight">
+    <strong>Πεζός ≠ προτεραιότητα χωρίς έλεγχο.</strong>
+    Ακόμη και όταν υπάρχει καθορισμένη διάβαση,
+    ο πεζός πρέπει να ελέγχει ότι το όχημα έχει σταματήσει
+    και ότι η διέλευση είναι ασφαλής.
+  </div>
+
+</section>
+
+<!-- 24.4 OPERATOR -->
+
+<section>
+
+  <h2>24.4 Βασικές Αρχές για τον Χειριστή</h2>
+
+  <p>
+    Το περονοφόρο πρέπει να χρησιμοποιείται μόνο
+    από άτομα που έχουν την απαιτούμενη εκπαίδευση,
+    εξουσιοδότηση και επάρκεια σύμφωνα με τις
+    διαδικασίες της εγκατάστασης και τις εφαρμοστέες απαιτήσεις.
+  </p>
+
+  <div class="grid">
+
+    <div class="card control-card">
+      <span class="icon">🔍</span>
+      <h3>Έλεγχος Πριν τη Χρήση</h3>
+      <p>
+        Πριν από τη λειτουργία,
+        πραγματοποιείται ο προβλεπόμενος έλεγχος
+        του οχήματος και των συστημάτων ασφαλείας.
+      </p>
+    </div>
+
+    <div class="card control-card">
+      <span class="icon">🐢</span>
+      <h3>Κατάλληλη Ταχύτητα</h3>
+      <p>
+        Η ταχύτητα προσαρμόζεται
+        στις συνθήκες του χώρου,
+        στην ορατότητα, στην κυκλοφορία
+        και στο φορτίο.
+      </p>
+    </div>
+
+    <div class="card control-card">
+      <span class="icon">📣</span>
+      <h3>Διασταυρώσεις</h3>
+      <p>
+        Προσέγγισε τυφλές γωνίες
+        και διασταυρώσεις με αυξημένη προσοχή
+        και χρησιμοποίησε τα προβλεπόμενα
+        μέσα προειδοποίησης.
+      </p>
+    </div>
+
+    <div class="card control-card">
+      <span class="icon">👷</span>
+      <h3>Προσοχή στους Πεζούς</h3>
+      <p>
+        Μείωσε ταχύτητα και σταμάτησε
+        όταν υπάρχει αβεβαιότητα
+        για την πρόθεση ή την κίνηση ενός πεζού.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 24.5 LOAD -->
+
+<section>
+
+  <h2>24.5 Φορτίο, Σταθερότητα & Ορατότητα</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">⚖️</span>
+      <h3>Σταθερότητα</h3>
+      <p>
+        Το φορτίο επηρεάζει
+        το κέντρο βάρους και τη συμπεριφορά
+        του περονοφόρου.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+      <h3>Ασφαλές Φορτίο</h3>
+      <p>
+        Το φορτίο πρέπει να είναι
+        κατάλληλο, σταθερό
+        και σωστά τοποθετημένο
+        πριν από τη μετακίνηση.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👁️</span>
+      <h3>Ορατότητα</h3>
+      <p>
+        Αν το φορτίο περιορίζει την ορατότητα,
+        ακολουθείται η προβλεπόμενη ασφαλής μέθοδος
+        κίνησης για τον συγκεκριμένο χώρο και εξοπλισμό.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⬇️</span>
+      <h3>Μεταφορά</h3>
+      <p>
+        Κατά τη μετακίνηση,
+        το φορτίο διατηρείται στη θέση
+        που προβλέπεται από την ασφαλή
+        μέθοδο λειτουργίας του εξοπλισμού.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="danger">
+    <strong>Ποτέ κάτω από ανυψωμένο φορτίο.</strong>
+    Οι πεζοί δεν πρέπει να βρίσκονται ή να περνούν
+    κάτω από ανυψωμένο φορτίο ή ανυψωμένα μέσα μεταφοράς φορτίου.
+  </div>
+
+</section>
+
+<!-- 24.6 BLIND SPOTS -->
+
+<section>
+
+  <h2>24.6 Τυφλά Σημεία & Διασταυρώσεις</h2>
+
+  <p>
+    Πολλά σοβαρά περιστατικά δεν συμβαίνουν
+    επειδή κάποιος αγνόησε έναν εμφανή κίνδυνο,
+    αλλά επειδή πεζός και χειριστής
+    δεν μπορούσαν να δουν ο ένας τον άλλο εγκαίρως.
+  </p>
+
+  <div class="grid">
+
+    <div class="card hazard-card">
+      <span class="icon">🏗️</span>
+      <h3>Ράφια & Κολώνες</h3>
+      <p>
+        Μπορούν να κρύψουν
+        πεζούς και οχήματα
+        μέχρι την τελευταία στιγμή.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">🚪</span>
+      <h3>Πόρτες & Έξοδοι</h3>
+      <p>
+        Ένας πεζός μπορεί να βγει
+        απευθείας σε διαδρομή οχήματος.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">📦</span>
+      <h3>Υψηλό Φορτίο</h3>
+      <p>
+        Το φορτίο μπορεί να περιορίζει
+        σημαντικά το οπτικό πεδίο
+        του χειριστή.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">🔄</span>
+      <h3>Όπισθεν & Στροφή</h3>
+      <p>
+        Η κατεύθυνση κίνησης
+        και η κίνηση του πίσω μέρους
+        απαιτούν συνεχή έλεγχο του χώρου.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 24.7 PASSENGERS / PARKING -->
+
+<section>
+
+  <h2>24.7 Επιβάτες, Στάθμευση & Εγκατάλειψη Οχήματος</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🚫</span>
+      <h3>Μη Εξουσιοδοτημένοι Επιβάτες</h3>
+      <p>
+        Δεν μεταφέρονται επιβάτες
+        εκτός εάν ο εξοπλισμός
+        έχει σχεδιαστεί και εγκριθεί
+        για τον συγκεκριμένο σκοπό.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🅿️</span>
+      <h3>Ασφαλής Στάθμευση</h3>
+      <p>
+        Το όχημα σταθμεύεται
+        μόνο σε κατάλληλο σημείο
+        και ασφαλίζεται σύμφωνα
+        με την προβλεπόμενη διαδικασία.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔑</span>
+      <h3>Μη Εξουσιοδοτημένη Χρήση</h3>
+      <p>
+        Ο εξοπλισμός πρέπει να προστατεύεται
+        από χρήση από μη εξουσιοδοτημένα άτομα.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- INTERACTIVE ACTIVITY -->
+
+<section>
+
+  <h2>Διαδραστική Δραστηριότητα: Πεζός & Περονοφόρο</h2>
+
+  <p>
+    Περπατάς σε χώρο αποθήκης και θέλεις να διασχίσεις
+    μια διαδρομή περονοφόρων. Ένα περονοφόρο πλησιάζει,
+    αλλά δεν είσαι βέβαιος ότι ο χειριστής σε έχει δει.
+  </p>
+
+  <p><strong>Ποια είναι η ασφαλέστερη ενέργεια;</strong></p>
+
+  <div class="activity-options">
+
+    <button type="button"
+            class="activity-choice"
+            data-type="wrong"
+            onclick="selectActivity(this)">
+      <span class="activity-letter">A</span>
+      Διασχίζω γρήγορα πριν φτάσει το περονοφόρο.
+    </button>
+
+    <button type="button"
+            class="activity-choice"
+            data-type="correct"
+            onclick="selectActivity(this)">
+      <span class="activity-letter">B</span>
+      Σταματώ σε ασφαλές σημείο και διασχίζω μόνο
+      όταν έχω επιβεβαιώσει ότι ο χειριστής
+      με έχει αντιληφθεί και η κίνηση είναι ασφαλής.
+    </button>
+
+    <button type="button"
+            class="activity-choice"
+            data-type="wrong"
+            onclick="selectActivity(this)">
+      <span class="activity-letter">C</span>
+      Συνεχίζω επειδή ο πεζός έχει πάντα προτεραιότητα.
+    </button>
+
+  </div>
+
+  <button type="button"
+          class="submit-btn"
+          onclick="submitActivity()">
+    Έλεγχος Απάντησης
+  </button>
+
+  <button type="button"
+          class="submit-btn reset-btn"
+          onclick="resetActivity()">
+    Επανεκκίνηση Δραστηριότητας
+  </button>
+
+  <div id="activityFeedback"
+       class="feedback"
+       aria-live="polite"></div>
+
+</section>
+
+<!-- DECISION SCENARIO -->
+
+<section>
+
+  <h2>Σενάριο Απόφασης: Το Φορτίο Κρύβει τη Διαδρομή</h2>
+
+  <p>
+    Χειρίζεσαι περονοφόρο και το φορτίο μπροστά σου
+    περιορίζει σημαντικά την ορατότητα.
+    Στην περιοχή κινούνται επίσης πεζοί.
+  </p>
+
+  <p><strong>Ποια είναι η σωστή προσέγγιση;</strong></p>
+
+  <button type="button"
+          class="scenario-option"
+          data-type="wrong"
+          onclick="selectScenario(this)">
+    Συνεχίζω κανονικά και βασίζομαι στην κόρνα
+    για να απομακρυνθούν οι πεζοί.
+  </button>
+
+  <button type="button"
+          class="scenario-option"
+          data-type="partial"
+          onclick="selectScenario(this)">
+    Κινούμαι πιο γρήγορα ώστε να περάσω
+    γρήγορα από την περιοχή περιορισμένης ορατότητας.
+  </button>
+
+  <button type="button"
+          class="scenario-option"
+          data-type="correct"
+          onclick="selectScenario(this)">
+    Σταματώ και αξιολογώ την ορατότητα και τη διαδρομή.
+    Χρησιμοποιώ την προβλεπόμενη ασφαλή μέθοδο κίνησης
+    για το συγκεκριμένο περονοφόρο, φορτίο και χώρο,
+    διατηρώντας έλεγχο για πεζούς και άλλα εμπόδια.
+  </button>
+
+  <button type="button"
+          class="submit-btn"
+          onclick="submitScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button type="button"
+          class="submit-btn reset-btn"
+          onclick="resetScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div id="scenarioFeedback"
+       class="feedback"
+       aria-live="polite"></div>
+
+</section>
+
+<!-- 24.8 SHARED RESPONSIBILITY -->
+
+<section>
+
+  <h2>24.8 Η Ασφάλεια της Κυκλοφορίας Είναι Κοινή Ευθύνη</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">👷</span>
+      <h3>Χειριστές</h3>
+      <p>
+        Ασφαλής ταχύτητα, συνεχής παρατήρηση,
+        έλεγχος φορτίου και προσοχή στους πεζούς.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚶</span>
+      <h3>Πεζοί</h3>
+      <p>
+        Προβλεπόμενες διαδρομές,
+        ασφαλείς αποστάσεις
+        και επιβεβαίωση πριν από τη διέλευση.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🏭</span>
+      <h3>Οργάνωση Χώρου</h3>
+      <p>
+        Κατάλληλη διάταξη,
+        διαχωρισμός κυκλοφορίας,
+        σήμανση, ορατότητα
+        και έλεγχος επικίνδυνων σημείων.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📢</span>
+      <h3>Αναφορά Κινδύνων</h3>
+      <p>
+        Τυφλά σημεία, κατεστραμμένες διαβάσεις,
+        εμπόδια και near misses
+        πρέπει να αναφέρονται.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="success">
+    <strong>Στόχος:</strong>
+    Πεζός και χειριστής δεν πρέπει να βασίζονται
+    στο ότι «ο άλλος θα προσέξει».
+    Το σύστημα κυκλοφορίας πρέπει να κάνει
+    την ασφαλή συμπεριφορά σαφή και προβλέψιμη.
+  </div>
+
+</section>
+
+<!-- QUIZ -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form id="quizForm" onsubmit="return false;">
+
+    <div class="quiz-question">
+      <p><strong>1. Πριν ένας πεζός διασχίσει διαδρομή περονοφόρου πρέπει:</strong></p>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        Να βεβαιωθεί ότι η διέλευση είναι ασφαλής
+        και ότι ο χειριστής έχει αντιληφθεί την παρουσία του.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Να περάσει γρήγορα χωρίς να σταματήσει.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Να θεωρήσει ότι το περονοφόρο θα σταματήσει πάντα.
+      </label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>2. Γιατί είναι επικίνδυνη μια τυφλή διασταύρωση;</strong></p>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Επειδή πεζός και χειριστής μπορεί να μην μπορούν
+        να δουν ο ένας τον άλλο εγκαίρως.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Επειδή τα περονοφόρα δεν μπορούν να στρίψουν.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Δεν υπάρχει ιδιαίτερος κίνδυνος.
+      </label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>3. Αν το φορτίο περιορίζει σημαντικά την ορατότητα του χειριστή:</strong></p>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        Ακολουθείται η προβλεπόμενη ασφαλής μέθοδος
+        κίνησης για το όχημα, το φορτίο και τον χώρο.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Ο χειριστής συνεχίζει χωρίς αλλαγή.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Αυξάνει την ταχύτητα για να ολοκληρώσει γρήγορα τη διαδρομή.
+      </label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>4. Πού πρέπει να κινείται ένας πεζός όπου υπάρχουν καθορισμένες διαδρομές;</strong></p>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        Στις προβλεπόμενες πεζές διαδρομές και διαβάσεις.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Στο κέντρο της διαδρομής των οχημάτων.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Όσο πιο κοντά γίνεται στα περονοφόρα.
+      </label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>5. Ποια συμπεριφορά είναι σωστή κοντά σε ανυψωμένο φορτίο;</strong></p>
+
+      <label>
+        <input type="radio" name="q5" value="1">
+        Παραμένω εκτός της επικίνδυνης ζώνης
+        και δεν περνώ κάτω από ανυψωμένο φορτίο.
+      </label>
+
+      <label>
+        <input type="radio" name="q5" value="0">
+        Περνώ γρήγορα από κάτω.
+      </label>
+
+      <label>
+        <input type="radio" name="q5" value="0">
+        Στέκομαι από κάτω για να καθοδηγώ τον χειριστή.
+      </label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>6. Ποια είναι η καλύτερη αρχή για μικτή κυκλοφορία;</strong></p>
+
+      <label>
+        <input type="radio" name="q6" value="1">
+        Διαχωρισμός, ορατότητα, επικοινωνία
+        και προβλέψιμη συμπεριφορά.
+      </label>
+
+      <label>
+        <input type="radio" name="q6" value="0">
+        Ο καθένας κινείται όπως τον εξυπηρετεί.
+      </label>
+
+      <label>
+        <input type="radio" name="q6" value="0">
+        Οι πεζοί έχουν αποκλειστική ευθύνη.
+      </label>
+    </div>
+
+    <div class="quiz-actions">
+
+      <button type="button"
+              class="submit-btn"
+              onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button type="button"
+              class="submit-btn reset-btn"
+              onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div id="quizProgress"
+       class="progress-box"
+       role="progressbar"
+       aria-label="Βαθμολογία Quiz"
+       aria-valuemin="0"
+       aria-valuemax="100"
+       aria-valuenow="0">
+
+    <div id="progressBar"
+         class="progress-bar"></div>
+
+  </div>
+
+  <div id="quizResult"
+       class="feedback"
+       aria-live="polite"></div>
+
+</section>
+
+<!-- TAKEAWAYS -->
+
+<section>
+
+  <h2>Βασικά Σημεία</h2>
+
+  <div class="takeaway">
+    <span>🚶</span>
+    <div>
+      Χρησιμοποίησε τις προβλεπόμενες διαδρομές πεζών
+      και μην εισέρχεσαι απρόβλεπτα σε διαδρομές οχημάτων.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>👁️</span>
+    <div>
+      Μην υποθέτεις ότι ο χειριστής σε έχει δει.
+      Επιβεβαίωσε ότι η διέλευση είναι ασφαλής.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🚜</span>
+    <div>
+      Οι χειριστές πρέπει να προσαρμόζουν την κίνηση
+      στην ορατότητα, στους πεζούς, στο φορτίο
+      και στις συνθήκες του χώρου.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>📦</span>
+    <div>
+      Το φορτίο επηρεάζει τόσο τη σταθερότητα
+      όσο και την ορατότητα του περονοφόρου.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛑</span>
+    <div>
+      Σε αβεβαιότητα, σταμάτα.
+      Η ασφαλής κίνηση είναι σημαντικότερη
+      από την ταχύτητα της εργασίας.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στη Βιομηχανία | Ενότητα 24
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+let selectedActivity = null;
+
+function selectActivity(button){
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  selectedActivity = button.dataset.type;
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitActivity(){
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedActivity){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από τον έλεγχο.";
+
+    return;
+  }
+
+  if(selectedActivity === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Μην βασίζεσαι στην υπόθεση ότι ο χειριστής σε έχει δει. " +
+      "Σταμάτησε σε ασφαλές σημείο και διέσχισε μόνο όταν έχεις επιβεβαιώσει ότι η κίνηση μπορεί να γίνει με ασφάλεια.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Η είσοδος στη διαδρομή ενός περονοφόρου χωρίς επιβεβαίωση μπορεί να οδηγήσει σε σοβαρό ατύχημα. " +
+      "Σταμάτησε, έλεγξε και επιβεβαίωσε πριν διασχίσεις.";
+  }
+}
+
+function resetActivity(){
+
+  selectedActivity = null;
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   DECISION SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario = button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Η περιορισμένη ορατότητα απαιτεί ελεγχόμενη απόφαση. " +
+      "Ο χειριστής πρέπει να χρησιμοποιεί την προβλεπόμενη ασφαλή μέθοδο κίνησης για το συγκεκριμένο όχημα, φορτίο και χώρο και να διατηρεί τον έλεγχο της διαδρομής.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Η αύξηση της ταχύτητας μειώνει τον διαθέσιμο χρόνο αντίδρασης και αυξάνει τον κίνδυνο όταν η ορατότητα είναι περιορισμένη.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Η κόρνα είναι μέσο προειδοποίησης, όχι υποκατάστατο της ασφαλούς ορατότητας, της κατάλληλης ταχύτητας και του ελέγχου της διαδρομής.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 6;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className = "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις έξι ερωτήσεις πριν από την υποβολή.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round((score / total) * 100);
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className = "feedback success";
+
+    result.innerHTML =
+      "<strong>Άριστα!</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Κατανοείς τις βασικές αρχές ασφαλούς κυκλοφορίας πεζών και περονοφόρων.";
+
+  }else if(score >= 4){
+
+    result.className = "feedback warning";
+
+    result.innerHTML =
+      "<strong>Καλή προσπάθεια.</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Ξαναδές ιδιαίτερα τα τυφλά σημεία, την ορατότητα, το φορτίο και την ασφαλή αλληλεπίδραση πεζών και οχημάτων.";
+
+  }else{
+
+    result.className = "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score + "/" + total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector('input[name="q1"]');
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+</script>
+
+</body>
+</html>

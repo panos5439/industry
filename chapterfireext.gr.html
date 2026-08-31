@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Συντήρηση & Χρήση Φορητού Πυροσβεστήρα</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+header{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:920px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  padding:20px;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+/* =====================================================
+   INFORMATION BOXES
+   ===================================================== */
+
+.highlight,
+.success,
+.danger,
+.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+/* =====================================================
+   TIMELINE / MAINTENANCE FLOW
+   ===================================================== */
+
+.maintenance-flow{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:14px;
+
+  margin-top:22px;
+}
+
+.maintenance-step{
+  min-height:185px;
+
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  background:#f8fafc;
+
+  text-align:center;
+}
+
+.maintenance-number{
+  width:52px;
+  height:52px;
+
+  display:grid;
+  place-items:center;
+
+  margin:0 auto 12px;
+
+  border-radius:50%;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+  font-size:1rem;
+}
+
+.maintenance-step strong{
+  display:block;
+
+  margin-bottom:8px;
+
+  color:var(--primary-dark);
+}
+
+/* =====================================================
+   SPECIAL CARDS
+   ===================================================== */
+
+.check-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.check-card::before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:5px;
+
+  background:var(--success);
+}
+
+.warning-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.warning-card::before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:5px;
+
+  background:var(--accent);
+}
+
+/* =====================================================
+   IMAGE
+   ===================================================== */
+
+.image-wrap{
+  max-width:520px;
+  margin:22px auto 0;
+
+  padding:12px;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  background:#f8fafc;
+
+  text-align:center;
+}
+
+.image-wrap img{
+  display:block;
+
+  width:100%;
+  height:auto;
+
+  border-radius:12px;
+}
+
+.image-caption{
+  margin-top:10px;
+
+  color:var(--muted);
+
+  font-size:.92rem;
+}
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+.activity-options{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(240px,1fr));
+
+  gap:14px;
+
+  margin-top:20px;
+}
+
+.activity-choice{
+  width:100%;
+  min-height:165px;
+
+  padding:18px;
+
+  border:2px solid var(--border);
+  border-radius:14px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.activity-choice:hover,
+.activity-choice:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.activity-choice.selected{
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:3px solid var(--primary);
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+.activity-letter{
+  width:38px;
+  height:38px;
+
+  display:grid;
+  place-items:center;
+
+  margin-bottom:10px;
+
+  border-radius:50%;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+}
+
+/* =====================================================
+   SCENARIO OPTIONS
+   ===================================================== */
+
+.scenario-option{
+  display:block;
+
+  width:100%;
+
+  margin:10px 0;
+  padding:14px 16px;
+
+  border:1px solid var(--border);
+  border-radius:12px;
+
+  background:#eef4fb;
+  color:var(--text);
+
+  text-align:left;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+
+  box-shadow:
+    0 0 0 4px rgba(18,60,105,.10);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+
+  border:none;
+  border-radius:10px;
+
+  background:var(--primary);
+  color:#fff;
+
+  font-weight:bold;
+
+  transition:
+    background-color .2s ease,
+    transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+/* =====================================================
+   FEEDBACK
+   ===================================================== */
+
+.feedback{
+  display:none;
+
+  margin-top:14px;
+  padding:14px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+
+  margin:9px 0;
+  padding:11px 13px;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+
+  color:var(--primary-dark);
+
+  border:2px solid var(--primary);
+
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* =====================================================
+   PROGRESS
+   ===================================================== */
+
+.progress-box{
+  height:18px;
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    var(--success),
+    #52b788
+  );
+
+  transition:width .4s ease;
+}
+
+/* =====================================================
+   TAKEAWAYS
+   ===================================================== */
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+
+  margin:14px 0;
+  padding:15px;
+
+  border-radius:12px;
+
+  background:var(--info-bg);
+  color:var(--primary-dark);
+
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+  padding:30px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:.9rem;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:850px){
+
+  .maintenance-flow{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+
+  main{
+    padding:14px;
+  }
+
+  section{
+    padding:20px;
+  }
+
+  .maintenance-flow{
+    grid-template-columns:1fr;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>
+    Συντήρηση & Χρήση Φορητού Πυροσβεστήρα
+  </h1>
+
+  <p>
+    Ένας πυροσβεστήρας είναι χρήσιμος μόνο όταν είναι
+    διαθέσιμος, σε καλή κατάσταση και έτοιμος να λειτουργήσει
+    όταν πραγματικά χρειαστεί.
+
+    Η σωστή επιθεώρηση και συντήρηση
+    αποτελούν βασικό μέρος της ετοιμότητας πυρασφάλειας.
+  </p>
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section>
+
+  <h2>Στόχοι Μάθησης</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🧯</span>
+      Κατανοεί γιατί η σωστή συντήρηση
+      είναι κρίσιμη για την αξιοπιστία
+      ενός φορητού πυροσβεστήρα.
+    </div>
+
+    <div class="card">
+      <span class="icon">📅</span>
+      Αναγνωρίζει τις βασικές χρονικές
+      περιόδους ελέγχου και συντήρησης
+      που περιγράφονται στην ενότητα.
+    </div>
+
+    <div class="card">
+      <span class="icon">🔍</span>
+      Γνωρίζει τα βασικά σημεία
+      ενός τριμηνιαίου οπτικού ελέγχου.
+    </div>
+
+    <div class="card">
+      <span class="icon">⚙️</span>
+      Κατανοεί πότε απαιτείται
+      εκτεταμένος έλεγχος
+      και αντικατάσταση υλικού.
+    </div>
+
+    <div class="card">
+      <span class="icon">🏷️</span>
+      Κατανοεί τη σημασία
+      της κατασβεστικής ικανότητας
+      στην επιλογή πυροσβεστήρα.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTRODUCTION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    1. Γιατί η Συντήρηση Είναι Σημαντική;
+  </h2>
+
+  <p>
+    Ο πυροσβεστήρας είναι εξοπλισμός έκτακτης ανάγκης.
+
+    Η παρουσία του στον χώρο δεν είναι αρκετή.
+    Πρέπει να βρίσκεται σε κατάσταση που να του επιτρέπει
+    να λειτουργήσει αξιόπιστα όταν απαιτηθεί.
+  </p>
+
+  <div class="danger">
+
+    <strong>Βασικό μήνυμα:</strong>
+
+    Ο πυροσβεστήρας δεν είναι διακόσμηση.
+    Είναι εξοπλισμός που πρέπει να παραμένει
+    διαθέσιμος και λειτουργικός.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     MAINTENANCE FLOW
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    2. Η Λογική της Συντήρησης
+  </h2>
+
+  <p>
+    Σύμφωνα με το υλικό της ενότητας,
+    η παρακολούθηση ενός φορητού πυροσβεστήρα
+    περιλαμβάνει διαφορετικά επίπεδα ελέγχου
+    κατά τη διάρκεια της ζωής του.
+  </p>
+
+  <div class="maintenance-flow">
+
+    <div class="maintenance-step">
+
+      <div class="maintenance-number">
+        3 μήνες
+      </div>
+
+      <strong>ΟΠΤΙΚΟΣ ΕΛΕΓΧΟΣ</strong>
+
+      Ο ιδιοκτήτης πραγματοποιεί
+      τριμηνιαίο οπτικό έλεγχο.
+
+    </div>
+
+    <div class="maintenance-step">
+
+      <div class="maintenance-number">
+        1 έτος
+      </div>
+
+      <strong>ΕΤΗΣΙΑ ΣΥΝΤΗΡΗΣΗ</strong>
+
+      Πραγματοποιείται από
+      αναγνωρισμένη και πιστοποιημένη
+      εταιρία συντήρησης.
+
+    </div>
+
+    <div class="maintenance-step">
+
+      <div class="maintenance-number">
+        5 έτη
+      </div>
+
+      <strong>ΚΑΤΑΣΒΕΣΤΙΚΟ ΥΛΙΚΟ</strong>
+
+      Το κατασβεστικό υλικό
+      αντικαθίσταται σύμφωνα
+      με το πρόγραμμα της ενότητας.
+
+    </div>
+
+    <div class="maintenance-step">
+
+      <div class="maintenance-number">
+        10+ έτη
+      </div>
+
+      <strong>ΕΚΤΕΤΑΜΕΝΟΣ ΕΛΕΓΧΟΣ</strong>
+
+      Μπορεί να απαιτείται
+      εκτεταμένος εργαστηριακός έλεγχος
+      σύμφωνα με τα κριτήρια της ενότητας.
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     YEARLY MAINTENANCE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    3. Ετήσια Συντήρηση
+  </h2>
+
+  <div class="grid">
+
+    <div class="card check-card">
+
+      <span class="icon">📅</span>
+
+      <h3>Μία Φορά τον Χρόνο</h3>
+
+      <p>
+        Σύμφωνα με το υλικό,
+        ο πυροσβεστήρας πρέπει να συντηρείται
+        μία φορά τον χρόνο.
+      </p>
+
+    </div>
+
+    <div class="card check-card">
+
+      <span class="icon">🛠️</span>
+
+      <h3>Από Κατάλληλη Εταιρία</h3>
+
+      <p>
+        Η συντήρηση πραγματοποιείται
+        από αναγνωρισμένη και πιστοποιημένη
+        εταιρία συντήρησης.
+      </p>
+
+    </div>
+
+    <div class="card check-card">
+
+      <span class="icon">✅</span>
+
+      <h3>Στόχος</h3>
+
+      <p>
+        Να διατηρείται ο πυροσβεστήρας
+        σε κατάσταση αξιόπιστης
+        και αποτελεσματικής λειτουργίας.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     QUARTERLY INSPECTION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    4. Τριμηνιαίος Οπτικός Έλεγχος
+  </h2>
+
+  <p>
+    Εκτός από την ετήσια συντήρηση,
+    το υλικό προβλέπει τριμηνιαίο
+    οπτικό έλεγχο από τον ιδιοκτήτη.
+  </p>
+
+  <div class="grid">
+
+    <div class="card check-card">
+
+      <span class="icon">🟢</span>
+
+      <h3>Μανόμετρο</h3>
+
+      <p>
+        Ελέγχεται αν ο δείκτης
+        του μανομέτρου βρίσκεται
+        στην πράσινη περιοχή.
+      </p>
+
+    </div>
+
+    <div class="card check-card">
+
+      <span class="icon">🔎</span>
+
+      <h3>Κατάσταση Σώματος</h3>
+
+      <p>
+        Ελέγχεται αν υπάρχουν
+        εμφανείς φθορές,
+        σκουριά
+        ή παραμορφώσεις.
+      </p>
+
+    </div>
+
+    <div class="card check-card">
+
+      <span class="icon">📌</span>
+
+      <h3>Περόνη Ασφαλείας</h3>
+
+      <p>
+        Ελέγχεται αν η ασφάλεια
+        βρίσκεται στη θέση της
+        και είναι άθικτη.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="image-wrap">
+
+    <img
+      src="https://flamecontrol.gr/wp-content/uploads/2025/10/301-006-029.jpg"
+      alt="Μανόμετρο φορητού πυροσβεστήρα">
+
+    <div class="image-caption">
+      Παράδειγμα μανομέτρου πυροσβεστήρα.
+      Στο υλικό της ενότητας,
+      ο δείκτης πρέπει να βρίσκεται στην πράσινη περιοχή.
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    <strong>Αν εντοπιστεί απόκλιση:</strong>
+
+    απαιτείται άμεση επικοινωνία
+    με την εταιρία συντήρησης
+    για επιδιόρθωση ή αντικατάσταση.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     AGENT
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    5. Κατασβεστικό Υλικό
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">5️⃣</span>
+
+      <h3>Ανά 5 Έτη</h3>
+
+      <p>
+        Σύμφωνα με το αρχικό υλικό,
+        το κατασβεστικό υλικό
+        αντικαθίσταται κάθε 5 χρόνια.
+      </p>
+
+    </div>
+
+    <div class="card warning-card">
+
+      <span class="icon">🧯</span>
+
+      <h3>Μετά από Χρήση</h3>
+
+      <p>
+        Το υλικό αναφέρει
+        ότι αντικατάσταση απαιτείται
+        και μετά από οποιαδήποτε χρήση
+        του πυροσβεστήρα.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Σημαντικό:</strong>
+
+    Ένας πυροσβεστήρας που έχει χρησιμοποιηθεί
+    δεν πρέπει να αντιμετωπίζεται σαν να είναι
+    αυτόματα έτοιμος για επόμενη χρήση.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     EXTENDED INSPECTION
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    6. Εκτεταμένος Εργαστηριακός Έλεγχος
+  </h2>
+
+  <p>
+    Σύμφωνα με το υλικό,
+    όταν η ηλικία του πυροσβεστήρα
+    ξεπερνά τα 10 έτη
+    ή όταν η συνολική κατάστασή του το απαιτεί,
+    πραγματοποιείται εκτεταμένος έλεγχος.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔩</span>
+      <h3>Εξαρτήματα</h3>
+      <p>
+        Αντικατάσταση
+        φθαρμένων εξαρτημάτων.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🧯</span>
+      <h3>Κατασβεστικό Υλικό</h3>
+      <p>
+        Αλλαγή του
+        κατασβεστικού υλικού.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">💧</span>
+      <h3>Υδραυλική Δοκιμή</h3>
+      <p>
+        Πραγματοποιείται
+        υδραυλική δοκιμή
+        του κυλίνδρου.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⚙️</span>
+      <h3>Σύστημα Πίεσης</h3>
+      <p>
+        Γίνεται πλήρης έλεγχος
+        του συστήματος πίεσης.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SERVICE LIFE
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    7. Διάρκεια Ζωής Πυροσβεστήρα Σκόνης
+  </h2>
+
+  <p>
+    Το παρεχόμενο υλικό αναφέρει
+    μέγιστη διάρκεια ζωής
+    20 ετών για τους πυροσβεστήρες σκόνης.
+  </p>
+
+  <div class="danger">
+
+    <strong>20 έτη:</strong>
+
+    Μετά από αυτό το χρονικό διάστημα,
+    το υλικό προβλέπει απόσυρση
+    και αντικατάσταση με νέο πυροσβεστήρα.
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     FIRE RATING
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    8. Κατασβεστική Ικανότητα
+  </h2>
+
+  <p>
+    Η απόδοση ενός πυροσβεστήρα
+    περιγράφεται από την
+    <strong>κατασβεστική ικανότητά</strong> του
+    και αναγράφεται στην ετικέτα.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">🏷️</span>
+
+      <h3>Διάβασε την Ετικέτα</h3>
+
+      <p>
+        Η κατασβεστική ικανότητα
+        αποτελεί βασική πληροφορία
+        που εμφανίζεται στην ετικέτα.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">⚖️</span>
+
+      <h3>Ίδια Ποσότητα ≠ Ίδια Απόδοση</h3>
+
+      <p>
+        Δύο πυροσβεστήρες
+        με την ίδια ποσότητα υλικού
+        δεν σημαίνει απαραίτητα
+        ότι έχουν την ίδια αποτελεσματικότητα.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">🎯</span>
+
+      <h3>Κατάλληλη Επιλογή</h3>
+
+      <p>
+        Η κατασβεστική ικανότητα
+        πρέπει να λαμβάνεται υπόψη
+        κατά την επιλογή
+        του κατάλληλου πυροσβεστήρα.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTERACTIVE ACTIVITY
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Διαδραστική Δραστηριότητα:
+    Οπτικός Έλεγχος Πυροσβεστήρα
+  </h2>
+
+  <p>
+    Κατά τον τριμηνιαίο οπτικό έλεγχο
+    βλέπεις ότι ο δείκτης του μανομέτρου
+    δεν βρίσκεται στην πράσινη περιοχή.
+  </p>
+
+  <p>
+    <strong>
+      Ποια είναι η σωστή ενέργεια;
+    </strong>
+  </p>
+
+  <div class="activity-options">
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">A</span>
+
+      Δεν κάνω τίποτα,
+      αφού ο πυροσβεστήρας
+      δεν έχει χρησιμοποιηθεί.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="correct"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">B</span>
+
+      Αναφέρω άμεσα την απόκλιση
+      και επικοινωνώ με την εταιρία συντήρησης
+      για έλεγχο, επιδιόρθωση
+      ή αντικατάσταση.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">C</span>
+
+      Περιμένω μέχρι
+      την επόμενη ετήσια συντήρηση.
+
+    </button>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitActivity()">
+    Έλεγχος Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetActivity()">
+    Επανεκκίνηση Δραστηριότητας
+  </button>
+
+  <div
+    id="activityFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DECISION SCENARIO
+     ===================================================== -->
+
+<section>
+
+  <h2>
+    Σενάριο Απόφασης:
+    Ο Πυροσβεστήρας Χρησιμοποιήθηκε
+  </h2>
+
+  <p>
+    Ένας πυροσβεστήρας χρησιμοποιήθηκε
+    για αντιμετώπιση περιστατικού.
+
+    Εξωτερικά φαίνεται
+    να βρίσκεται σε καλή κατάσταση.
+  </p>
+
+  <p>
+    <strong>
+      Τι πρέπει να γίνει σύμφωνα με το υλικό της ενότητας;
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Τον επιστρέφω αμέσως
+    στη θέση του
+    επειδή δεν φαίνεται κατεστραμμένος.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="partial"
+    onclick="selectScenario(this)">
+
+    Περιμένω
+    τον επόμενο τριμηνιαίο
+    οπτικό έλεγχο.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Θεωρώ ότι απαιτείται
+    η προβλεπόμενη συντήρηση
+    και αντικατάσταση του κατασβεστικού υλικού
+    μετά τη χρήση.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     QUIZ
+     ===================================================== -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form
+    id="quizForm"
+    onsubmit="return false;">
+
+    <!-- Q1 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Πόσο συχνά αναφέρει το υλικό ότι γίνεται η ετήσια συντήρηση;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="1">
+
+        Μία φορά τον χρόνο.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Μία φορά κάθε 10 χρόνια.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q1"
+          value="0">
+
+        Μόνο μετά από χρήση.
+      </label>
+
+    </div>
+
+    <!-- Q2 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Τι ελέγχεται στον τριμηνιαίο οπτικό έλεγχο;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="1">
+
+        Μανόμετρο, εμφανείς φθορές
+        και περόνη ασφαλείας.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Μόνο το χρώμα
+        του πυροσβεστήρα.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q2"
+          value="0">
+
+        Μόνο το σημείο
+        στο οποίο είναι τοποθετημένος.
+      </label>
+
+    </div>
+
+    <!-- Q3 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Αν το μανόμετρο δεν βρίσκεται στην πράσινη περιοχή:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="1">
+
+        Επικοινωνούμε άμεσα
+        με την εταιρία συντήρησης.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Το αγνοούμε
+        μέχρι τον επόμενο χρόνο.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q3"
+          value="0">
+
+        Χρησιμοποιούμε τον πυροσβεστήρα
+        για δοκιμή.
+      </label>
+
+    </div>
+
+    <!-- Q4 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Σύμφωνα με το υλικό, το κατασβεστικό υλικό αντικαθίσταται:
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="1">
+
+        Κάθε 5 χρόνια
+        και μετά από οποιαδήποτε χρήση.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Μόνο όταν αλλάξει
+        το χρώμα του πυροσβεστήρα.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q4"
+          value="0">
+
+        Ποτέ.
+      </label>
+
+    </div>
+
+    <!-- Q5 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          5. Τι μπορεί να περιλαμβάνει ο εκτεταμένος εργαστηριακός έλεγχος;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q5"
+          value="1">
+
+        Αντικατάσταση φθαρμένων εξαρτημάτων,
+        αλλαγή υλικού,
+        υδραυλική δοκιμή
+        και έλεγχο συστήματος πίεσης.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q5"
+          value="0">
+
+        Μόνο καθαρισμό
+        της εξωτερικής επιφάνειας.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q5"
+          value="0">
+
+        Μόνο αλλαγή
+        της ετικέτας.
+      </label>
+
+    </div>
+
+    <!-- Q6 -->
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          6. Γιατί είναι σημαντική η κατασβεστική ικανότητα;
+        </strong>
+      </p>
+
+      <label>
+        <input
+          type="radio"
+          name="q6"
+          value="1">
+
+        Επειδή δύο πυροσβεστήρες
+        με ίδια ποσότητα υλικού
+        δεν έχουν απαραίτητα
+        την ίδια αποτελεσματικότητα.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q6"
+          value="0">
+
+        Επειδή δείχνει
+        το βάρος του κυλίνδρου.
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="q6"
+          value="0">
+
+        Δεν επηρεάζει
+        την επιλογή πυροσβεστήρα.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- =====================================================
+     KEY TAKEAWAYS
+     ===================================================== -->
+
+<section>
+
+  <h2>Βασικά Σημεία</h2>
+
+  <div class="takeaway">
+
+    <span>🧯</span>
+
+    <div>
+      Ένας πυροσβεστήρας πρέπει να παραμένει
+      διαθέσιμος και σε κατάσταση αξιόπιστης λειτουργίας.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🔍</span>
+
+    <div>
+      Ο τριμηνιαίος οπτικός έλεγχος
+      περιλαμβάνει μανόμετρο,
+      εμφανείς φθορές
+      και περόνη ασφαλείας.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>📅</span>
+
+    <div>
+      Η ετήσια συντήρηση
+      πραγματοποιείται σύμφωνα
+      με το πρόγραμμα του υλικού.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>⚙️</span>
+
+    <div>
+      Η ηλικία, η κατάσταση
+      και η χρήση του πυροσβεστήρα
+      επηρεάζουν τις απαιτούμενες
+      ενέργειες συντήρησης.
+    </div>
+
+  </div>
+
+  <div class="takeaway">
+
+    <span>🏷️</span>
+
+    <div>
+      Η κατασβεστική ικανότητα
+      είναι σημαντικό κριτήριο
+      για την επιλογή
+      του κατάλληλου πυροσβεστήρα.
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στην Εργασία |
+  Συντήρηση Φορητού Πυροσβεστήρα
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+let selectedActivity = null;
+
+function selectActivity(button){
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedActivity =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitActivity(){
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedActivity){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από τον έλεγχο.";
+
+    return;
+  }
+
+  if(selectedActivity === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Όταν ο δείκτης του μανομέτρου δεν βρίσκεται στην προβλεπόμενη περιοχή, " +
+      "το υλικό απαιτεί άμεση επικοινωνία με την εταιρία συντήρησης για έλεγχο, επιδιόρθωση ή αντικατάσταση.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Μία απόκλιση που εντοπίζεται στον οπτικό έλεγχο δεν πρέπει να αγνοείται ή να παραμένει μέχρι την επόμενη προγραμματισμένη συντήρηση.";
+  }
+}
+
+function resetActivity(){
+
+  selectedActivity = null;
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   DECISION SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario =
+    button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className =
+      "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className =
+      "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Σύμφωνα με το υλικό της ενότητας, το κατασβεστικό υλικό αντικαθίσταται μετά από οποιαδήποτε χρήση του πυροσβεστήρα.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Δεν είναι σωστό.</strong> " +
+      "Μετά από χρήση δεν περιμένουμε μέχρι τον επόμενο περιοδικό οπτικό έλεγχο.";
+
+  }else{
+
+    feedback.className =
+      "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Το γεγονός ότι ο πυροσβεστήρας φαίνεται εξωτερικά σε καλή κατάσταση δεν σημαίνει ότι πρέπει να επιστρέψει άμεσα σε υπηρεσία μετά από χρήση.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+
+      option.classList.remove("selected");
+
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 6;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις έξι ερωτήσεις πριν από την υποβολή.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Άριστα!</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Κατανοείς τα βασικά σημεία ελέγχου, συντήρησης και κατασβεστικής ικανότητας του φορητού πυροσβεστήρα.";
+
+  }else if(score >= 4){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Καλή προσπάθεια.</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Ξαναδές ιδιαίτερα τις χρονικές περιόδους ελέγχου, την κατάσταση του μανομέτρου και τις ενέργειες μετά από χρήση.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score + "/" + total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector(
+      'input[name="q1"]'
+    );
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+
+</script>
+
+</body>
+</html>

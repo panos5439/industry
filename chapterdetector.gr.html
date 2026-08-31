@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Πυρανίχνευση | Ανιχνευτές Καπνού & Θερμότητας</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,input{font:inherit;}
+button{cursor:pointer;}
+
+header{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:920px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+.highlight,.success,.danger,.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+.safety-flow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:22px;
+}
+
+.safety-step{
+  min-height:170px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#f8fafc;
+  text-align:center;
+}
+
+.step-number{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 12px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+}
+
+.safety-step strong{
+  display:block;
+  margin-bottom:8px;
+  color:var(--primary-dark);
+}
+
+.control-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.control-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:var(--success);
+}
+
+.hazard-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.hazard-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:var(--accent);
+}
+
+.image-wrap{
+  max-width:520px;
+  margin:22px auto 0;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#f8fafc;
+  text-align:center;
+}
+
+.image-wrap img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:12px;
+}
+
+.image-caption{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.activity-options{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:14px;
+  margin-top:20px;
+}
+
+.activity-choice{
+  width:100%;
+  min-height:165px;
+  padding:18px;
+  border:2px solid var(--border);
+  border-radius:14px;
+  background:#eef4fb;
+  color:var(--text);
+  text-align:left;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.activity-choice:hover,
+.activity-choice:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.activity-choice.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:3px solid var(--primary);
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.activity-letter{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  margin-bottom:10px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+}
+
+.scenario-option{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#eef4fb;
+  color:var(--text);
+  text-align:left;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+  transition:background-color .2s ease,transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{
+  margin-top:0;
+}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fff;
+  cursor:pointer;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+  margin-top:18px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--success),#52b788);
+  transition:width .4s ease;
+}
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin:14px 0;
+  padding:15px;
+  border-radius:12px;
+  background:var(--info-bg);
+  color:var(--primary-dark);
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+footer{
+  padding:30px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+@media(max-width:850px){
+  .safety-flow{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  main{padding:14px;}
+  section{padding:20px;}
+
+  .safety-flow{
+    grid-template-columns:1fr;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>Πυρανίχνευση: Ανιχνευτές Καπνού & Θερμότητας</h1>
+
+  <p>
+    Η πυρανίχνευση παρέχει έγκαιρη προειδοποίηση
+    όταν εμφανιστούν σημάδια φωτιάς.
+    Στόχος είναι οι άνθρωποι να ενημερωθούν έγκαιρα
+    και να ξεκινήσει γρήγορα και με ασφάλεια η εκκένωση.
+  </p>
+
+</header>
+
+<main>
+
+<!-- LEARNING OBJECTIVES -->
+
+<section>
+
+  <h2>Στόχοι Μάθησης</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🔥</span>
+      Κατανοεί τι είναι
+      η πυρανίχνευση
+      και ποιος είναι ο σκοπός της.
+    </div>
+
+    <div class="card">
+      <span class="icon">💨</span>
+      Αναγνωρίζει
+      πώς λειτουργεί
+      ένας ανιχνευτής καπνού.
+    </div>
+
+    <div class="card">
+      <span class="icon">🌡️</span>
+      Κατανοεί
+      τη λειτουργία
+      ενός ανιχνευτή θερμότητας.
+    </div>
+
+    <div class="card">
+      <span class="icon">🔴</span>
+      Κατανοεί τον ρόλο
+      των χειροκίνητων
+      κομβίων συναγερμού.
+    </div>
+
+    <div class="card">
+      <span class="icon">🚪</span>
+      Γνωρίζει
+      τι πρέπει να κάνει
+      όταν ενεργοποιηθεί ο συναγερμός.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 1 -->
+
+<section>
+
+  <h2>1. Τι Είναι η Πυρανίχνευση;</h2>
+
+  <p>
+    Η πυρανίχνευση είναι ένα σύστημα
+    που εντοπίζει έγκαιρα σημάδια φωτιάς,
+    όπως καπνό ή θερμότητα.
+  </p>
+
+  <p>
+    Το σύστημα μπορεί να ενεργοποιήσει
+    τον συναγερμό,
+    ώστε οι άνθρωποι στον χώρο
+    να ειδοποιηθούν όσο το δυνατόν νωρίτερα.
+  </p>
+
+  <div class="info">
+
+    <strong>Βασικός σκοπός:</strong>
+
+    η έγκαιρη προειδοποίηση,
+    ώστε να αρχίσει γρήγορα
+    και με ασφάλεια η εκκένωση.
+
+  </div>
+
+</section>
+
+<!-- 2 -->
+
+<section>
+
+  <h2>2. Πώς Λειτουργεί το Σύστημα;</h2>
+
+  <div class="safety-flow">
+
+    <div class="safety-step">
+
+      <div class="step-number">1</div>
+
+      <strong>ΑΝΙΧΝΕΥΣΗ</strong>
+
+      Ο ανιχνευτής εντοπίζει
+      καπνό ή θερμότητα.
+
+    </div>
+
+    <div class="safety-step">
+
+      <div class="step-number">2</div>
+
+      <strong>ΣΗΜΑ</strong>
+
+      Στέλνει σήμα
+      στον πίνακα πυρανίχνευσης.
+
+    </div>
+
+    <div class="safety-step">
+
+      <div class="step-number">3</div>
+
+      <strong>ΣΥΝΑΓΕΡΜΟΣ</strong>
+
+      Ενεργοποιούνται
+      σειρήνες ή φάροι,
+      όπου υπάρχουν.
+
+    </div>
+
+    <div class="safety-step">
+
+      <div class="step-number">4</div>
+
+      <strong>ΕΚΚΕΝΩΣΗ</strong>
+
+      Οι άνθρωποι
+      απομακρύνονται
+      προς τις εξόδους κινδύνου.
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 3 -->
+
+<section>
+
+  <h2>3. Ανιχνευτής Καπνού</h2>
+
+  <div class="grid">
+
+    <div class="card control-card">
+
+      <span class="icon">💨</span>
+
+      <h3>Τι Ανιχνεύει;</h3>
+
+      <p>
+        Ανιχνεύει
+        σωματίδια καπνού
+        που βρίσκονται στον αέρα.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">⏱️</span>
+
+      <h3>Έγκαιρη Ενεργοποίηση</h3>
+
+      <p>
+        Μπορεί να ενεργοποιηθεί
+        νωρίς όταν εμφανιστεί καπνός,
+        ανάλογα με τη μελέτη
+        και τον χώρο εγκατάστασης.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">🔔</span>
+
+      <h3>Σύνδεση με Πίνακα</h3>
+
+      <p>
+        Στέλνει σήμα
+        στον πίνακα πυρανίχνευσης,
+        ο οποίος μπορεί να ενεργοποιήσει
+        σειρήνες ή φάρους.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="image-wrap">
+
+    <img
+      src="https://commons.wikimedia.org/wiki/Special:FilePath/Smoke%20detector.JPG"
+      alt="Ανιχνευτής καπνού τοποθετημένος στην οροφή"
+      loading="lazy">
+
+    <div class="image-caption">
+      Ενδεικτική φωτογραφία ανιχνευτή καπνού
+      τοποθετημένου στην οροφή.
+    </div>
+
+  </div>
+
+  <div class="highlight">
+
+    Οι ανιχνευτές
+    τοποθετούνται συνήθως στην οροφή
+    και συνδέονται με τον πίνακα πυρανίχνευσης.
+
+  </div>
+
+</section>
+
+<!-- 4 -->
+
+<section>
+
+  <h2>4. Ανιχνευτής Θερμότητας</h2>
+
+  <div class="grid">
+
+    <div class="card control-card">
+
+      <span class="icon">🌡️</span>
+
+      <h3>Υψηλή Θερμοκρασία</h3>
+
+      <p>
+        Μπορεί να ενεργοποιηθεί
+        όταν η θερμοκρασία
+        φτάσει σε υψηλό επίπεδο.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">📈</span>
+
+      <h3>Απότομη Αύξηση</h3>
+
+      <p>
+        Μπορεί επίσης
+        να αντιδράσει
+        σε απότομη αύξηση
+        της θερμοκρασίας.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">🏭</span>
+
+      <h3>Εφαρμογές</h3>
+
+      <p>
+        Χρησιμοποιείται συχνά
+        σε χώρους όπου μπορεί
+        να υπάρχει ατμός ή σκόνη,
+        ανάλογα με τη μελέτη.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">🔗</span>
+
+      <h3>Συμπληρωματική Λειτουργία</h3>
+
+      <p>
+        Μπορεί να λειτουργεί
+        συμπληρωματικά
+        με την ανίχνευση καπνού
+        για καλύτερη κάλυψη.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 5 -->
+
+<section>
+
+  <h2>5. Χειροκίνητα Κομβία Συναγερμού</h2>
+
+  <p>
+    Η πυρανίχνευση αποτελεί
+    αυτόματη μορφή ειδοποίησης.
+  </p>
+
+  <p>
+    Τα χειροκίνητα κομβία συναγερμού
+    χρησιμοποιούνται για χειροκίνητη ειδοποίηση
+    όταν κάποιος δει φωτιά ή καπνό.
+  </p>
+
+  <div class="success">
+
+    <strong>Αν δεις φωτιά:</strong>
+
+    ενεργοποίησε τον συναγερμό,
+    αν υπάρχει,
+    και προχώρησε σε εκκένωση
+    σύμφωνα με τη διαδικασία του χώρου.
+
+  </div>
+
+</section>
+
+<!-- 6 -->
+
+<section>
+
+  <h2>6. Τι Κάνω Όταν Ενεργοποιηθεί ο Συναγερμός;</h2>
+
+  <div class="safety-flow">
+
+    <div class="safety-step">
+
+      <div class="step-number">1</div>
+
+      <strong>ΣΤΑΜΑΤΩ</strong>
+
+      Παραμένω ψύχραιμος
+      και σταματώ άμεσα
+      αυτό που κάνω.
+
+    </div>
+
+    <div class="safety-step">
+
+      <div class="step-number">2</div>
+
+      <strong>ΑΚΟΛΟΥΘΩ ΕΞΟΔΟ</strong>
+
+      Κατευθύνομαι
+      προς την πλησιέστερη
+      έξοδο κινδύνου.
+
+    </div>
+
+    <div class="safety-step">
+
+      <div class="step-number">3</div>
+
+      <strong>ΧΡΗΣΙΜΟΠΟΙΩ ΣΚΑΛΕΣ</strong>
+
+      Δεν χρησιμοποιώ ασανσέρ.
+      Χρησιμοποιώ τις σκάλες.
+
+    </div>
+
+    <div class="safety-step">
+
+      <div class="step-number">4</div>
+
+      <strong>ΣΗΜΕΙΟ ΣΥΓΚΕΝΤΡΩΣΗΣ</strong>
+
+      Πηγαίνω
+      στο σημείο συγκέντρωσης
+      και περιμένω οδηγίες.
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Κανόνας:</strong>
+
+    Ακούω συναγερμό →
+    απομακρύνομαι →
+    κατευθύνομαι προς την έξοδο κινδύνου.
+
+  </div>
+
+</section>
+
+<!-- 7 -->
+
+<section>
+
+  <h2>7. Προστασία των Ανιχνευτών</h2>
+
+  <div class="grid">
+
+    <div class="card hazard-card">
+
+      <span class="icon">🚫</span>
+
+      <h3>Μην τους Καλύπτεις</h3>
+
+      <p>
+        Δεν καλύπτουμε
+        τους ανιχνευτές,
+        γιατί μπορεί να επηρεαστεί
+        η δυνατότητα ανίχνευσης.
+      </p>
+
+    </div>
+
+    <div class="card hazard-card">
+
+      <span class="icon">🎨</span>
+
+      <h3>Μην τους Βάφεις</h3>
+
+      <p>
+        Δεν βάφουμε
+        τους ανιχνευτές
+        ή τα ανοίγματά τους.
+      </p>
+
+    </div>
+
+    <div class="card hazard-card">
+
+      <span class="icon">↔️</span>
+
+      <h3>Μην τους Μετακινείς</h3>
+
+      <p>
+        Δεν μετακινούμε
+        ανιχνευτές
+        από τη θέση τους.
+      </p>
+
+    </div>
+
+    <div class="card hazard-card">
+
+      <span class="icon">📢</span>
+
+      <h3>Αναφορά Βλάβης</h3>
+
+      <p>
+        Αν εντοπιστεί
+        βλάβη ή φθορά,
+        πρέπει να αναφερθεί άμεσα.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- INTERACTIVE ACTIVITY -->
+
+<section>
+
+  <h2>Διαδραστική Δραστηριότητα: Ο Συναγερμός Ενεργοποιείται</h2>
+
+  <p>
+    Βρίσκεσαι σε χώρο εργασίας
+    και ενεργοποιείται ο συναγερμός πυρκαγιάς.
+  </p>
+
+  <p><strong>Ποια είναι η σωστή αντίδραση;</strong></p>
+
+  <div class="activity-options">
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">A</span>
+
+      Συνεχίζω την εργασία
+      μέχρι να δω προσωπικά
+      καπνό ή φωτιά.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="correct"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">B</span>
+
+      Σταματώ ό,τι κάνω,
+      ακολουθώ την πλησιέστερη έξοδο κινδύνου
+      και κατευθύνομαι
+      στο σημείο συγκέντρωσης.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">C</span>
+
+      Χρησιμοποιώ το ασανσέρ
+      για να βγω γρηγορότερα.
+
+    </button>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitActivity()">
+    Έλεγχος Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetActivity()">
+    Επανεκκίνηση Δραστηριότητας
+  </button>
+
+  <div
+    id="activityFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- SCENARIO -->
+
+<section>
+
+  <h2>Σενάριο Απόφασης: Βλέπεις Καπνό</h2>
+
+  <p>
+    Βλέπεις καπνό
+    σε έναν χώρο εργασίας
+    αλλά ο αυτόματος συναγερμός
+    δεν έχει ακόμη ενεργοποιηθεί.
+  </p>
+
+  <p>
+    <strong>
+      Ποια είναι η σωστή ενέργεια
+      σύμφωνα με τη θεωρία της ενότητας;
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Περιμένω μέχρι
+    να ενεργοποιηθεί αυτόματα
+    κάποιος ανιχνευτής.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    Ενεργοποιώ τον συναγερμό,
+    αν υπάρχει διαθέσιμο κομβίο,
+    και προχωρώ σε εκκένωση.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    Καλύπτω τον ανιχνευτή
+    ώστε να μη δημιουργηθεί συναγερμός.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Υποβολή Απάντησης
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Επαναφορά Σεναρίου
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- QUIZ -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form id="quizForm" onsubmit="return false;">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. Ποιος είναι ο βασικός σκοπός της πυρανίχνευσης;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        Να εντοπίζει έγκαιρα σημάδια φωτιάς
+        και να ειδοποιεί τους ανθρώπους.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Να σβήνει πάντα αυτόματα κάθε φωτιά.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Να αντικαθιστά τις εξόδους κινδύνου.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Τι ανιχνεύει ένας ανιχνευτής καπνού;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Σωματίδια καπνού στον αέρα.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Μόνο τον θόρυβο.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Μόνο την υγρασία.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. Πότε μπορεί να ενεργοποιηθεί ένας ανιχνευτής θερμότητας;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        Από υψηλή θερμοκρασία
+        ή απότομη αύξησή της.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Μόνο όταν υπάρχει νερό.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Μόνο όταν υπάρχει θόρυβος.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. Ποιος είναι ο ρόλος ενός χειροκίνητου κομβίου συναγερμού;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        Να επιτρέπει χειροκίνητη ενεργοποίηση
+        όταν κάποιος δει φωτιά ή καπνό.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Να απενεργοποιεί όλους τους ανιχνευτές.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Να ανοίγει αυτόματα το ασανσέρ.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          5. Τι κάνουμε όταν ενεργοποιηθεί ο συναγερμός;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q5" value="1">
+        Σταματάμε την εργασία,
+        ακολουθούμε την έξοδο κινδύνου
+        και πηγαίνουμε στο σημείο συγκέντρωσης.
+      </label>
+
+      <label>
+        <input type="radio" name="q5" value="0">
+        Περιμένουμε μέχρι να δούμε φωτιά.
+      </label>
+
+      <label>
+        <input type="radio" name="q5" value="0">
+        Χρησιμοποιούμε το ασανσέρ.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          6. Ποια ενέργεια είναι σωστή για τους ανιχνευτές;
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q6" value="1">
+        Δεν τους καλύπτουμε,
+        δεν τους βάφουμε
+        και αναφέρουμε βλάβες ή φθορές.
+      </label>
+
+      <label>
+        <input type="radio" name="q6" value="0">
+        Τους μετακινούμε
+        όταν μας ενοχλούν.
+      </label>
+
+      <label>
+        <input type="radio" name="q6" value="0">
+        Τους καλύπτουμε
+        για να μην ενεργοποιούνται.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Υποβολή Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Επαναφορά Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Βαθμολογία Quiz"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- KEY TAKEAWAYS -->
+
+<section>
+
+  <h2>Βασικά Σημεία</h2>
+
+  <div class="takeaway">
+    <span>🔥</span>
+    <div>
+      Η πυρανίχνευση
+      παρέχει έγκαιρη προειδοποίηση
+      όταν ανιχνευθούν σημάδια φωτιάς.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>💨</span>
+    <div>
+      Οι ανιχνευτές καπνού
+      εντοπίζουν σωματίδια καπνού
+      στον αέρα.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🌡️</span>
+    <div>
+      Οι ανιχνευτές θερμότητας
+      ενεργοποιούνται από υψηλή θερμοκρασία
+      ή απότομη αύξησή της.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🔴</span>
+    <div>
+      Τα χειροκίνητα κομβία
+      επιτρέπουν την ενεργοποίηση συναγερμού
+      όταν κάποιος δει φωτιά ή καπνό.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🚪</span>
+    <div>
+      Όταν ακούσεις συναγερμό,
+      απομακρύνσου προς την έξοδο κινδύνου
+      και κατευθύνσου στο σημείο συγκέντρωσης.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>⚠️</span>
+    <div>
+      Μην καλύπτεις,
+      βάφεις ή μετακινείς ανιχνευτές
+      και ανέφερε άμεσα οποιαδήποτε βλάβη.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Εκπαίδευση Υγείας & Ασφάλειας στην Εργασία |
+  Πυρανίχνευση
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+let selectedActivity = null;
+
+function selectActivity(button){
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  selectedActivity = button.dataset.type;
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitActivity(){
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedActivity){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από τον έλεγχο.";
+
+    return;
+  }
+
+  if(selectedActivity === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Όταν ενεργοποιηθεί ο συναγερμός, σταματάμε την εργασία, ακολουθούμε την έξοδο κινδύνου και κατευθυνόμαστε στο σημείο συγκέντρωσης.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Δεν περιμένουμε να δούμε προσωπικά τη φωτιά και δεν χρησιμοποιούμε ασανσέρ κατά την εκκένωση.";
+  }
+}
+
+function resetActivity(){
+
+  selectedActivity = null;
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario = button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Παρακαλώ επίλεξε μία απάντηση πριν από την υποβολή.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Σωστά.</strong> " +
+      "Η θεωρία αναφέρει ότι αν κάποιος δει φωτιά ή καπνό, μπορεί να ενεργοποιήσει το χειροκίνητο κομβίο συναγερμού, όπου υπάρχει, και να εκκενώσει.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Λάθος.</strong> " +
+      "Δεν περιμένουμε απαραίτητα την αυτόματη ενεργοποίηση και δεν παρεμβαίνουμε στους ανιχνευτές.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 6;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Παρακαλώ απάντησε και στις έξι ερωτήσεις πριν από την υποβολή.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round((score / total) * 100);
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Άριστα!</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Κατανοείς τις βασικές αρχές πυρανίχνευσης, συναγερμού και ασφαλούς εκκένωσης.";
+
+  }else if(score >= 4){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Καλή προσπάθεια.</strong> Πέτυχες " +
+      score + "/" + total +
+      ". Ξαναδές ιδιαίτερα τη λειτουργία των ανιχνευτών και τις ενέργειες όταν ενεργοποιηθεί ο συναγερμός.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "Πέτυχες " +
+      score + "/" + total +
+      ". Προτείνεται να επαναλάβεις την ενότητα και να δοκιμάσεις ξανά.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector('input[name="q1"]');
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+</script>
+
+</body>
+</html>

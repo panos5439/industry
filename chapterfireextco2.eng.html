@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CO₂ Fire Extinguisher | Safe Use</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,input{font:inherit;}
+button{cursor:pointer;}
+
+header{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:920px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{
+  color:var(--primary-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+.highlight,.success,.danger,.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+.safety-flow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:22px;
+}
+
+.safety-step{
+  min-height:170px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#f8fafc;
+  text-align:center;
+}
+
+.step-number{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 12px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+}
+
+.safety-step strong{
+  display:block;
+  margin-bottom:8px;
+  color:var(--primary-dark);
+}
+
+.hazard-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.hazard-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:var(--accent);
+}
+
+.control-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.control-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:var(--success);
+}
+
+.image-wrap{
+  max-width:520px;
+  margin:22px auto 0;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#f8fafc;
+  text-align:center;
+}
+
+.image-wrap img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:12px;
+}
+
+.image-caption{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.activity-options{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:14px;
+  margin-top:20px;
+}
+
+.activity-choice{
+  width:100%;
+  min-height:165px;
+  padding:18px;
+  border:2px solid var(--border);
+  border-radius:14px;
+  background:#eef4fb;
+  color:var(--text);
+  text-align:left;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.activity-choice:hover,
+.activity-choice:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.activity-choice.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:3px solid var(--primary);
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.activity-letter{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  margin-bottom:10px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+}
+
+.scenario-option{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#eef4fb;
+  color:var(--text);
+  text-align:left;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+  transition:background-color .2s ease,transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{transform:translateY(-1px);}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{
+  background:#36404a;
+}
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{margin-top:0;}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fff;
+  cursor:pointer;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+}
+
+.quiz-question input{
+  margin-right:8px;
+}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+  margin-top:18px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--success),#52b788);
+  transition:width .4s ease;
+}
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin:14px 0;
+  padding:15px;
+  border-radius:12px;
+  background:var(--info-bg);
+  color:var(--primary-dark);
+  font-weight:bold;
+}
+
+.takeaway span{
+  font-size:1.3rem;
+}
+
+footer{
+  padding:30px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+@media(max-width:850px){
+  .safety-flow{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  main{padding:14px;}
+  section{padding:20px;}
+
+  .safety-flow{
+    grid-template-columns:1fr;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>CO₂ Fire Extinguisher</h1>
+
+  <p>
+    The correct type of fire extinguisher can make a difference within seconds.
+    In this module, we learn about the CO₂ fire extinguisher,
+    when it is used, how it extinguishes fire
+    and what hazards may result from incorrect use.
+  </p>
+
+</header>
+
+<main>
+
+<!-- LEARNING OBJECTIVES -->
+
+<section>
+
+  <h2>Learning Objectives</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🧯</span>
+      Understand what
+      a CO₂ fire extinguisher is
+      and how it works.
+    </div>
+
+    <div class="card">
+      <span class="icon">🔥</span>
+      Recognise
+      which types of fire
+      it is suitable for.
+    </div>
+
+    <div class="card">
+      <span class="icon">⚡</span>
+      Understand why it is used
+      on electrical and electronic equipment.
+    </div>
+
+    <div class="card">
+      <span class="icon">⚠️</span>
+      Recognise the main hazards
+      associated with incorrect use.
+    </div>
+
+    <div class="card">
+      <span class="icon">🎯</span>
+      Select the appropriate
+      type of extinguisher
+      according to the type of fire.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 1 -->
+
+<section>
+
+  <h2>1. What Is a CO₂ Fire Extinguisher?</h2>
+
+  <p>
+    A CO₂ fire extinguisher contains
+    carbon dioxide
+    in liquefied form,
+    under high pressure.
+  </p>
+
+  <p>
+    When activated,
+    the CO₂ is discharged as a white cloud
+    at a very low temperature.
+  </p>
+
+  <div class="image-wrap">
+
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Fire_extinguisher_CO2_b.svg/960px-Fire_extinguisher_CO2_b.svg.png"
+      alt="Illustration of a CO₂ fire extinguisher">
+
+    <div class="image-caption">
+      Indicative illustration of a CO₂ fire extinguisher
+      and the way the agent is discharged.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 2 -->
+
+<section>
+
+  <h2>2. Which Fires Is It Suitable For?</h2>
+
+  <div class="grid">
+
+    <div class="card control-card">
+
+      <span class="icon">🔥</span>
+
+      <h3>Class B</h3>
+
+      <p>
+        Suitable for flammable liquids,
+        such as oils, petrol,
+        solvents and similar materials.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">⚡</span>
+
+      <h3>Electrical Equipment</h3>
+
+      <p>
+        Used on fires involving
+        electrical equipment,
+        such as electrical panels,
+        servers and computers.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="danger">
+
+    <strong>Not suitable:</strong>
+
+    for Class A solid fuels,
+    such as wood, paper and textiles,
+    or for Class D metal fires.
+
+  </div>
+
+  <div class="info">
+
+    <strong>Typical application areas:</strong>
+
+    electrical panels,
+    computer rooms,
+    lift machinery rooms,
+    workshops
+    and industrial areas
+    with electrical installations.
+
+  </div>
+
+</section>
+
+<!-- 3 -->
+
+<section>
+
+  <h2>3. How Does It Extinguish Fire?</h2>
+
+  <div class="safety-flow">
+
+    <div class="safety-step">
+      <div class="step-number">1</div>
+      <strong>DISCHARGE</strong>
+      CO₂ is released
+      from the extinguisher.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">2</div>
+      <strong>DISPLACEMENT</strong>
+      It displaces oxygen
+      around the flame.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">3</div>
+      <strong>COOLING</strong>
+      The gas is discharged
+      at a very low temperature.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">4</div>
+      <strong>EXTINGUISHING</strong>
+      The fire is “smothered”
+      without leaving residue.
+    </div>
+
+  </div>
+
+  <div class="highlight">
+    Unlike powder or foam extinguishers,
+    CO₂ does not leave residue
+    after discharge.
+  </div>
+
+</section>
+
+<!-- 4 -->
+
+<section>
+
+  <h2>4. Advantages of CO₂</h2>
+
+  <div class="grid">
+
+    <div class="card control-card">
+
+      <span class="icon">✨</span>
+
+      <h3>Leaves No Residue</h3>
+
+      <p>
+        It is particularly useful
+        for electronic
+        and electrical equipment.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">⚡</span>
+
+      <h3>Non-Conductive</h3>
+
+      <p>
+        The module material
+        presents CO₂ as suitable
+        for use on electrical equipment.
+      </p>
+
+    </div>
+
+    <div class="card control-card">
+
+      <span class="icon">⏱️</span>
+
+      <h3>Fast Extinguishing</h3>
+
+      <p>
+        It can provide
+        rapid extinguishing
+        when used correctly.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 5 -->
+
+<section>
+
+  <h2>5. Disadvantages & Hazards</h2>
+
+  <div class="grid">
+
+    <div class="card hazard-card">
+
+      <span class="icon">🫁</span>
+
+      <h3>Asphyxiation Risk</h3>
+
+      <p>
+        In small enclosed spaces,
+        reduction of the available oxygen
+        may create a serious hazard.
+      </p>
+
+    </div>
+
+    <div class="card hazard-card">
+
+      <span class="icon">❄️</span>
+
+      <h3>Very Low Temperature</h3>
+
+      <p>
+        The nozzle
+        and discharge horn
+        can become extremely cold,
+        creating a risk of frostbite.
+      </p>
+
+    </div>
+
+    <div class="card hazard-card">
+
+      <span class="icon">⏳</span>
+
+      <h3>Short Discharge Time</h3>
+
+      <p>
+        The extinguisher
+        empties relatively quickly,
+        so the available discharge time
+        is limited.
+      </p>
+
+    </div>
+
+    <div class="card hazard-card">
+
+      <span class="icon">🪵</span>
+
+      <h3>Not for Solid Fuels</h3>
+
+      <p>
+        It is not considered effective
+        for solid fuel fires,
+        such as paper and wood.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 6 -->
+
+<section>
+
+  <h2>6. Typical Capacities & Applications</h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="icon">2️⃣</span>
+
+      <h3>2 kg CO₂</h3>
+
+      <p>
+        For small electrical panels
+        and small offices.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <span class="icon">5️⃣</span>
+
+      <h3>5 kg CO₂</h3>
+
+      <p>
+        Common in commercial areas
+        and machinery rooms.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="info">
+
+    In larger facilities,
+    fixed CO₂ systems may also be installed,
+    activated automatically
+    or manually to protect an entire room.
+
+  </div>
+
+  <div class="success">
+
+    <strong>Key message:</strong>
+
+    Use CO₂ only where it is suitable:
+    on flammable liquids
+    and electrical equipment.
+
+  </div>
+
+</section>
+
+<!-- INTERACTIVE ACTIVITY -->
+
+<section>
+
+  <h2>Interactive Activity: Selecting an Extinguisher</h2>
+
+  <p>
+    You see a small fire
+    in an electrical panel.
+    A CO₂ fire extinguisher is available.
+  </p>
+
+  <p><strong>Which option matches the theory in this module?</strong></p>
+
+  <div class="activity-options">
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="correct"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">A</span>
+
+      CO₂ is suitable
+      for fires involving electrical equipment.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">B</span>
+
+      CO₂ is used only
+      for wood and paper fires.
+
+    </button>
+
+    <button
+      type="button"
+      class="activity-choice"
+      data-type="wrong"
+      onclick="selectActivity(this)">
+
+      <span class="activity-letter">C</span>
+
+      The type of extinguisher
+      does not matter.
+
+    </button>
+
+  </div>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitActivity()">
+    Check Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetActivity()">
+    Restart Activity
+  </button>
+
+  <div
+    id="activityFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- SCENARIO -->
+
+<section>
+
+  <h2>Decision Scenario: Use in a Small Enclosed Space</h2>
+
+  <p>
+    There is a fire incident
+    in a small enclosed area
+    and you are considering using CO₂.
+  </p>
+
+  <p>
+    <strong>
+      Which key hazard should you consider
+      according to the theory in this module?
+    </strong>
+  </p>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    There is no particular hazard
+    because CO₂ leaves no residue.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="correct"
+    onclick="selectScenario(this)">
+
+    There is a risk of asphyxiation
+    because the available oxygen
+    may be reduced in a small enclosed space.
+
+  </button>
+
+  <button
+    type="button"
+    class="scenario-option"
+    data-type="wrong"
+    onclick="selectScenario(this)">
+
+    The only hazard
+    is that it may contaminate
+    the electrical equipment.
+
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn"
+    onclick="submitScenario()">
+    Submit Answer
+  </button>
+
+  <button
+    type="button"
+    class="submit-btn reset-btn"
+    onclick="resetScenario()">
+    Reset Scenario
+  </button>
+
+  <div
+    id="scenarioFeedback"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- QUIZ -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form id="quizForm" onsubmit="return false;">
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          1. What does a CO₂ fire extinguisher contain?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        Carbon dioxide
+        in liquefied form
+        under high pressure.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Water only.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Metal powder.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          2. Which fires is it presented as suitable for?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Flammable liquids
+        and electrical equipment.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Wood and paper only.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Class D metal fires.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          3. What is a key advantage of CO₂?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        It leaves no residue.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        It leaves a large amount of foam.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        It is intended exclusively
+        for solid fuel fires.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          4. What hazard exists in a small enclosed space?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        Risk of asphyxiation
+        due to reduced oxygen.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        Risk from excessive humidity.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        There is no hazard.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          5. Why is care required around the horn and nozzle?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q5" value="1">
+        Because they can become extremely cold
+        and cause frostbite.
+      </label>
+
+      <label>
+        <input type="radio" name="q5" value="0">
+        Because they fill with water.
+      </label>
+
+      <label>
+        <input type="radio" name="q5" value="0">
+        Because they become highly electrically conductive.
+      </label>
+
+    </div>
+
+    <div class="quiz-question">
+
+      <p>
+        <strong>
+          6. What is the key principle for selection?
+        </strong>
+      </p>
+
+      <label>
+        <input type="radio" name="q6" value="1">
+        Use CO₂ only where it is suitable
+        for the specific type of fire.
+      </label>
+
+      <label>
+        <input type="radio" name="q6" value="0">
+        Any extinguisher
+        is suitable for every fire.
+      </label>
+
+      <label>
+        <input type="radio" name="q6" value="0">
+        Extinguisher selection
+        depends only on its size.
+      </label>
+
+    </div>
+
+    <div class="quiz-actions">
+
+      <button
+        type="button"
+        class="submit-btn"
+        onclick="checkQuiz()">
+        Submit Quiz
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn reset-btn"
+        onclick="resetQuiz()">
+        Reset Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    id="quizProgress"
+    class="progress-box"
+    role="progressbar"
+    aria-label="Quiz Score"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0">
+
+    <div
+      id="progressBar"
+      class="progress-bar">
+    </div>
+
+  </div>
+
+  <div
+    id="quizResult"
+    class="feedback"
+    aria-live="polite">
+  </div>
+
+</section>
+
+<!-- KEY TAKEAWAYS -->
+
+<section>
+
+  <h2>Key Takeaways</h2>
+
+  <div class="takeaway">
+    <span>🧯</span>
+    <div>
+      A CO₂ fire extinguisher
+      contains carbon dioxide
+      under high pressure.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🔥</span>
+    <div>
+      It is used for flammable liquids
+      and electrical equipment,
+      according to the theory in this module.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>✨</span>
+    <div>
+      It leaves no residue,
+      making it useful
+      around electronic equipment.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>❄️</span>
+    <div>
+      The horn and nozzle
+      may become extremely cold.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🫁</span>
+    <div>
+      In small enclosed spaces,
+      there is a risk of asphyxiation
+      due to reduced available oxygen.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🎯</span>
+    <div>
+      The correct type of extinguisher
+      must be selected
+      according to the type of fire.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Occupational Health & Safety Training |
+  CO₂ Fire Extinguisher
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+let selectedActivity = null;
+
+function selectActivity(button){
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  selectedActivity = button.dataset.type;
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitActivity(){
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedActivity){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before checking.";
+
+    return;
+  }
+
+  if(selectedActivity === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "The theory in this module presents CO₂ as suitable for fires involving electrical equipment.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "The type of fire extinguisher must match the type of fire.";
+  }
+}
+
+function resetActivity(){
+
+  selectedActivity = null;
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario = button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "The theory states that there is a risk of asphyxiation in small enclosed spaces due to reduced available oxygen.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "The fact that CO₂ leaves no residue does not mean that its use is free from other hazards.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 6;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "Please answer all six questions before submitting.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round((score / total) * 100);
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className =
+      "feedback success";
+
+    result.innerHTML =
+      "<strong>Excellent!</strong> You scored " +
+      score + "/" + total +
+      ". You understand the key principles, applications and hazards of CO₂ fire extinguishers.";
+
+  }else if(score >= 4){
+
+    result.className =
+      "feedback warning";
+
+    result.innerHTML =
+      "<strong>Good effort.</strong> You scored " +
+      score + "/" + total +
+      ". Review the suitable fire types, hazards and advantages of CO₂.";
+
+  }else{
+
+    result.className =
+      "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score + "/" + total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector('input[name="q1"]');
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+</script>
+
+</body>
+</html>

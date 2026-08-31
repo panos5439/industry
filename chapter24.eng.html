@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Module 24 | Forklifts & Mixed Workplace Traffic</title>
+
+<style>
+:root{
+  --primary:#123c69;
+  --primary-dark:#0b2545;
+  --secondary:#f4b400;
+  --accent:#d62828;
+  --success:#2a9d8f;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --text:#1f2933;
+  --muted:#5f6c7b;
+  --border:#d9e2ec;
+  --warning-bg:#fff8e1;
+  --danger-bg:#fff1f1;
+  --success-bg:#eafaf7;
+  --info-bg:#eef4fb;
+}
+
+*{box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,input{font:inherit;}
+button{cursor:pointer;}
+
+header{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;
+  padding:52px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 12px;
+  font-size:clamp(1.8rem,4vw,3rem);
+}
+
+header p{
+  max-width:920px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+section{
+  background:var(--card);
+  margin-bottom:24px;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:0;
+  color:var(--primary);
+}
+
+h3{color:var(--primary-dark);}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(15,23,42,.08);
+}
+
+.icon{
+  display:block;
+  margin-bottom:10px;
+  font-size:2rem;
+}
+
+.highlight,.success,.danger,.info{
+  padding:18px;
+  margin-top:16px;
+  border-radius:12px;
+}
+
+.highlight{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+}
+
+.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+}
+
+.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+}
+
+.info{
+  border-left:6px solid var(--primary);
+  background:var(--info-bg);
+}
+
+.rule-list{
+  margin:12px 0 0;
+  padding-left:22px;
+}
+
+.rule-list li{margin:8px 0;}
+
+.safety-flow{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+  margin-top:22px;
+}
+
+.safety-step{
+  min-height:165px;
+  padding:18px 14px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#f8fafc;
+  text-align:center;
+}
+
+.step-number{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 12px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+}
+
+.safety-step strong{
+  display:block;
+  margin-bottom:6px;
+  color:var(--primary-dark);
+}
+
+.hazard-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.hazard-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:var(--accent);
+}
+
+.control-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.control-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:var(--success);
+}
+
+.activity-options{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:14px;
+  margin-top:20px;
+}
+
+.activity-choice{
+  width:100%;
+  min-height:165px;
+  padding:18px;
+  border:2px solid var(--border);
+  border-radius:14px;
+  background:#eef4fb;
+  color:var(--text);
+  text-align:left;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.activity-choice:hover,
+.activity-choice:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.activity-choice.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:3px solid var(--primary);
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.activity-letter{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  margin-bottom:10px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+}
+
+.scenario-option{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#eef4fb;
+  color:var(--text);
+  text-align:left;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.scenario-option:hover,
+.scenario-option:focus{
+  background:#dcecff;
+  border-color:var(--primary);
+  outline:3px solid rgba(244,180,0,.65);
+  outline-offset:2px;
+}
+
+.scenario-option.selected{
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+  box-shadow:0 0 0 4px rgba(18,60,105,.10);
+}
+
+.submit-btn{
+  margin-top:12px;
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+  transition:background-color .2s ease,transform .2s ease;
+}
+
+.submit-btn:hover,
+.submit-btn:focus{
+  background:var(--primary-dark);
+  outline:3px solid var(--secondary);
+  outline-offset:2px;
+}
+
+.submit-btn:hover{transform:translateY(-1px);}
+
+.reset-btn{
+  background:#52606d;
+  margin-left:8px;
+}
+
+.reset-btn:hover,
+.reset-btn:focus{background:#36404a;}
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.feedback.success{
+  border-left:6px solid var(--success);
+  background:var(--success-bg);
+  color:#145c4c;
+}
+
+.feedback.danger{
+  border-left:6px solid var(--accent);
+  background:var(--danger-bg);
+  color:#9e1f1f;
+}
+
+.feedback.warning{
+  border-left:6px solid var(--secondary);
+  background:var(--warning-bg);
+  color:#6f5100;
+}
+
+.quiz-question{
+  margin-bottom:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.quiz-question p{margin-top:0;}
+
+.quiz-question label{
+  display:block;
+  margin:9px 0;
+  padding:11px 13px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fff;
+  cursor:pointer;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.quiz-question label:hover{
+  background:#eef4fb;
+  border-color:var(--primary);
+}
+
+.quiz-question label:has(input:checked){
+  background:#d9e9f8;
+  color:var(--primary-dark);
+  border:2px solid var(--primary);
+  font-weight:bold;
+}
+
+.quiz-question input{margin-right:8px;}
+
+.quiz-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.progress-box{
+  height:18px;
+  margin-top:18px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#e8eef5;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--success),#52b788);
+  transition:width .4s ease;
+}
+
+.takeaway{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin:14px 0;
+  padding:15px;
+  border-radius:12px;
+  background:var(--info-bg);
+  color:var(--primary-dark);
+  font-weight:bold;
+}
+
+.takeaway span{font-size:1.3rem;}
+
+footer{
+  padding:30px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+@media(max-width:850px){
+  .safety-flow{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  main{padding:14px;}
+  section{padding:20px;}
+
+  .safety-flow{
+    grid-template-columns:1fr;
+  }
+
+  .quiz-actions{
+    flex-direction:column;
+  }
+
+  .quiz-actions button{
+    width:100%;
+  }
+
+  .reset-btn{
+    margin-left:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>
+    Module 24: Forklifts & Mixed Workplace Traffic
+  </h1>
+
+  <p>
+    When pedestrians, forklifts, trucks and other mobile equipment
+    share the same workplace, a small mistake can have
+    serious consequences. Safe traffic management requires separation,
+    visibility, communication and predictable behaviour.
+  </p>
+</header>
+
+<main>
+
+<!-- LEARNING OBJECTIVES -->
+
+<section>
+  <h2>Learning Objectives</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">⚠️</span>
+      Recognise the main hazards
+      associated with forklifts and mixed workplace traffic.
+    </div>
+
+    <div class="card">
+      <span class="icon">🚶</span>
+      Apply safe behaviour
+      as a pedestrian in vehicle movement areas.
+    </div>
+
+    <div class="card">
+      <span class="icon">🚜</span>
+      Understand basic principles
+      of safe forklift operation.
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+      Recognise how a load
+      affects stability and visibility.
+    </div>
+
+    <div class="card">
+      <span class="icon">👁️</span>
+      Understand the importance
+      of blind spots, intersections
+      and visual confirmation.
+    </div>
+
+  </div>
+</section>
+
+<!-- 24.1 -->
+
+<section>
+
+  <h2>24.1 Why Is Mixed Traffic High Risk?</h2>
+
+  <p>
+    A forklift does not behave like a passenger car.
+    Its weight, load distribution, restricted visibility,
+    turning characteristics and workplace environment
+    create specific hazards.
+  </p>
+
+  <div class="grid">
+
+    <div class="card hazard-card">
+      <span class="icon">🚶</span>
+      <h3>Pedestrian Struck by Vehicle</h3>
+      <p>
+        A pedestrian may enter
+        the path of a vehicle
+        without being seen.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">↩️</span>
+      <h3>Turning & Rear Swing</h3>
+      <p>
+        When turning,
+        the rear of the forklift
+        may move towards pedestrians,
+        equipment or structures.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">👁️</span>
+      <h3>Restricted Visibility</h3>
+      <p>
+        Loads, columns,
+        racking and other equipment
+        can create blind spots.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">📦</span>
+      <h3>Falling Load</h3>
+      <p>
+        An unstable, damaged or incorrectly
+        positioned load may shift
+        or fall.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">⚖️</span>
+      <h3>Tip-Over</h3>
+      <p>
+        Speed, sharp turns,
+        uneven surfaces or incorrect load handling
+        can affect
+        vehicle stability.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="danger">
+    <strong>Critical point:</strong>
+    Never assume that the operator has seen you.
+    Being physically close to a forklift
+    does not mean that you are within the operator's field of vision.
+  </div>
+
+</section>
+
+<!-- 24.2 -->
+
+<section>
+
+  <h2>24.2 The Basic Logic of Safe Traffic</h2>
+
+  <div class="safety-flow">
+
+    <div class="safety-step">
+      <div class="step-number">1</div>
+      <strong>SEPARATE</strong>
+      Separate pedestrians and vehicles wherever reasonably practicable.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">2</div>
+      <strong>LOOK</strong>
+      Check the route, blind spots and intersections.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">3</div>
+      <strong>COMMUNICATE</strong>
+      Make sure the pedestrian and operator
+      are aware of each other.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">4</div>
+      <strong>KEEP DISTANCE</strong>
+      Do not unnecessarily enter
+      the operating zone of a vehicle.
+    </div>
+
+    <div class="safety-step">
+      <div class="step-number">5</div>
+      <strong>DO NOT ASSUME</strong>
+      Proceed only when it is clear
+      that movement can be made safely.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 24.3 PEDESTRIANS -->
+
+<section>
+
+  <h2>24.3 Safe Pedestrian Behaviour</h2>
+
+  <div class="grid">
+
+    <div class="card control-card">
+      <span class="icon">🚶</span>
+      <h3>Use Designated Routes</h3>
+      <p>
+        Use designated pedestrian walkways,
+        crossings and protected areas
+        where provided.
+      </p>
+    </div>
+
+    <div class="card control-card">
+      <span class="icon">👀</span>
+      <h3>Visual Confirmation</h3>
+      <p>
+        Before crossing a vehicle route,
+        make sure the operator
+        is aware of your presence.
+      </p>
+    </div>
+
+    <div class="card control-card">
+      <span class="icon">🛑</span>
+      <h3>Stop at Intersections</h3>
+      <p>
+        Do not appear suddenly
+        from behind doors, racking,
+        columns or stored materials.
+      </p>
+    </div>
+
+    <div class="card control-card">
+      <span class="icon">↔️</span>
+      <h3>Keep Your Distance</h3>
+      <p>
+        Do not walk too close
+        to a moving forklift
+        and do not stand within its turning zone.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="highlight">
+    <strong>Pedestrian does not mean automatic right of way without checking.</strong>
+    Even where a designated crossing is provided,
+    the pedestrian must check that the vehicle has stopped
+    and that it is safe to cross.
+  </div>
+
+</section>
+
+<!-- 24.4 OPERATOR -->
+
+<section>
+
+  <h2>24.4 Basic Principles for the Operator</h2>
+
+  <p>
+    A forklift should only be operated
+    by persons who have the required training,
+    authorisation and competence in accordance with
+    site procedures and applicable requirements.
+  </p>
+
+  <div class="grid">
+
+    <div class="card control-card">
+      <span class="icon">🔍</span>
+      <h3>Pre-Use Inspection</h3>
+      <p>
+        Before operation,
+        carry out the required inspection
+        of the vehicle and its safety systems.
+      </p>
+    </div>
+
+    <div class="card control-card">
+      <span class="icon">🐢</span>
+      <h3>Appropriate Speed</h3>
+      <p>
+        Adjust speed
+        to workplace conditions,
+        visibility, traffic
+        and the load.
+      </p>
+    </div>
+
+    <div class="card control-card">
+      <span class="icon">📣</span>
+      <h3>Intersections</h3>
+      <p>
+        Approach blind corners
+        and intersections with increased caution
+        and use the required
+        warning methods.
+      </p>
+    </div>
+
+    <div class="card control-card">
+      <span class="icon">👷</span>
+      <h3>Watch for Pedestrians</h3>
+      <p>
+        Reduce speed and stop
+        whenever there is uncertainty
+        about a pedestrian's intention or movement.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 24.5 LOAD -->
+
+<section>
+
+  <h2>24.5 Load, Stability & Visibility</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">⚖️</span>
+      <h3>Stability</h3>
+      <p>
+        The load affects
+        the centre of gravity
+        and the behaviour of the forklift.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📦</span>
+      <h3>Safe Load</h3>
+      <p>
+        The load must be
+        suitable, stable
+        and correctly positioned
+        before movement.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">👁️</span>
+      <h3>Visibility</h3>
+      <p>
+        If the load restricts visibility,
+        follow the designated safe method
+        of travel for the specific
+        workplace and equipment.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">⬇️</span>
+      <h3>Travel</h3>
+      <p>
+        During movement,
+        keep the load in the position
+        required by the safe
+        operating method for the equipment.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="danger">
+    <strong>Never stand under an elevated load.</strong>
+    Pedestrians must not stand or walk
+    beneath an elevated load or raised load-handling equipment.
+  </div>
+
+</section>
+
+<!-- 24.6 BLIND SPOTS -->
+
+<section>
+
+  <h2>24.6 Blind Spots & Intersections</h2>
+
+  <p>
+    Many serious incidents do not occur
+    because someone ignored an obvious hazard,
+    but because the pedestrian and operator
+    could not see each other in time.
+  </p>
+
+  <div class="grid">
+
+    <div class="card hazard-card">
+      <span class="icon">🏗️</span>
+      <h3>Racking & Columns</h3>
+      <p>
+        These can hide
+        pedestrians and vehicles
+        until the last moment.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">🚪</span>
+      <h3>Doors & Exits</h3>
+      <p>
+        A pedestrian may step
+        directly into a vehicle route.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">📦</span>
+      <h3>High Load</h3>
+      <p>
+        The load can significantly restrict
+        the operator's
+        field of vision.
+      </p>
+    </div>
+
+    <div class="card hazard-card">
+      <span class="icon">🔄</span>
+      <h3>Reversing & Turning</h3>
+      <p>
+        Direction of travel
+        and rear swing
+        require continuous monitoring of the surrounding area.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 24.7 PASSENGERS / PARKING -->
+
+<section>
+
+  <h2>24.7 Passengers, Parking & Leaving the Vehicle</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">🚫</span>
+      <h3>Unauthorised Passengers</h3>
+      <p>
+        Do not carry passengers
+        unless the equipment
+        is designed and approved
+        for that specific purpose.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🅿️</span>
+      <h3>Safe Parking</h3>
+      <p>
+        Park the vehicle
+        only in an appropriate location
+        and secure it according
+        to the required procedure.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🔑</span>
+      <h3>Unauthorised Use</h3>
+      <p>
+        Equipment must be protected
+        against use by unauthorised persons.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- INTERACTIVE ACTIVITY -->
+
+<section>
+
+  <h2>Interactive Activity: Pedestrian & Forklift</h2>
+
+  <p>
+    You are walking through a warehouse and want to cross
+    a forklift route. A forklift is approaching,
+    but you are not sure whether the operator has seen you.
+  </p>
+
+  <p><strong>What is the safest action?</strong></p>
+
+  <div class="activity-options">
+
+    <button type="button"
+            class="activity-choice"
+            data-type="wrong"
+            onclick="selectActivity(this)">
+      <span class="activity-letter">A</span>
+      Cross quickly before the forklift arrives.
+    </button>
+
+    <button type="button"
+            class="activity-choice"
+            data-type="correct"
+            onclick="selectActivity(this)">
+      <span class="activity-letter">B</span>
+      Stop in a safe position and cross only
+      after confirming that the operator
+      is aware of you and movement is safe.
+    </button>
+
+    <button type="button"
+            class="activity-choice"
+            data-type="wrong"
+            onclick="selectActivity(this)">
+      <span class="activity-letter">C</span>
+      Continue because pedestrians always have priority.
+    </button>
+
+  </div>
+
+  <button type="button"
+          class="submit-btn"
+          onclick="submitActivity()">
+    Check Answer
+  </button>
+
+  <button type="button"
+          class="submit-btn reset-btn"
+          onclick="resetActivity()">
+    Restart Activity
+  </button>
+
+  <div id="activityFeedback"
+       class="feedback"
+       aria-live="polite"></div>
+
+</section>
+
+<!-- DECISION SCENARIO -->
+
+<section>
+
+  <h2>Decision Scenario: The Load Blocks Your View</h2>
+
+  <p>
+    You are operating a forklift and the load in front of you
+    significantly restricts visibility.
+    Pedestrians are also moving in the area.
+  </p>
+
+  <p><strong>What is the correct approach?</strong></p>
+
+  <button type="button"
+          class="scenario-option"
+          data-type="wrong"
+          onclick="selectScenario(this)">
+    Continue normally and rely on the horn
+    to make pedestrians move away.
+  </button>
+
+  <button type="button"
+          class="scenario-option"
+          data-type="partial"
+          onclick="selectScenario(this)">
+    Travel faster so that you can get through
+    the restricted-visibility area quickly.
+  </button>
+
+  <button type="button"
+          class="scenario-option"
+          data-type="correct"
+          onclick="selectScenario(this)">
+    Stop and assess visibility and the route.
+    Use the designated safe method of travel
+    for the specific forklift, load and workplace,
+    while maintaining control for pedestrians and other obstacles.
+  </button>
+
+  <button type="button"
+          class="submit-btn"
+          onclick="submitScenario()">
+    Submit Answer
+  </button>
+
+  <button type="button"
+          class="submit-btn reset-btn"
+          onclick="resetScenario()">
+    Reset Scenario
+  </button>
+
+  <div id="scenarioFeedback"
+       class="feedback"
+       aria-live="polite"></div>
+
+</section>
+
+<!-- 24.8 SHARED RESPONSIBILITY -->
+
+<section>
+
+  <h2>24.8 Traffic Safety Is a Shared Responsibility</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">👷</span>
+      <h3>Operators</h3>
+      <p>
+        Safe speed, continuous observation,
+        load control and attention to pedestrians.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🚶</span>
+      <h3>Pedestrians</h3>
+      <p>
+        Designated routes,
+        safe distances
+        and confirmation before crossing.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🏭</span>
+      <h3>Workplace Organisation</h3>
+      <p>
+        Suitable layout,
+        traffic separation,
+        signage, visibility
+        and control of high-risk points.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="icon">📢</span>
+      <h3>Hazard Reporting</h3>
+      <p>
+        Blind spots, damaged walkways,
+        obstructions and near misses
+        should be reported.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="success">
+    <strong>Goal:</strong>
+    Pedestrians and operators should not rely
+    on the assumption that “the other person will notice”.
+    The traffic system should make
+    safe behaviour clear and predictable.
+  </div>
+
+</section>
+
+<!-- QUIZ -->
+
+<section>
+
+  <h2>Mini Quiz</h2>
+
+  <form id="quizForm" onsubmit="return false;">
+
+    <div class="quiz-question">
+      <p><strong>1. Before a pedestrian crosses a forklift route, they should:</strong></p>
+
+      <label>
+        <input type="radio" name="q1" value="1">
+        Make sure the crossing is safe
+        and that the operator is aware of their presence.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Cross quickly without stopping.
+      </label>
+
+      <label>
+        <input type="radio" name="q1" value="0">
+        Assume that the forklift will always stop.
+      </label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>2. Why is a blind intersection dangerous?</strong></p>
+
+      <label>
+        <input type="radio" name="q2" value="1">
+        Because the pedestrian and operator may not be able
+        to see each other in time.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        Because forklifts cannot turn.
+      </label>
+
+      <label>
+        <input type="radio" name="q2" value="0">
+        There is no particular hazard.
+      </label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>3. If the load significantly restricts the operator's visibility:</strong></p>
+
+      <label>
+        <input type="radio" name="q3" value="1">
+        Follow the designated safe method
+        of travel for the vehicle, load and workplace.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Continue without changing anything.
+      </label>
+
+      <label>
+        <input type="radio" name="q3" value="0">
+        Increase speed to complete the route quickly.
+      </label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>4. Where should a pedestrian walk when designated routes are provided?</strong></p>
+
+      <label>
+        <input type="radio" name="q4" value="1">
+        On the designated pedestrian routes and crossings.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        In the centre of vehicle routes.
+      </label>
+
+      <label>
+        <input type="radio" name="q4" value="0">
+        As close as possible to forklifts.
+      </label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>5. What is the correct behaviour around an elevated load?</strong></p>
+
+      <label>
+        <input type="radio" name="q5" value="1">
+        Stay outside the hazardous zone
+        and never walk under an elevated load.
+      </label>
+
+      <label>
+        <input type="radio" name="q5" value="0">
+        Walk quickly underneath it.
+      </label>
+
+      <label>
+        <input type="radio" name="q5" value="0">
+        Stand underneath it to guide the operator.
+      </label>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>6. What is the best principle for mixed workplace traffic?</strong></p>
+
+      <label>
+        <input type="radio" name="q6" value="1">
+        Separation, visibility, communication
+        and predictable behaviour.
+      </label>
+
+      <label>
+        <input type="radio" name="q6" value="0">
+        Everyone moves in whichever way is most convenient.
+      </label>
+
+      <label>
+        <input type="radio" name="q6" value="0">
+        Pedestrians have sole responsibility.
+      </label>
+    </div>
+
+    <div class="quiz-actions">
+
+      <button type="button"
+              class="submit-btn"
+              onclick="checkQuiz()">
+        Submit Quiz
+      </button>
+
+      <button type="button"
+              class="submit-btn reset-btn"
+              onclick="resetQuiz()">
+        Reset Quiz
+      </button>
+
+    </div>
+
+  </form>
+
+  <div id="quizProgress"
+       class="progress-box"
+       role="progressbar"
+       aria-label="Quiz score"
+       aria-valuemin="0"
+       aria-valuemax="100"
+       aria-valuenow="0">
+
+    <div id="progressBar"
+         class="progress-bar"></div>
+
+  </div>
+
+  <div id="quizResult"
+       class="feedback"
+       aria-live="polite"></div>
+
+</section>
+
+<!-- TAKEAWAYS -->
+
+<section>
+
+  <h2>Key Takeaways</h2>
+
+  <div class="takeaway">
+    <span>🚶</span>
+    <div>
+      Use designated pedestrian routes
+      and do not enter vehicle routes unpredictably.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>👁️</span>
+    <div>
+      Never assume the operator has seen you.
+      Confirm that crossing is safe.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🚜</span>
+    <div>
+      Operators must adapt movement
+      to visibility, pedestrians, the load
+      and workplace conditions.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>📦</span>
+    <div>
+      The load affects both stability
+      and forklift visibility.
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span>🛑</span>
+    <div>
+      When uncertain, stop.
+      Safe movement is more important
+      than speed of work.
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Industrial Occupational Health & Safety Training | Module 24
+</footer>
+
+<script>
+"use strict";
+
+/* =====================================================
+   INTERACTIVE ACTIVITY
+   ===================================================== */
+
+let selectedActivity = null;
+
+function selectActivity(button){
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  selectedActivity = button.dataset.type;
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitActivity(){
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedActivity){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before checking.";
+
+    return;
+  }
+
+  if(selectedActivity === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "Do not rely on the assumption that the operator has seen you. " +
+      "Stop in a safe position and cross only after confirming that movement can be made safely.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "Entering a forklift route without confirmation can lead to a serious accident. " +
+      "Stop, check and confirm before crossing.";
+  }
+}
+
+function resetActivity(){
+
+  selectedActivity = null;
+
+  document
+    .querySelectorAll(".activity-choice")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  const feedback =
+    document.getElementById("activityFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   DECISION SCENARIO
+   ===================================================== */
+
+let selectedScenario = null;
+
+function selectScenario(button){
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  button.classList.add("selected");
+
+  selectedScenario = button.dataset.type;
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function submitScenario(){
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "block";
+
+  if(!selectedScenario){
+
+    feedback.className = "feedback warning";
+
+    feedback.innerHTML =
+      "Please select an answer before submitting.";
+
+    return;
+  }
+
+  if(selectedScenario === "correct"){
+
+    feedback.className = "feedback success";
+
+    feedback.innerHTML =
+      "<strong>Correct.</strong> " +
+      "Restricted visibility requires a controlled decision. " +
+      "The operator must use the designated safe method of travel for the specific vehicle, load and workplace and maintain control of the route.";
+
+  }else if(selectedScenario === "partial"){
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "Increasing speed reduces the time available to react and increases risk when visibility is restricted.";
+
+  }else{
+
+    feedback.className = "feedback danger";
+
+    feedback.innerHTML =
+      "<strong>Incorrect.</strong> " +
+      "The horn is a warning device, not a substitute for safe visibility, appropriate speed and control of the travel route.";
+  }
+}
+
+function resetScenario(){
+
+  selectedScenario = null;
+
+  document
+    .querySelectorAll(".scenario-option")
+    .forEach(function(option){
+      option.classList.remove("selected");
+    });
+
+  const feedback =
+    document.getElementById("scenarioFeedback");
+
+  feedback.style.display = "none";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+/* =====================================================
+   QUIZ
+   ===================================================== */
+
+function checkQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  const result =
+    document.getElementById("quizResult");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const total = 6;
+
+  let score = 0;
+  let answered = 0;
+
+  for(let i = 1; i <= total; i++){
+
+    const answer =
+      form.querySelector(
+        'input[name="q' + i + '"]:checked'
+      );
+
+    if(answer){
+
+      answered++;
+
+      if(answer.value === "1"){
+        score++;
+      }
+    }
+  }
+
+  result.style.display = "block";
+
+  if(answered < total){
+
+    result.className = "feedback warning";
+
+    result.innerHTML =
+      "Please answer all six questions before submitting.";
+
+    progressBar.style.width = "0%";
+
+    progressBox.setAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    return;
+  }
+
+  const percentage =
+    Math.round((score / total) * 100);
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    String(percentage)
+  );
+
+  if(score === total){
+
+    result.className = "feedback success";
+
+    result.innerHTML =
+      "<strong>Excellent!</strong> You scored " +
+      score + "/" + total +
+      ". You understand the key principles of safe pedestrian and forklift traffic.";
+
+  }else if(score >= 4){
+
+    result.className = "feedback warning";
+
+    result.innerHTML =
+      "<strong>Good effort.</strong> You scored " +
+      score + "/" + total +
+      ". Review blind spots, visibility, load safety and safe pedestrian-vehicle interaction.";
+
+  }else{
+
+    result.className = "feedback danger";
+
+    result.innerHTML =
+      "You scored " +
+      score + "/" + total +
+      ". It is recommended that you review the module and try again.";
+  }
+}
+
+/* =====================================================
+   RESET QUIZ
+   ===================================================== */
+
+function resetQuiz(){
+
+  const form =
+    document.getElementById("quizForm");
+
+  form.reset();
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressBox =
+    document.getElementById("quizProgress");
+
+  const result =
+    document.getElementById("quizResult");
+
+  progressBar.style.width = "0%";
+
+  progressBox.setAttribute(
+    "aria-valuenow",
+    "0"
+  );
+
+  result.style.display = "none";
+  result.className = "feedback";
+  result.innerHTML = "";
+
+  const firstQuestion =
+    form.querySelector('input[name="q1"]');
+
+  if(firstQuestion){
+    firstQuestion.focus();
+  }
+}
+</script>
+
+</body>
+</html>

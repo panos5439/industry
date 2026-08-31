@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Training Platform User Guide</title>
+
+  <style>
+    :root{
+      --primary:#123c69;
+      --primary-dark:#0b2545;
+      --secondary:#f4b400;
+      --success:#2a9d8f;
+      --danger:#d62828;
+
+      --bg:#f5f7fa;
+      --card:#ffffff;
+      --soft-blue:#eef5fb;
+      --soft-yellow:#fff8df;
+      --soft-green:#edf8f5;
+
+      --text:#172033;
+      --muted:#5b677a;
+      --border:#dbe3ec;
+
+      --shadow:0 10px 30px rgba(11,37,69,.08);
+      --radius:18px;
+      --max-width:1100px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+
+    a{
+      color:inherit;
+    }
+
+    button,
+    a{
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:100;
+
+      background:rgba(11,37,69,.97);
+      color:#fff;
+
+      border-bottom:1px solid rgba(255,255,255,.1);
+      backdrop-filter:blur(10px);
+    }
+
+    .topbar-inner{
+      width:min(var(--max-width), calc(100% - 32px));
+      margin:auto;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+
+      min-height:62px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+
+      font-weight:750;
+      font-size:.98rem;
+    }
+
+    .brand-mark{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+
+      display:grid;
+      place-items:center;
+
+      background:linear-gradient(
+        135deg,
+        var(--secondary),
+        #ffd45a
+      );
+
+      color:var(--primary-dark);
+      font-weight:900;
+    }
+
+    .top-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+
+      min-width:40px;
+      height:40px;
+      padding:0 13px;
+
+      border-radius:10px;
+      text-decoration:none;
+
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.14);
+
+      transition:.2s ease;
+    }
+
+    .top-link:hover,
+    .top-link:focus-visible{
+      background:#fff;
+      color:var(--primary-dark);
+      outline:none;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero{
+      background:
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(244,180,0,.18),
+          transparent 22%
+        ),
+        linear-gradient(
+          135deg,
+          var(--primary-dark),
+          var(--primary)
+        );
+
+      color:#fff;
+      padding:64px 20px 70px;
+    }
+
+    .hero-inner{
+      width:min(var(--max-width), 100%);
+      margin:auto;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+
+      padding:7px 12px;
+      border-radius:999px;
+
+      background:rgba(255,255,255,.11);
+      border:1px solid rgba(255,255,255,.18);
+
+      font-size:.8rem;
+      font-weight:800;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+    }
+
+    .hero h1{
+      max-width:780px;
+      margin:18px 0 14px;
+
+      font-size:clamp(2rem, 5vw, 3.5rem);
+      line-height:1.08;
+      letter-spacing:-.03em;
+    }
+
+    .hero p{
+      max-width:760px;
+      margin:0;
+
+      color:#dfeaf5;
+      font-size:1.08rem;
+    }
+
+    .hero-rule{
+      margin-top:28px;
+      max-width:820px;
+
+      display:flex;
+      align-items:flex-start;
+      gap:13px;
+
+      padding:17px 18px;
+
+      border-radius:14px;
+      background:rgba(255,255,255,.09);
+      border-left:4px solid var(--secondary);
+    }
+
+    .hero-rule strong{
+      color:#fff;
+    }
+
+
+    /* =========================
+       PAGE LAYOUT
+    ========================= */
+
+    main{
+      width:min(var(--max-width), calc(100% - 32px));
+      margin:-28px auto 0;
+      position:relative;
+      z-index:2;
+      padding-bottom:50px;
+    }
+
+    section{
+      scroll-margin-top:82px;
+    }
+
+    .panel{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+
+      padding:28px;
+      margin-bottom:20px;
+    }
+
+    .section-heading{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      margin-bottom:22px;
+    }
+
+    .section-number{
+      flex:0 0 42px;
+      width:42px;
+      height:42px;
+
+      display:grid;
+      place-items:center;
+
+      border-radius:12px;
+
+      background:var(--primary);
+      color:#fff;
+
+      font-weight:850;
+    }
+
+    .section-heading h2{
+      margin:0 0 4px;
+      color:var(--primary-dark);
+
+      font-size:1.55rem;
+      line-height:1.25;
+    }
+
+    .section-heading p{
+      margin:0;
+      color:var(--muted);
+    }
+
+
+    /* =========================
+       QUICK START
+    ========================= */
+
+    .quick-start{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:12px;
+    }
+
+    .quick-step{
+      padding:17px;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+    }
+
+    .quick-step strong{
+      display:block;
+      color:var(--primary);
+      margin-bottom:5px;
+    }
+
+    .quick-step span{
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+
+    /* =========================
+       CONTENT CARDS
+    ========================= */
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:16px;
+    }
+
+    .card{
+      padding:20px;
+
+      border:1px solid var(--border);
+      border-radius:15px;
+      background:#fff;
+    }
+
+    .card h3{
+      margin:0 0 9px;
+      color:var(--primary-dark);
+      font-size:1.05rem;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .card ul{
+      margin:0;
+      padding-left:21px;
+    }
+
+    .card li{
+      margin:7px 0;
+      color:var(--muted);
+    }
+
+    .highlight-card{
+      background:var(--soft-blue);
+      border-color:#cfe0f0;
+    }
+
+    .success-card{
+      background:var(--soft-green);
+      border-color:#cbe8df;
+    }
+
+
+    /* =========================
+       STEP LIST
+    ========================= */
+
+    .steps{
+      display:grid;
+      gap:12px;
+    }
+
+    .step{
+      display:grid;
+      grid-template-columns:38px 1fr;
+      gap:13px;
+      align-items:start;
+
+      padding:16px;
+
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+
+    .step-icon{
+      width:38px;
+      height:38px;
+
+      display:grid;
+      place-items:center;
+
+      border-radius:10px;
+
+      background:var(--soft-blue);
+      color:var(--primary);
+
+      font-weight:850;
+    }
+
+    .step h3{
+      margin:0 0 4px;
+      font-size:1rem;
+      color:var(--primary-dark);
+    }
+
+    .step p{
+      margin:0;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+
+    /* =========================
+       KEYBOARD
+    ========================= */
+
+    .control-list{
+      display:grid;
+      gap:10px;
+    }
+
+    .control{
+      display:flex;
+      align-items:center;
+      gap:12px;
+
+      padding:14px 15px;
+
+      background:#f8fafc;
+      border:1px solid var(--border);
+      border-radius:12px;
+    }
+
+    .kbd{
+      display:inline-block;
+      min-width:150px;
+
+      padding:6px 10px;
+
+      border-radius:8px;
+      border:1px solid #c9d4df;
+
+      background:#fff;
+
+      color:var(--primary-dark);
+      font-weight:750;
+      font-size:.86rem;
+
+      text-align:center;
+    }
+
+    .control span:last-child{
+      color:var(--muted);
+    }
+
+
+    /* =========================
+       CALLOUTS
+    ========================= */
+
+    .callout{
+      margin-top:18px;
+      padding:16px 18px;
+
+      border-radius:14px;
+
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+
+    .callout strong{
+      color:var(--primary-dark);
+    }
+
+    .callout.info{
+      background:var(--soft-blue);
+      border-left:4px solid var(--primary);
+    }
+
+    .callout.warning{
+      background:var(--soft-yellow);
+      border-left:4px solid var(--secondary);
+    }
+
+    .callout.success{
+      background:var(--soft-green);
+      border-left:4px solid var(--success);
+    }
+
+
+    /* =========================
+       EXAM
+    ========================= */
+
+    .exam-box{
+      padding:24px;
+
+      border-radius:16px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary-dark),
+          var(--primary)
+        );
+
+      color:#fff;
+    }
+
+    .exam-box h3{
+      margin:0 0 8px;
+      font-size:1.3rem;
+    }
+
+    .exam-box p{
+      margin:0;
+      color:#dfeaf5;
+    }
+
+    .exam-score{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+
+      margin-top:15px;
+      padding:9px 13px;
+
+      border-radius:999px;
+
+      background:#fff;
+      color:var(--primary-dark);
+
+      font-weight:800;
+    }
+
+
+    /* =========================
+       CHECKLIST
+    ========================= */
+
+    .checklist{
+      display:grid;
+      gap:11px;
+      margin-top:4px;
+    }
+
+    .check-item{
+      display:flex;
+      gap:11px;
+      align-items:flex-start;
+
+      padding:13px 15px;
+
+      border-radius:12px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+    }
+
+    .check{
+      width:22px;
+      height:22px;
+      flex:0 0 22px;
+
+      border-radius:6px;
+      display:grid;
+      place-items:center;
+
+      background:var(--success);
+      color:#fff;
+
+      font-size:.78rem;
+      font-weight:900;
+    }
+
+    .check-item span:last-child{
+      color:var(--muted);
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer{
+      padding:30px 20px;
+
+      text-align:center;
+      color:#6b7687;
+
+      font-size:.88rem;
+      border-top:1px solid var(--border);
+
+      background:#fff;
+    }
+
+
+    /* =========================
+       ACCESSIBILITY
+    ========================= */
+
+    :focus-visible{
+      outline:3px solid var(--secondary);
+      outline-offset:3px;
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      html{
+        scroll-behavior:auto;
+      }
+
+      *{
+        transition:none !important;
+      }
+    }
+
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width:850px){
+
+      .quick-start{
+        grid-template-columns:repeat(2, 1fr);
+      }
+
+      .grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:600px){
+
+      .hero{
+        padding:50px 18px 58px;
+      }
+
+      main{
+        width:min(100% - 22px, var(--max-width));
+      }
+
+      .panel{
+        padding:21px 17px;
+      }
+
+      .quick-start{
+        grid-template-columns:1fr;
+      }
+
+      .section-heading{
+        gap:11px;
+      }
+
+      .section-number{
+        width:38px;
+        height:38px;
+        flex-basis:38px;
+      }
+
+      .control{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .kbd{
+        min-width:0;
+        width:auto;
+      }
+
+      .brand{
+        font-size:.88rem;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+
+  <!-- =========================
+       TOP BAR
+  ========================== -->
+
+  <header class="topbar">
+    <div class="topbar-inner">
+
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">i</div>
+        <span>Training Platform User Guide</span>
+      </div>
+
+      <a
+        href="#top"
+        class="top-link"
+        aria-label="Back to the top of the page"
+        title="Back to top">
+        ↑
+      </a>
+
+    </div>
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero">
+    <div class="hero-inner">
+
+      <div class="eyebrow">
+        Quick User Guide
+      </div>
+
+      <h1>
+        How do I use the platform?
+      </h1>
+
+      <p>
+        Everything you need to know about tags, navigation
+        in the 3D environment, language selection and the final exam.
+      </p>
+
+      <div class="hero-rule">
+        <div aria-hidden="true">★</div>
+        <div>
+          <strong>Most important:</strong>
+          open and review all tags.
+          The final exam questions are based
+          on their content.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <main>
+
+    <!-- =========================
+         QUICK START
+    ========================== -->
+
+    <section class="panel" aria-labelledby="quick-title">
+
+      <div class="section-heading">
+        <div class="section-number" aria-hidden="true">✓</div>
+
+        <div>
+          <h2 id="quick-title">At a Glance</h2>
+          <p>The correct order for using the platform.</p>
+        </div>
+      </div>
+
+      <div class="quick-start">
+
+        <div class="quick-step">
+          <strong>1. Open the tags</strong>
+          <span>Review all training content.</span>
+        </div>
+
+        <div class="quick-step">
+          <strong>2. Complete each section</strong>
+          <span>Select the completion checkbox.</span>
+        </div>
+
+        <div class="quick-step">
+          <strong>3. Check the language</strong>
+          <span>Before starting the exam.</span>
+        </div>
+
+        <div class="quick-step">
+          <strong>4. Take the exam</strong>
+          <span>From the relevant menu option.</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         TAGS
+    ========================== -->
+
+    <section class="panel" id="tags" aria-labelledby="tags-title">
+
+      <div class="section-heading">
+
+        <div class="section-number">1</div>
+
+        <div>
+          <h2 id="tags-title">
+            Side Menu &amp; Tags
+          </h2>
+
+          <p>
+            Tags are the main learning points
+            of the training.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="grid">
+
+        <article class="card highlight-card">
+
+          <h3>What do they contain?</h3>
+
+          <p>
+            Information, instructions and, where applicable,
+            short activities or questions.
+          </p>
+
+        </article>
+
+
+        <article class="card">
+
+          <h3>What should you do?</h3>
+
+          <ul>
+            <li>Open all tags.</li>
+            <li>Follow them in order.</li>
+            <li>Do not skip any content.</li>
+          </ul>
+
+        </article>
+
+      </div>
+
+
+      <div class="callout warning">
+
+        <div aria-hidden="true">!</div>
+
+        <div>
+          <strong>Do not forget to confirm completion.</strong><br>
+          In each section, select the relevant
+          checkbox at the bottom of the screen
+          to confirm that you have completed it.
+        </div>
+
+      </div>
+
+
+      <div class="callout info">
+
+        <div aria-hidden="true">i</div>
+
+        <div>
+          If you lose track of your progress, return to the
+          side menu and continue from the next tag.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         3D NAVIGATION
+    ========================== -->
+
+    <section class="panel" id="navigation" aria-labelledby="nav-title">
+
+      <div class="section-heading">
+
+        <div class="section-number">2</div>
+
+        <div>
+          <h2 id="nav-title">
+            Navigation in the 3D Environment
+          </h2>
+
+          <p>
+            The basic controls you will need.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="control-list">
+
+        <div class="control">
+          <span class="kbd">Left click + drag</span>
+          <span>Rotate the view</span>
+        </div>
+
+        <div class="control">
+          <span class="kbd">Mouse wheel</span>
+          <span>Zoom in / out</span>
+        </div>
+
+        <div class="control">
+          <span class="kbd">Click a point / arrow keys</span>
+          <span>Move around the environment</span>
+        </div>
+
+      </div>
+
+
+      <div class="callout info">
+
+        <div aria-hidden="true">i</div>
+
+        <div>
+          If a point does not respond,
+          zoom out slightly and try again.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         LANGUAGE
+    ========================== -->
+
+    <section class="panel" id="language" aria-labelledby="language-title">
+
+      <div class="section-heading">
+
+        <div class="section-number">3</div>
+
+        <div>
+          <h2 id="language-title">
+            Language Selection
+          </h2>
+
+          <p>
+            There are two different language settings.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="grid">
+
+        <article class="card">
+
+          <h3>Language inside a tag</h3>
+
+          <p>
+            The language option at the top-right of a tag
+            changes only the text of that specific tag.
+          </p>
+
+        </article>
+
+
+        <article class="card highlight-card">
+
+          <h3>Side menu language</h3>
+
+          <p>
+            The language selected through the language icon
+            in the side menu also determines
+            the language of the final exam.
+          </p>
+
+        </article>
+
+      </div>
+
+
+      <div class="callout warning">
+
+        <div aria-hidden="true">!</div>
+
+        <div>
+          <strong>Before starting the exam:</strong>
+          check that the side menu is set
+          to your preferred language.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         EXAM
+    ========================== -->
+
+    <section class="panel" id="exam" aria-labelledby="exam-title">
+
+      <div class="section-heading">
+
+        <div class="section-number">4</div>
+
+        <div>
+          <h2 id="exam-title">
+            Final Exam
+          </h2>
+
+          <p>
+            Start only after you have completed
+            the training content.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="steps">
+
+        <div class="step">
+
+          <div class="step-icon">1</div>
+
+          <div>
+            <h3>Open the side menu</h3>
+            <p>
+              Find the
+              “START THE EXAM” option.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-icon">2</div>
+
+          <div>
+            <h3>Select the relevant tag</h3>
+            <p>
+              Click the tag that launches
+              the final exam.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-icon">3</div>
+
+          <div>
+            <h3>Answer the questions</h3>
+            <p>
+              The questions are based on the content
+              of the training tags.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="exam-box" style="margin-top:18px;">
+
+        <h3>Pass Requirement</h3>
+
+        <p>
+          Successful completion requires a score
+          of 70%, unless your organisation has set
+          a different passing score.
+        </p>
+
+        <div class="exam-score">
+          Target: ≥ 70%
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         TROUBLESHOOTING
+    ========================== -->
+
+    <section class="panel" id="help" aria-labelledby="help-title">
+
+      <div class="section-heading">
+
+        <div class="section-number">5</div>
+
+        <div>
+          <h2 id="help-title">
+            If Something Is Not Working Properly
+          </h2>
+
+          <p>
+            Try these simple steps first.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="steps">
+
+        <div class="step">
+
+          <div class="step-icon">1</div>
+
+          <div>
+            <h3>Refresh the page</h3>
+            <p>
+              Refresh the page and allow the content
+              to load again.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-icon">2</div>
+
+          <div>
+            <h3>Wait a few seconds</h3>
+            <p>
+              The 3D environment may need a little time
+              to load completely.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-icon">3</div>
+
+          <div>
+            <h3>Restart or change your browser</h3>
+            <p>
+              If the problem continues,
+              close and reopen your browser
+              or try a different browser.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         FINAL CHECKLIST
+    ========================== -->
+
+    <section class="panel" aria-labelledby="check-title">
+
+      <div class="section-heading">
+
+        <div class="section-number">✓</div>
+
+        <div>
+          <h2 id="check-title">
+            Before Starting the Exam
+          </h2>
+
+          <p>
+            A quick final check.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="checklist">
+
+        <div class="check-item">
+          <div class="check" aria-hidden="true">✓</div>
+          <span>I have opened and reviewed all tags.</span>
+        </div>
+
+        <div class="check-item">
+          <div class="check" aria-hidden="true">✓</div>
+          <span>
+            I have confirmed completion
+            of the required sections.
+          </span>
+        </div>
+
+        <div class="check-item">
+          <div class="check" aria-hidden="true">✓</div>
+          <span>
+            I have selected the correct language
+            from the side menu.
+          </span>
+        </div>
+
+        <div class="check-item">
+          <div class="check" aria-hidden="true">✓</div>
+          <span>
+            I am ready to select
+            “START THE EXAM”.
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="callout success">
+
+        <div aria-hidden="true">✓</div>
+
+        <div>
+          <strong>Ready.</strong>
+          If you have completed the steps above,
+          you can proceed to the final exam.
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    Training Platform User Guide · 2026
+  </footer>
+
+</body>
+</html>
